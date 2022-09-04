@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxProjectileDistance: 100
-  ejectionForce: 5
+  ejectionForce: 7
   minTorque: 0
   maxTorque: 5
 --- !u!64 &6935379013777298366

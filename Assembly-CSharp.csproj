@@ -56,21 +56,24 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ProjectileSleeve.cs" />
-    <Compile Include="Assets\FireFlameFlashing.cs" />
-    <Compile Include="Assets\Projectile.cs" />
-    <Compile Include="Assets\Player_Movement.cs" />
-    <Compile Include="Assets\Player_Shooting.cs" />
-    <Compile Include="Assets\Explosion.cs" />
-    <Compile Include="Assets\EnemyHeealth.cs" />
-    <Compile Include="Assets\Player_Scope.cs" />
-    <Compile Include="Assets\PlayerHP.cs" />
-    <Compile Include="Assets\AutoDestroy.cs" />
-    <Compile Include="Assets\Gun.cs" />
-    <Compile Include="Assets\Test_Flashlight.cs" />
-    <Compile Include="Assets\EnemyController.cs" />
-    <Compile Include="Assets\IgnoreCollision.cs" />
-    <Compile Include="Assets\Player_Aim.cs" />
+    <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
+    <Compile Include="Assets\Scripts\BulletRaycast.cs" />
+    <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
+    <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Player_Movement.cs" />
+    <Compile Include="Assets\Scripts\Player_Shooting.cs" />
+    <Compile Include="Assets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
+    <Compile Include="Assets\Scripts\Player_Scope.cs" />
+    <Compile Include="Assets\Scripts\PlayerHP.cs" />
+    <Compile Include="Assets\Scripts\AutoDestroy.cs" />
+    <Compile Include="Assets\Scripts\Gun.cs" />
+    <Compile Include="Assets\Scripts\Test_Flashlight.cs" />
+    <Compile Include="Assets\Scripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\Target.cs" />
+    <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
+    <Compile Include="Assets\Scripts\Player_Aim.cs" />
+    <Compile Include="Assets\LightFlicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

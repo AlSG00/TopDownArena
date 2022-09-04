@@ -253,9 +253,9 @@ GameObject:
   - component: {fileID: 5133322705927309271}
   - component: {fileID: 5133322705927309268}
   - component: {fileID: 5133322705927309269}
-  - component: {fileID: 5133322705927309266}
-  - component: {fileID: 5133322705927309267}
   - component: {fileID: -8181482022390864362}
+  - component: {fileID: 5133322705927309266}
+  - component: {fileID: 7624619158445679898}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -359,33 +359,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5133322705927309266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7550860234317800423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b70ca6036285b438f17c378850af19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  target: {fileID: 0}
---- !u!114 &5133322705927309267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7550860234317800423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1554c241d0c92c94f87d0a02948ccb3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 50
 --- !u!195 &-8181482022390864362
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -408,3 +381,32 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5133322705927309266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550860234317800423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b70ca6036285b438f17c378850af19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  target: {fileID: 0}
+  agent: {fileID: 0}
+--- !u!114 &7624619158445679898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550860234317800423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6e7dae32889f5499c6eec0f9875de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  armor: 0
