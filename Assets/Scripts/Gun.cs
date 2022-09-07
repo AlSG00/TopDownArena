@@ -71,7 +71,8 @@ public class Gun : MonoBehaviour
         //{
         //    Shoot();
         //}
-      //  FireFlameUpdate();
+        //  FireFlameUpdate();
+        Debug.DrawRay(gunBarrel.transform.position, gunBarrel.transform.forward * 10);
     }
 
     public void Shoot()

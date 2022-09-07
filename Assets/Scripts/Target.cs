@@ -28,11 +28,7 @@ public class Target : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            // Сделать скриптик, чтобы была своя анимация смерти в зависимости от типа объекта
-            // GameObject go = gameObject.GetComponent<Death>();
-
             Destroy(gameObject);
-
         }
     }
 
