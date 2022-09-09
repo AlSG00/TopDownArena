@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
+    <Compile Include="Assets\RayProjectile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

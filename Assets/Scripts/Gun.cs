@@ -59,6 +59,8 @@ public class Gun : MonoBehaviour
 
     public bool isShooting;
 
+    public Vector3 direction;
+
     int count = 0;
 
     public GameObject impactEffect;
@@ -67,11 +69,12 @@ public class Gun : MonoBehaviour
 
     private void Awake()
     {
+         direction = GetDirection();
         Instance = GetComponent<Gun>();
         fireFlame.intensity = 0;
         fireFlame.range = fireFlameRange;
-        float test = bulletSpreadValue;
-        Vector3 BulletSpread = new Vector3(test, test, test);
+   //     float test = bulletSpreadValue;
+   //     Vector3 BulletSpread = new Vector3(test, test, test);
     }
 
     void Update()
@@ -84,77 +87,83 @@ public class Gun : MonoBehaviour
         if (lastTimeShot + fireDelay <= Time.time)
         {
             lastTimeShot = Time.time;
-            RaycastHit hit;
+            //RaycastHit hit;
             Instantiate(sleevePrefab, SleeveEjector.position, SleeveEjector.rotation); // делаем гильзу
+       
+            Instantiate(projectilePrefab, gunBarrel.transform.position, gunBarrel.transform.rotation);
             fireFlame.intensity = fireFlameIntensity; // делаем вспышку от выстрела
             SleeveEjector.transform.localEulerAngles = new Vector3(sleeveThrowing_X, Random.Range(sleeveThrowingMinAngle_Y, sleeveThrowingMaxAngle_Y), sleeveThrowing_Z); // делаем разброс гильз
           
-            Vector3 direction = GetDirection(); // делаем разброс пуль
-            Debug.Log(direction);
-            if (Physics.Raycast(gunBarrel.transform.position, direction, out hit))
-            {
+          //  Vector3 direction = GetDirection(); // делаем разброс пуль
+//Debug.Log(direction);
+         //   if (Physics.Raycast(gunBarrel.transform.position, direction, out hit))
+         //   {
                 
-                SpawnTrail2(hit);
+              //  SpawnTrail2(hit);
                 // пускаем пулю
-                Target target = hit.transform.GetComponent<Target>();
-                if (target != null)
-                {
-                    target.TakeDamage(damage); // наносим урон
-                }
-            }
+               // Target target = hit.transform.GetComponent<Target>();
+              //  if (target != null)
+              //  {
+              //      target.TakeDamage(damage); // наносим урон
+            //    }
+          //  }
 
-            GameObject impactObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); // эффект от попадания пули
-            Destroy(impactObj, 1f);
+           // GameObject impactObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); // эффект от попадания пули
+          //  Destroy(impactObj, 1f);
         }
     }
 
-    private Vector3 GetDirection()
+    public Vector3 GetDirection()
     {
         Vector3 direction = gunBarrel.transform.forward;        
-        direction += new Vector3(Random.Range(-bulletSpreadValue, bulletSpreadValue), Random.Range(-bulletSpreadValue, bulletSpreadValue), Random.Range(-bulletSpreadValue, bulletSpreadValue));
+        direction += new Vector3(
+            Random.Range(-bulletSpreadValue, bulletSpreadValue), 
+            Random.Range(-bulletSpreadValue, bulletSpreadValue), 
+            Random.Range(-bulletSpreadValue, bulletSpreadValue)
+            );
       
        // direction.Normalize();
 
         return direction;
     }
 
-    private IEnumerable SpawnTrail(TrailRenderer Trail, RaycastHit Hit)
-    {
-        float time = 0;
-        Vector3 startposition = Trail.transform.position;
+    //private IEnumerable SpawnTrail(TrailRenderer Trail, RaycastHit Hit)
+    //{
+    //    float time = 0;
+    //    Vector3 startposition = Trail.transform.position;
 
-        while (time < 1)
-        {
-            Trail.transform.position = Vector3.Lerp(startposition, Hit.point, time);
-            time += Time.deltaTime / Trail.time;
+    //    while (time < 1)
+    //    {
+    //        Trail.transform.position = Vector3.Lerp(startposition, Hit.point, time);
+    //        time += Time.deltaTime / Trail.time;
 
-            yield return null;
-        }
-        Trail.transform.position = Hit.point;
-        Instantiate(impactEffect, Hit.point, Quaternion.LookRotation(Hit.normal));
+    //        yield return null;
+    //    }
+    //    Trail.transform.position = Hit.point;
+    //    Instantiate(impactEffect, Hit.point, Quaternion.LookRotation(Hit.normal));
 
-        Destroy(Trail.gameObject, Trail.time);
-    }
+    //    Destroy(Trail.gameObject, Trail.time);
+    //}
 
-    private void SpawnTrail2(RaycastHit Hit)
-    {
-        float time = 0;
-        TrailRenderer Trail = Instantiate(BulletTrail, gunBarrel.transform.position, Quaternion.identity);
+    //private void SpawnTrail2(RaycastHit Hit)
+    //{
+    //    float time = 0;
+    //    TrailRenderer Trail = Instantiate(BulletTrail, gunBarrel.transform.position, Quaternion.identity);
 
-        Vector3 startposition = Trail.transform.position;
+    //    Vector3 startposition = Trail.transform.position;
 
-       // while (time < 1)
-       // {
-            Trail.transform.position = Vector3.Lerp(startposition, Hit.point, time);
-            time += Time.deltaTime / Trail.time;
+    //   // while (time < 1)
+    //   // {
+    //        Trail.transform.position = Vector3.Lerp(startposition, Hit.point, time);
+    //        time += Time.deltaTime / Trail.time;
 
         
-      //  }
-        Trail.transform.position = Hit.point;
-     //   Instantiate(impactEffect, Hit.point, Quaternion.LookRotation(Hit.normal));
+    //  //  }
+    //    Trail.transform.position = Hit.point;
+    // //   Instantiate(impactEffect, Hit.point, Quaternion.LookRotation(Hit.normal));
 
-        Destroy(Trail.gameObject, Trail.time);
-    }
+    //    Destroy(Trail.gameObject, Trail.time);
+    //}
 
     public void FireFlameUpdate()
     {
