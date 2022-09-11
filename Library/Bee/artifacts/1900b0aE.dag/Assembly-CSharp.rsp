@@ -352,6 +352,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/AmmoCrate.cs"
+"Assets/FixedRotation.cs"
 "Assets/LightFlicker.cs"
 "Assets/RayProjectile.cs"
 "Assets/Roach.cs"
