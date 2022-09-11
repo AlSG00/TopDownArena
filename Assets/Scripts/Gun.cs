@@ -5,112 +5,99 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField]
-    Transform gunBarrel;
-
+    Transform gunBarrel;                    // Дуло. Точка, где создается пуля
     [SerializeField]
-    Transform SleeveEjector;
-
+    Transform SleeveEjector;                // Ежектор. Точка, где создаются гильзы
     [SerializeField]
-    GameObject projectilePrefab;
-
+    GameObject projectilePrefab;            // Префаб пули
     [SerializeField]
-    GameObject sleevePrefab;
-
+    GameObject sleevePrefab;                // Префаб гильзы
     [SerializeField]
-    float sleeveThrowing_X;
-
+    float sleeveThrowing_X;                 // Х-угол выброса гильзы
     [SerializeField]
-    float sleeveThrowingMinAngle_Y;
-
+    float sleeveThrowingMinAngle_Y;         // минимальный У-угол выброса гильзы
     [SerializeField]
-    float sleeveThrowingMaxAngle_Y;
-
+    float sleeveThrowingMaxAngle_Y;         // максимальный У-угол выброса гильзы
     [SerializeField]
-    float sleeveThrowing_Z;
-
+    float sleeveThrowing_Z;                 // Z-угол выброса гильзы
     [SerializeField]
-    float fireDelay;
-
+    float fireDelay;                        // Задержка между выстрелами
     [SerializeField]
-    Light fireFlame;
-
+    Light fireFlame;                        // Источник света для вспышки от выстрела
     [SerializeField]
-    float fireFlameIntensity;
-
+    float fireFlameIntensity;               // Интенсивность вспышки от выстрела
     [SerializeField]
-    float fireFlameFading;
-
+    float fireFlameFading;                  // Скорость затухания вспышки от выстрела
     [SerializeField]
-    float fireFlameRange;
-
+    float fireFlameRange;                   // Дальность свечения вспышки от выстрела                          
     [SerializeField]
-    float damage;
-
+    float bulletSpreadValue;                // Разброс пуль
     [SerializeField]
-    float bulletSpreadValue;
-
+    private int magCapacity;                // Емкость магазина
     [SerializeField]
-    private TrailRenderer BulletTrail;
+    private int ammoStock;                  // Боезапас
+    public int currentAmmo;
+    public int currentStock;
     Vector3 BulletSpread;
-
     private float lastTimeShot;
-
     public static Gun Instance;
-
     public bool isShooting;
-
-    public Vector3 direction;
-
-    int count = 0;
-
-    public GameObject impactEffect;
+    public GameObject impactEffect;        // Тестовые переменные для добавления эффектов от попадания пули в различные поверхности
     public GameObject impactEffect2;
     public GameObject impactEffect3;
 
     private void Awake()
-    {
-         direction = GetDirection();
+    {        
         Instance = GetComponent<Gun>();
         fireFlame.intensity = 0;
         fireFlame.range = fireFlameRange;
-   //     float test = bulletSpreadValue;
-   //     Vector3 BulletSpread = new Vector3(test, test, test);
-    }
 
-    void Update()
-    {
-
+        currentAmmo = magCapacity;
+        currentStock = ammoStock;
     }
 
     public void Shoot()
     {
-        if (lastTimeShot + fireDelay <= Time.time)
+        if ((lastTimeShot + fireDelay <= Time.time) 
+            && (currentAmmo > 0))
         {
-            lastTimeShot = Time.time;
-            //RaycastHit hit;
-            Instantiate(sleevePrefab, SleeveEjector.position, SleeveEjector.rotation); // делаем гильзу
-       
+            lastTimeShot = Time.time;            
+            Instantiate(sleevePrefab, SleeveEjector.position, SleeveEjector.rotation); // делаем гильзу       
             Instantiate(projectilePrefab, gunBarrel.transform.position, gunBarrel.transform.rotation);
             fireFlame.intensity = fireFlameIntensity; // делаем вспышку от выстрела
-            SleeveEjector.transform.localEulerAngles = new Vector3(sleeveThrowing_X, Random.Range(sleeveThrowingMinAngle_Y, sleeveThrowingMaxAngle_Y), sleeveThrowing_Z); // делаем разброс гильз
-          
-          //  Vector3 direction = GetDirection(); // делаем разброс пуль
-//Debug.Log(direction);
-         //   if (Physics.Raycast(gunBarrel.transform.position, direction, out hit))
-         //   {
-                
-              //  SpawnTrail2(hit);
-                // пускаем пулю
-               // Target target = hit.transform.GetComponent<Target>();
-              //  if (target != null)
-              //  {
-              //      target.TakeDamage(damage); // наносим урон
-            //    }
-          //  }
+            SleeveEjector.transform.localEulerAngles = new Vector3(
+                sleeveThrowing_X, 
+                Random.Range(sleeveThrowingMinAngle_Y, sleeveThrowingMaxAngle_Y), 
+                sleeveThrowing_Z
+                ); // делаем разброс гильз
 
-           // GameObject impactObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); // эффект от попадания пули
-          //  Destroy(impactObj, 1f);
+            currentAmmo--;
+            Debug.Log($"ammo: {currentAmmo} / {currentStock}");
         }
+    }
+
+    public void Reload()
+    {
+        int toFill = magCapacity - currentAmmo;        
+        if (toFill > 0 && currentStock > 0)
+        {
+            if (currentStock >= toFill)
+            {
+                currentStock -= toFill;
+                currentAmmo = magCapacity;
+            }
+            else
+            {
+                currentAmmo += currentStock;
+                currentStock = 0;
+            }
+            Debug.Log($"ammo: {currentAmmo} / {currentStock}");
+        }
+        else
+        {
+            Debug.Log("Can't reload");
+        }
+
     }
 
     public Vector3 GetDirection()
@@ -122,51 +109,43 @@ public class Gun : MonoBehaviour
             Random.Range(-bulletSpreadValue, bulletSpreadValue)
             );
       
-       // direction.Normalize();
+        direction.Normalize();
 
         return direction;
-    }
-
-    //private IEnumerable SpawnTrail(TrailRenderer Trail, RaycastHit Hit)
-    //{
-    //    float time = 0;
-    //    Vector3 startposition = Trail.transform.position;
-
-    //    while (time < 1)
-    //    {
-    //        Trail.transform.position = Vector3.Lerp(startposition, Hit.point, time);
-    //        time += Time.deltaTime / Trail.time;
-
-    //        yield return null;
-    //    }
-    //    Trail.transform.position = Hit.point;
-    //    Instantiate(impactEffect, Hit.point, Quaternion.LookRotation(Hit.normal));
-
-    //    Destroy(Trail.gameObject, Trail.time);
-    //}
-
-    //private void SpawnTrail2(RaycastHit Hit)
-    //{
-    //    float time = 0;
-    //    TrailRenderer Trail = Instantiate(BulletTrail, gunBarrel.transform.position, Quaternion.identity);
-
-    //    Vector3 startposition = Trail.transform.position;
-
-    //   // while (time < 1)
-    //   // {
-    //        Trail.transform.position = Vector3.Lerp(startposition, Hit.point, time);
-    //        time += Time.deltaTime / Trail.time;
-
-        
-    //  //  }
-    //    Trail.transform.position = Hit.point;
-    // //   Instantiate(impactEffect, Hit.point, Quaternion.LookRotation(Hit.normal));
-
-    //    Destroy(Trail.gameObject, Trail.time);
-    //}
+    }    
 
     public void FireFlameUpdate()
     {
-            fireFlame.intensity -= fireFlameFading;
+        fireFlame.intensity -= fireFlameFading;
+        Debug.Log(fireFlame.intensity);
     }
+
+    //public void Shoot()
+    //{
+    //    if (lastTimeShot + fireDelay <= Time.time)
+    //    {
+    //        lastTimeShot = Time.time;
+    //        Instantiate(sleevePrefab, SleeveEjector.position, SleeveEjector.rotation); // делаем гильзу       
+    //        Instantiate(projectilePrefab, gunBarrel.transform.position, gunBarrel.transform.rotation);
+    //        fireFlame.intensity = fireFlameIntensity; // делаем вспышку от выстрела
+    //        SleeveEjector.transform.localEulerAngles = new Vector3(sleeveThrowing_X, Random.Range(sleeveThrowingMinAngle_Y, sleeveThrowingMaxAngle_Y), sleeveThrowing_Z); // делаем разброс гильз
+
+    //        //  Vector3 direction = GetDirection(); // делаем разброс пуль
+    //        //Debug.Log(direction);
+    //        //   if (Physics.Raycast(gunBarrel.transform.position, direction, out hit))
+    //        //   {
+
+    //        //  SpawnTrail2(hit);
+    //        // пускаем пулю
+    //        // Target target = hit.transform.GetComponent<Target>();
+    //        //  if (target != null)
+    //        //  {
+    //        //      target.TakeDamage(damage); // наносим урон
+    //        //    }
+    //        //  }
+
+    //        // GameObject impactObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); // эффект от попадания пули
+    //        //  Destroy(impactObj, 1f);
+    //    }
+    //}
 }

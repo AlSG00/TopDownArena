@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Player_Shooting.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
+    <Compile Include="Assets\RayProjectile.cs" />
     <Compile Include="Assets\RoachRunFrom.cs" />
     <Compile Include="Assets\Scripts\Player_Scope.cs" />
     <Compile Include="Assets\Scripts\PlayerHP.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
-    <Compile Include="Assets\RayProjectile.cs" />
+    <Compile Include="Assets\AmmoCrate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

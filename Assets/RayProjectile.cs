@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RayProjectile : MonoBehaviour
-{
-    // Start is called before the first frame update
-    public Rigidbody rb;
+{       
+    [SerializeField]
     private Vector3 previousPos;
-    public GameObject impactEffect;
-    public float speed;
-    public TrailRenderer trace;
-    public LayerMask layerMask;
-    public GameObject gunbarrel;
-    public float damage;
-    public float step;
+    [SerializeField]
+    private GameObject impactEffect;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private LayerMask layerMask;
+    [SerializeField]
+    private float damage;
+    [SerializeField]
+    private float step;
+    [SerializeField]
+    private float bulletSpreadValue;
     private Vector3 _direction;
-
-    public float bulletSpreadValue;
+    private Rigidbody rb;
+  
     void Start()
     {
         _direction = GetDirection();
@@ -40,8 +44,7 @@ public class RayProjectile : MonoBehaviour
                 if (target != null)
                 {
                     target.TakeDamage(damage); // наносим урон
-                }
-                //  Destroy(gameObject);
+                }               
                 Destruct(hit.point, hit.normal, hit.transform.root);
             }
             else
@@ -53,9 +56,6 @@ public class RayProjectile : MonoBehaviour
 
     private void Destruct(Vector3 point, Vector3 normal, Transform target)
     {
-        //  var hitNormal = Quaternion.Euler(normal);
-        // GameObject impactObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); // эффект от попадания пули
-       
         Destroy(gameObject);
         GameObject impactObj = Instantiate(impactEffect, point, Quaternion.LookRotation(normal) /*gunbarrel*//*Quaternion.Euler(normal)*/);
         //  AudioSource.PlayClipAtPoint(explosionAudio, transform.position, 2f);
@@ -65,7 +65,6 @@ public class RayProjectile : MonoBehaviour
     public void Shoot()
     {
         previousPos = transform.position;
-
         rb.AddForce(_direction * speed, ForceMode.VelocityChange);
     }
 
@@ -86,7 +85,7 @@ public class RayProjectile : MonoBehaviour
             Random.Range(-bulletSpreadValue, bulletSpreadValue)
             );
 
-        // direction.Normalize();
+        direction.Normalize();
 
         return direction;
     }

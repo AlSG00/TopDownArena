@@ -16,7 +16,7 @@ public class Player_Aim : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         MoveCamera();
     }

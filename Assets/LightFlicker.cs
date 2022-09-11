@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightFlicker : MonoBehaviour
 {
     [SerializeField]
-    private Light light;
+    private Light _light;
 
     [SerializeField]
     private float minIntensity;
@@ -21,7 +21,7 @@ public class LightFlicker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        light = GetComponent<Light>();
+        _light = GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class LightFlicker : MonoBehaviour
         if (flickerTime + frequency <= Time.time)
         {
             flickerTime = Time.time;
-            light.intensity = Random.Range(minIntensity, maxIntensity);
+            GetComponent<Light>().intensity = Random.Range(minIntensity, maxIntensity);
         }        
     }
 }

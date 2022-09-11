@@ -14,21 +14,24 @@ public class Player_Shooting : MonoBehaviour
 
     void Update()
     {
-        ShootInput();
-        Gun.Instance.FireFlameUpdate();
+        ShootInput();                       // Проверка, нажата ли кнопка выстрела
+        Gun.Instance.FireFlameUpdate();     // Угасание вспышки от выстрела
     }
 
     void ShootInput()
     {
         if (Input.GetButton("Fire1"))
-        {
-            //isShooting = true;
-            Gun.Instance.Shoot();
-            //Instantiate(prefab, barrel.transform.position, barrel.transform.rotation);
+        {          
+            Gun.Instance.Shoot();            
         }
-        else
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            //isShooting = false;
+            Gun.Instance.Reload();
         }
+        //else
+        //{
+        //    //isShooting = false;
+        //}
     }
 }
