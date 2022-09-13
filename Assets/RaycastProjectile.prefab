@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previousPos: {x: 0, y: 0, z: 0}
-  impactEffect: {fileID: 7314358844588756561, guid: a096459dbf94fad4ca31c7fc808caec6, type: 3}
+  impactEffect: {fileID: 1025285306637258, guid: d8f0099df63275647a8bcf646df1ca00,
+    type: 3}
   speed: 150
   layerMask:
     serializedVersion: 2

@@ -46,6 +46,7 @@ public class Gun : MonoBehaviour
     public GameObject impactEffect2;
     public GameObject impactEffect3;
 
+    public AmmoCounterTest ammoCounter;
     private void Awake()
     {        
         Instance = GetComponent<Gun>();
@@ -54,6 +55,8 @@ public class Gun : MonoBehaviour
 
         currentAmmo = magCapacity;
         currentStock = ammoStock;
+
+        ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
     }
 
     public void Shoot()
@@ -71,8 +74,10 @@ public class Gun : MonoBehaviour
                 sleeveThrowing_Z
                 ); // делаем разброс гильз
 
+            
             currentAmmo--;
             Debug.Log($"ammo: {currentAmmo} / {currentStock}");
+            ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
         }
     }
 
@@ -91,6 +96,7 @@ public class Gun : MonoBehaviour
                 currentAmmo += currentStock;
                 currentStock = 0;
             }
+            ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
             Debug.Log($"ammo: {currentAmmo} / {currentStock}");
         }
         else

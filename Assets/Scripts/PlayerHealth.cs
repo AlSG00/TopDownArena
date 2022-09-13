@@ -7,11 +7,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     float health;
     float currentHealth;
+
+    public HealtBarScript healthBar; 
     // Start is called before the first frame update
 
     void Start()
     {
         currentHealth = health;
+        healthBar.SetMaxHealth(health);
     }
 
     void Update()
@@ -30,6 +33,6 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+        healthBar.SetHealth(currentHealth);
     }
 }
