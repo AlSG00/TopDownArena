@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AmmoCrate : MonoBehaviour
 {
+    public int ammo;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,15 @@ public class AmmoCrate : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            //collision.gameObject.GetComponent<Gun>().AddAmmo(ammo);
+            collision.gameObject.GetComponentInChildren<Gun>().AddAmmo(ammo);
+            Destroy(gameObject);
+        }      
     }
 }

@@ -6,10 +6,15 @@ public class Player_Movement : MonoBehaviour
 {
     [SerializeField]
     private float player_speed;
+    [SerializeField]
+    private float player_sprint;
     public Rigidbody rigidBody;
     //public Camera camera;
-
+    private float sprintSpeed;
+    bool isSprinting;
     Vector3 movement;
+
+    public AudioSource footsteps;
 
     //void Update()
     //{
@@ -19,6 +24,11 @@ public class Player_Movement : MonoBehaviour
     //    FixedUpdate();
     //    HandleRotationInput();
     //}
+
+    private void Start()
+    {
+        isSprinting = false;
+    }
 
     private void FixedUpdate()
     {
@@ -30,7 +40,20 @@ public class Player_Movement : MonoBehaviour
         //movement.Normalize();
         //transform.Translate(movement * player_speed * Time.deltaTime, Space.World);
         Move();
+        Sprint();
         HandleRotationInput();
+    }
+
+    private void Sprint()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            sprintSpeed = player_sprint;
+        }
+        else
+        {
+            sprintSpeed = 1;
+        }
     }
 
     private void Move()
@@ -47,8 +70,12 @@ public class Player_Movement : MonoBehaviour
         double cosForce = Mathf.Abs(Mathf.Cos(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
 
         Vector3 _movement = new Vector3(Input.GetAxisRaw("Horizontal") * (float)cosForce, 0, Input.GetAxisRaw("Vertical") * (float)sinForce);
+        if ((sinForce > 0 || cosForce > 0) && !footsteps.isPlaying)
+            footsteps.Play();
+        //else
+        //    footsteps.Stop();
+        transform.Translate(_movement * player_speed * sprintSpeed * Time.deltaTime, Space.World);
 
-        transform.Translate(_movement * player_speed * Time.deltaTime, Space.World);
     }
 
         void HandleRotationInput()

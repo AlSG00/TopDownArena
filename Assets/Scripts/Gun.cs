@@ -46,25 +46,32 @@ public class Gun : MonoBehaviour
     public GameObject impactEffect2;
     public GameObject impactEffect3;
 
+    public AudioClip reloadSound;
+    public AudioClip shotSound;
+    public AudioSource audioSource;
     public AmmoCounterTest ammoCounter;
+
+    private bool isReloading;
     private void Awake()
     {        
         Instance = GetComponent<Gun>();
         fireFlame.intensity = 0;
         fireFlame.range = fireFlameRange;
-
-        currentAmmo = magCapacity;
-        currentStock = ammoStock;
-
+        isReloading = false;
+        //currentAmmo = magCapacity;
+        //currentStock = ammoStock;
+      //  audioSource.clip = shotSound;
         ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
     }
 
     public void Shoot()
     {
         if ((lastTimeShot + fireDelay <= Time.time) 
-            && (currentAmmo > 0))
+            && (currentAmmo > 0)
+            && !isReloading)
         {
-            lastTimeShot = Time.time;            
+            lastTimeShot = Time.time;
+            audioSource.PlayOneShot(shotSound);
             Instantiate(sleevePrefab, SleeveEjector.position, SleeveEjector.rotation); // делаем гильзу       
             Instantiate(projectilePrefab, gunBarrel.transform.position, gunBarrel.transform.rotation);
             fireFlame.intensity = fireFlameIntensity; // делаем вспышку от выстрела
@@ -76,8 +83,9 @@ public class Gun : MonoBehaviour
 
             
             currentAmmo--;
-            Debug.Log($"ammo: {currentAmmo} / {currentStock}");
             ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
+
+            
         }
     }
 
@@ -86,6 +94,11 @@ public class Gun : MonoBehaviour
         int toFill = magCapacity - currentAmmo;        
         if (toFill > 0 && currentStock > 0)
         {
+            isReloading = true;
+            audioSource.PlayOneShot(reloadSound);
+
+            //yield return new WaitForSecondsRealtime(3);
+
             if (currentStock >= toFill)
             {
                 currentStock -= toFill;
@@ -104,6 +117,21 @@ public class Gun : MonoBehaviour
             Debug.Log("Can't reload");
         }
 
+    }
+
+    public void IsReloading()
+    {
+        if (isReloading == true && !audioSource.isPlaying)
+            isReloading = false;
+    }
+
+    public void AddAmmo(int ammo)
+    {
+        currentStock += ammo;
+        if (currentStock > ammoStock)
+            currentStock = ammoStock;
+
+        ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
     }
 
     public Vector3 GetDirection()

@@ -365,6 +365,8 @@
 "Assets/FixedRotation.cs"
 "Assets/HealtBarScript.cs"
 "Assets/LightFlicker.cs"
+"Assets/Medkit.cs"
+"Assets/MouseInteraction.cs"
 "Assets/RayProjectile.cs"
 "Assets/Roach.cs"
 "Assets/RoachController.cs"
@@ -393,6 +395,7 @@
 "Assets/Shared/Scripts/ProximityActivate.cs"
 "Assets/Shared/Scripts/SimpleCameraController.cs"
 "Assets/Shared/Scripts/SimpleCharacterMotor.cs"
+"Assets/ToolTip.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
 
