@@ -4,18 +4,8 @@ using UnityEngine;
 
 public class AmmoCrate : MonoBehaviour
 {
-    public int ammo;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private int ammo;
 
     private void OnCollisionEnter(Collision collision)
     {

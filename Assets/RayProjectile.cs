@@ -20,6 +20,8 @@ public class RayProjectile : MonoBehaviour
     private float bulletSpreadValue;
     private Vector3 _direction;
     private Rigidbody rb;
+    [SerializeField]
+    private float impactForce;
   
     void Start()
     {
@@ -44,8 +46,14 @@ public class RayProjectile : MonoBehaviour
                 if (target != null)
                 {
                     target.TakeDamage(damage); // наносим урон
-                }               
+                }
+                if (hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * impactForce);
+                }
                 Destruct(hit.point, hit.normal, hit.transform.root);
+
+                
             }
             else
             {

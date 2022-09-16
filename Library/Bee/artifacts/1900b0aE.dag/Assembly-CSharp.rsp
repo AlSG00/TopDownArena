@@ -362,6 +362,7 @@
 "Assets/AmmoCounterTest.cs"
 "Assets/AmmoCrate.cs"
 "Assets/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs"
+"Assets/FieldOfView.cs"
 "Assets/FixedRotation.cs"
 "Assets/HealtBarScript.cs"
 "Assets/LightFlicker.cs"
@@ -395,6 +396,8 @@
 "Assets/Shared/Scripts/ProximityActivate.cs"
 "Assets/Shared/Scripts/SimpleCameraController.cs"
 "Assets/Shared/Scripts/SimpleCharacterMotor.cs"
+"Assets/ShowTooltip.cs"
+"Assets/TextLookAt.cs"
 "Assets/ToolTip.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0

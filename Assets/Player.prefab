@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1891848615263795759}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1891848614460232944
 GameObject:
@@ -60,7 +60,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1891848615263795759}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 50}
 --- !u!1 &1891848615040942635
 GameObject:
@@ -87,12 +87,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891848615040942635}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.19512206, z: 0.726}
-  m_LocalScale: {x: 3.5714288, y: 2.4390244, z: 1}
+  m_LocalPosition: {x: 0, y: 0.29400003, z: 1.348999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1891848615263795759}
-  m_RootOrder: 2
+  m_Father: {fileID: 1891848615734474056}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1891848615040942645
 Light:
@@ -190,7 +190,6 @@ Transform:
   m_Children:
   - {fileID: 1891848615555154195}
   - {fileID: 1891848615272465928}
-  - {fileID: 1891848615040942644}
   - {fileID: 1891848614281583026}
   - {fileID: 1891848614460232945}
   m_Father: {fileID: 1891848615734474056}
@@ -273,8 +272,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunBarrel: {fileID: 1891848614281583026}
   SleeveEjector: {fileID: 1891848614460232945}
-  projectilePrefab: {fileID: 4511106413221611046, guid: 6073fe19303cb8044914e2e18ccd50b5, type: 3}
-  sleevePrefab: {fileID: 3949811732455408043, guid: 54462dc5a03f38f4bab11c45daf47f09, type: 3}
+  projectilePrefab: {fileID: 4511106413221611046, guid: 6073fe19303cb8044914e2e18ccd50b5,
+    type: 3}
+  sleevePrefab: {fileID: 3949811732455408043, guid: 54462dc5a03f38f4bab11c45daf47f09,
+    type: 3}
   sleeveThrowing_X: 0
   sleeveThrowingMinAngle_Y: -10
   sleeveThrowingMaxAngle_Y: 10
@@ -284,13 +285,20 @@ MonoBehaviour:
   fireFlameIntensity: 20
   fireFlameFading: 2
   fireFlameRange: 5.61
-  damage: 10
   bulletSpreadValue: 0.1
-  BulletTrail: {fileID: -3401239435372064601, guid: b0d5b7b51a4871d4e8da44afc7be6f62, type: 3}
+  magCapacity: 0
+  ammoStock: 0
+  currentAmmo: 0
+  currentStock: 0
   isShooting: 0
-  impactEffect: {fileID: 7314358844588756561, guid: a096459dbf94fad4ca31c7fc808caec6, type: 3}
+  impactEffect: {fileID: 7314358844588756561, guid: a096459dbf94fad4ca31c7fc808caec6,
+    type: 3}
   impactEffect2: {fileID: 0}
   impactEffect3: {fileID: 0}
+  reloadSound: {fileID: 0}
+  shotSound: {fileID: 0}
+  audioSource: {fileID: 0}
+  ammoCounter: {fileID: 0}
 --- !u!1 &1891848615272465935
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +524,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1891848615263795759}
+  - {fileID: 1891848615040942644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -611,9 +620,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_speed: 2
+  player_sprint: 0
   rigidBody: {fileID: 1891848615734474060}
-  camera: {fileID: 0}
-  HP: 100
+  footsteps: {fileID: 0}
 --- !u!114 &1891848615734474068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,6 +636,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  currentHealth: 0
+  healthBar: {fileID: 0}
 --- !u!114 &1891848615734474057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +652,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashlight: {fileID: 1891848615555154204}
   ambient: {fileID: 1891848615040942645}
+  flashlightAudioSource: {fileID: 0}
+  turnOnSound: {fileID: 0}
+  turnOffSound: {fileID: 0}
 --- !u!114 &1891848615734474058
 MonoBehaviour:
   m_ObjectHideFlags: 0
