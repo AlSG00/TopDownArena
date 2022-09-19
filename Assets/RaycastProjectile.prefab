@@ -105,7 +105,7 @@ MonoBehaviour:
   speed: 150
   layerMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 4279
   damage: 10
   step: 1e-10
   bulletSpreadValue: 0.05

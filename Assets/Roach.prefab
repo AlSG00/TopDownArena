@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 169248624328905339}
   - component: {fileID: 169248624328905329}
   - component: {fileID: 169248624328905328}
-  m_Layer: 0
+  - component: {fileID: -7295237624898219575}
+  - component: {fileID: -8675288785802782883}
+  m_Layer: 7
   m_Name: Roach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,3 +160,30 @@ MonoBehaviour:
   wanderMaxTime: 0
   safeDistance: 5
   run: 0
+--- !u!114 &-7295237624898219575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659133501549866584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3417c49995cbcea4aa2a73ebdf103693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RaycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 4023
+--- !u!114 &-8675288785802782883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659133501549866584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b334c0935829642b595f043fde9963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

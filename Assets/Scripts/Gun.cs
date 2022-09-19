@@ -110,7 +110,6 @@ public class Gun : MonoBehaviour
                 currentStock = 0;
             }
             ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
-            Debug.Log($"ammo: {currentAmmo} / {currentStock}");
         }
         else
         {
@@ -150,8 +149,7 @@ public class Gun : MonoBehaviour
 
     public void FireFlameUpdate()
     {
-        fireFlame.intensity -= fireFlameFading;
-        Debug.Log(fireFlame.intensity);
+        fireFlame.intensity -= fireFlameFading; 
     }
 
     //public void Shoot()

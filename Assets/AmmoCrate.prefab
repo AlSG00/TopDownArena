@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2033085543939010543}
   - component: {fileID: 2033085543939010540}
   - component: {fileID: 5308620128562062634}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AmmoCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 2033085543242133493}
   - component: {fileID: 2033085543242133490}
   - component: {fileID: 2033085543242133494}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 2033085543947389241}
   - component: {fileID: 2033085543947389243}
   - component: {fileID: 2033085543947389240}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}

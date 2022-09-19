@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Shared\Ramps\Editor\RampAssetEditor.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\Editor\LOSStencilRendererEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

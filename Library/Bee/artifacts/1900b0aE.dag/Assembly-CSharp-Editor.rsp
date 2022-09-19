@@ -377,6 +377,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/EntroPi/GPU Line Of Sight/Scripts/Editor/LOSStencilRendererEditor.cs"
 "Assets/Shared/Ramps/Editor/RampAssetEditor.cs"
 "Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs"
 -langversion:9.0
