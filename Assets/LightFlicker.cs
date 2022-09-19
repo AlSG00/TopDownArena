@@ -16,6 +16,9 @@ public class LightFlicker : MonoBehaviour
     [SerializeField]
     private float frequency;
 
+    [SerializeField]
+    private float additionalDelay;
+
     private float flickerTime;
 
     // Start is called before the first frame update
@@ -32,7 +35,8 @@ public class LightFlicker : MonoBehaviour
 
     private void Flicker()
     {
-        if (flickerTime + frequency <= Time.time)
+        float delay = Random.Range(0, additionalDelay);
+        if (flickerTime + frequency + delay <= Time.time)
         {
             flickerTime = Time.time;
             GetComponent<Light>().intensity = Random.Range(minIntensity, maxIntensity);
