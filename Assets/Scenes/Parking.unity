@@ -24508,6 +24508,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9094323224724858691, guid: b94eed945ab42b048ad623fac7bebae6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.501
+      objectReference: {fileID: 0}
     - target: {fileID: 9094323225839666394, guid: b94eed945ab42b048ad623fac7bebae6,
         type: 3}
       propertyPath: ammoCounter
