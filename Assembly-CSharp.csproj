@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AmmoCrate.cs" />
-    <Compile Include="Assets\testtesttest.cs" />
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
@@ -88,7 +87,7 @@
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
-    <Compile Include="Assets\RayProjectile.cs" />
+    <Compile Include="Assets\Gun\RayProjectile.cs" />
     <Compile Include="Assets\HealtBarScript.cs" />
     <Compile Include="Assets\RoachRunFrom.cs" />
     <Compile Include="Assets\Scripts\Player_Scope.cs" />
@@ -127,6 +126,10 @@
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
+    <Compile Include="Assets\AudioManager.cs" />
+    <Compile Include="Assets\nextSpawn.cs" />
+    <Compile Include="Assets\SwapAudio.cs" />
+    <Compile Include="Assets\CheckPass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

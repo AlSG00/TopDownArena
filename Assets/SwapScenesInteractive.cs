@@ -30,8 +30,10 @@ public class SwapScenesInteractive : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E))
         {
-            var scene = GameManager.GetComponent<SceneTransitions>();
-            scene.targerSpawnPoint = _targetSpawnPoint;
+            //var scene = GameManager.GetComponent<SceneTransitions>();
+            //scene.targerSpawnPoint = _targetSpawnPoint;
+            other.GetComponent<nextSpawn>().targetSpawn = _targetSpawnPoint;
+            
             //SceneManager.LoadScene(_targetLevel);
             //LoadNewScene();
             //gameObject.SetActive(false);
