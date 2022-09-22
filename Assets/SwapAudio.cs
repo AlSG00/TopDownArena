@@ -6,7 +6,7 @@ public class SwapAudio : MonoBehaviour
 {
     //  public CheckPass cp;
     public SwapAudio pair;
-  //  public bool isPassed;
+    public bool isPassed;
     public AudioClip sound;
     public AudioSource AmbientAudioSource;
     //public AudioSource NextAmbientAudioSource;
@@ -26,10 +26,18 @@ public class SwapAudio : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        currentVolume = pair.targetVolume;
-        StopAllCoroutines();
-        StartCoroutine(FadeTrack(sound));
-
+        if (!isPassed)
+        {
+                isPassed = true;
+            pair.isPassed = false;
+            currentVolume = pair.targetVolume;
+            //FadeTrack(sound);
+            //  }
+            //currentVolume = pair.targetVolume;
+          // StopAllCoroutines();
+            
+            StartCoroutine(FadeTrack(sound));
+        }
         //if (!cp.isPassed)
         //{
         //    Debug.Log("true");
@@ -66,24 +74,21 @@ public class SwapAudio : MonoBehaviour
 
     private IEnumerator FadeTrack(AudioClip newClip)
     {
-        //var temp = NextAmbientAudioSource.clip;
         float tempTimeElapsed = timeElapsed;
         float tempTimeToFade = timeToFade;
 
         AmbientAudioSource.clip = newClip;
         AmbientAudioSource.Play();
         timeElapsed = 0;
-
-        while (timeElapsed < timeToFade)
+        AmbientAudioSource.volume = 0;
+        while (tempTimeElapsed < tempTimeToFade)
         {
             AmbientAudioSource.volume = Mathf.Lerp(0, targetVolume, tempTimeElapsed / tempTimeToFade);
             pair.AmbientAudioSource.volume = Mathf.Lerp(currentVolume, 0, tempTimeElapsed / tempTimeToFade);
-            timeElapsed += Time.deltaTime;
+            tempTimeElapsed += Time.deltaTime;
             yield return null;
         }
 
-        //  PrevAmbientAudioSource.clip = temp;
         pair.AmbientAudioSource.Stop();
-        //pair.isPassed = false;
     }
 }

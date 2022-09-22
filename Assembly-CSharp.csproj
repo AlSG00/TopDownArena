@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
+    <Compile Include="Assets\nextSpawn.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
     <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Roach.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
+    <Compile Include="Assets\CheckPass.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilRenderer.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerInfo.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\DoorSliding.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Assets\Gun\RayProjectile.cs" />
     <Compile Include="Assets\HealtBarScript.cs" />
     <Compile Include="Assets\RoachRunFrom.cs" />
+    <Compile Include="Assets\SwapAudio.cs" />
     <Compile Include="Assets\Scripts\Player_Scope.cs" />
     <Compile Include="Assets\Scripts\PlayerHP.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectHider.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSDebugView.cs" />
+    <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
     <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\MouseInteraction.cs" />
@@ -126,10 +130,6 @@
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
-    <Compile Include="Assets\AudioManager.cs" />
-    <Compile Include="Assets\nextSpawn.cs" />
-    <Compile Include="Assets\SwapAudio.cs" />
-    <Compile Include="Assets\CheckPass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

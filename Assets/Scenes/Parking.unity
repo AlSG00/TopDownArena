@@ -10768,6 +10768,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 82
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &436588093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 436588095}
+  - component: {fileID: 436588094}
+  m_Layer: 0
+  m_Name: Audio Reverb Zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!167 &436588094
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436588093}
+  m_Enabled: 1
+  m_MinDistance: 17.583183
+  m_MaxDistance: 19.57
+  m_ReverbPreset: 3
+  m_Room: -1000
+  m_RoomHF: -454
+  m_DecayTime: 0.4
+  m_DecayHFRatio: 0.83
+  m_Reflections: -1646
+  m_ReflectionsDelay: 0.002
+  m_Reverb: 53
+  m_ReverbDelay: 0.003
+  m_HFReference: 5000
+  m_Diffusion: 100
+  m_Density: 100
+  m_LFReference: 250
+  m_RoomLF: 0
+--- !u!4 &436588095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436588093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.51, y: 2.17, z: 40.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 109
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &451557494
 GameObject:
   m_ObjectHideFlags: 0
@@ -12412,11 +12468,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pair: {fileID: 866004245}
+  isPassed: 0
   sound: {fileID: 8300000, guid: f6e20b1637e36af4f8e3269ab4adcc64, type: 3}
   AmbientAudioSource: {fileID: 1613543396}
-  timeToFade: 2
-  targetVolume: 1
-  currentVolume: 0
+  timeToFade: 1
+  targetVolume: 0.5
+  currentVolume: 0.5
 --- !u!65 &580385247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12438,7 +12495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580385245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.68, y: 3.51, z: 28.26}
+  m_LocalPosition: {x: 6.68, y: 3.51, z: 29.68}
   m_LocalScale: {x: 5.7133, y: 0.48038, z: 0.5230777}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13033,7 +13090,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25396
+  m_Name: pb_Mesh25412
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20635,11 +20692,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pair: {fileID: 580385246}
+  isPassed: 0
   sound: {fileID: 8300000, guid: a8a0322e32a3ee949a1e2f6679f4c3c5, type: 3}
   AmbientAudioSource: {fileID: 1270922634}
-  timeToFade: 2
-  targetVolume: 1
-  currentVolume: 0
+  timeToFade: 1
+  targetVolume: 0.5
+  currentVolume: 0.5
 --- !u!65 &866004246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20661,7 +20719,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866004244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.68, y: 3.52, z: 22.93}
+  m_LocalPosition: {x: 6.68, y: 3.52, z: 22.02}
   m_LocalScale: {x: 5.7133, y: 0.48038, z: 0.70686495}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25620,7 +25678,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 131
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -34354,7 +34412,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 130
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
