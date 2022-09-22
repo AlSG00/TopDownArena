@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class AmmoCrate : MonoBehaviour
 {
+    //[SerializeField]
+    //private GameObject _object;
     [SerializeField]
-    private int ammo;
-    private bool isMouseOver;
+    private int _ammo;
+    private bool _isMouseOver;
     //private void OnCollisionEnter(Collision collision)
     //{
     //    //if (collision.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && isMouseOver)
@@ -41,10 +43,10 @@ public class AmmoCrate : MonoBehaviour
         //    if (hit.transform.name == "AmmoCrate")
         //    {
 
-                if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && isMouseOver)
+                if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && _isMouseOver)
                 {
                     //collision.gameObject.GetComponent<Gun>().AddAmmo(ammo);
-                    other.gameObject.GetComponentInChildren<Gun>().AddAmmo(ammo);
+                    other.gameObject.GetComponentInChildren<Gun>().AddAmmo(_ammo);
                     Destroy(gameObject);
                 }
         //    }
@@ -63,11 +65,11 @@ public class AmmoCrate : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        isMouseOver = true;
+        _isMouseOver = true;
     }
 
     private void OnMouseExit()
     {
-        isMouseOver = false;
+        _isMouseOver = false;
     }
 }

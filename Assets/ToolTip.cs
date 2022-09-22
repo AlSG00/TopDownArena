@@ -9,6 +9,7 @@ public class ToolTip : MonoBehaviour
 
     public void SetDefaultTooltip()
     {
+
         tootltip.text = "";
     }
 
