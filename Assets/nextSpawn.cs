@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class nextSpawn : MonoBehaviour
 {
-    public string targetSpawn = "";
+    public string TargetSpawn = "";
 
-    private void Start()
-    {
-        if (targetSpawn != "")
-        {
-            GameObject spawnpoint = GameObject.Find(targetSpawn);
-            this.transform.position = spawnpoint.transform.position;
-        }
-    }
+
+
+    //private void Start()
+    //{
+    //    if (targetSpawn != "")
+    //    {
+    //        GameObject spawnpoint = GameObject.Find(targetSpawn);
+    //        this.transform.position = spawnpoint.transform.position;
+    //    }
+    //}
+
 }

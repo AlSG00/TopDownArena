@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class SwapScenesInteractive : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _player;
+    //[SerializeField]
+    //private GameObject _player;
 
     [SerializeField]
     private Text _toolbar;
@@ -18,8 +18,8 @@ public class SwapScenesInteractive : MonoBehaviour
     [SerializeField]
     private string _targetSpawnPoint;
 
-    [SerializeField]
-    private GameObject GameManager;
+    //[SerializeField]
+    //private GameObject GameManager;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,7 +32,7 @@ public class SwapScenesInteractive : MonoBehaviour
         {
             //var scene = GameManager.GetComponent<SceneTransitions>();
             //scene.targerSpawnPoint = _targetSpawnPoint;
-            other.GetComponent<nextSpawn>().targetSpawn = _targetSpawnPoint;
+            other.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
             
             //SceneManager.LoadScene(_targetLevel);
             //LoadNewScene();
@@ -102,8 +102,8 @@ public class SwapScenesInteractive : MonoBehaviour
         _toolbar.text = "";
     }
 
-    private void OnMouseOver()
-    {
-        Debug.Log("Check");
-    }
+    //private void OnMouseOver()
+    //{
+    //    Debug.Log("Check");
+    //}
 }
