@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6244287319636124893}
   - component: {fileID: 1903345278691749490}
   - component: {fileID: 4807785092203032151}
+  - component: {fileID: 1772705488147085330}
   m_Layer: 0
   m_Name: TEMP_Chair
   m_TagString: Untagged
@@ -362,6 +363,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1772705488147085330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646880907512180094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 0.6140295, z: 1}
+  m_Center: {x: 0.625, y: 0.30701476, z: -0.5}
 --- !u!1 &6583593715059171261
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +390,7 @@ GameObject:
   - component: {fileID: 5995501493417397214}
   - component: {fileID: 2902153280405392223}
   - component: {fileID: 3742461834129957293}
+  - component: {fileID: 6171951223419419903}
   m_Layer: 0
   m_Name: Chair_Back
   m_TagString: Untagged
@@ -706,3 +721,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &6171951223419419903
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6583593715059171261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2500002, y: 0.6140297, z: 1}
+  m_Center: {x: 0.6250001, y: 0.3070146, z: -0.5}
