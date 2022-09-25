@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5133322705808805526}
   - component: {fileID: 5133322705808805527}
   - component: {fileID: 5133322705808805524}
+  - component: {fileID: 423460297161075272}
   m_Layer: 7
   m_Name: Cube (81)
   m_TagString: Untagged
@@ -97,6 +98,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8262883, y: 1, z: 1}
   m_Center: {x: 0.0868559, y: 0, z: -1.3844737e-15}
+--- !u!114 &423460297161075272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5133322705808805522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd6d01ddf7ecb5499482fadc7af917c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 7550860234317800423}
 --- !u!1 &5133322706122794260
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,6 +123,7 @@ GameObject:
   - component: {fileID: 5133322706122794264}
   - component: {fileID: 5133322706122794265}
   - component: {fileID: 5133322706122794262}
+  - component: {fileID: 2166607544742284336}
   m_Layer: 7
   m_Name: Cube (80)
   m_TagString: Untagged
@@ -195,6 +210,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.81481177, y: 1, z: 1}
   m_Center: {x: 0.09259413, y: 0, z: -1.7106542e-15}
+--- !u!114 &2166607544742284336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5133322706122794260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd6d01ddf7ecb5499482fadc7af917c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 7550860234317800423}
 --- !u!1 &5133322706743408039
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +285,8 @@ GameObject:
   - component: {fileID: 5133322705927309266}
   - component: {fileID: 7624619158445679898}
   - component: {fileID: 2065310417}
+  - component: {fileID: 7960956000395675948}
+  - component: {fileID: 2278884472381419829}
   m_Layer: 7
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -339,7 +369,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7550860234317800423}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 80
   m_Drag: 0.2
   m_AngularDrag: 0.2
   m_UseGravity: 1
@@ -424,3 +454,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   attackCooldown: 0
+--- !u!114 &7960956000395675948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550860234317800423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3417c49995cbcea4aa2a73ebdf103693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RaycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &2278884472381419829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550860234317800423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b334c0935829642b595f043fde9963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
