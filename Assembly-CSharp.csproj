@@ -59,6 +59,7 @@
     <Compile Include="Assets\AmmoCrate.cs" />
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
+    <Compile Include="Assets\Test_PlayAnimation.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
     <Compile Include="Assets\nextSpawn.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
+    <Compile Include="Assets\Test_PlayOST.cs" />
+    <Compile Include="Assets\TestAnimationEvent.cs" />
     <Compile Include="Assets\Roach.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
     <Compile Include="Assets\CheckPass.cs" />
@@ -130,6 +133,11 @@
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
+    <Compile Include="Assets\TEST_Keycard.cs" />
+    <Compile Include="Assets\MeshCombiner.cs" />
+    <Compile Include="Assets\MeshCombinerEditor.cs" />
+    <Compile Include="Assets\TEST_UnlockDoor.cs" />
+    <Compile Include="Assets\PlayerInventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

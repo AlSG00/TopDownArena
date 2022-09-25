@@ -14,13 +14,11 @@ public class ShowTooltip : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Debug.Log("Entered");
         tooltip.SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        Debug.Log("Leaved");
         tooltip.SetActive(false);
     }
 }
