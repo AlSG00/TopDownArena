@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
     <Compile Include="Assets\MeshCombinerEditor.cs" />
+    <Compile Include="Assets\TEST_SetActive.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\Gun\RayProjectile.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\MouseInteraction.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSVisibilityInfo.cs" />
+    <Compile Include="Assets\TEST_ActivateTriggers.cs" />
     <Compile Include="Assets\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\Scripts\Test_Flashlight.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Assets\MeshCombiner.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
     <Compile Include="Assets\ToolTip.cs" />
+    <Compile Include="Assets\TEST_LOS_Visibility.cs" />
     <Compile Include="Assets\TextLookAt.cs" />
     <Compile Include="Assets\RoachController.cs" />
     <Compile Include="Assets\FieldOfView.cs" />
@@ -134,15 +137,12 @@
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
     <Compile Include="Assets\SwapScene.cs" />
+    <Compile Include="Assets\TEST_SpawnEnemies.cs" />
     <Compile Include="Assets\ShowTooltip.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\ILOSSource.cs" />
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
-    <Compile Include="Assets\TEST_ActivateTriggers.cs" />
-    <Compile Include="Assets\TEST_SpawnEnemies.cs" />
-    <Compile Include="Assets\TEST_SetActive.cs" />
-    <Compile Include="Assets\TEST_LOS_Visibility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
