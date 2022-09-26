@@ -101,9 +101,4 @@ public class SwapScenesInteractive : MonoBehaviour
     {
         _toolbar.text = "";
     }
-
-    //private void OnMouseOver()
-    //{
-    //    Debug.Log("Check");
-    //}
 }

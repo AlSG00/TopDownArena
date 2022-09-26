@@ -10,13 +10,16 @@ public class TEST_SpawnEnemies : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isFinished && spawnpoint != null && spawnpoint.Count > 0)
+        if (other.CompareTag("Player"))
         {
-            for (int i = 0; i < spawnpoint.Count; i++)
+            if (!_isFinished && spawnpoint != null && spawnpoint.Count > 0)
             {
-                Instantiate(enemyPrefab, spawnpoint[i].position, Quaternion.identity);
+                for (int i = 0; i < spawnpoint.Count; i++)
+                {
+                    Instantiate(enemyPrefab, spawnpoint[i].position, Quaternion.identity);
+                }
+                _isFinished = true;
             }
-            _isFinished = true;
         }
     }
 }

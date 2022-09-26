@@ -107,7 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4279
   damage: 10
-  step: 1e-10
+  step: 0.1
   bulletSpreadValue: 0.05
   impactForce: 300
 --- !u!54 &429479767370374102

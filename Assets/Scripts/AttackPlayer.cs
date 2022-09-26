@@ -9,23 +9,38 @@ public class AttackPlayer : MonoBehaviour
 
     [SerializeField]
     private float attackCooldown;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    private float _lastHitTime;
+
+    private bool _isAttacking;
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        CountCooldown();
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            if (_isAttacking)
+            {
+                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            }
+        }
+    }
+
+    private void CountCooldown()
+    {
+        if (_lastHitTime + attackCooldown <= Time.time)
+        {
+            _isAttacking = true;
+            _lastHitTime = Time.time;
+        }
+        else
+        {
+            _isAttacking = false;
         }
     }
 }

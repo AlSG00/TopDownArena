@@ -4,30 +4,20 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
-    [SerializeField]
-    private float player_speed;
-    [SerializeField]
-    private float player_sprint;
+    [SerializeField] private float player_speed;
+    [SerializeField] private float player_sprint;
     public Rigidbody rigidBody;
     //public Camera camera;
     private float sprintSpeed;
     bool isSprinting;
     Vector3 movement;
-
-    public AudioSource footsteps;
-
-    //void Update()
-    //{
-
-    //    //movement.x = Input.GetAxis("Horizontal");
-    //    //movement.z = Input.GetAxis("Vertical");
-    //    FixedUpdate();
-    //    HandleRotationInput();
-    //}
+    [SerializeField] AudioSource footstepsSource;
+    [SerializeField] List<AudioClip> footstepsSample;
+    [SerializeField] Animator animationController;
 
     private void Start()
     {
-        isSprinting = false;
+        animationController = gameObject.GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -49,11 +39,14 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             sprintSpeed = player_sprint;
+            animationController.SetBool("isRunning", true);
         }
         else
         {
             sprintSpeed = 1;
+            animationController.SetBool("isRunning", false);
         }
+        
     }
 
     private void Move()
@@ -65,34 +58,36 @@ public class Player_Movement : MonoBehaviour
         //// movement.Normalize();
         //transform.Translate(movement * player_speed * Time.deltaTime, Space.World);
 
-        //    //Movement
         double sinForce = Mathf.Abs(Mathf.Sin(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
         double cosForce = Mathf.Abs(Mathf.Cos(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
 
         Vector3 _movement = new Vector3(Input.GetAxisRaw("Horizontal") * (float)cosForce, 0, Input.GetAxisRaw("Vertical") * (float)sinForce);
-        if ((sinForce > 0 || cosForce > 0) && !footsteps.isPlaying)
-            footsteps.Play();
-        //else
-        //    footsteps.Stop();
-        transform.Translate(_movement * player_speed * sprintSpeed * Time.deltaTime, Space.World);
+        if (_movement.magnitude > 0)
+        {
+            animationController.SetBool("isWalking", true);
+        }
+        else
+        {
+            animationController.SetBool("isWalking", false);
+        }
 
+        transform.Translate(_movement * player_speed * sprintSpeed * Time.deltaTime, Space.World);
     }
 
-        void HandleRotationInput()
+    void HandleRotationInput()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
         {
             transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
     }
 
-
-    //Movement
-    //double sinForce = Mathf.Abs(Mathf.Sin(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
-    //double cosForce = Mathf.Abs(Mathf.Cos(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
-
-    //Vector3 _movement = new Vector3(Input.GetAxisRaw("Horizontal") * (float)cosForce, 0, Input.GetAxisRaw("Vertical") * (float)sinForce);
+    private void PlayFootstepsSound()
+    {
+        //footstepsSource.clip = footstepsSample[Random.Range(0, footstepsSample.Count - 1)];
+        footstepsSource.PlayOneShot(footstepsSample[Random.Range(0, footstepsSample.Count - 1)]);
+    }
 }

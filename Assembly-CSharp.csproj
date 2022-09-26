@@ -59,6 +59,7 @@
     <Compile Include="Assets\TEST_Keycard.cs" />
     <Compile Include="Assets\AmmoCrate.cs" />
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
+    <Compile Include="Assets\SCRIPT_ExitGame.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Test_PlayAnimation.cs" />
     <Compile Include="Assets\TEST_UnlockDoor.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Assets\Scripts\Player_Shooting.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
+    <Compile Include="Assets\SCRIPT_Screamer_Lamp.cs" />
     <Compile Include="Assets\MeshCombinerEditor.cs" />
     <Compile Include="Assets\TEST_SetActive.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
