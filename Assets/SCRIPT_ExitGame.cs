@@ -6,6 +6,7 @@ public class SCRIPT_ExitGame : MonoBehaviour
 {
     public void ExitGame()
     {
+        Debug.Log("Exit");
         Application.Quit();
     }
 }

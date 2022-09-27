@@ -34,8 +34,9 @@ public class SwapScenesInteractive : MonoBehaviour
         {
             //var scene = GameManager.GetComponent<SceneTransitions>();
             //scene.targerSpawnPoint = _targetSpawnPoint;
-            _entityNextSpawn.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
-            //other.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
+            
+            //_entityNextSpawn.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
+            other.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
             
             //SceneManager.LoadScene(_targetLevel);
             //LoadNewScene();
