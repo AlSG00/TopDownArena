@@ -58,10 +58,16 @@ public class Gun : MonoBehaviour
         fireFlame.intensity = 0;
         fireFlame.range = fireFlameRange;
         isReloading = false;
-        //currentAmmo = magCapacity;
-        //currentStock = ammoStock;
-      //  audioSource.clip = shotSound;
+
+
+        Transform canvas = GameObject.Find("Canvas").transform;
+        ammoCounter = canvas.GetChild(1).GetComponent<AmmoCounterTest>();
+
+       // ammoCounter = ui.transform.Find("AmmoCounter").GetComponent<AmmoCounterTest>();
+
+
         ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
+        Debug.Log(ammoCounter);
     }
 
     public void Shoot()

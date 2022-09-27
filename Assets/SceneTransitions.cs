@@ -28,7 +28,7 @@ public class SceneTransitions : MonoBehaviour
 
     private void Start()
     {
-        _player = GameObject.Find("Player");
+        _player = GameObject.Find("ENTY_NextSpawn");
         _targerSpawnPoint = GameObject.Find(_player.GetComponent<nextSpawn>().TargetSpawn);
         _player.transform.position = _targerSpawnPoint.transform.position;
     }

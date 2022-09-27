@@ -8,6 +8,8 @@ public class SwapScenesInteractive : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject _player;
+    [SerializeField]
+    private GameObject _entityNextSpawn;
 
     [SerializeField]
     private Text _toolbar;
@@ -32,11 +34,13 @@ public class SwapScenesInteractive : MonoBehaviour
         {
             //var scene = GameManager.GetComponent<SceneTransitions>();
             //scene.targerSpawnPoint = _targetSpawnPoint;
-            other.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
+            _entityNextSpawn.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
+            //other.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
             
             //SceneManager.LoadScene(_targetLevel);
             //LoadNewScene();
             //gameObject.SetActive(false);
+
             //yield return new WaitForSeconds(0.5f);
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_targetLevel);
             //// fadeToBlack.SetTrigger("FadeIn");

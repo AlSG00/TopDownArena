@@ -5,15 +5,18 @@ using UnityEngine;
 public class Player_Aim : MonoBehaviour
 {
     [SerializeField]
-    private Transform target;
+    private GameObject trgt;
     [SerializeField]
     private Vector3 targetOffset;
     [SerializeField]
     private float movementSpeed;
-
-    void Start()
+    private Transform _target;
+    private void Awake()
     {
-
+        //trgt = GameObject.Find("Player");
+        //_target = trgt.transform;
+        Transform temp = GameObject.Find("Player").transform;
+        _target = temp;
     }
 
     void FixedUpdate()
@@ -23,7 +26,7 @@ public class Player_Aim : MonoBehaviour
 
     void MoveCamera()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + targetOffset, movementSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, _target.position + targetOffset, movementSpeed * Time.deltaTime);
     }
 
 

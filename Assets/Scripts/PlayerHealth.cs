@@ -13,6 +13,9 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        Transform canvas = GameObject.Find("Canvas").transform;
+        healthBar = canvas.GetChild(0).GetComponent<HealtBarScript>();
+
         if (currentHealth == 0)          
             currentHealth = health;
         healthBar.SetMaxHealth(health);
