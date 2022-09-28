@@ -60,8 +60,9 @@ public class Gun : MonoBehaviour
         isReloading = false;
 
 
-        Transform canvas = GameObject.Find("Canvas").transform;
-        ammoCounter = canvas.GetChild(1).GetComponent<AmmoCounterTest>();
+        Transform hud = GameObject.Find("HUD").transform;
+        Transform _hud = hud.transform.GetChild(0);
+        ammoCounter = _hud.GetChild(1).GetComponent<AmmoCounterTest>();
 
        // ammoCounter = ui.transform.Find("AmmoCounter").GetComponent<AmmoCounterTest>();
 

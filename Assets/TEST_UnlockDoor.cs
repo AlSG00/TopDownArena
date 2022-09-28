@@ -12,6 +12,7 @@ public class TEST_UnlockDoor : MonoBehaviour
     public Texture2D openWithKeycardIcon;
     public Color closed;
     public Color opened;
+    public GameObject targetDoor;
 
     private void OnTriggerStay(Collider other)
     {
@@ -35,8 +36,11 @@ public class TEST_UnlockDoor : MonoBehaviour
 
     private void Unlock()
     {
+
         gameObject.GetComponent<MeshRenderer>().material = unlocked;
         glowing.color = opened;
+        targetDoor.SetActive(true);
+        
     }
 
     private void OnMouseEnter()

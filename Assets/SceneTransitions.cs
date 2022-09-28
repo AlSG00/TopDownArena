@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class SceneTransitions : MonoBehaviour
 {
     private string _targerSpawnPointName;
-    private GameObject _player;
+    private Transform _player;
     private GameObject _targerSpawnPoint;
+    private Transform _fade;
     //private void OnEnable()
     //{
     //    SceneManager.sceneLoaded += OnSceneLoaded;
@@ -26,10 +27,22 @@ public class SceneTransitions : MonoBehaviour
     //    player.transform.position = spawnPoint.transform.position;
     //}
 
-    private void Start()
+    private void Awake()
     {
-        _player = GameObject.Find("Player");
-        _targerSpawnPoint = GameObject.Find(_player.GetComponent<nextSpawn>().TargetSpawn);
-        _player.transform.position = _targerSpawnPoint.transform.position;
+        _player = GameObject.Find("Player").transform.GetChild(0);
+        _fade = GameObject.Find("HUD").transform.GetChild(0).transform.GetChild(3);
+        _fade.GetComponent<Animator>().SetTrigger("FadeOut");
+
+        string spawn = _player.GetComponent<nextSpawn>().TargetSpawn;
+        if (spawn != "")
+        {
+            _targerSpawnPoint = GameObject.Find(spawn);
+            _player.transform.position = _targerSpawnPoint.transform.position;
+        }
     }
+
+    //private IEnumerator startScene()
+    //{
+
+    //}
 }

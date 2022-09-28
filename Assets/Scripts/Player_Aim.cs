@@ -15,8 +15,9 @@ public class Player_Aim : MonoBehaviour
     {
         //trgt = GameObject.Find("Player");
         //_target = trgt.transform;
-        Transform temp = GameObject.Find("Player").transform;
-        _target = temp;
+        Transform player = GameObject.Find("Player").transform;
+        Transform _player = player.transform.GetChild(0);
+        _target = _player;
     }
 
     void FixedUpdate()

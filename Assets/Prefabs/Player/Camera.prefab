@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f0b482cef43ad418bd264672c90d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  trgt: {fileID: 0}
   targetOffset: {x: 0, y: 25, z: 0}
   movementSpeed: 5
 --- !u!114 &3026837720070224205

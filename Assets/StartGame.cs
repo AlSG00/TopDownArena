@@ -5,22 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    public GameObject playerPrefab;
+    //public GameObject playerPrefab;
+    public Animator fadeEffect;
 
     public void Activate()
     {
-        Debug.Log("Activated");
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Parking");
-        GameObject player = GameObject.Find("Player");
-        GameObject spawnPoint = GameObject.Find("StartPoint");
+        Transform Player = GameObject.Find("Player").transform;
+        Transform HUD = GameObject.Find("HUD").transform;
+        Transform PlayerCamera = GameObject.Find("PlayerCamera").transform;
 
-        if (player == null)
+        Player.transform.GetChild(0).gameObject.SetActive(true);
+        HUD.transform.GetChild(0).gameObject.SetActive(true);
+        PlayerCamera.transform.GetChild(0).gameObject.SetActive(true);
+
+        Player.transform.GetChild(0).gameObject.GetComponent<nextSpawn>().TargetSpawn = "StartPoint";
+        fadeEffect = HUD.transform.GetChild(0).transform.GetChild(3).GetComponent<Animator>();
+        StartCoroutine(Start());
+    }
+
+    private IEnumerator Start()
+    {
+        //fadeEffect.SetBool("isFaded", true);
+        fadeEffect.SetTrigger("FadeIn");
+        float ntime = 0;
+        while (ntime < 1f)
         {
-            Instantiate(playerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            AnimatorStateInfo asi = fadeEffect.GetCurrentAnimatorStateInfo(0);
+            ntime = asi.normalizedTime;
+            yield return new WaitForEndOfFrame();
         }
-        else
-        {
-            player.transform.position = spawnPoint.transform.position;
-        }
+        SceneManager.LoadScene("Parking");
     }
 }

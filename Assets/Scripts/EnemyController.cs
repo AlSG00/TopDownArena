@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
   //  [SerializeField]
   //  private float moveSpeed;
 
-    public GameObject target;
+    public Transform target;
 
     public NavMeshAgent agent;
     [SerializeField]
@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
     {
         //   rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        target = GameObject.Find("Player");
+        target = GameObject.Find("Player").transform.GetChild(0);
         agent = GetComponent<NavMeshAgent>();
     }
  

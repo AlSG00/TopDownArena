@@ -20,7 +20,7 @@ public class SwapScene : MonoBehaviour
         //SceneManager.LoadScene(_targetLevel);
         //LoadNewScene( );
         //gameObject.SetActive(false);
-        _fadeIn.SetTrigger("Fading");
+        _fadeIn.SetTrigger("");
 
         yield return new WaitForSeconds(0.5f);
 

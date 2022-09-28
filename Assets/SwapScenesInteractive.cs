@@ -6,11 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class SwapScenesInteractive : MonoBehaviour
 {
-    //[SerializeField]
-    //private GameObject _player;
-    [SerializeField]
-    private GameObject _entityNextSpawn;
-
     [SerializeField]
     private Text _toolbar;
 
@@ -20,87 +15,55 @@ public class SwapScenesInteractive : MonoBehaviour
     [SerializeField]
     private string _targetSpawnPoint;
 
-    //[SerializeField]
-    //private GameObject GameManager;
+    public Animator fadeEffect;
 
+    private bool hasCoroutine = false;
     private void OnTriggerEnter(Collider other)
     {
-        _toolbar.text = "[E]";
+        if (other.CompareTag("Player"))
+        {
+            _toolbar = GameObject.Find("HUD").transform.GetChild(0).transform.GetChild(2).transform.GetChild(0).GetComponent<Text>();
+            _toolbar.text = "[E]";
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E))
+        if (other.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
-            //var scene = GameManager.GetComponent<SceneTransitions>();
-            //scene.targerSpawnPoint = _targetSpawnPoint;
-            
-            //_entityNextSpawn.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
+            fadeEffect = GameObject.Find("HUD").transform.GetChild(0).transform.GetChild(3).GetComponent<Animator>();
+
             other.GetComponent<nextSpawn>().TargetSpawn = _targetSpawnPoint;
             
-            //SceneManager.LoadScene(_targetLevel);
-            //LoadNewScene();
-            //gameObject.SetActive(false);
+            if (_targetLevel == "Titles")
+            {
+                other.transform.GetChild(0).gameObject.SetActive(false);
+                GameObject.Find("HUD").transform.GetChild(0).gameObject.SetActive(false);
+                GameObject.Find("PlayerCamera").transform.GetChild(0).gameObject.SetActive(false);
+            }
 
-            //yield return new WaitForSeconds(0.5f);
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_targetLevel);
-            //// fadeToBlack.SetTrigger("FadeIn");
-            ////   pState.movingToNextLevel = false;
-            //// Wait until the asynchronous scene fully loads
-
-            //while (!asyncLoad.isDone)
-            //{
-            //    yield return null;
-            //}
-
-            //if (_targetSpawnPoint == "Red")
-            //{
-            //    _player.transform.position = GameObject.FindGameObjectWithTag("Red").transform.position;
-            //}
-            /*if*/
-            //{
-            //    GameObject spawnpoint = GameObject.Find(_targetSpawnPoint);
-            //  Debug.Log(spawnpoint);
-            //     _player.transform.position = spawnpoint.transform.position;
-            //  _player.transform.position = GameObject.FindGameObjectWithTag("Blue").transform.position;
-            //}
+            if (!hasCoroutine)
+            {
+                hasCoroutine = true;
+                StartCoroutine(Start());
+            }
         }
     }
 
-    
+    private IEnumerator Start()
+    {
+        
 
-    //private void OnEnable()
-    //{
-    //    SceneManager.sceneLoaded += OnSceneLoaded;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    SceneManager.sceneLoaded -= OnSceneLoaded;
-    //}
-
-    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    //{
-    //    var spawnPoint = GameObject.Find("testSpawn");
-    //    var player = GameObject.Find("Player");
-
-    //    player.transform.position = spawnPoint.transform.position;
-    //}
-
-
-    //private void LoadNewScene()
-    //{
-    //    SceneManager.LoadScene(_targetLevel);
-    //    GameObject spawnpoint = GameObject.Find(_targetSpawnPoint);
-    //    _player.transform.position = spawnpoint.transform.position;
-    //}
-
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    GameObject spawnpoint = GameObject.Find(_targetSpawnPoint);
-    //    _player.transform.position = spawnpoint.transform.position;
-
-    //}
+        fadeEffect.SetTrigger("FadeIn");
+        float ntime = 0;
+        while (ntime < 1f)
+        {
+            AnimatorStateInfo asi = fadeEffect.GetCurrentAnimatorStateInfo(0);
+            ntime = asi.normalizedTime;
+            yield return new WaitForEndOfFrame();
+        }
+        SceneManager.LoadScene(_targetLevel);
+    }
 
     private void OnTriggerExit(Collider other)
     {

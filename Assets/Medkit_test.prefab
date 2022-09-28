@@ -296,7 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ammo
+  m_text: 'MEDKIT
 
 '
   m_isRightToLeft: 0
