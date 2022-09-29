@@ -20,12 +20,12 @@ public class SwapScenesInteractive : MonoBehaviour
     private bool hasCoroutine = false;
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag("Player"))
-        //{
-        //    _toolbar = GameObject.Find("HUD").transform.GetChild(0).transform.GetChild(2).transform.GetChild(0).GetComponent<Text>();
-        //    _toolbar.text = "[E]";
+        if (other.CompareTag("Player"))
+        {
+            _toolbar = GameObject.Find("HUD").transform.GetChild(0).transform.GetChild(2).transform.GetChild(0).GetComponent<Text>();
+            _toolbar.text = "[E]";
         //    StartCoroutine(Start());
-        //}
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -39,8 +39,8 @@ public class SwapScenesInteractive : MonoBehaviour
             if (_targetLevel == "Titles")
             {
                 other.transform.GetChild(0).gameObject.SetActive(false);
-                GameObject.Find("HUD").transform.GetChild(0).gameObject.SetActive(false);
-                GameObject.Find("PlayerCamera").transform.GetChild(0).gameObject.SetActive(false);
+               // GameObject.Find("HUD").transform.GetChild(0).gameObject.SetActive(false);
+               // GameObject.Find("PlayerCamera").transform.GetChild(0).gameObject.SetActive(false);
             }
 
             if (!hasCoroutine)

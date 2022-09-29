@@ -59,16 +59,16 @@ public class Gun : MonoBehaviour
         fireFlame.range = fireFlameRange;
         isReloading = false;
 
-
         Transform hud = GameObject.Find("HUD").transform;
         Transform _hud = hud.transform.GetChild(0);
         ammoCounter = _hud.GetChild(1).GetComponent<AmmoCounterTest>();
 
-       // ammoCounter = ui.transform.Find("AmmoCounter").GetComponent<AmmoCounterTest>();
-
-
         ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
-        Debug.Log(ammoCounter);
+    }
+
+    private void Start()
+    {
+        ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
     }
 
     public void Shoot()
@@ -91,8 +91,6 @@ public class Gun : MonoBehaviour
             
             currentAmmo--;
             ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
-
-            
         }
     }
 

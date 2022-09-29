@@ -96,7 +96,6 @@
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
     <Compile Include="Assets\SCRIPT_Screamer_Lamp.cs" />
-    <Compile Include="Assets\MeshCombinerEditor.cs" />
     <Compile Include="Assets\TEST_SetActive.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />

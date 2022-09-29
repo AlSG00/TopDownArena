@@ -26,7 +26,7 @@ public class StartGame : MonoBehaviour
     private IEnumerator Start()
     {
         //fadeEffect.SetBool("isFaded", true);
-        fadeEffect.SetTrigger("FadeIn");
+        fadeEffect.SetTrigger("Enable");
         float ntime = 0;
         while (ntime < 1f)
         {
