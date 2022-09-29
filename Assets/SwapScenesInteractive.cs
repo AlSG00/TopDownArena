@@ -20,11 +20,12 @@ public class SwapScenesInteractive : MonoBehaviour
     private bool hasCoroutine = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            _toolbar = GameObject.Find("HUD").transform.GetChild(0).transform.GetChild(2).transform.GetChild(0).GetComponent<Text>();
-            _toolbar.text = "[E]";
-        }
+        //if (other.CompareTag("Player"))
+        //{
+        //    _toolbar = GameObject.Find("HUD").transform.GetChild(0).transform.GetChild(2).transform.GetChild(0).GetComponent<Text>();
+        //    _toolbar.text = "[E]";
+        //    StartCoroutine(Start());
+        //}
     }
 
     private void OnTriggerStay(Collider other)
@@ -52,8 +53,6 @@ public class SwapScenesInteractive : MonoBehaviour
 
     private IEnumerator Start()
     {
-        
-
         fadeEffect.SetTrigger("FadeIn");
         float ntime = 0;
         while (ntime < 1f)
@@ -62,7 +61,15 @@ public class SwapScenesInteractive : MonoBehaviour
             ntime = asi.normalizedTime;
             yield return new WaitForEndOfFrame();
         }
-        SceneManager.LoadScene(_targetLevel);
+
+        AsyncOperation loadAsync = SceneManager.LoadSceneAsync(_targetLevel);
+
+        while (!loadAsync.isDone)
+        {
+            yield return null;
+        }
+
+       // SceneManager.LoadScene(_targetLevel);
     }
 
     private void OnTriggerExit(Collider other)
