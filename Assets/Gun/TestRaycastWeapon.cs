@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class TestRaycastWeapon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool isFiring = false;
+    public ParticleSystem[] muzzleFlash;
+    public ParticleSystem hitEffect;
+    public Transform muzzle;
+
+    Ray ray;
+    RaycastHit hitInfo;
+
+    public void StartFiring()
     {
-        
+        isFiring = true;
+        for (int i = 0; i < muzzleFlash.Length; i++)
+        {
+            muzzleFlash[i].Emit(1);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StopFiring()
     {
-        
+        isFiring = false;
     }
 }

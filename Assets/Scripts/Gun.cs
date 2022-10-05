@@ -52,6 +52,7 @@ public class Gun : MonoBehaviour
     public AmmoCounterTest ammoCounter;
 
     private bool isReloading;
+
     private void Awake()
     {        
         Instance = GetComponent<Gun>();

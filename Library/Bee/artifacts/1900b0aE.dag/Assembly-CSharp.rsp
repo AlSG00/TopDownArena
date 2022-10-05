@@ -437,8 +437,6 @@
 "Assets/Shared/Scripts/SimpleCameraController.cs"
 "Assets/Shared/Scripts/SimpleCharacterMotor.cs"
 "Assets/ShowTooltip.cs"
-"Assets/StarterAssets/ThirdPersonController/Scripts/BasicRigidBodyPush.cs"
-"Assets/StarterAssets/ThirdPersonController/Scripts/ThirdPersonController.cs"
 "Assets/StartGame.cs"
 "Assets/SwapAudio.cs"
 "Assets/SwapScene.cs"

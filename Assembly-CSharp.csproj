@@ -86,6 +86,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSSource.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
+    <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
     <Compile Include="Assets\MeshCombier_2.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\FixedRotation.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSCuller.cs" />
-    <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\AmmoCounterTest.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
@@ -130,7 +130,6 @@
     <Compile Include="Assets\SwapScenesInteractive.cs" />
     <Compile Include="Assets\MeshCombiner.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
-    <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
     <Compile Include="Assets\ToolTip.cs" />
     <Compile Include="Assets\TEST_LOS_Visibility.cs" />
     <Compile Include="Assets\TextLookAt.cs" />
@@ -147,7 +146,6 @@
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
-    <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -7,7 +7,7 @@ public class Player_Shooting : MonoBehaviour
     public bool isShooting;
     public GameObject prefab;
     public GameObject barrel;
-
+    public TestRaycastWeapon weapon;
     private void Start()
     {
         isShooting = false;
@@ -21,14 +21,24 @@ public class Player_Shooting : MonoBehaviour
 
     void ShootInput()
     {
-        if (Input.GetButton("Fire1"))
-        {          
-            Gun.Instance.Shoot();            
+        //if (Input.GetButton("Fire1"))
+        //{          
+        //    Gun.Instance.Shoot();            
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    Gun.Instance.Reload();
+        //}
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            weapon.StartFiring();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonUp("Fire1"))
         {
-            Gun.Instance.Reload();
+            weapon.StopFiring();
         }
     }
 }
