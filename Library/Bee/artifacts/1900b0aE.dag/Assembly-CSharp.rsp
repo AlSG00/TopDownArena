@@ -397,6 +397,7 @@
 "Assets/FieldOfView.cs"
 "Assets/FixedRotation.cs"
 "Assets/Gun/RayProjectile.cs"
+"Assets/Gun/TestRaycastWeapon.cs"
 "Assets/HealtBarScript.cs"
 "Assets/LightFlicker.cs"
 "Assets/Medkit.cs"

@@ -6,15 +6,11 @@ public class AttackPlayer : MonoBehaviour
 {
     [SerializeField]
     private float damage;
-
     [SerializeField]
     private float attackCooldown;
-
     private float _lastHitTime;
-
     private bool _isAttacking;
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         CountCooldown();

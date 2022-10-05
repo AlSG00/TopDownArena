@@ -30,17 +30,14 @@ public class TEST_UnlockDoor : MonoBehaviour
             {
                 Debug.Log($"{requiredItem} REQUIRED");
             }
-
         }
     }
 
     private void Unlock()
     {
-
         gameObject.GetComponent<MeshRenderer>().material = unlocked;
         glowing.color = opened;
         targetDoor.SetActive(true);
-        
     }
 
     private void OnMouseEnter()

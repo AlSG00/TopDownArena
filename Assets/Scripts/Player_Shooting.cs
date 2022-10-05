@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Player_Shooting : MonoBehaviour
 {
+    // TODO: REWORK THIS SCRIPT
     public bool isShooting;
     public GameObject prefab;
     public GameObject barrel;
@@ -16,7 +17,6 @@ public class Player_Shooting : MonoBehaviour
     {
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
         Gun.Instance.FireFlameUpdate();     // Угасание вспышки от выстрела
-        Gun.Instance.IsReloading();
     }
 
     void ShootInput()
@@ -30,9 +30,5 @@ public class Player_Shooting : MonoBehaviour
         {
             Gun.Instance.Reload();
         }
-        //else
-        //{
-        //    //isShooting = false;
-        //}
     }
 }

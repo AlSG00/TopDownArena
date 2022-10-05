@@ -9,23 +9,6 @@ public class SceneTransitions : MonoBehaviour
     private Transform _player;
     private GameObject _targerSpawnPoint;
     private Transform _fade;
-    //private void OnEnable()
-    //{
-    //    SceneManager.sceneLoaded += OnSceneLoaded;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    SceneManager.sceneLoaded -= OnSceneLoaded;
-    //}
-
-    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    //{
-    //    var spawnPoint = GameObject.Find(targerSpawnPoint);
-    //    var player = GameObject.Find("Player");
-
-    //    player.transform.position = spawnPoint.transform.position;
-    //}
 
     private void Awake()
     {
@@ -40,9 +23,4 @@ public class SceneTransitions : MonoBehaviour
             _player.transform.position = _targerSpawnPoint.transform.position;
         }
     }
-
-    //private IEnumerator startScene()
-    //{
-
-    //}
 }
