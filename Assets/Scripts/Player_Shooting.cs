@@ -16,7 +16,7 @@ public class Player_Shooting : MonoBehaviour
     void Update()
     {
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
-        Gun.Instance.FireFlameUpdate();     // Угасание вспышки от выстрела
+       weapon.FireFlameUpdate();     // Угасание вспышки от выстрела
     }
 
     void ShootInput()

@@ -12,13 +12,11 @@ public class Target : MonoBehaviour
 
     private float currentHealth;
 
-    // Start is called before the first frame update
     void Start()
     {
         currentHealth = health;
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckHealth();

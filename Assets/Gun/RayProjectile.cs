@@ -19,7 +19,9 @@ public class RayProjectile : MonoBehaviour
     [SerializeField]
     private float bulletSpreadValue;
     private Vector3 _direction;
+
     private Rigidbody rb;
+   
     [SerializeField]
     private float impactForce;
   
