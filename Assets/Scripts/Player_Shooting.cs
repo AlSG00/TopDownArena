@@ -7,16 +7,22 @@ public class Player_Shooting : MonoBehaviour
     public bool isShooting;
     public GameObject prefab;
     public GameObject barrel;
-    public TestRaycastWeapon weapon;
+    //public TestRaycastWeapon weapon;
+
+    // Новое
+    public SCRIPT_Weapon weapon;
+    public SCRIPT_MuzzleFlame muzzleFlame;
+    public SCRIPT_AmmoShells ammoShells;
+
     private void Start()
     {
         isShooting = false;
     }
 
-    void Update()
+    void LateUpdate()
     {
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
-       weapon.FireFlameUpdate();     // Угасание вспышки от выстрела
+        muzzleFlame.FadeFlame();   // Угасание вспышки от выстрела
     }
 
     void ShootInput()
@@ -41,6 +47,7 @@ public class Player_Shooting : MonoBehaviour
             weapon.UpdateFiring(Time.deltaTime);
         }
         weapon.UpdateBullet(Time.deltaTime);
+       // ammoShells.UpdateShells();
 
         if (Input.GetButtonUp("Fire1"))
         {

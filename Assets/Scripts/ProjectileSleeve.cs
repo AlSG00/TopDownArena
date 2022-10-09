@@ -28,28 +28,19 @@ public class ProjectileSleeve : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         sleeveEjector = transform.position;
         MoveProjectile();
-
-    }
-
-   // bool oneTime = false;
-
-    void Update()
-    {
-         //MoveProjectile()
     }
 
     void MoveProjectile()
     {
         if (Vector3.Distance(sleeveEjector, transform.position) > maxProjectileDistance)
+        {
             Destroy(this.gameObject);
+        }
         else
         {
             rb.AddRelativeForce(Vector3.right * ejectionForce * Time.deltaTime, ForceMode.Impulse);
             rb.AddRelativeTorque(Vector3.right * Random.Range(minTorque, maxTorque) * Time.deltaTime, ForceMode.Impulse);
             rb.AddRelativeTorque(Vector3.left * Random.Range(minTorque, maxTorque) * Time.deltaTime, ForceMode.Impulse);
         }
-
     }
-
-
 }
