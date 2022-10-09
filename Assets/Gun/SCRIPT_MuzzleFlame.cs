@@ -13,6 +13,8 @@ public class SCRIPT_MuzzleFlame : MonoBehaviour
     [SerializeField]
     float lightRange;                   // ƒальность свечени€ вспышки от выстрела
 
+    public ParticleSystem[] muzzleFlash;
+
     private void Awake()
     {
         lightOrigin.intensity = 0;
@@ -26,6 +28,10 @@ public class SCRIPT_MuzzleFlame : MonoBehaviour
 
     public void LightFlame()
     {
+        for (int i = 0; i < muzzleFlash.Length; i++)
+        {
+            muzzleFlash[i].Emit(1);
+        }
         lightOrigin.intensity = lightIntensity;
     }
 }

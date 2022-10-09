@@ -19,12 +19,10 @@ public class SCRIPT_Weapon : MonoBehaviour
     public float damage;
     public float bulletSpreadValue;
 
-    public ParticleSystem[] muzzleFlash;
     public GameObject hitEffect;
     public TrailRenderer tracerEffect;
     public Transform muzzle;
     
-    // public Transform raycastDestination;
     public LayerMask activeLayers;
     Ray ray;
     RaycastHit hitInfo;
@@ -35,23 +33,36 @@ public class SCRIPT_Weapon : MonoBehaviour
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
 
-    int counter = 0;
-
     private bool isReloading;
-
     private float lastTimeShot;
-
     private float fireDelay;
+
+    public AudioClip reloadSound;
+    public AudioClip shotSound;
+    public AudioSource audioSource;
+
+    [SerializeField]
+    private int magCapacity = 30;
+    [SerializeField]
+    private int ammoStock = 150;                  // Боезапас
+    public int currentAmmo = 30;
+    public int currentStock = 90;
+
+    public AmmoCounterTest ammoCounter;
+
+    public bool singleShots;
+
+    public bool shotPerformed;
 
     private void Awake()
     {
-        fireDelay = (float)60 / fireRate;
-        Debug.Log(fireDelay);
+        isReloading = false;    
     }
 
     public void StartFiring()
     {
         isFiring = true;
+        fireDelay = (float)60 / fireRate;
         accumulatedTime = 0.0f;
         FireBullet();
     }
@@ -62,22 +73,24 @@ public class SCRIPT_Weapon : MonoBehaviour
     private void FireBullet()
     {
         if ((lastTimeShot + fireDelay <= Time.time)
-            //&& (currentAmmo > 0)
+            && (currentAmmo > 0)
             && !isReloading)
         {
             lastTimeShot = Time.time;
-            for (int i = 0; i < muzzleFlash.Length; i++)
-            {
-                muzzleFlash[i].Emit(1);
-            }
-
+            audioSource.PlayOneShot(shotSound);
             //Vector3 velocity = (raycastDestination.position - muzzle.position).normalized * bulletSpeed;
-            Vector3 velocity = transform.forward/*.normalized*/ * bulletSpeed;
+            //Vector3 velocity = transform.forward/*.normalized*/ * bulletSpeed;
+
+            Vector3 velocity = GetSpreadDirection() * bulletSpeed;
+
             var bullet = CreateBullet(muzzle.position, velocity);
             bullets.Add(bullet);
 
             muzzleFlame.LightFlame();
             ammoShells.EjectShell();
+
+            currentAmmo--;
+            ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
         }
     }
 
@@ -90,7 +103,7 @@ public class SCRIPT_Weapon : MonoBehaviour
         bullet.lifeTime = 0.0f;
         bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
         bullet.tracer.AddPosition(position);
-        //Destroy(bullet.tracer, maxLifeTime);
+
         return bullet;
     }
 
@@ -180,6 +193,61 @@ public class SCRIPT_Weapon : MonoBehaviour
     private void DestroyBullets()
     {
         bullets.RemoveAll(bullet => bullet.lifeTime >= maxLifeTime);
+    }
+
+    public void Reload()
+    {
+        int toFill = magCapacity - currentAmmo;
+        if (toFill > 0 && currentStock > 0)
+        {
+            isReloading = true;
+            audioSource.PlayOneShot(reloadSound);
+
+            if (currentStock >= toFill)
+            {
+                currentStock -= toFill;
+                currentAmmo = magCapacity;
+            }
+            else
+            {
+                currentAmmo += currentStock;
+                currentStock = 0;
+            }
+            ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
+        }
+        else
+        {
+            Debug.Log("Can't reload");
+        }
+    }
+
+    public void AddAmmo(int ammo)
+    {
+        currentStock += ammo;
+        if (currentStock > ammoStock)
+            currentStock = ammoStock;
+
+        ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
+    }
+
+    public void IsReloading()
+    {
+        if (isReloading == true && !audioSource.isPlaying)
+            isReloading = false;
+    }
+
+    public Vector3 GetSpreadDirection()
+    {
+        Vector3 direction = muzzle.transform.forward;
+        direction += new Vector3(
+            Random.Range(-bulletSpreadValue, bulletSpreadValue),
+            Random.Range(-bulletSpreadValue, bulletSpreadValue),
+            Random.Range(-bulletSpreadValue, bulletSpreadValue)
+            );
+
+        direction.Normalize();
+
+        return direction;
     }
 }
     

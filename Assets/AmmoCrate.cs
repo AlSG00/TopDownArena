@@ -46,7 +46,7 @@ public class AmmoCrate : MonoBehaviour
                 if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && _isMouseOver)
                 {
                     //collision.gameObject.GetComponent<Gun>().AddAmmo(ammo);
-                    other.gameObject.GetComponentInChildren<Gun>().AddAmmo(_ammo);
+                    other.gameObject.GetComponentInChildren<SCRIPT_Weapon>().AddAmmo(_ammo);
                     Destroy(gameObject);
                 }
         //    }

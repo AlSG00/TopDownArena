@@ -22,7 +22,8 @@ public class Player_Shooting : MonoBehaviour
     void LateUpdate()
     {
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
-        muzzleFlame.FadeFlame();   // Угасание вспышки от выстрела
+        muzzleFlame.FadeFlame();            // Угасание вспышки от выстрела
+        weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
     }
 
     void ShootInput()
@@ -32,26 +33,39 @@ public class Player_Shooting : MonoBehaviour
         //    Gun.Instance.Shoot();            
         //}
 
-        //if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            weapon.Reload();
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            if (!weapon.shotPerformed)
+            {
+                weapon.StartFiring();
+                if (weapon.singleShots)
+                {
+                    weapon.shotPerformed = true;
+                }
+            }
+        }
+        else
+        {
+            weapon.StopFiring();
+            weapon.shotPerformed = false;
+        }
+
+        //if (weapon.isFiring)
         //{
-        //    Gun.Instance.Reload();
+        //    weapon.UpdateFiring(Time.deltaTime);
         //}
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            weapon.StartFiring();
-        }
-
-        if (weapon.isFiring)
-        {
-            weapon.UpdateFiring(Time.deltaTime);
-        }
         weapon.UpdateBullet(Time.deltaTime);
        // ammoShells.UpdateShells();
 
-        if (Input.GetButtonUp("Fire1"))
-        {
-            weapon.StopFiring();
-        }
+        //if (Input.GetButtonUp("Fire1"))
+        //{
+        //    weapon.StopFiring();
+        // //   weapon.shotPerformed = false;
+        //}
     }
 }

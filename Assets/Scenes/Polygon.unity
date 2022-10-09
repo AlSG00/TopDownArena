@@ -197,7 +197,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198234346748616026, guid: 1678916d35fc42a42bcc02961ec65639,
         type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198234346748616026, guid: 1678916d35fc42a42bcc02961ec65639,
+        type: 3}
       propertyPath: UVModule.flipV
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198515452120210940, guid: 1678916d35fc42a42bcc02961ec65639,
+        type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198515452120210940, guid: 1678916d35fc42a42bcc02961ec65639,
@@ -316,6 +326,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &108583322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 941683902997296051, guid: cd422651100d7374db43db53478ab621,
+    type: 3}
+  m_PrefabInstance: {fileID: 744242735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece3934c52c86e54c9a2a069b9329c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &149982117
 Mesh:
   m_ObjectHideFlags: 0
@@ -847,6 +869,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd422651100d7374db43db53478ab621, type: 3}
+--- !u!82 &782545384 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6831854522706252304, guid: cd226d2e61cf8744f9b77874363c5d90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1287062406}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &883490664
 Mesh:
   m_ObjectHideFlags: 0
@@ -1410,6 +1438,8 @@ MonoBehaviour:
   lightIntensity: 20
   fadingSpeed: 2
   lightRange: 5.61
+  muzzleFlash:
+  - {fileID: 1018312898}
 --- !u!114 &1098868975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,8 +1458,6 @@ MonoBehaviour:
   impactForce: 75
   damage: 10
   bulletSpreadValue: 0
-  muzzleFlash:
-  - {fileID: 1018312898}
   hitEffect: {fileID: 7314358844588756561, guid: a096459dbf94fad4ca31c7fc808caec6,
     type: 3}
   tracerEffect: {fileID: 9081275519731484546, guid: 6c02991fdfc257c4784192cdc3e92c1e,
@@ -1440,6 +1468,16 @@ MonoBehaviour:
     m_Bits: 6071
   muzzleFlame: {fileID: 1098868974}
   ammoShells: {fileID: 1098868973}
+  reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
+  shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
+  audioSource: {fileID: 782545384}
+  magCapacity: 5000
+  ammoStock: 5000
+  currentAmmo: 5000
+  currentStock: 5000
+  ammoCounter: {fileID: 108583322}
+  singleShots: 1
+  shotPerformed: 0
 --- !u!1 &1202815311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,6 +1817,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: muzzleFlameLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831854522706252307, guid: cd226d2e61cf8744f9b77874363c5d90,
+        type: 3}
+      propertyPath: m_Name
+      value: GunAudioSource
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd226d2e61cf8744f9b77874363c5d90, type: 3}

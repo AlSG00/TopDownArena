@@ -84,6 +84,7 @@
     <Compile Include="Assets\Medkit.cs" />
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSSource.cs" />
+    <Compile Include="Assets\Gun\SCRIPT_Weapon.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
     <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Assets\HealtBarScript.cs" />
     <Compile Include="Assets\RoachRunFrom.cs" />
     <Compile Include="Assets\SwapAudio.cs" />
+    <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
     <Compile Include="Assets\Scripts\Player_Scope.cs" />
     <Compile Include="Assets\Scripts\PlayerHP.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectHider.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
+    <Compile Include="Assets\Gun\SCRIPT_AmmoShells.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSDebugView.cs" />
     <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
@@ -146,9 +149,6 @@
     <Compile Include="Assets\Scripts\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
-    <Compile Include="Assets\Gun\SCRIPT_AmmoShells.cs" />
-    <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
-    <Compile Include="Assets\Gun\SCRIPT_Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
