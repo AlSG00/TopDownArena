@@ -14,9 +14,17 @@ public class Player_Shooting : MonoBehaviour
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
 
+    private float lastTimeSingleShot;
+    private float tempSpread;
+    private bool valueTaken;
+
+    public List<string> forbidAiming;
+
     private void Start()
     {
         isShooting = false;
+        tempSpread = weapon.bulletSpreadValue;
+        valueTaken = false;
     }
 
     void LateUpdate()
@@ -38,10 +46,35 @@ public class Player_Shooting : MonoBehaviour
             weapon.Reload();
         }
 
+        if (Input.GetButton("Fire2"))
+        {
+            // TODO: Может возникнуть проблема при реализации смены оружия
+            // Каждый раз подтягивать зависимость??????????????
+            if (!valueTaken && !forbidAiming.Contains(weapon.name))
+            {
+                
+                tempSpread = weapon.bulletSpreadValue;
+                weapon.bulletSpreadValue = 0;
+                valueTaken = true;
+            }
+        }
+        else
+        {
+            weapon.bulletSpreadValue = tempSpread;
+            valueTaken = false;
+        }
+        Debug.Log($"TempSpread {tempSpread}");
+        Debug.Log($"BulletSpread {weapon.bulletSpreadValue}");
+        //if (Input.GetButtonUp("Fire2"))
+        //{
+        //    weapon.bulletSpreadValue = tempSpread;
+        //}
+
         if (Input.GetButton("Fire1"))
         {
-            if (!weapon.shotPerformed)
+            if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
             {
+                lastTimeSingleShot = Time.time;
                 weapon.StartFiring();
                 if (weapon.singleShots)
                 {

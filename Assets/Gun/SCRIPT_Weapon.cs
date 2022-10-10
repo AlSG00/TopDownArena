@@ -19,7 +19,12 @@ public class SCRIPT_Weapon : MonoBehaviour
     public float damage;
     public float bulletSpreadValue;
 
-    public GameObject hitEffect;
+    //public GameObject hitEffectMetal;
+    //public GameObject hitEffectConcrete;
+
+    public ParticleSystem hitEffectMetal;
+    public ParticleSystem hitEffectConcrete;
+
     public TrailRenderer tracerEffect;
     public Transform muzzle;
     
@@ -54,6 +59,13 @@ public class SCRIPT_Weapon : MonoBehaviour
 
     public bool shotPerformed;
 
+    public int projectilesPerShot = 1;
+
+    private ParticleSystem hitEffect;
+
+    public float singleShotDelay = 0.3f;
+    
+
     private void Awake()
     {
         isReloading = false;    
@@ -64,6 +76,8 @@ public class SCRIPT_Weapon : MonoBehaviour
         isFiring = true;
         fireDelay = (float)60 / fireRate;
         accumulatedTime = 0.0f;
+
+    
         FireBullet();
     }
 
@@ -81,10 +95,14 @@ public class SCRIPT_Weapon : MonoBehaviour
             //Vector3 velocity = (raycastDestination.position - muzzle.position).normalized * bulletSpeed;
             //Vector3 velocity = transform.forward/*.normalized*/ * bulletSpeed;
 
-            Vector3 velocity = GetSpreadDirection() * bulletSpeed;
+            //Vector3 velocity = GetSpreadDirection() * bulletSpeed;
 
-            var bullet = CreateBullet(muzzle.position, velocity);
-            bullets.Add(bullet);
+            for (int i = 0; i < projectilesPerShot; i++)
+            {
+                Vector3 velocity = GetSpreadDirection() * bulletSpeed;
+                var bullet = CreateBullet(muzzle.position, velocity);
+                bullets.Add(bullet);
+            }
 
             muzzleFlame.LightFlame();
             ammoShells.EjectShell();
@@ -171,8 +189,23 @@ public class SCRIPT_Weapon : MonoBehaviour
                 hitInfo.rigidbody.AddForce(-hitInfo.normal * impactForce);
             }
 
-            GameObject impactObj = Instantiate(hitEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            Destroy(impactObj, 1f);
+          //  GameObject impactObj;
+            if (hitInfo.transform.CompareTag("Concrete"))
+            {
+                // impactObj = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                hitEffect = hitEffectConcrete;
+            }
+            else
+            {
+                hitEffect = hitEffectMetal;
+               // impactObj = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            }
+
+            hitEffect.transform.position = hitInfo.point;
+            hitEffect.transform.forward = hitInfo.normal;
+            hitEffect.Play();
+
+            //Destroy(impactObj, 12f);
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.lifeTime = maxLifeTime;
