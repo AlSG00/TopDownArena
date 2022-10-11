@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class Player_Shooting : MonoBehaviour
 
     // Новое
     public SCRIPT_Weapon weapon;
+    public SCRIPT_WeaponSlots weaponSlots;
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
 
@@ -20,27 +22,49 @@ public class Player_Shooting : MonoBehaviour
 
     public List<string> forbidAiming;
 
+    public class Weapon
+    {
+        public GameObject WeaponPref;
+        public bool isActive;
+    }
+
+
+
     private void Start()
     {
         isShooting = false;
         tempSpread = weapon.bulletSpreadValue;
         valueTaken = false;
+
+        // TOTOD: Подтягивать ссылки на скрипты
     }
 
     void LateUpdate()
     {
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
+        SwitchWeapon();
         muzzleFlame.FadeFlame();            // Угасание вспышки от выстрела
         weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
     }
 
+    private void SwitchWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            weapon = weaponSlots.holsterSlot.GetComponent<SCRIPT_Weapon>();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            weapon = weaponSlots.beltSlot.GetComponent<SCRIPT_Weapon>();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            weapon = weaponSlots.backSlot.GetComponent<SCRIPT_Weapon>();
+        }
+    }
+
     void ShootInput()
     {
-        //if (Input.GetButton("Fire1"))
-        //{          
-        //    Gun.Instance.Shoot();            
-        //}
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             weapon.Reload();
@@ -63,12 +87,6 @@ public class Player_Shooting : MonoBehaviour
             weapon.bulletSpreadValue = tempSpread;
             valueTaken = false;
         }
-        Debug.Log($"TempSpread {tempSpread}");
-        Debug.Log($"BulletSpread {weapon.bulletSpreadValue}");
-        //if (Input.GetButtonUp("Fire2"))
-        //{
-        //    weapon.bulletSpreadValue = tempSpread;
-        //}
 
         if (Input.GetButton("Fire1"))
         {
@@ -88,17 +106,6 @@ public class Player_Shooting : MonoBehaviour
             weapon.shotPerformed = false;
         }
 
-        //if (weapon.isFiring)
-        //{
-        //    weapon.UpdateFiring(Time.deltaTime);
-        //}
         weapon.UpdateBullet(Time.deltaTime);
-       // ammoShells.UpdateShells();
-
-        //if (Input.GetButtonUp("Fire1"))
-        //{
-        //    weapon.StopFiring();
-        // //   weapon.shotPerformed = false;
-        //}
     }
 }
