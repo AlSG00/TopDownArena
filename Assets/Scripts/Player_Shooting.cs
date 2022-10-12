@@ -47,20 +47,51 @@ public class Player_Shooting : MonoBehaviour
         weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
     }
 
+    public enum ActiveWeapon
+    {
+        Holster = 1,
+        Belt = 2,
+        Back = 3
+    }
     private void SwitchWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            weapon = weaponSlots.holsterSlot.GetComponent<SCRIPT_Weapon>();
+            GetWeapon(ActiveWeapon.Holster);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            weapon = weaponSlots.beltSlot.GetComponent<SCRIPT_Weapon>();
+            GetWeapon(ActiveWeapon.Belt);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            weapon = weaponSlots.backSlot.GetComponent<SCRIPT_Weapon>();
+            GetWeapon(ActiveWeapon.Back);
         }
+    }
+
+    private void GetWeapon(ActiveWeapon slot)
+    {
+        GameObject activeSlot = null;
+        switch (slot)
+        {
+            case ActiveWeapon.Holster:
+                weapon = weaponSlots.holsterSlot.GetComponent<SCRIPT_Weapon>();
+                activeSlot = weaponSlots.holsterSlot;
+                break;
+
+            case ActiveWeapon.Belt:
+                weapon = weaponSlots.beltSlot.GetComponent<SCRIPT_Weapon>();
+                activeSlot = weaponSlots.beltSlot;
+                break;
+
+            case ActiveWeapon.Back:
+                weapon = weaponSlots.backSlot.GetComponent<SCRIPT_Weapon>();
+                activeSlot = weaponSlots.backSlot;
+                break;
+        }
+
+        muzzleFlame = activeSlot.GetComponent<SCRIPT_MuzzleFlame>();
+        ammoShells = activeSlot.GetComponent<SCRIPT_AmmoShells>();
     }
 
     void ShootInput()
