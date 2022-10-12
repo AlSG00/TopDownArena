@@ -3794,11 +3794,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFiring: 0
-  fireRate: 600
+  fireRate: 1200
   bulletSpeed: 330
   impactForce: 100
   damage: 10
-  bulletSpreadValue: 0.1
+  bulletSpreadValue: 0.5
   hitEffectMetal: {fileID: 1808243371}
   hitEffectConcrete: {fileID: 1140906711}
   tracerEffect: {fileID: 9081275519731484546, guid: 6c02991fdfc257c4784192cdc3e92c1e,
@@ -3819,7 +3819,7 @@ MonoBehaviour:
   ammoCounter: {fileID: 108583322}
   singleShots: 0
   shotPerformed: 0
-  projectilesPerShot: 1
+  projectilesPerShot: 40
   singleShotDelay: 0
 --- !u!198 &1140906711 stripped
 ParticleSystem:

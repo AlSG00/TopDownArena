@@ -68,7 +68,7 @@ public class SCRIPT_Weapon : MonoBehaviour
 
     private void Awake()
     {
-        isReloading = false;    
+        isReloading = false;
     }
 
     public void StartFiring()
