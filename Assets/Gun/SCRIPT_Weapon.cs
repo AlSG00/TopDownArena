@@ -19,11 +19,11 @@ public class SCRIPT_Weapon : MonoBehaviour
     public float damage;
     public float bulletSpreadValue;
 
-    //public GameObject hitEffectMetal;
-    //public GameObject hitEffectConcrete;
+    public GameObject hitEffectMetal;
+    public GameObject hitEffectConcrete;
 
-    public ParticleSystem hitEffectMetal;
-    public ParticleSystem hitEffectConcrete;
+    //public ParticleSystem hitEffectMetal;
+    //public ParticleSystem hitEffectConcrete;
 
     public TrailRenderer tracerEffect;
     public Transform muzzle;
@@ -176,7 +176,7 @@ public class SCRIPT_Weapon : MonoBehaviour
             //hitEffect.transform.forward = hitInfo.normal;
             //hitEffect.Emit(1);
 
-            //GameObject impactObj = Instantiate(impactEffect, point, Quaternion.LookRotation(normal) /*gunbarrel*//*Quaternion.Euler(normal)*/);
+            GameObject impactObj = null/* Instantiate(impactEffect, point, Quaternion.LookRotation(normal) /*gunbarrel*//*Quaternion.Euler(normal))*/;
 
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
@@ -192,20 +192,20 @@ public class SCRIPT_Weapon : MonoBehaviour
           //  GameObject impactObj;
             if (hitInfo.transform.CompareTag("Concrete"))
             {
-                // impactObj = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                hitEffect = hitEffectConcrete;
+                 impactObj = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                //hitEffect = hitEffectConcrete;
             }
             else
             {
-                hitEffect = hitEffectMetal;
-               // impactObj = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                //hitEffect = hitEffectMetal;
+                impactObj = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
+          //  impactObj.GetComponent<ParticleSystem>().Play();
+            //hitEffect.transform.position = hitInfo.point;
+            //hitEffect.transform.forward = hitInfo.normal;
+            //hitEffect.Play();
 
-            hitEffect.transform.position = hitInfo.point;
-            hitEffect.transform.forward = hitInfo.normal;
-            hitEffect.Play();
-
-            //Destroy(impactObj, 12f);
+            Destroy(impactObj, 12f);
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.lifeTime = maxLifeTime;

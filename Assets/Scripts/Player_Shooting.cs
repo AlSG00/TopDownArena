@@ -92,6 +92,7 @@ public class Player_Shooting : MonoBehaviour
 
         muzzleFlame = activeSlot.GetComponent<SCRIPT_MuzzleFlame>();
         ammoShells = activeSlot.GetComponent<SCRIPT_AmmoShells>();
+        Debug.Log(weapon.bulletSpreadValue);
     }
 
     void ShootInput()
@@ -101,19 +102,18 @@ public class Player_Shooting : MonoBehaviour
             weapon.Reload();
         }
 
-        if (Input.GetButton("Fire2"))
+        if (Input.GetButtonDown("Fire2"))
         {
             // TODO: Может возникнуть проблема при реализации смены оружия
             // Каждый раз подтягивать зависимость??????????????
             if (!valueTaken && !forbidAiming.Contains(weapon.name))
             {
-                
                 tempSpread = weapon.bulletSpreadValue;
                 weapon.bulletSpreadValue = 0;
                 valueTaken = true;
             }
         }
-        else
+        if (Input.GetButtonUp("Fire2"))
         {
             weapon.bulletSpreadValue = tempSpread;
             valueTaken = false;
