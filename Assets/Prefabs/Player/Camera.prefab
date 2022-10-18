@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3355531876711502135}
   - component: {fileID: 3026837720070224200}
-  - component: {fileID: 3026837720070224202}
+  - component: {fileID: 8275170769103447166}
+  - component: {fileID: 34226085381240828}
   - component: {fileID: 3026837720070224205}
   - component: {fileID: 3026837720070224204}
-  - component: {fileID: 3026837720070224207}
   - component: {fileID: 3026837720070224203}
   - component: {fileID: 3026837720070224206}
   m_Layer: 0
@@ -81,7 +81,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &3026837720070224202
+--- !u!114 &8275170769103447166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,12 +90,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 7328671105925514743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f0b482cef43ad418bd264672c90d27, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ddbae7047dbb64da1bcc1080a5181b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trgt: {fileID: 0}
-  targetOffset: {x: 0, y: 25, z: 0}
-  movementSpeed: 5
+  targetOffset: {x: 0, y: 20, z: 0}
+  movementSpeed: 3
+  rotationOffsetX: 0
+  rotationOffsetY: 0
+  rotationOffsetMagnitude: 0
+  shakingDelay: 0
+--- !u!114 &34226085381240828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328671105925514743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ddbae7047dbb64da1bcc1080a5181b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetOffset: {x: 0, y: 0, z: 0}
+  movementSpeed: 0
+  rotationOffsetX: 0
+  rotationOffsetY: 0
+  rotationOffsetMagnitude: 0
+  shakingDelay: 0
 --- !u!114 &3026837720070224205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,20 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Shader: {fileID: 4800000, guid: 2b6a538e428c46a43b25dd43e69ef78f, type: 3}
   m_Brightness: 0.52
---- !u!114 &3026837720070224207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7328671105925514743}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a9ad3dbf6ac227409ca309548ea7a5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Shader: {fileID: 4800000, guid: 2b6a538e428c46a43b25dd43e69ef78f, type: 3}
-  m_Brightness: 1
 --- !u!114 &3026837720070224203
 MonoBehaviour:
   m_ObjectHideFlags: 0
