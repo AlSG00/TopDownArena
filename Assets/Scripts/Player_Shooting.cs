@@ -72,24 +72,30 @@ public class Player_Shooting : MonoBehaviour
     private void GetWeapon(ActiveWeapon slot)
     {
         GameObject activeSlot = null;
-        switch (slot)
+        try
         {
-            case ActiveWeapon.Holster:
-                weapon = weaponSlots.holsterSlot.GetComponent<SCRIPT_Weapon>();
-                activeSlot = weaponSlots.holsterSlot;
-                break;
+            switch (slot)
+            {
+                case ActiveWeapon.Holster:
+                    weapon = weaponSlots.holsterSlot.GetComponent<SCRIPT_Weapon>();
+                    activeSlot = weaponSlots.holsterSlot;
+                    break;
 
-            case ActiveWeapon.Belt:
-                weapon = weaponSlots.beltSlot.GetComponent<SCRIPT_Weapon>();
-                activeSlot = weaponSlots.beltSlot;
-                break;
+                case ActiveWeapon.Belt:
+                    weapon = weaponSlots.beltSlot.GetComponent<SCRIPT_Weapon>();
+                    activeSlot = weaponSlots.beltSlot;
+                    break;
 
-            case ActiveWeapon.Back:
-                weapon = weaponSlots.backSlot.GetComponent<SCRIPT_Weapon>();
-                activeSlot = weaponSlots.backSlot;
-                break;
+                case ActiveWeapon.Back:
+                    weapon = weaponSlots.backSlot.GetComponent<SCRIPT_Weapon>();
+                    activeSlot = weaponSlots.backSlot;
+                    break;
+            }
         }
-
+        catch
+        {
+            Debug.Log($"{slot.ToString()}: Weapon is missing");
+        }
         muzzleFlame = activeSlot.GetComponent<SCRIPT_MuzzleFlame>();
         ammoShells = activeSlot.GetComponent<SCRIPT_AmmoShells>();
         Debug.Log(weapon.bulletSpreadValue);

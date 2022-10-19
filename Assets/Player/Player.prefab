@@ -632,7 +632,7 @@ Transform:
   - {fileID: 6831854521937008831}
   - {fileID: 6831854522015480977}
   m_Father: {fileID: 4421014042534757170}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -92.322, z: 0}
 --- !u!33 &6831854522407218062
 MeshFilter:
@@ -1414,6 +1414,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5728513034708675812}
     m_Modifications:
+    - target: {fileID: -8955316372418814459, guid: 9ffa221dda398ef44bd794270860e245,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ffa221dda398ef44bd794270860e245,
         type: 3}
       propertyPath: m_RootOrder
@@ -1473,6 +1478,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: _Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2484128538761520324, guid: 9ffa221dda398ef44bd794270860e245,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 9ffa221dda398ef44bd794270860e245,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ffa221dda398ef44bd794270860e245, type: 3}
