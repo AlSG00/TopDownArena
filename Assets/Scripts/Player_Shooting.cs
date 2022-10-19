@@ -6,8 +6,8 @@ public class Player_Shooting : MonoBehaviour
 {
     // TODO: REWORK THIS SCRIPT
     public bool isShooting;
-    public GameObject prefab;
-    public GameObject barrel;
+  //  public GameObject prefab;
+  //  public GameObject muzzle;
     //public TestRaycastWeapon weapon;
 
     // Новое
@@ -16,10 +16,11 @@ public class Player_Shooting : MonoBehaviour
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
 
-    private float lastTimeSingleShot;
-    private float tempSpread;
-    private bool valueTaken;
+    private float lastTimeSingleShot; // Задержка перед выстрелом в одиночном режиме стрельбы
+    private float tempSpread;         // Запомнить разброс от выстрела, чтобы вернуть его при выходе из прицеливания  
+    private bool valueTaken;          
 
+    // TODO: Протестировать лист
     public List<string> forbidAiming;
 
     public class Weapon

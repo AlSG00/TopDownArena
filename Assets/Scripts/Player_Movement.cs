@@ -6,7 +6,7 @@ public class Player_Movement : MonoBehaviour
 {
     [SerializeField] private float player_speed;
     [SerializeField] private float player_sprint;
-    public Rigidbody rigidBody;
+   // public Rigidbody rigidBody;
     //public Camera camera;
     private float sprintSpeed;
     bool isSprinting;
