@@ -23,6 +23,8 @@ public class Player_Shooting : MonoBehaviour
     // TODO: Протестировать лист
     public List<string> forbidAiming;
 
+    public Animator animController;
+
     public class Weapon
     {
         public GameObject WeaponPref;
@@ -106,13 +108,12 @@ public class Player_Shooting : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            animController.SetTrigger("Reloading");
             weapon.Reload();
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
-            // TODO: Может возникнуть проблема при реализации смены оружия
-            // Каждый раз подтягивать зависимость??????????????
             if (!valueTaken && !forbidAiming.Contains(weapon.name))
             {
                 tempSpread = weapon.bulletSpreadValue;
@@ -128,6 +129,7 @@ public class Player_Shooting : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
+            animController.SetBool("isShooting", true);
             if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
             {
                 lastTimeSingleShot = Time.time;
@@ -140,6 +142,7 @@ public class Player_Shooting : MonoBehaviour
         }
         else
         {
+            animController.SetBool("isShooting", false);
             weapon.StopFiring();
             weapon.shotPerformed = false;
         }

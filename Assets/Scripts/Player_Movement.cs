@@ -15,9 +15,16 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] List<AudioClip> footstepsSample;
     [SerializeField] Animator animationController;
 
+    private Vector3 moveDirection = Vector3.zero;
+
     private void Start()
     {
         animationController = gameObject.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+       // GetTurnAngle();
     }
 
     private void FixedUpdate()
@@ -29,6 +36,7 @@ public class Player_Movement : MonoBehaviour
         //movement = new Vector3(horiz, 0, vert);
         //movement.Normalize();
         //transform.Translate(movement * player_speed * Time.deltaTime, Space.World);
+        
         Move();
         Sprint();
         HandleRotationInput();
@@ -51,9 +59,13 @@ public class Player_Movement : MonoBehaviour
 
     private void Move()
     {
-        //float horiz = Input.GetAxis("Horizontal");
-        //float vert = Input.GetAxis("Vertical");
+        float horiz = Input.GetAxis("Horizontal");
+        float vert = Input.GetAxis("Vertical");
 
+        Animating(horiz, vert);
+
+      //  animationController.SetFloat("horizontal", horiz);
+      //  animationController.SetFloat("vertical", vert);
         //movement = new Vector3(horiz, 0, vert);
         //// movement.Normalize();
         //transform.Translate(movement * player_speed * Time.deltaTime, Space.World);
@@ -72,13 +84,14 @@ public class Player_Movement : MonoBehaviour
         }
 
         transform.Translate(_movement * player_speed * sprintSpeed * Time.deltaTime, Space.World);
+
     }
 
     void HandleRotationInput()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+        
         if (Physics.Raycast(ray, out hit))
         {
             transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
@@ -89,5 +102,20 @@ public class Player_Movement : MonoBehaviour
     {
         //footstepsSource.clip = footstepsSample[Random.Range(0, footstepsSample.Count - 1)];
         footstepsSource.PlayOneShot(footstepsSample[Random.Range(0, footstepsSample.Count - 1)]);
+    }
+
+    private void Animating(float h, float v)
+    {
+        moveDirection = new Vector3(h, 0, v);
+
+        if (moveDirection.magnitude > 1.0f)
+        {
+            moveDirection = moveDirection.normalized;
+        }
+
+        moveDirection = transform.InverseTransformDirection(moveDirection).normalized;
+
+        animationController.SetFloat("horizontal", moveDirection.x, 1f, Time.deltaTime * 10f);
+        animationController.SetFloat("vertical", moveDirection.z, 1f, Time.deltaTime * 10f);
     }
 }
