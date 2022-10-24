@@ -6,6 +6,7 @@ public class Player_Shooting : MonoBehaviour
 {
     // TODO: REWORK THIS SCRIPT
     public bool isShooting;
+    public bool isAiming;
   //  public GameObject prefab;
   //  public GameObject muzzle;
     //public TestRaycastWeapon weapon;
@@ -23,18 +24,19 @@ public class Player_Shooting : MonoBehaviour
     // TODO: Протестировать лист
     public List<string> forbidAiming;
 
-    public Animator animController;
+    public Animator animationController;
 
-    public class Weapon
-    {
-        public GameObject WeaponPref;
-        public bool isActive;
-    }
+    //public class Weapon
+    //{
+    //    public GameObject WeaponPref;
+    //    public bool isActive;
+    //}
 
 
 
     private void Start()
     {
+        
         isShooting = false;
         tempSpread = weapon.bulletSpreadValue;
         valueTaken = false;
@@ -108,12 +110,15 @@ public class Player_Shooting : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            animController.SetTrigger("Reloading");
+            animationController.SetTrigger("Reloading");
             weapon.Reload();
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
+            isAiming = true;
+            animationController.SetBool("isAiming", isAiming);
+
             if (!valueTaken && !forbidAiming.Contains(weapon.name))
             {
                 tempSpread = weapon.bulletSpreadValue;
@@ -121,15 +126,22 @@ public class Player_Shooting : MonoBehaviour
                 valueTaken = true;
             }
         }
+
         if (Input.GetButtonUp("Fire2"))
         {
-            weapon.bulletSpreadValue = tempSpread;
-            valueTaken = false;
+            isAiming = false;
+            animationController.SetBool("isAiming", isAiming);
+
+            if (valueTaken)
+            {
+                weapon.bulletSpreadValue = tempSpread;
+                valueTaken = false;
+            }
         }
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && isAiming)
         {
-            animController.SetBool("isShooting", true);
+            animationController.SetBool("isShooting", true);
             if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
             {
                 lastTimeSingleShot = Time.time;
@@ -142,7 +154,7 @@ public class Player_Shooting : MonoBehaviour
         }
         else
         {
-            animController.SetBool("isShooting", false);
+            animationController.SetBool("isShooting", false);
             weapon.StopFiring();
             weapon.shotPerformed = false;
         }
