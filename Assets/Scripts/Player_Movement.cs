@@ -15,6 +15,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] List<AudioClip> footstepsSample;
     [SerializeField] Animator animationController;
 
+    public float turnSpeed = 0.1f;
+
     private Vector3 moveDirection = Vector3.zero;
 
     private void Start()
@@ -24,7 +26,9 @@ public class Player_Movement : MonoBehaviour
 
     private void Update()
     {
-       // GetTurnAngle();
+      //  transform.parent.position = transform.position - transform.localPosition;
+        //Debug.Log($"{transform.parent.name} position is {transform}");
+        // GetTurnAngle();
     }
 
     private void FixedUpdate()
@@ -70,6 +74,7 @@ public class Player_Movement : MonoBehaviour
         //// movement.Normalize();
         //transform.Translate(movement * player_speed * Time.deltaTime, Space.World);
 
+        // TODO:ѕопробовать заменить этот код на обычный Clamp
         double sinForce = Mathf.Abs(Mathf.Sin(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
         double cosForce = Mathf.Abs(Mathf.Cos(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
 
@@ -94,7 +99,13 @@ public class Player_Movement : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit))
         {
-            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            lock;alskdh;fiolahs;fo
+            Vector3 direction = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            //  transform.rotation = Quaternion.FromToRotation(transform.position, direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), Time.time * turnSpeed);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed);
+            // transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
     }
 
@@ -104,6 +115,7 @@ public class Player_Movement : MonoBehaviour
         footstepsSource.PlayOneShot(footstepsSample[Random.Range(0, footstepsSample.Count - 1)]);
     }
 
+    // »спользуетс€, чтобы анимаци€ проигрывалась корректно независимо от поворота игрока
     private void Animating(float h, float v)
     {
         moveDirection = new Vector3(h, 0, v);
