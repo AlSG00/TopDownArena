@@ -99,13 +99,13 @@ public class Player_Movement : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit))
         {
-            lock;alskdh;fiolahs;fo
-            Vector3 direction = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            Quaternion rotation = Quaternion.LookRotation(direction);
+            //lock;alskdh;fiolahs;fo
+            //Vector3 direction = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            //Quaternion rotation = Quaternion.LookRotation(direction);
             //  transform.rotation = Quaternion.FromToRotation(transform.position, direction);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), Time.time * turnSpeed);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), Time.time * turnSpeed);
             // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed);
-            // transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+             transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
     }
 

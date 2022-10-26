@@ -93,6 +93,7 @@
     <Compile Include="Assets\FixedRotation.cs" />
     <Compile Include="Assets\PlayerInventory.cs" />
     <Compile Include="Assets\SceneTransitions.cs" />
+    <Compile Include="Assets\SCRIPT_FollowChild.cs" />
     <Compile Include="Assets\Scripts\Player_Movement.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraMoving.cs" />
     <Compile Include="Assets\Scripts\Player_Shooting.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="Assets\Camera\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
-    <Compile Include="Assets\SCRIPT_FollowChild.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
