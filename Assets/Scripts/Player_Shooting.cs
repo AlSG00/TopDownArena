@@ -2,8 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 public class Player_Shooting : MonoBehaviour
 {
+
+    public Rig aimLayer;
+    public float aimingDuration = 0.1f;
     // TODO: REWORK THIS SCRIPT
     public bool isShooting;
     public bool isAiming;
@@ -42,6 +46,11 @@ public class Player_Shooting : MonoBehaviour
         valueTaken = false;
 
         // TOTOD: Подтягивать ссылки на скрипты
+    }
+
+    private void FixedUpdate()
+    {
+        Aim();    
     }
 
     void LateUpdate()
@@ -118,6 +127,7 @@ public class Player_Shooting : MonoBehaviour
         {
             isAiming = true;
             animationController.SetBool("isAiming", isAiming);
+            //Aim(true);
 
             if (!valueTaken && !forbidAiming.Contains(weapon.name))
             {
@@ -131,7 +141,7 @@ public class Player_Shooting : MonoBehaviour
         {
             isAiming = false;
             animationController.SetBool("isAiming", isAiming);
-
+           // Aim(false);
             if (valueTaken)
             {
                 weapon.bulletSpreadValue = tempSpread;
@@ -160,5 +170,19 @@ public class Player_Shooting : MonoBehaviour
         }
 
         weapon.UpdateBullet(Time.deltaTime);
+    }
+
+    private void Aim()
+    {
+        if (isAiming)
+        {
+            aimLayer.weight += Time.deltaTime / aimingDuration;
+            //aimLayer.weight = Mathf.Lerp(0, 1, aimingDuration);
+        }
+        else
+        {
+            //aimLayer.weight = Mathf.Lerp(1, 0, aimingDuration);
+            aimLayer.weight -= Time.deltaTime / aimingDuration;
+        }
     }
 }

@@ -106,6 +106,8 @@ public class Player_Movement : MonoBehaviour
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), Time.time * turnSpeed);
             // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed);
              transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+
+            //transform.rotation = Quaternion.Slerp(transform.rotation, new Vector3(hit.point.x, transform.position.y, hit.point.z), 1f);
         }
     }
 
