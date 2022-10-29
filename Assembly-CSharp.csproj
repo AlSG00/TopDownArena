@@ -151,6 +151,8 @@
     <Compile Include="Assets\Camera\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
+    <Compile Include="Assets\SCRIPT_ActiveWeapon.cs" />
+    <Compile Include="Assets\Gun\SCRIPT_WeaponPickup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -949,6 +951,12 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

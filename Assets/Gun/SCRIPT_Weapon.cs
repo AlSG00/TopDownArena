@@ -22,6 +22,7 @@ public class SCRIPT_Weapon : MonoBehaviour
     public GameObject hitEffectMetal;
     public GameObject hitEffectConcrete;
 
+    public AnimationClip weaponAnimation;
     //public ParticleSystem hitEffectMetal;
     //public ParticleSystem hitEffectConcrete;
 
