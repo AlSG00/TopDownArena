@@ -117,58 +117,68 @@ public class Player_Shooting : MonoBehaviour
 
     void ShootInput()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (weapon)
         {
-            animationController.SetTrigger("Reloading");
-            weapon.Reload();
-        }
-
-        if (Input.GetButtonDown("Fire2"))
-        {
-            isAiming = true;
-            animationController.SetBool("isAiming", isAiming);
-            //Aim(true);
-
-            if (!valueTaken && !forbidAiming.Contains(weapon.name))
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                tempSpread = weapon.bulletSpreadValue;
-                weapon.bulletSpreadValue = 0;
-                valueTaken = true;
+        //        animationController.SetTrigger("Reloading");
+                weapon.Reload();
             }
-        }
 
-        if (Input.GetButtonUp("Fire2"))
-        {
-            isAiming = false;
-            animationController.SetBool("isAiming", isAiming);
-           // Aim(false);
-            if (valueTaken)
+            if (Input.GetButtonDown("Fire2"))
             {
-                weapon.bulletSpreadValue = tempSpread;
-                valueTaken = false;
+                isAiming = true;
+            //    animationController.SetBool("isAiming", isAiming);
+                //Aim(true);
+
+                //if (!valueTaken && !forbidAiming.Contains(weapon.name))
+                //{
+                //    tempSpread = weapon.bulletSpreadValue;
+                //    weapon.bulletSpreadValue = 0;
+                //    valueTaken = true;
+                //}
             }
-        }
 
-        if (Input.GetButton("Fire1") && isAiming)
-        {
-            animationController.SetBool("isShooting", true);
-            if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
+            if (Input.GetButtonUp("Fire2"))
             {
-                lastTimeSingleShot = Time.time;
-                weapon.StartFiring();
-                if (weapon.singleShots)
+                isAiming = false;
+             //   animationController.SetBool("isAiming", isAiming);
+                // Aim(false);
+                //if (valueTaken)
+                //{
+                //    weapon.bulletSpreadValue = tempSpread;
+                //    valueTaken = false;
+                //}
+            }
+
+            if (Input.GetButton("Fire1"))
+            {
+                if (isAiming)
                 {
-                    weapon.shotPerformed = true;
+               //     animationController.SetBool("isShooting", true);
+                    if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
+                    {
+                        lastTimeSingleShot = Time.time;
+                        weapon.StartFiring();
+                        if (weapon.singleShots)
+                        {
+                            weapon.shotPerformed = true;
+                        }
+                    }
                 }
+                else
+                {
+                    // TODO: Рукопашная
+                }
+
+            }
+            else
+            {
+          //      animationController.SetBool("isShooting", false);
+                weapon.StopFiring();
+                weapon.shotPerformed = false;
             }
         }
-        else
-        {
-            animationController.SetBool("isShooting", false);
-            weapon.StopFiring();
-            weapon.shotPerformed = false;
-        }
-
         weapon.UpdateBullet(Time.deltaTime);
     }
 
@@ -185,4 +195,11 @@ public class Player_Shooting : MonoBehaviour
             aimLayer.weight -= Time.deltaTime / aimingDuration;
         }
     }
+
+    public void Equip(SCRIPT_Weapon weaponToEquip)
+    {
+        weapon = weaponToEquip.GetComponent<SCRIPT_Weapon>();
+        muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
+        ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
+    }    
 }

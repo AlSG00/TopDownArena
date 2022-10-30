@@ -12,64 +12,63 @@ public class SCRIPT_Weapon : MonoBehaviour
         public TrailRenderer tracer;
     }
 
+    public string weaponName;
+
     public bool isFiring = false;
     public float fireRate = 25;
     public float bulletSpeed = 1000f;
     public float impactForce;
     public float damage;
     public float bulletSpreadValue;
-
     public GameObject hitEffectMetal;
     public GameObject hitEffectConcrete;
 
-    public AnimationClip weaponAnimation;
+
+    
     //public ParticleSystem hitEffectMetal;
     //public ParticleSystem hitEffectConcrete;
-
     public TrailRenderer tracerEffect;
     public Transform muzzle;
-    
     public LayerMask activeLayers;
-    Ray ray;
-    RaycastHit hitInfo;
-    float accumulatedTime;
-    List<Bullet> bullets = new List<Bullet>();
-    float maxLifeTime = 3f;
-
+    private Ray ray;
+    private RaycastHit hitInfo;
+    private float accumulatedTime;
+    private List<Bullet> bullets = new List<Bullet>();
+    private float maxLifeTime = 3f;
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
-
     private bool isReloading;
     private float lastTimeShot;
     private float fireDelay;
-
     public AudioClip reloadSound;
     public AudioClip shotSound;
     public AudioSource audioSource;
-
     [SerializeField]
     private int magCapacity = 30;
     [SerializeField]
     private int ammoStock = 150;                  // Боезапас
     public int currentAmmo = 30;
     public int currentStock = 90;
-
     public AmmoCounterTest ammoCounter;
-
     public bool singleShots;
-
     public bool shotPerformed;
-
     public int projectilesPerShot = 1;
-
     private ParticleSystem hitEffect;
-
     public float singleShotDelay = 0.3f;
-    
 
-    private void Awake()
+
+    public AnimationClip weaponIdleAnimation;
+    public AnimationClip weaponAimAnimation;
+    public AnimationClip weaponSwapAnimation;
+    public AnimationClip weaponReloadAnimation;
+    public AnimationClip weaponShootAnimation;
+
+    private void Start()
     {
         isReloading = false;
+        muzzleFlame = GetComponent<SCRIPT_MuzzleFlame>();
+        ammoShells = GetComponent<SCRIPT_AmmoShells>();
+        ammoCounter = GameObject.Find("HUD").GetComponentInChildren<AmmoCounterTest>();
     }
 
     public void StartFiring()

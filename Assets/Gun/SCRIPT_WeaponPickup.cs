@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class SCRIPT_WeaponPickup : MonoBehaviour
 {
-    public SCRIPT_Weapon weaponPrefab;
+    public GameObject weaponPrefab;
 
     private void OnTriggerEnter(Collider other)
     {
         SCRIPT_ActiveWeapon activeWeapon = other.GetComponent<SCRIPT_ActiveWeapon>();
+
+        if (activeWeapon)
+        {
+            SCRIPT_Weapon weaponToPickup = Instantiate(weaponPrefab.GetComponent<SCRIPT_Weapon>());
+            activeWeapon.Equip(weaponToPickup);
+            Player_Shooting player = other.GetComponent<Player_Shooting>();
+            player.Equip(weaponToPickup);
+        }
     }
 
-    private void PickWeapon()
-    {
-        SCRIPT_ActiveWeapon activeWeapon;
 
-        SCRIPT_Weapon weaponToPick = Instantiate(weaponPrefab);
-    //    activeWeapon.Equip(weaponToPick);
-    }
 }
