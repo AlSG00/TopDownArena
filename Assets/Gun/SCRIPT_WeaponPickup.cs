@@ -18,6 +18,4 @@ public class SCRIPT_WeaponPickup : MonoBehaviour
             player.Equip(weaponToPickup);
         }
     }
-
-
 }

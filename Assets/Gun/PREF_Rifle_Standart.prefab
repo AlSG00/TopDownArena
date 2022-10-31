@@ -562,6 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Rifle
+  WeaponSlot: 1
   isFiring: 0
   fireRate: 600
   bulletSpeed: 330

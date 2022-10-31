@@ -13,6 +13,7 @@ public class SCRIPT_Weapon : MonoBehaviour
     }
 
     public string weaponName;
+    public SCRIPT_ActiveWeapon.WeaponSlot WeaponSlot;
 
     public bool isFiring = false;
     public float fireRate = 25;

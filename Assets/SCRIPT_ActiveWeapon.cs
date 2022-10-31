@@ -6,19 +6,28 @@ using UnityEditor.Animations;
 
 public class SCRIPT_ActiveWeapon : MonoBehaviour
 {
-    public Rig handIk;
-    SCRIPT_Weapon weapon;
+    //public Rig handIk;
+    public SCRIPT_Weapon[] equippedWeapon;
+
+    int activeWeaponIndex;
+
+    public Transform[] weaponSlots;
     public Transform weaponParent;
     public Transform weaponLeftGrip;
     public Transform weaponRightGrip;
 
     public Animator rigController;
-  //  public AnimatorOverrideController animatorOverride;
+
+    public enum WeaponSlot
+    {
+        Holster = 0,
+        Belt = 1,
+        Back = 2
+    }
 
     private void Start()
     {
-        rigController = GetComponent<Animator>();
-     //   animatorOverride = playerAnimator.runtimeAnimatorController as AnimatorOverrideController;
+      //  rigController = GetComponent<Animator>();
 
         SCRIPT_Weapon equippedWeapon = GetComponentInChildren<SCRIPT_Weapon>();
         if (equippedWeapon)
@@ -27,59 +36,93 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (!weapon)
-        {
-           // playerAnimator.SetLayerWeight(1, 0.0f);
-            handIk.weight = 0.0f;
-        }
-    }
-
     public void Equip(SCRIPT_Weapon weaponToEquip)
     {
-        if (weapon)
+        int weaponSlotIndex = (int)weaponToEquip.WeaponSlot;
+        if (equippedWeapon[weaponSlotIndex])
         {
-            Destroy(weapon.gameObject);
+            Destroy(equippedWeapon[weaponSlotIndex].gameObject);
         }
+        //else if (rigController.GetBool("isHolstering") == false)
+        //{
+        //    rigController.SetBool("isHolstering", true);
+        //}
+        //equippedWeapon[weaponSlotIndex] = weaponToEquip;
+        ////  handIk.weight = 1.0f;
+        ////     playerAnimator.SetLayerWeight(1, 1.0f);
+        ////weapon.transform.parent = weaponSlots[weaponSlotIndex];
+        //equippedWeapon[weaponSlotIndex].transform.parent = weaponParent;
+        //equippedWeapon[weaponSlotIndex].transform.localPosition = Vector3.zero;
+        //equippedWeapon[weaponSlotIndex].transform.localRotation = Quaternion.identity;
 
-        weapon = weaponToEquip;
-        handIk.weight = 1.0f;
-   //     playerAnimator.SetLayerWeight(1, 1.0f);
-        weapon.transform.parent = weaponParent;
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.transform.localRotation = Quaternion.identity;
+        // equippedWeapon[weaponSlotIndex] = weaponToEquip;
+        //  handIk.weight = 1.0f;
+        //     playerAnimator.SetLayerWeight(1, 1.0f);
+        //weapon.transform.parent = weaponSlots[weaponSlotIndex];
+        weaponToEquip.transform.parent = weaponParent;
+        weaponToEquip.transform.localPosition = Vector3.zero;
+        weaponToEquip.transform.localRotation = Quaternion.identity;
 
-        //rigController.Play("ANIM_Equip_" + weapon.weaponName);
-      //  Invoke(nameof(SetAnimationDelayer), 0.001f);
+        // StartCoroutine("PlayAnimTest", equippedWeapon[weaponSlotIndex]);
+        rigController.Play($"ANIM_Equip_{equippedWeapon[weaponSlotIndex].weaponName}");
+        // rigController.SetTrigger("equip");
+       // SetActiveWeapon(weaponSlotIndex);
     }
 
-    //void SetAnimationDelayer()
-    //{
-    //    animatorOverride["ANIM_Weapon_Idle"] = weapon.weaponIdleAnimation;
-    //    animatorOverride["ANIM_Weapon_Aim"] = weapon.weaponAimAnimation;
-    //}
+    private void SetActiveWeapon(int weaponSlotIndex)
+    {
+        int holsterIndex = activeWeaponIndex;
+        int activateIndex = weaponSlotIndex;
+        StartCoroutine(SwitchWeapon(holsterIndex, activateIndex));
+    }
 
-    //[ContextMenu("Save weapon idle pose")]
-    //void SaveWeaponIdlePose()
-    //{
-    //    GameObjectRecorder recorder = new GameObjectRecorder(gameObject);
-    //    recorder.BindComponentsOfType<Transform>(weaponParent.gameObject, false);
-    //    recorder.BindComponentsOfType<Transform>(weaponLeftGrip.gameObject, false);
-    //    recorder.BindComponentsOfType<Transform>(weaponRightGrip.gameObject, false);
-    //    recorder.TakeSnapshot(0.0f);
-    //    recorder.SaveToClip(weapon.weaponIdleAnimation);
-    //}
+    private IEnumerator SwitchWeapon(int holsterIndex, int activateIndex)
+    {
+        yield return StartCoroutine(HolsterWeapon(holsterIndex));
+        yield return StartCoroutine(ActivateWeapon(activateIndex));
+        activeWeaponIndex = activateIndex;
+    }
 
-    //[ContextMenu("Save weapon aim pose")]
-    //void SaveWeaponAimPose()
-    //{
-    //    GameObjectRecorder recorder = new GameObjectRecorder(gameObject);
-    //    recorder.BindComponentsOfType<Transform>(weaponParent.gameObject, false);
-    //    recorder.BindComponentsOfType<Transform>(weaponLeftGrip.gameObject, false);
-    //    recorder.BindComponentsOfType<Transform>(weaponRightGrip.gameObject, false);
-    //    recorder.TakeSnapshot(0.0f);
-    //    recorder.SaveToClip(weapon.weaponAimAnimation);
-    //}
+    private IEnumerator HolsterWeapon(int holsterIndex)
+    {
+        //rigController.Play($"ANIM_Equip_{weapon.weaponName}");
+        var weapon = GetWeapon(holsterIndex);
+        if (weapon)
+        {
+            rigController.SetBool("isHolstered", true);
+            do
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+        }
+    }
+
+    private IEnumerator ActivateWeapon(int activateIndex)
+    {
+        //rigController.Play($"ANIM_Equip_{weapon.weaponName}");
+        var weapon = GetWeapon(activateIndex);
+        if (weapon)
+        {
+            rigController.SetBool("isHolstered", false);
+            rigController.Play($"ANIM_Equip_{weapon.weaponName}");
+
+            do
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+        }
+    }
+
+    private SCRIPT_Weapon GetWeapon(int index)
+    {
+        if (index < 0 || index >= equippedWeapon.Length)
+        {
+            return null;
+        }
+
+        return equippedWeapon[index];
+    }
 }
 

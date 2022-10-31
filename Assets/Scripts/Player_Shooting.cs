@@ -6,7 +6,7 @@ using UnityEngine.Animations.Rigging;
 public class Player_Shooting : MonoBehaviour
 {
 
-    public Rig aimLayer;
+    //public Rig aimLayer;
     public float aimingDuration = 0.1f;
     // TODO: REWORK THIS SCRIPT
     public bool isShooting;
@@ -30,6 +30,7 @@ public class Player_Shooting : MonoBehaviour
 
     public Animator animationController;
 
+    bool isHolstered;
     //public class Weapon
     //{
     //    public GameObject WeaponPref;
@@ -42,8 +43,9 @@ public class Player_Shooting : MonoBehaviour
     {
         
         isShooting = false;
-        tempSpread = weapon.bulletSpreadValue;
-        valueTaken = false;
+        isHolstered = animationController.GetBool("isHolstered");
+        //tempSpread = weapon.bulletSpreadValue;
+        // valueTaken = false;
 
         // TOTOD: Подтягивать ссылки на скрипты
     }
@@ -128,7 +130,7 @@ public class Player_Shooting : MonoBehaviour
             if (Input.GetButtonDown("Fire2"))
             {
                 isAiming = true;
-            //    animationController.SetBool("isAiming", isAiming);
+                animationController.SetBool("isAiming", isAiming);
                 //Aim(true);
 
                 //if (!valueTaken && !forbidAiming.Contains(weapon.name))
@@ -142,7 +144,7 @@ public class Player_Shooting : MonoBehaviour
             if (Input.GetButtonUp("Fire2"))
             {
                 isAiming = false;
-             //   animationController.SetBool("isAiming", isAiming);
+                animationController.SetBool("isAiming", isAiming);
                 // Aim(false);
                 //if (valueTaken)
                 //{
@@ -153,7 +155,7 @@ public class Player_Shooting : MonoBehaviour
 
             if (Input.GetButton("Fire1"))
             {
-                if (isAiming)
+                if (isAiming && !isHolstered)
                 {
                //     animationController.SetBool("isShooting", true);
                     if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
@@ -180,20 +182,27 @@ public class Player_Shooting : MonoBehaviour
             }
         }
         weapon.UpdateBullet(Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.X) && !isAiming)
+        {
+            isHolstered = animationController.GetBool("isHolstered");
+            animationController.SetBool("isHolstered", !isHolstered);
+            isHolstered = !isHolstered;
+        }
     }
 
     private void Aim()
     {
-        if (isAiming)
-        {
-            aimLayer.weight += Time.deltaTime / aimingDuration;
-            //aimLayer.weight = Mathf.Lerp(0, 1, aimingDuration);
-        }
-        else
-        {
-            //aimLayer.weight = Mathf.Lerp(1, 0, aimingDuration);
-            aimLayer.weight -= Time.deltaTime / aimingDuration;
-        }
+        //if (isAiming)
+        //{
+        //    aimLayer.weight += Time.deltaTime / aimingDuration;
+        //    //aimLayer.weight = Mathf.Lerp(0, 1, aimingDuration);
+        //}
+        //else
+        //{
+        //    //aimLayer.weight = Mathf.Lerp(1, 0, aimingDuration);
+        //    aimLayer.weight -= Time.deltaTime / aimingDuration;
+        //}
     }
 
     public void Equip(SCRIPT_Weapon weaponToEquip)
