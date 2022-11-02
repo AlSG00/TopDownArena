@@ -17,8 +17,8 @@ public class Player_Shooting : MonoBehaviour
 
     // Новое
     public SCRIPT_Weapon weapon;
-    public SCRIPT_WeaponSlots weaponSlots;
-    public SCRIPT_MuzzleFlame muzzleFlame;
+    [HideInInspector] public SCRIPT_WeaponSlots weaponSlots;
+    [HideInInspector] public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
 
     private float lastTimeSingleShot; // Задержка перед выстрелом в одиночном режиме стрельбы
@@ -31,6 +31,8 @@ public class Player_Shooting : MonoBehaviour
     public Animator animationController;
 
     bool isHolstered;
+
+    private SCRIPT_ActiveWeapon activeWeapon;
     //public class Weapon
     //{
     //    public GameObject WeaponPref;
@@ -41,81 +43,78 @@ public class Player_Shooting : MonoBehaviour
 
     private void Start()
     {
-        
         isShooting = false;
-        isHolstered = animationController.GetBool("isHolstered");
+        Equip(weapon);
+        
+        //activeWeapon = gameObject.GetComponent<SCRIPT_ActiveWeapon>();
+        //if (activeWeapon)
+        //{
+        //    Debug.Log("active weapon");
+        //}
         //tempSpread = weapon.bulletSpreadValue;
         // valueTaken = false;
-
         // TOTOD: Подтягивать ссылки на скрипты
     }
 
     private void FixedUpdate()
     {
-        Aim();    
+       // Aim();    
     }
 
     void LateUpdate()
     {
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
-        SwitchWeapon();
+        //SwitchWeapon();
         muzzleFlame.FadeFlame();            // Угасание вспышки от выстрела
         weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
     }
 
-    public enum ActiveWeapon
-    {
-        Holster = 1,
-        Belt = 2,
-        Back = 3
-    }
     private void SwitchWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            GetWeapon(ActiveWeapon.Holster);
+            Debug.Log("Holster unavailable");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            GetWeapon(ActiveWeapon.Belt);
+            activeWeapon.SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            GetWeapon(ActiveWeapon.Back);
+            activeWeapon.SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
         }
     }
 
-    private void GetWeapon(ActiveWeapon slot)
-    {
-        GameObject activeSlot = null;
-        try
-        {
-            switch (slot)
-            {
-                case ActiveWeapon.Holster:
-                    weapon = weaponSlots.holsterSlot.GetComponent<SCRIPT_Weapon>();
-                    activeSlot = weaponSlots.holsterSlot;
-                    break;
+    //private void GetWeapon(ActiveWeapon slot)
+    //{
+    //    GameObject activeSlot = null;
+    //    //try
+    //    //{
+    //    //    switch (slot)
+    //    //    {
+    //    //        case ActiveWeapon.Holster:
+    //    //            weapon = weaponSlots.holsterSlot.GetComponent<SCRIPT_Weapon>();
+    //    //            activeSlot = weaponSlots.holsterSlot;
+    //    //            break;
 
-                case ActiveWeapon.Belt:
-                    weapon = weaponSlots.beltSlot.GetComponent<SCRIPT_Weapon>();
-                    activeSlot = weaponSlots.beltSlot;
-                    break;
+    //    //        case ActiveWeapon.Belt:
+    //    //            weapon = weaponSlots.beltSlot.GetComponent<SCRIPT_Weapon>();
+    //    //            activeSlot = weaponSlots.beltSlot;
+    //    //            break;
 
-                case ActiveWeapon.Back:
-                    weapon = weaponSlots.backSlot.GetComponent<SCRIPT_Weapon>();
-                    activeSlot = weaponSlots.backSlot;
-                    break;
-            }
-        }
-        catch
-        {
-            Debug.Log($"{slot.ToString()}: Weapon is missing");
-        }
-        muzzleFlame = activeSlot.GetComponent<SCRIPT_MuzzleFlame>();
-        ammoShells = activeSlot.GetComponent<SCRIPT_AmmoShells>();
-        Debug.Log(weapon.bulletSpreadValue);
-    }
+    //    //        case ActiveWeapon.Back:
+    //    //            weapon = weaponSlots.backSlot.GetComponent<SCRIPT_Weapon>();
+    //    //            activeSlot = weaponSlots.backSlot;
+    //    //            break;
+    //    //    }
+    //    //}
+    //    //catch
+    //    //{
+    //    //    Debug.Log($"{slot.ToString()}: Weapon is missing");
+    //    //}
+    //   /muzzleFlame = activeSlot.GetComponent<SCRIPT_MuzzleFlame>();
+    //    ammoShells = activeSlot.GetComponent<SCRIPT_AmmoShells>();
+    //}
 
     void ShootInput()
     {
@@ -155,6 +154,7 @@ public class Player_Shooting : MonoBehaviour
 
             if (Input.GetButton("Fire1"))
             {
+                isHolstered = animationController.GetBool("isHolstered");
                 if (isAiming && !isHolstered)
                 {
                //     animationController.SetBool("isShooting", true);
@@ -181,33 +181,20 @@ public class Player_Shooting : MonoBehaviour
                 weapon.shotPerformed = false;
             }
         }
-        weapon.UpdateBullet(Time.deltaTime);
+        if (weapon)
+        {
+            weapon.UpdateBullet(Time.deltaTime);
+        }
 
         if (Input.GetKeyDown(KeyCode.X) && !isAiming)
         {
-            isHolstered = animationController.GetBool("isHolstered");
-            animationController.SetBool("isHolstered", !isHolstered);
-            isHolstered = !isHolstered;
+            GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
         }
-    }
-
-    private void Aim()
-    {
-        //if (isAiming)
-        //{
-        //    aimLayer.weight += Time.deltaTime / aimingDuration;
-        //    //aimLayer.weight = Mathf.Lerp(0, 1, aimingDuration);
-        //}
-        //else
-        //{
-        //    //aimLayer.weight = Mathf.Lerp(1, 0, aimingDuration);
-        //    aimLayer.weight -= Time.deltaTime / aimingDuration;
-        //}
     }
 
     public void Equip(SCRIPT_Weapon weaponToEquip)
     {
-        weapon = weaponToEquip.GetComponent<SCRIPT_Weapon>();
+        weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
         muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
         ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
     }    

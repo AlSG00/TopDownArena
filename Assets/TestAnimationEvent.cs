@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestAnimationEvent : MonoBehaviour
 {
-    private bool isFinished = false;
+    //private bool isFinished = false;
     [SerializeField]
     private bool playOnce;
     [SerializeField]

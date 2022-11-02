@@ -14,7 +14,7 @@ public class Test_PlayOST : MonoBehaviour
     [SerializeField]
     private float delay;
 
-    private bool isCoroutineRunning = false;
+    //private bool isCoroutineRunning = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -55,6 +55,6 @@ public class Test_PlayOST : MonoBehaviour
         }
         sound.Stop();
         sound.volume = tempVolume;
-        isCoroutineRunning = false;
+        //isCoroutineRunning = false;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SCRIPT_WeaponPickup : MonoBehaviour
 {
-    public GameObject weaponPrefab;
+    public SCRIPT_Weapon weaponPrefab;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,10 +12,12 @@ public class SCRIPT_WeaponPickup : MonoBehaviour
 
         if (activeWeapon)
         {
-            SCRIPT_Weapon weaponToPickup = Instantiate(weaponPrefab.GetComponent<SCRIPT_Weapon>());
-            activeWeapon.Equip(weaponToPickup);
-            Player_Shooting player = other.GetComponent<Player_Shooting>();
-            player.Equip(weaponToPickup);
+            {
+                SCRIPT_Weapon weaponToPickup = Instantiate(weaponPrefab);
+                activeWeapon.Equip(weaponToPickup);
+            }
+            //Player_Shooting player = other.GetComponent<Player_Shooting>();
+           // player.Equip(weaponToPickup);
         }
     }
 }
