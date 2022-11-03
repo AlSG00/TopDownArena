@@ -65,25 +65,25 @@ public class Player_Shooting : MonoBehaviour
     {
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
         //SwitchWeapon();
-        muzzleFlame.FadeFlame();            // Угасание вспышки от выстрела
+        //muzzleFlame.FadeFlame();            // Угасание вспышки от выстрела
         weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
     }
 
-    private void SwitchWeapon()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.Log("Holster unavailable");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            activeWeapon.SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            activeWeapon.SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
-        }
-    }
+    //private void SwitchWeapon()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        Debug.Log("Holster unavailable");
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Alpha2))
+    //    {
+    //        activeWeapon.SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Alpha3))
+    //    {
+    //        activeWeapon.SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
+    //    }
+    //}
 
     //private void GetWeapon(ActiveWeapon slot)
     //{

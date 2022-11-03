@@ -8,7 +8,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 {
     //public Rig handIk;
     public SCRIPT_Weapon[] equippedWeapons;
-
+    public bool isSwitchingWeapon = false;
     int activeWeaponIndex;
 
     public Transform[] weaponSlots;
@@ -47,10 +47,12 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            Debug.Log("belt");
             SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            Debug.Log("back");
             SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
         }
     }
@@ -130,30 +132,33 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     public void SetActiveWeapon(WeaponSlot weaponSlot)
     {
-        int holsterIndex = activeWeaponIndex;
-        int activateIndex = (int)weaponSlot;
-
-        Debug.Log($"Holstering {holsterIndex}. Activating {activateIndex}");
-        Debug.Log("Already equipped");
-        if (holsterIndex == activateIndex)
+        if (!isSwitchingWeapon)
         {
-            Debug.Log("Already equipped");
-            return;
-        }
+            isSwitchingWeapon = true;
+            int holsterIndex = activeWeaponIndex;
+            int activateIndex = (int)weaponSlot;
 
-        StartCoroutine(SwitchWeapon(holsterIndex, activateIndex));
+            Debug.Log($"Activating {activateIndex}");
+            if (holsterIndex == activateIndex)
+            {
+                Debug.Log("Already equipped");
+                return;
+            }
+
+            StartCoroutine(SwitchWeapon(holsterIndex, activateIndex));
+        }
     }
 
     private IEnumerator SwitchWeapon(int holsterIndex, int activateIndex)
-    {
+    {   
         yield return StartCoroutine(HolsterWeapon(holsterIndex));
         yield return StartCoroutine(ActivateWeapon(activateIndex));
         activeWeaponIndex = activateIndex;
+        
     }
 
     private IEnumerator HolsterWeapon(int holsterIndex)
     {
-        //rigController.Play($"ANIM_Equip_{weapon.weaponName}");
         var weapon = GetWeapon(holsterIndex);
         if (weapon)
         {
@@ -163,8 +168,6 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
-
-            //weapon.transform.SetParent(weaponSlots[(int)weapon.WeaponSlot].transform);
         }
     }
 
@@ -173,17 +176,16 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         var weapon = GetWeapon(activateIndex);
         if (weapon)
         {
-
+            GetComponent<Player_Shooting>().Equip(weapon);
             rigController.SetBool("isHolstered", false);
-            
+            rigController.Play($"ANIM_Equip_{weapon.weaponName}");
             do
             {
                 yield return new WaitForEndOfFrame();
             }
             while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
-
-            rigController.Play($"ANIM_Equip_{weapon.weaponName}");
-            GetComponent<Player_Shooting>().Equip(weapon);
+            
+            isSwitchingWeapon = false;
         }
     }
 
@@ -209,5 +211,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             StartCoroutine(HolsterWeapon(activeWeaponIndex));
         }
     }
+
+    
 }
 

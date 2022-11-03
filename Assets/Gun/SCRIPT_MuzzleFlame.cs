@@ -21,6 +21,11 @@ public class SCRIPT_MuzzleFlame : MonoBehaviour
         lightOrigin.range = lightRange;
     }
 
+    public void FixedUpdate()
+    {
+        FadeFlame();
+    }
+
     public void FadeFlame()
     {
         lightOrigin.intensity -= fadingSpeed;
@@ -33,5 +38,10 @@ public class SCRIPT_MuzzleFlame : MonoBehaviour
             muzzleFlash[i].Emit(1);
         }
         lightOrigin.intensity = lightIntensity;
+    }
+
+    private void OnDisable()
+    {
+        lightOrigin.intensity = 0;
     }
 }
