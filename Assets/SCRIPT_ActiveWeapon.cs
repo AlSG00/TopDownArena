@@ -10,7 +10,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     public SCRIPT_Weapon[] equippedWeapons;
     public bool isSwitchingWeapon = false;
     int activeWeaponIndex;
-
+    private Player_Shooting playerShooting;
     public Transform[] weaponSlots;
     //public Transform weaponParent;
     public Transform weaponLeftGrip;
@@ -27,8 +27,8 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     private void Start()
     {
-      //  rigController = GetComponent<Animator>();
-
+        //  rigController = GetComponent<Animator>();
+        playerShooting = GetComponent<Player_Shooting>();
         SCRIPT_Weapon equippedWeapon = GetComponentInChildren<SCRIPT_Weapon>();
         activeWeaponIndex = (int)equippedWeapon.WeaponSlot;
         if (equippedWeapon)
@@ -142,6 +142,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             if (holsterIndex == activateIndex)
             {
                 Debug.Log("Already equipped");
+                isSwitchingWeapon = false;
                 return;
             }
 
@@ -150,22 +151,26 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     }
 
     private IEnumerator SwitchWeapon(int holsterIndex, int activateIndex)
-    {   
+    {
+        Debug.Log("Switching");
         yield return StartCoroutine(HolsterWeapon(holsterIndex));
         yield return StartCoroutine(ActivateWeapon(activateIndex));
         activeWeaponIndex = activateIndex;
-        
+        Debug.Log("Switching is done");
+
     }
 
     private IEnumerator HolsterWeapon(int holsterIndex)
     {
+        Debug.Log("Holstering");
+        playerShooting.isHolstered = true;
         var weapon = GetWeapon(holsterIndex);
         if (weapon)
         {
             rigController.SetBool("isHolstered", true);
             do
             {
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(0.3f); 
             }
             while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
         }
@@ -173,10 +178,11 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     private IEnumerator ActivateWeapon(int activateIndex)
     {
+        Debug.Log("Activating");
         var weapon = GetWeapon(activateIndex);
         if (weapon)
         {
-            GetComponent<Player_Shooting>().Equip(weapon);
+            
             rigController.SetBool("isHolstered", false);
             rigController.Play($"ANIM_Equip_{weapon.weaponName}");
             do
@@ -186,6 +192,8 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
             
             isSwitchingWeapon = false;
+            GetComponent<Player_Shooting>().Equip(weapon);
+            playerShooting.isHolstered = false;
         }
     }
 

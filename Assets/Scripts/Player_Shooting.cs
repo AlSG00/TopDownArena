@@ -17,7 +17,6 @@ public class Player_Shooting : MonoBehaviour
 
     // Новое
     public SCRIPT_Weapon weapon;
-    [HideInInspector] public SCRIPT_WeaponSlots weaponSlots;
     [HideInInspector] public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
 
@@ -30,7 +29,7 @@ public class Player_Shooting : MonoBehaviour
 
     public Animator animationController;
 
-    bool isHolstered;
+    public bool isHolstered;
 
     private SCRIPT_ActiveWeapon activeWeapon;
     //public class Weapon
@@ -194,6 +193,7 @@ public class Player_Shooting : MonoBehaviour
 
     public void Equip(SCRIPT_Weapon weaponToEquip)
     {
+        isHolstered = false;
         weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
         muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
         ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();

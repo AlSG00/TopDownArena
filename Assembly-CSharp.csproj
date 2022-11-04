@@ -90,7 +90,6 @@
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
     <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
-    <Compile Include="Assets\Gun\SCRIPT_WeaponSlots.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\FixedRotation.cs" />
     <Compile Include="Assets\PlayerInventory.cs" />
