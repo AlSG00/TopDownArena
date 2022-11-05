@@ -41,19 +41,22 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     {
         var weapon = GetWeapon(activeWeaponIndex);
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (!weapon.isReloading)
         {
-            Debug.Log("Holster unavailable");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Debug.Log("belt");
-            SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Debug.Log("back");
-            SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Debug.Log("Holster unavailable");
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Debug.Log("belt");
+                SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Debug.Log("back");
+                SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
+            }
         }
     }
 
@@ -220,6 +223,9 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         }
     }
 
-    
+    public SCRIPT_Weapon GetActiveWeapon()
+    {
+        return GetWeapon(activeWeaponIndex);
+    }
 }
 

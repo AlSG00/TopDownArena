@@ -38,7 +38,7 @@ public class SCRIPT_Weapon : MonoBehaviour
     private float maxLifeTime = 3f;
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
-    private bool isReloading;
+    public bool isReloading;
     private float lastTimeShot;
     private float fireDelay;
     public AudioClip reloadSound;
@@ -58,11 +58,18 @@ public class SCRIPT_Weapon : MonoBehaviour
     public float singleShotDelay = 0.3f;
 
 
-    public AnimationClip weaponIdleAnimation;
-    public AnimationClip weaponAimAnimation;
-    public AnimationClip weaponSwapAnimation;
-    public AnimationClip weaponReloadAnimation;
-    public AnimationClip weaponShootAnimation;
+    //public AnimationClip weaponIdleAnimation;
+    //public AnimationClip weaponAimAnimation;
+    //public AnimationClip weaponSwapAnimation;
+    //public AnimationClip weaponReloadAnimation;
+    //public AnimationClip weaponShootAnimation;
+
+    public GameObject magazine;
+
+    public AudioClip ejectMagSound;
+    public AudioClip putMagSound;
+    public AudioClip pullOutMagSound;
+    public AudioClip InsertMagSound;
 
     private void Start()
     {
@@ -235,7 +242,7 @@ public class SCRIPT_Weapon : MonoBehaviour
         if (toFill > 0 && currentStock > 0)
         {
             isReloading = true;
-            audioSource.PlayOneShot(reloadSound);
+           // audioSource.PlayOneShot(reloadSound);
 
             if (currentStock >= toFill)
             {

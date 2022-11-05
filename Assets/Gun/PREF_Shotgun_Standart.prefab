@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightOrigin: {fileID: 6339439357773681493}
   lightIntensity: 20
-  fadingSpeed: 2
+  fadingSpeed: 7
   lightRange: 5.61
   muzzleFlash:
   - {fileID: 6141348124117125228}

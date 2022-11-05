@@ -524,7 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightOrigin: {fileID: 5783658668785958192}
   lightIntensity: 20
-  fadingSpeed: 2
+  fadingSpeed: 7
   lightRange: 5.61
   muzzleFlash:
   - {fileID: 886211326529990670}
@@ -581,6 +581,7 @@ MonoBehaviour:
     m_Bits: 6071
   muzzleFlame: {fileID: 1048267339396752257}
   ammoShells: {fileID: 1048267339396752262}
+  isReloading: 0
   reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 5783658668931804524}
@@ -593,11 +594,11 @@ MonoBehaviour:
   shotPerformed: 0
   projectilesPerShot: 1
   singleShotDelay: 0
-  weaponIdleAnimation: {fileID: 0}
-  weaponAimAnimation: {fileID: 0}
-  weaponSwapAnimation: {fileID: 0}
-  weaponReloadAnimation: {fileID: 0}
-  weaponShootAnimation: {fileID: 0}
+  magazine: {fileID: 1047405133121538393}
+  ejectMagSound: {fileID: 8300000, guid: 01de3f440c1400243ba9eff80cec3213, type: 3}
+  putMagSound: {fileID: 8300000, guid: 35141b69c42ab2c438f4d6042d3db712, type: 3}
+  pullOutMagSound: {fileID: 8300000, guid: 6336383199cceeb4dae50ca2e34604c2, type: 3}
+  InsertMagSound: {fileID: 8300000, guid: 2690432c9e0a3084385990c2b8a98af2, type: 3}
 --- !u!1 &5783658668785958194
 GameObject:
   m_ObjectHideFlags: 0

@@ -472,6 +472,7 @@
 "Assets/TextLookAt.cs"
 "Assets/ToolTip.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
+"Assets/WeaponAnimationEvents.cs"
 -langversion:9.0
 
 /deterministic
