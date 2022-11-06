@@ -241,7 +241,7 @@ public class SCRIPT_Weapon : MonoBehaviour
         int toFill = magCapacity - currentAmmo;
         if (toFill > 0 && currentStock > 0)
         {
-            isReloading = true;
+           // isReloading = true;
            // audioSource.PlayOneShot(reloadSound);
 
             if (currentStock >= toFill)
@@ -271,11 +271,11 @@ public class SCRIPT_Weapon : MonoBehaviour
         ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
     }
 
-    public void IsReloading()
-    {
-        if (isReloading == true && !audioSource.isPlaying)
-            isReloading = false;
-    }
+    //public void IsReloading()
+    //{
+    //    if (isReloading == true && !audioSource.isPlaying)
+    //        isReloading = false;
+    //}
 
     public Vector3 GetSpreadDirection()
     {

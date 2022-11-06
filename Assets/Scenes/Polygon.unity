@@ -901,6 +901,7 @@ MonoBehaviour:
     m_Bits: 6071
   muzzleFlame: {fileID: 132971775}
   ammoShells: {fileID: 132971776}
+  isReloading: 0
   reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 1579055476}
@@ -913,11 +914,11 @@ MonoBehaviour:
   shotPerformed: 0
   projectilesPerShot: 8
   singleShotDelay: 0
-  weaponIdleAnimation: {fileID: 0}
-  weaponAimAnimation: {fileID: 0}
-  weaponSwapAnimation: {fileID: 0}
-  weaponReloadAnimation: {fileID: 0}
-  weaponShootAnimation: {fileID: 0}
+  magazine: {fileID: 0}
+  ejectMagSound: {fileID: 0}
+  putMagSound: {fileID: 0}
+  pullOutMagSound: {fileID: 0}
+  InsertMagSound: {fileID: 0}
 --- !u!114 &132971775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4116,6 +4117,7 @@ MonoBehaviour:
     m_Bits: 6071
   muzzleFlame: {fileID: 926368632}
   ammoShells: {fileID: 926368633}
+  isReloading: 0
   reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 1830299726}
@@ -4128,11 +4130,11 @@ MonoBehaviour:
   shotPerformed: 0
   projectilesPerShot: 50
   singleShotDelay: 0
-  weaponIdleAnimation: {fileID: 0}
-  weaponAimAnimation: {fileID: 0}
-  weaponSwapAnimation: {fileID: 0}
-  weaponReloadAnimation: {fileID: 0}
-  weaponShootAnimation: {fileID: 0}
+  magazine: {fileID: 0}
+  ejectMagSound: {fileID: 0}
+  putMagSound: {fileID: 0}
+  pullOutMagSound: {fileID: 0}
+  InsertMagSound: {fileID: 0}
 --- !u!114 &926368632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7828,6 +7830,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8553f885d460944b9303fdf5285cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftHand: {fileID: 4487652194184200382}
+  activeWeapon: {fileID: 7546444054703482936}
 --- !u!1 &1725883089
 GameObject:
   m_ObjectHideFlags: 0
@@ -8575,6 +8579,7 @@ MonoBehaviour:
     m_Bits: 6071
   muzzleFlame: {fileID: 1860928657}
   ammoShells: {fileID: 1860928658}
+  isReloading: 0
   reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 1412330212}
@@ -8587,11 +8592,11 @@ MonoBehaviour:
   shotPerformed: 0
   projectilesPerShot: 1
   singleShotDelay: 0
-  weaponIdleAnimation: {fileID: 0}
-  weaponAimAnimation: {fileID: 0}
-  weaponSwapAnimation: {fileID: 0}
-  weaponReloadAnimation: {fileID: 0}
-  weaponShootAnimation: {fileID: 0}
+  magazine: {fileID: 0}
+  ejectMagSound: {fileID: 0}
+  putMagSound: {fileID: 0}
+  pullOutMagSound: {fileID: 0}
+  InsertMagSound: {fileID: 0}
 --- !u!114 &1860928657
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1285,9 +1285,30 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: SetReloadingBool
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.26666668
+    functionName: OnAnimationAudioEvent
+    data: EjectMag
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.43333334
     functionName: OnAnimationEvent
     data: EjectMag
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.2166667
+    functionName: OnAnimationAudioEvent
+    data: PutInMag
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -1299,6 +1320,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 2.1166666
+    functionName: OnAnimationAudioEvent
+    data: GetNewMag
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2.25
     functionName: OnAnimationEvent
     data: GetNewMag
@@ -1306,9 +1334,23 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 3.25
+  - time: 3.3666666
+    functionName: OnAnimationAudioEvent
+    data: InsertNewMag
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.7333333
     functionName: OnAnimationEvent
     data: InsertNewMag
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.233333
+    functionName: SetReloadingBool
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

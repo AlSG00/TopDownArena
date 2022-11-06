@@ -40,7 +40,7 @@ public class Player_Shooting : MonoBehaviour
         TryGetComponent<SCRIPT_ActiveWeapon>(out activeWeapon);
         isShooting = false;
         Equip(weapon);
-        animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);
+        //animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);
     }
 
     private void FixedUpdate()
@@ -53,16 +53,15 @@ public class Player_Shooting : MonoBehaviour
         ShootInput();                       // Проверка, нажата ли кнопка выстрела
         //SwitchWeapon();
         //muzzleFlame.FadeFlame();            // Угасание вспышки от выстрела
-        weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
+        //weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
     }
 
     void ShootInput()
     {
         if (weapon)
         {
-            if (Input.GetKeyDown(KeyCode.R) && isAiming)
+            if (Input.GetKeyDown(KeyCode.R) && isAiming && !activeWeapon.isReloading)
             {
-                Debug.Log("Reloading...");
                 animationController.SetTrigger("Reload");
                 weapon.Reload();
             }
@@ -96,9 +95,9 @@ public class Player_Shooting : MonoBehaviour
             if (Input.GetButton("Fire1"))
             {
                 isHolstered = animationController.GetBool("isHolstered");
-                if (isAiming && !isHolstered)
+                if (isAiming && !isHolstered && !activeWeapon.isReloading)
                 {
-                 // animationController.SetBool("isShooting", true);
+                    // animationController.SetBool("isShooting", true);
                     if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
                     {
                         lastTimeSingleShot = Time.time;
@@ -141,33 +140,33 @@ public class Player_Shooting : MonoBehaviour
         ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
     }
 
-    public void OnAnimationEvent(string eventName)
-    {
-        Debug.Log("AnimationEventCalled");
-        switch (eventName)
-        {
-            case "EjectMag":
-                Debug.Log("EjectMag");
-                weapon.audioSource.PlayOneShot(weapon.ejectMagSound);
-                magazineHand = Instantiate(weapon.magazine, leftHand, true);
-                weapon.magazine.SetActive(false);
-                break;
-            case "PutInMag":
-                Debug.Log("PutInMag");
-                weapon.audioSource.PlayOneShot(weapon.putMagSound);
-                magazineHand.SetActive(false);
-                break;
-            case "GetNewMag":
-                Debug.Log("GetNewMag");
-                weapon.audioSource.PlayOneShot(weapon.pullOutMagSound);
-                magazineHand.SetActive(false);
-                break;
-            case "InsertNewMag":
-                Debug.Log("InsertNewMag");
-                weapon.audioSource.PlayOneShot(weapon.InsertMagSound);
-                weapon.magazine.SetActive(true);
-                Destroy(magazineHand);
-                break;
-        }
-    }
+    //public void OnAnimationEvent(string eventName)
+    //{
+    //    Debug.Log("AnimationEventCalled");
+    //    switch (eventName)
+    //    {
+    //        case "EjectMag":
+    //            Debug.Log("EjectMag");
+    //            weapon.audioSource.PlayOneShot(weapon.ejectMagSound);
+    //            magazineHand = Instantiate(weapon.magazine, leftHand, true);
+    //            weapon.magazine.SetActive(false);
+    //            break;
+    //        case "PutInMag":
+    //            Debug.Log("PutInMag");
+    //            weapon.audioSource.PlayOneShot(weapon.putMagSound);
+    //            magazineHand.SetActive(false);
+    //            break;
+    //        case "GetNewMag":
+    //            Debug.Log("GetNewMag");
+    //            weapon.audioSource.PlayOneShot(weapon.pullOutMagSound);
+    //            magazineHand.SetActive(false);
+    //            break;
+    //        case "InsertNewMag":
+    //            Debug.Log("InsertNewMag");
+    //            weapon.audioSource.PlayOneShot(weapon.InsertMagSound);
+    //            weapon.magazine.SetActive(true);
+    //            Destroy(magazineHand);
+    //            break;
+    //    }
+    //}
 }

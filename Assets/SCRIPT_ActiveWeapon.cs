@@ -9,6 +9,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     //public Rig handIk;
     public SCRIPT_Weapon[] equippedWeapons;
     public bool isSwitchingWeapon = false;
+    public bool isReloading = false;
     int activeWeaponIndex;
     private Player_Shooting playerShooting;
     public Transform[] weaponSlots;
@@ -49,12 +50,10 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Debug.Log("belt");
                 SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                Debug.Log("back");
                 SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
             }
         }
@@ -141,7 +140,6 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             int holsterIndex = activeWeaponIndex;
             int activateIndex = (int)weaponSlot;
 
-            Debug.Log($"Activating {activateIndex}");
             if (holsterIndex == activateIndex)
             {
                 Debug.Log("Already equipped");
@@ -155,17 +153,14 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     private IEnumerator SwitchWeapon(int holsterIndex, int activateIndex)
     {
-        Debug.Log("Switching");
         yield return StartCoroutine(HolsterWeapon(holsterIndex));
         yield return StartCoroutine(ActivateWeapon(activateIndex));
         activeWeaponIndex = activateIndex;
-        Debug.Log("Switching is done");
 
     }
 
     private IEnumerator HolsterWeapon(int holsterIndex)
     {
-        Debug.Log("Holstering");
         playerShooting.isHolstered = true;
         var weapon = GetWeapon(holsterIndex);
         if (weapon)
@@ -181,7 +176,6 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     private IEnumerator ActivateWeapon(int activateIndex)
     {
-        Debug.Log("Activating");
         var weapon = GetWeapon(activateIndex);
         if (weapon)
         {
