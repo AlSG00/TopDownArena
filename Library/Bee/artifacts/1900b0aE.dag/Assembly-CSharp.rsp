@@ -418,6 +418,7 @@
 "Assets/EntroPi/GPU Line Of Sight/Scripts/LOSVisibilityInfo.cs"
 "Assets/FieldOfView.cs"
 "Assets/FixedRotation.cs"
+"Assets/Grass/Scripts/GrassTrample.cs"
 "Assets/Gun/RayProjectile.cs"
 "Assets/Gun/SCRIPT_AmmoShells.cs"
 "Assets/Gun/SCRIPT_MuzzleFlame.cs"

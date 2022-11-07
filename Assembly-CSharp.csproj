@@ -114,6 +114,7 @@
     <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\TestAnimationEvent.cs" />
+    <Compile Include="Assets\Grass\Scripts\GrassTrample.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
     <Compile Include="Assets\CheckPass.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerInfo.cs" />
@@ -176,6 +177,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSStencilMask.shader" />
+    <None Include="Assets\Grass\Shaders\GrassShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\_Sources\Desaturate.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -189,6 +191,7 @@
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSSkyBox.shader" />
+    <None Include="Assets\Grass\Shaders\CustomTessellation.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\_Sources\testwrite.shader" />
   </ItemGroup>
