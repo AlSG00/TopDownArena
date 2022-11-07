@@ -61,98 +61,98 @@
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
     <Compile Include="Assets\SCRIPT_ExitGame.cs" />
     <Compile Include="Assets\SCRIPT_ActiveWeapon.cs" />
-    <Compile Include="Assets\Gun\SCRIPT_WeaponPickup.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
-    <Compile Include="Assets\Test_PlayAnimation.cs" />
-    <Compile Include="Assets\TEST_UnlockDoor.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
     <Compile Include="Assets\nextSpawn.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
-    <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
-    <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Test_PlayOST.cs" />
-    <Compile Include="Assets\TestAnimationEvent.cs" />
     <Compile Include="Assets\Roach.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
-    <Compile Include="Assets\CheckPass.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilRenderer.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerInfo.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\DoorSliding.cs" />
     <Compile Include="Assets\LightFlicker.cs" />
-    <Compile Include="Assets\Gun\WeaponAnimationEvents.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\Desaturate.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
-    <Compile Include="Assets\Medkit.cs" />
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSSource.cs" />
-    <Compile Include="Assets\Gun\SCRIPT_Weapon.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
     <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\FixedRotation.cs" />
     <Compile Include="Assets\PlayerInventory.cs" />
-    <Compile Include="Assets\SceneTransitions.cs" />
     <Compile Include="Assets\SCRIPT_FollowChild.cs" />
     <Compile Include="Assets\Scripts\Player_Movement.cs" />
-    <Compile Include="Assets\Camera\SCRIPT_CameraMoving.cs" />
-    <Compile Include="Assets\Scripts\Player_Shooting.cs" />
-    <Compile Include="Assets\Scripts\Explosion.cs" />
-    <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
-    <Compile Include="Assets\SCRIPT_Screamer_Lamp.cs" />
     <Compile Include="Assets\TEST_SetActive.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\Gun\RayProjectile.cs" />
     <Compile Include="Assets\HealtBarScript.cs" />
-    <Compile Include="Assets\RoachRunFrom.cs" />
-    <Compile Include="Assets\SwapAudio.cs" />
-    <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
     <Compile Include="Assets\Scripts\Player_Scope.cs" />
     <Compile Include="Assets\Scripts\PlayerHP.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSDebugView.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
+    <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
+    <Compile Include="Assets\MouseInteraction.cs" />
+    <Compile Include="Assets\StartGame.cs" />
+    <Compile Include="Assets\DontDestroyOnLoad.cs" />
+    <Compile Include="Assets\Scripts\Test_Flashlight.cs" />
+    <Compile Include="Assets\Scripts\EnemyController.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
+    <Compile Include="Assets\TEST_LOS_Visibility.cs" />
+    <Compile Include="Assets\TextLookAt.cs" />
+    <Compile Include="Assets\RoachController.cs" />
+    <Compile Include="Assets\SwapScene.cs" />
+    <Compile Include="Assets\TEST_SpawnEnemies.cs" />
+    <Compile Include="Assets\ShowTooltip.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\ILOSSource.cs" />
+    <Compile Include="Assets\Camera\Player_Aim.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
+    <Compile Include="Assets\Gun\SCRIPT_WeaponPickup.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
+    <Compile Include="Assets\Test_PlayAnimation.cs" />
+    <Compile Include="Assets\TEST_UnlockDoor.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
+    <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
+    <Compile Include="Assets\Scripts\BulletRaycast.cs" />
+    <Compile Include="Assets\TestAnimationEvent.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
+    <Compile Include="Assets\CheckPass.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerInfo.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\DoorSliding.cs" />
+    <Compile Include="Assets\Gun\WeaponAnimationEvents.cs" />
+    <Compile Include="Assets\Medkit.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSSource.cs" />
+    <Compile Include="Assets\Gun\SCRIPT_Weapon.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\FixedRotation.cs" />
+    <Compile Include="Assets\SceneTransitions.cs" />
+    <Compile Include="Assets\Camera\SCRIPT_CameraMoving.cs" />
+    <Compile Include="Assets\Scripts\Player_Shooting.cs" />
+    <Compile Include="Assets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
+    <Compile Include="Assets\SCRIPT_Screamer_Lamp.cs" />
+    <Compile Include="Assets\RoachRunFrom.cs" />
+    <Compile Include="Assets\SwapAudio.cs" />
+    <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraShake.cs" />
     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSCuller.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\AmmoCounterTest.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectHider.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
     <Compile Include="Assets\Gun\SCRIPT_AmmoShells.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSDebugView.cs" />
     <Compile Include="Assets\AudioManager.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
-    <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
-    <Compile Include="Assets\MouseInteraction.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSVisibilityInfo.cs" />
     <Compile Include="Assets\TEST_ActivateTriggers.cs" />
-    <Compile Include="Assets\StartGame.cs" />
-    <Compile Include="Assets\DontDestroyOnLoad.cs" />
-    <Compile Include="Assets\Scripts\Test_Flashlight.cs" />
-    <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\SwapScenesInteractive.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
     <Compile Include="Assets\ToolTip.cs" />
-    <Compile Include="Assets\TEST_LOS_Visibility.cs" />
-    <Compile Include="Assets\TextLookAt.cs" />
-    <Compile Include="Assets\RoachController.cs" />
     <Compile Include="Assets\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSMask.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
-    <Compile Include="Assets\SwapScene.cs" />
-    <Compile Include="Assets\TEST_SpawnEnemies.cs" />
-    <Compile Include="Assets\ShowTooltip.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\ILOSSource.cs" />
-    <Compile Include="Assets\Camera\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -841,6 +841,9 @@
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
@@ -856,11 +859,17 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
       <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
@@ -903,6 +912,9 @@
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProBuilder.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
@@ -952,29 +964,17 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+    <Reference Include="Unity.VisualScripting.State">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
