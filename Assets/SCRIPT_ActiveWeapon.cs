@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 
 public class SCRIPT_ActiveWeapon : MonoBehaviour
 {

@@ -102,6 +102,7 @@
     <Compile Include="Assets\SwapScene.cs" />
     <Compile Include="Assets\TEST_SpawnEnemies.cs" />
     <Compile Include="Assets\ShowTooltip.cs" />
+    <Compile Include="Assets\SCRIPT_SunRotation.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\ILOSSource.cs" />
     <Compile Include="Assets\Camera\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
