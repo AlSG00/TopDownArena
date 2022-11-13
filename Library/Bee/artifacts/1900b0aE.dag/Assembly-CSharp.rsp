@@ -470,6 +470,7 @@
 "Assets/SwapScene.cs"
 "Assets/SwapScenesInteractive.cs"
 "Assets/TestAnimationEvent.cs"
+"Assets/TestClculationScript.cs"
 "Assets/TEST_ActivateTriggers.cs"
 "Assets/TEST_Keycard.cs"
 "Assets/TEST_LOS_Visibility.cs"
