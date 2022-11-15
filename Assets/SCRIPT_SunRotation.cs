@@ -7,53 +7,29 @@ public class SCRIPT_SunRotation : MonoBehaviour
     public int defaultStartTime = 0;
     public float dayCycleDuration = 1;
     public float nightCycleDuration = 1;
-    public float switchToNightLightningSpeed = 0.005f;
-    public float switchToDayLightningSpeed = 0.005f;
+    public float switchToNightIntensitySpeed = 0.005f;
+    public float switchToDayIntensitySpeed = 0.005f;
     public Animator sunAnimationController;
     private float rotationSpeedAtDay;
     private float rotationSpeedAtNight;
 
-    private bool isNight = false;
+    public delegate void DaytimeAction();
+    public static event DaytimeAction DayStarted;
+    public static event DaytimeAction NightStarted;
 
-    private bool setDay = false;
+    private Light sun;
     private void Start()
     {
         RenderSettings.ambientIntensity = 0;
         CalñulateSunRotationSpeed();
         sunAnimationController.speed = 1 / dayCycleDuration;
-
+        sun = GetComponentInChildren<Light>();
         //if (defaultStartTime != 0)
         //{
         //    sunAnimationController.Play("ANIM_Sun", 0, 1 / (dayCycleDuration + nightCycleDuration) * defaultStartTime);
         //}
         sunAnimationController.Play("ANIM_Sun", 0, 0);
     }
-
-    //private void FixedUpdate()
-    //{
-    //    if (setDay)
-    //    {
-    //        RenderSettings.ambientIntensity = Mathf.Lerp(0f, 1f, 5);
-    //        if (RenderSettings.ambientIntensity >= 1)
-    //        {
-    //            setDay = false;
-
-    //        }
-    //    }
-    //}
-    //private void CheckNight()
-    //{
-    //    if (gameObject.transform.eulerAngles.x > 90 && gameObject.transform.eulerAngles.x < 270)
-    //    {
-    //        Debug.Log("night");
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("day");
-    //    }
-
-
-    //}
 
     public void CalñulateSunRotationSpeed()
     {
@@ -65,38 +41,34 @@ public class SCRIPT_SunRotation : MonoBehaviour
     public void SetDay()
     {
         sunAnimationController.speed = 1 / dayCycleDuration;
-        StartCoroutine(SetDayIntensity());
+        StartCoroutine(SetDayAmbient());
         Debug.Log("Day");
+        DayStarted?.Invoke();
     }
 
     public void SetNight()
     {
         sunAnimationController.speed = 1 / nightCycleDuration;
-        StartCoroutine(SetNightIntensity());
+        StartCoroutine(SetNightAmbient());
         Debug.Log("Night");
+        NightStarted?.Invoke();
     }
 
-    public void FullCycleMark()
-    {
-        Debug.Log("Full day");
-        //RenderSettings.ambientIntensity = 1;
-    }
-
-    private IEnumerator SetDayIntensity()
+    private IEnumerator SetDayAmbient()
     {
         while (RenderSettings.ambientIntensity < 1)
         {
-            yield return RenderSettings.ambientIntensity += switchToDayLightningSpeed;
+            yield return RenderSettings.ambientIntensity += switchToDayIntensitySpeed;
         }
-        Mathf.Clamp(RenderSettings.ambientIntensity, 0, 1);
+        RenderSettings.ambientIntensity = 1;
     }
 
-    private IEnumerator SetNightIntensity()
+    private IEnumerator SetNightAmbient()
     {
         while (RenderSettings.ambientIntensity > 0)
         {
-            yield return RenderSettings.ambientIntensity -= switchToNightLightningSpeed;
+            yield return RenderSettings.ambientIntensity -= switchToNightIntensitySpeed;
         }
-        Mathf.Clamp(RenderSettings.ambientIntensity, 0, 1);
+        RenderSettings.ambientIntensity = 0; 
     }
 }

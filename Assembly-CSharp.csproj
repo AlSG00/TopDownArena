@@ -156,6 +156,9 @@
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
+    <Compile Include="Assets\SCRIPT_MusicLoop.cs" />
+    <Compile Include="Assets\SCRIPT_DaytimeLight.cs" />
+    <Compile Include="Assets\SCRIPT_TestBlackZones.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
