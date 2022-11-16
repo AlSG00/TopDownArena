@@ -462,6 +462,7 @@
 "Assets/SCRIPT_Screamer_Lamp.cs"
 "Assets/SCRIPT_SunRotation.cs"
 "Assets/SCRIPT_TestBlackZones.cs"
+"Assets/SCRIPT_TEST_LookAtBlackZone.cs"
 "Assets/Shared/Ramps/Runtime/RampAsset.cs"
 "Assets/Shared/Scripts/AdjustTimeScale.cs"
 "Assets/Shared/Scripts/ProximityActivate.cs"

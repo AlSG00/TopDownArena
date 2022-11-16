@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
     <Compile Include="Assets\SCRIPT_ExitGame.cs" />
     <Compile Include="Assets\SCRIPT_ActiveWeapon.cs" />
+    <Compile Include="Assets\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\nextSpawn.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
+    <Compile Include="Assets\SCRIPT_DaytimeLight.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSDebugView.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
     <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSVisibilityInfo.cs" />
     <Compile Include="Assets\TEST_ActivateTriggers.cs" />
+    <Compile Include="Assets\SCRIPT_TestBlackZones.cs" />
     <Compile Include="Assets\SwapScenesInteractive.cs" />
     <Compile Include="Assets\ToolTip.cs" />
     <Compile Include="Assets\FieldOfView.cs" />
@@ -156,9 +159,7 @@
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
-    <Compile Include="Assets\SCRIPT_MusicLoop.cs" />
-    <Compile Include="Assets\SCRIPT_DaytimeLight.cs" />
-    <Compile Include="Assets\SCRIPT_TestBlackZones.cs" />
+    <Compile Include="Assets\SCRIPT_TEST_LookAtBlackZone.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

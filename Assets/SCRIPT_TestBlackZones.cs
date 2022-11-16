@@ -18,18 +18,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StopAllCoroutines();
-            //_renderer.GetPropertyBlock(_propertyBlock);
-            //_propertyBlock.SetColor("Color", Color.red);
-            Debug.Log("Entered");
-            //_renderer.material.color = Color.red;
-            for (int i = 0; i < blackZone.Length; i++)
-            {
-                _renderer = blackZone[i].GetComponent<Renderer>();
-                StartCoroutine(FadeZone(_renderer));
-            }
-            
-            
+            FadeArea();
         }
     }
 
@@ -37,22 +26,66 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Leaved");
-            //_renderer.material.color = Color.black;
-            for (int i = 0; i < blackZone.Length; i++)
-            {
-                _renderer = blackZone[i].GetComponent<Renderer>();
-                _renderer.material.color = new Color(0f, 0f, 0f, 1f);
-            }
+            IncreaseArea();
         }
     }
 
-    private IEnumerator FadeZone(Renderer renderer)
+    public void FadeArea()
+    {
+        StopAllCoroutines();
+        for (int i = 0; i < blackZone.Length; i++)
+        {
+            Debug.Log($"Black zone: {i}");
+            _renderer = blackZone[i].GetComponent<Renderer>();
+            StartCoroutine(Fade(_renderer));
+        }
+    }
+
+    public void IncreaseArea()
+    {
+        StopAllCoroutines();
+        for (int i = 0; i < blackZone.Length; i++)
+        {
+            _renderer = blackZone[i].GetComponent<Renderer>();
+            StartCoroutine(Increase(_renderer));
+        }
+    }
+
+    private IEnumerator Fade(Renderer renderer)
     {
         while (renderer.material.color.a > 0)
         {
-            yield return renderer.material.color = new Color(0f, 0f, 0f, renderer.material.color.a - 0.03f);
+            yield return renderer.material.color = new Color(
+                renderer.material.color.r, 
+                renderer.material.color.g, 
+                renderer.material.color.b, 
+                renderer.material.color.a - 0.03f
+                );
         }
-        renderer.material.color = new Color(0f, 0f, 0f, 0f);
+        renderer.material.color = new Color(
+            renderer.material.color.r, 
+            renderer.material.color.g, 
+            renderer.material.color.b, 
+            0f
+            );
+    }
+
+    private IEnumerator Increase(Renderer renderer)
+    {
+        while (renderer.material.color.a < 1)
+        {
+            yield return renderer.material.color = new Color(
+                renderer.material.color.r, 
+                renderer.material.color.g, 
+                renderer.material.color.b, 
+                renderer.material.color.a + 0.03f
+                );
+        }
+        renderer.material.color = new Color(
+            renderer.material.color.r, 
+            renderer.material.color.g, 
+            renderer.material.color.b, 
+            1f
+            );
     }
 }
