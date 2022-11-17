@@ -5,37 +5,62 @@ using UnityEngine;
 public class SCRIPT_TestBlackZones : MonoBehaviour
 {
     public GameObject[] blackZone;
+    //[HideInInspector]
+    public bool inLineOfSight = false;
+    public bool stayingInside = false;
+    public bool[] raycastHits;
     private Renderer _renderer;
     private MaterialPropertyBlock _propertyBlock;
+    private SCRIPT_TEST_LookAtBlackZone PlayerRaycastLook;
 
-    private void Awake()
+    public bool alreadyFading = false;
+
+    private void Start()
     {
         _propertyBlock = new MaterialPropertyBlock();
         _renderer = GetComponent<Renderer>();
     }
 
+    private void Update()
+    {
+        if (raycastHits != null)
+        {
+            string temp = "";
+            for (int i = 0; i < raycastHits.Length; i++)
+            {
+                temp += $"{raycastHits[i]} | ";
+            }
+            Debug.Log(temp);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") /*&& !inLineOfSight*/)
         {
+            stayingInside = true;
             FadeArea();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" /*&& !inLineOfSight*/)
         {
-            IncreaseArea();
+            stayingInside = false;
+            if (!inLineOfSight)
+            {
+                IncreaseArea();
+            }
         }
     }
 
     public void FadeArea()
     {
         StopAllCoroutines();
+        alreadyFading = true;
         for (int i = 0; i < blackZone.Length; i++)
         {
-            Debug.Log($"Black zone: {i}");
             _renderer = blackZone[i].GetComponent<Renderer>();
             StartCoroutine(Fade(_renderer));
         }
@@ -68,6 +93,8 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
             renderer.material.color.b, 
             0f
             );
+
+        yield return alreadyFading = false;
     }
 
     private IEnumerator Increase(Renderer renderer)
