@@ -16,7 +16,7 @@ public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
 
     SCRIPT_TestBlackZones blackZone;
 
-    public bool alreadyFading = false;
+    //public bool alreadyFading = false;
 
     private float _minAngle;
     private float _maxAngle;
@@ -46,6 +46,9 @@ public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
                 if (_hits[i].collider.CompareTag("Black"))
                 {
                     blackZone = _hits[i].collider.GetComponent<SCRIPT_TestBlackZones>();
+
+                    //if (blackZone.canSee)
+                    //{
                     if (blackZone.raycastHits == null ||
                         blackZone.raycastHits.Length != _hits.Length)
                     {
@@ -56,8 +59,12 @@ public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
                     {
                         blackZone.inLineOfSight = true;
                         blackZone.raycastHits[i] = true;
-                        blackZone.FadeArea();
+                        if (blackZone.canSee)
+                        {
+                            blackZone.FadeArea();
+                        }
                     }
+                    //}
                 }
                 else
                 {

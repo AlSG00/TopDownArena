@@ -10,8 +10,6 @@ public class SCRIPT_SunRotation : MonoBehaviour
     public float switchToNightIntensitySpeed = 0.005f;
     public float switchToDayIntensitySpeed = 0.005f;
     public Animator sunAnimationController;
-    private float rotationSpeedAtDay;
-    private float rotationSpeedAtNight;
 
     public delegate void DaytimeAction();
     public static event DaytimeAction DayStarted;
@@ -21,7 +19,6 @@ public class SCRIPT_SunRotation : MonoBehaviour
     private void Start()
     {
         RenderSettings.ambientIntensity = 0;
-        CalñulateSunRotationSpeed();
         sunAnimationController.speed = 1 / dayCycleDuration;
         sun = GetComponentInChildren<Light>();
         //if (defaultStartTime != 0)
@@ -29,13 +26,6 @@ public class SCRIPT_SunRotation : MonoBehaviour
         //    sunAnimationController.Play("ANIM_Sun", 0, 1 / (dayCycleDuration + nightCycleDuration) * defaultStartTime);
         //}
         sunAnimationController.Play("ANIM_Sun", 0, 0);
-    }
-
-    public void CalñulateSunRotationSpeed()
-    {
-
-        //rotationSpeedAtDay = 360 / dayCycleDuration;
-        //rotationSpeedAtNight = 360 / nightCycleDuration;
     }
 
     public void SetDay()

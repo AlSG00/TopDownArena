@@ -5,15 +5,16 @@ using UnityEngine;
 public class SCRIPT_TestBlackZones : MonoBehaviour
 {
     public GameObject[] blackZone;
-    //[HideInInspector]
-    public bool inLineOfSight = false;
-    public bool stayingInside = false;
-    public bool[] raycastHits;
+    public float visibilityDistance = 0f;
+    public bool canSee = true;
+
+    [HideInInspector] public bool inLineOfSight = false;
+    [HideInInspector] public bool stayingInside = false;
+    [HideInInspector] public bool[] raycastHits;
+
     private Renderer _renderer;
     private MaterialPropertyBlock _propertyBlock;
     private SCRIPT_TEST_LookAtBlackZone PlayerRaycastLook;
-
-    public bool alreadyFading = false;
 
     private void Start()
     {
@@ -48,7 +49,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
         if (other.tag == "Player" /*&& !inLineOfSight*/)
         {
             stayingInside = false;
-            if (!inLineOfSight)
+            if (!inLineOfSight || !canSee)
             {
                 IncreaseArea();
             }
@@ -58,7 +59,6 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
     public void FadeArea()
     {
         StopAllCoroutines();
-        alreadyFading = true;
         for (int i = 0; i < blackZone.Length; i++)
         {
             _renderer = blackZone[i].GetComponent<Renderer>();
@@ -93,8 +93,6 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
             renderer.material.color.b, 
             0f
             );
-
-        yield return alreadyFading = false;
     }
 
     private IEnumerator Increase(Renderer renderer)
