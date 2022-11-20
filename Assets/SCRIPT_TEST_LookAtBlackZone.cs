@@ -73,7 +73,6 @@ public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
                         blackZone.raycastHits[i] = false;
                         if (blackZone.raycastHits.All(x => x == false))
                         {
-                            Debug.LogWarning("increase");
                             blackZone.inLineOfSight = false;
                             if (!blackZone.stayingInside && !blackZone.inLineOfSight)
                             {
@@ -92,7 +91,6 @@ public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
                     blackZone.raycastHits[i] = false;
                     if (blackZone.raycastHits.All(x => x == false))
                     {
-                        Debug.LogWarning("increase");
                         blackZone.inLineOfSight = false;
                         if (!blackZone.stayingInside && !blackZone.inLineOfSight)
                         {

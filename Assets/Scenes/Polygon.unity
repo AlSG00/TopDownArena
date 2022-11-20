@@ -822,7 +822,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28794
+  m_Name: pb_Mesh28788
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1416,9 +1416,8 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 1579055476}
   magCapacity: 5000
-  ammoStock: 5000
-  currentAmmo: 5000
-  currentStock: 5000
+  currentAmmoInMag: 30
+  ammoInStock: {fileID: 0}
   ammoCounter: {fileID: 108583322}
   singleShots: 1
   shotPerformed: 0
@@ -1708,7 +1707,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29218
+  m_Name: pb_Mesh29212
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4372,7 +4371,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28780
+  m_Name: pb_Mesh28774
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5446,7 +5445,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28642
+  m_Name: pb_Mesh28636
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6705,9 +6704,8 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 1830299726}
   magCapacity: 5000
-  ammoStock: 5000
-  currentAmmo: 5000
-  currentStock: 5000
+  currentAmmoInMag: 30
+  ammoInStock: {fileID: 0}
   ammoCounter: {fileID: 108583322}
   singleShots: 0
   shotPerformed: 0
@@ -9246,7 +9244,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29086
+  m_Name: pb_Mesh29080
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9667,7 +9665,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28324
+  m_Name: pb_Mesh28318
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9851,7 +9849,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29276
+  m_Name: pb_Mesh29270
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12546,9 +12544,8 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 1412330212}
   magCapacity: 5000
-  ammoStock: 5000
-  currentAmmo: 5000
-  currentStock: 5000
+  currentAmmoInMag: 30
+  ammoInStock: {fileID: 0}
   ammoCounter: {fileID: 108583322}
   singleShots: 0
   shotPerformed: 0
@@ -18869,6 +18866,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6b03a1cc0a14c1d46bbf34cfed7cb474, type: 3}
   animationController: {fileID: 0}
   turnSpeed: 0.1
+  enableFeetIK: 1
+  heightFromGroundRaycast: 1
+  raycastDownDistance: 1
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  pelvisOffset: 0
+  pelvisUpAndDownSpeed: 0.2
+  feetToIKPositionSpeed: 0.5
+  leftFootAnimVariableName: LeftFootCurve
+  rightFootAnimVariableName: RightFootCurve
+  useProIKFeature: 0
+  showSolverDebug: 1
 --- !u!114 &6831854521137588237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18959,11 +18969,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dce83ee582f650499f5fbecea0ac7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashlight: {fileID: 6831854523046903779}
-  ambient: {fileID: 6831854523217386296}
-  flashlightAudioSource: {fileID: 6831854522591876947}
-  turnOnSound: {fileID: 8300000, guid: 6b0d6f1243595eb49b82d78a8c2932e8, type: 3}
-  turnOffSound: {fileID: 8300000, guid: 552d09e2d3d26d44b9508062c387ae7c, type: 3}
+  _flashlight: {fileID: 0}
+  _flashlightAudioSource: {fileID: 0}
+  _turnOnSound: {fileID: 0}
+  _turnOffSound: {fileID: 0}
+  chargeCapacity: 100
+  dischargeSpeed: 0.01
+  regenerationSpeed: 0
+  chargeRemaining: 100
+  consoleDebug: 0
 --- !u!114 &6831854521137588275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19426,12 +19440,12 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6831854523046903777}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 4.43
+  m_Intensity: 0
   m_Range: 20.3
   m_SpotAngle: 116
   m_InnerSpotAngle: 21.80208
@@ -19993,6 +20007,7 @@ GameObject:
   - component: {fileID: 7546444054703482932}
   - component: {fileID: 7546444054703482933}
   - component: {fileID: 7546444054703482931}
+  - component: {fileID: 7546444054703482937}
   - component: {fileID: 7546444054703482930}
   - component: {fileID: 7546444054703482929}
   - component: {fileID: 7546444054703482928}
@@ -20069,11 +20084,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dce83ee582f650499f5fbecea0ac7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashlight: {fileID: 6831854523046903779}
-  ambient: {fileID: 1784450401}
-  flashlightAudioSource: {fileID: 6831854522591876947}
-  turnOnSound: {fileID: 8300000, guid: 6b0d6f1243595eb49b82d78a8c2932e8, type: 3}
-  turnOffSound: {fileID: 8300000, guid: 552d09e2d3d26d44b9508062c387ae7c, type: 3}
+  _flashlight: {fileID: 6831854523046903779}
+  _flashlightAudioSource: {fileID: 6831854522591876947}
+  _turnOnSound: {fileID: 8300000, guid: 6b0d6f1243595eb49b82d78a8c2932e8, type: 3}
+  _turnOffSound: {fileID: 8300000, guid: 552d09e2d3d26d44b9508062c387ae7c, type: 3}
+  chargeCapacity: 100
+  dischargeSpeed: 0.001
+  regenerationSpeed: 0
+  chargeRemaining: 100
+  consoleDebug: 0
 --- !u!114 &7546444054703482930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20110,6 +20129,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6b03a1cc0a14c1d46bbf34cfed7cb474, type: 3}
   animationController: {fileID: 3824020741422590188}
   turnSpeed: 0.15
+  enableFeetIK: 1
+  heightFromGroundRaycast: 0.01
+  raycastDownDistance: 1
+  environmentLayer:
+    serializedVersion: 2
+    m_Bits: 513
+  pelvisOffset: 0
+  pelvisUpAndDownSpeed: 0.2
+  feetToIKPositionSpeed: 0.5
+  leftFootAnimVariableName: LeftFootCurve
+  rightFootAnimVariableName: RightFootCurve
+  useProIKFeature: 0
+  showSolverDebug: 1
 --- !u!136 &7546444054703482932
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20302,6 +20334,21 @@ MonoBehaviour:
   weaponLeftGrip: {fileID: 279232383}
   weaponRightGrip: {fileID: 1373282847}
   rigController: {fileID: 1720479530}
+--- !u!114 &7546444054703482937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546444054703482924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbaa2cd77fc18ac4bbfc64e130602f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pistolAmmoCapacity: 90
+  rifleAmmoCapacity: 9999
+  shotgunAmmoCapacity: 72
 --- !u!4 &7608158032332585050
 Transform:
   m_ObjectHideFlags: 0

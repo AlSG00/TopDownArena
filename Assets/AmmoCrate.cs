@@ -6,8 +6,7 @@ public class AmmoCrate : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject _object;
-    [SerializeField]
-    private int _ammo;
+    [SerializeField] private int _ammo;
     private bool _isMouseOver;
     //private void OnCollisionEnter(Collision collision)
     //{
@@ -45,8 +44,9 @@ public class AmmoCrate : MonoBehaviour
 
                 if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && _isMouseOver)
                 {
-                    //collision.gameObject.GetComponent<Gun>().AddAmmo(ammo);
-                    other.gameObject.GetComponentInChildren<SCRIPT_Weapon>().AddAmmo(_ammo);
+            //collision.gameObject.GetComponent<Gun>().AddAmmo(ammo);
+            //other.gameObject.GetComponentInChildren<SCRIPT_Weapon>().AddAmmo(_ammo);
+            other.gameObject.GetComponent<SCRIPT_PlayerAmmunition>().rifleAmmo.AddAmmo(_ammo);
                     Destroy(gameObject);
                 }
         //    }

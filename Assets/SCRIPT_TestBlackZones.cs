@@ -24,15 +24,15 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
 
     private void Update()
     {
-        if (raycastHits != null)
-        {
-            string temp = "";
-            for (int i = 0; i < raycastHits.Length; i++)
-            {
-                temp += $"{raycastHits[i]} | ";
-            }
-            Debug.Log(temp);
-        }
+        //if (raycastHits != null)
+        //{
+        //    string temp = "";
+        //    for (int i = 0; i < raycastHits.Length; i++)
+        //    {
+        //        temp += $"{raycastHits[i]} | ";
+        //    }
+        //    Debug.Log(temp);
+        //}
     }
 
     private void OnTriggerEnter(Collider other)

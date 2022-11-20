@@ -586,9 +586,8 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 5783658668931804524}
   magCapacity: 9999
-  ammoStock: 9999
-  currentAmmo: 9680
-  currentStock: 9999
+  currentAmmoInMag: 9999
+  ammoInStock: {fileID: 0}
   ammoCounter: {fileID: 0}
   singleShots: 0
   shotPerformed: 0

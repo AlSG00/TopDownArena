@@ -97,7 +97,7 @@
     <Compile Include="Assets\MouseInteraction.cs" />
     <Compile Include="Assets\StartGame.cs" />
     <Compile Include="Assets\DontDestroyOnLoad.cs" />
-    <Compile Include="Assets\Scripts\Test_Flashlight.cs" />
+    <Compile Include="Assets\Scripts\SCRIPT_PlayerFlashlight.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
     <Compile Include="Assets\TEST_LOS_Visibility.cs" />
@@ -153,6 +153,7 @@
     <Compile Include="Assets\TEST_ActivateTriggers.cs" />
     <Compile Include="Assets\SCRIPT_TestBlackZones.cs" />
     <Compile Include="Assets\SwapScenesInteractive.cs" />
+    <Compile Include="Assets\Scripts\SCRIPT_PlayerAmmunition.cs" />
     <Compile Include="Assets\ToolTip.cs" />
     <Compile Include="Assets\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />

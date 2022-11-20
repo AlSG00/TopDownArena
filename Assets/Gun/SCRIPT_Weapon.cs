@@ -44,12 +44,15 @@ public class SCRIPT_Weapon : MonoBehaviour
     public AudioClip reloadSound;
     public AudioClip shotSound;
     public AudioSource audioSource;
-    [SerializeField]
-    private int magCapacity = 30;
-    [SerializeField]
-    private int ammoStock = 150;                  // Боезапас
-    public int currentAmmo = 30;
-    public int currentStock = 90;
+
+
+    [SerializeField] private int magCapacity = 30;
+    public int currentAmmoInMag = 30;
+
+    //[SerializeField] private int ammoStock = 150;                  // Боезапас
+    public SCRIPT_PlayerAmmunition ammoInStock;
+    
+    //public int currentStock = 90;
     public AmmoCounterTest ammoCounter;
     public bool singleShots;
     public bool shotPerformed;
@@ -71,12 +74,26 @@ public class SCRIPT_Weapon : MonoBehaviour
     public AudioClip pullOutMagSound;
     public AudioClip InsertMagSound;
 
+    public SCRIPT_PlayerAmmunition.Ammo currentWeaponStock;
+
     private void Start()
     {
         isReloading = false;
         muzzleFlame = GetComponent<SCRIPT_MuzzleFlame>();
         ammoShells = GetComponent<SCRIPT_AmmoShells>();
         ammoCounter = GameObject.Find("HUD").GetComponentInChildren<AmmoCounterTest>();
+        ammoInStock = GameObject.Find("Player").GetComponentInChildren<SCRIPT_PlayerAmmunition>();
+
+        if (weaponName == "Rifle")
+        {
+            currentWeaponStock = ammoInStock.rifleAmmo;
+            Debug.LogWarning(currentWeaponStock);
+        }
+        else if (weaponName == "Shotgun")
+        {
+            currentWeaponStock = ammoInStock.shotgunAmmo;
+            Debug.LogWarning(currentWeaponStock);
+        }
     }
 
     public void StartFiring()
@@ -85,7 +102,6 @@ public class SCRIPT_Weapon : MonoBehaviour
         fireDelay = (float)60 / fireRate;
         accumulatedTime = 0.0f;
 
-    
         FireBullet();
     }
 
@@ -95,7 +111,7 @@ public class SCRIPT_Weapon : MonoBehaviour
     private void FireBullet()
     {
         if ((lastTimeShot + fireDelay <= Time.time)
-            && (currentAmmo > 0)
+            && (currentAmmoInMag > 0)
             && !isReloading)
         {
             lastTimeShot = Time.time;
@@ -115,8 +131,9 @@ public class SCRIPT_Weapon : MonoBehaviour
             muzzleFlame.LightFlame();
             ammoShells.EjectShell();
 
-            currentAmmo--;
-            ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
+            currentAmmoInMag--;
+            Debug.Log($"In mag {currentAmmoInMag}");
+            ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
         }
     }
 
@@ -238,23 +255,24 @@ public class SCRIPT_Weapon : MonoBehaviour
 
     public void Reload()
     {
-        int toFill = magCapacity - currentAmmo;
-        if (toFill > 0 && currentStock > 0)
-        {
-           // isReloading = true;
-           // audioSource.PlayOneShot(reloadSound);
+        int toFill = magCapacity - currentAmmoInMag; // считаем, сколько не хватает
 
-            if (currentStock >= toFill)
-            {
-                currentStock -= toFill;
-                currentAmmo = magCapacity;
-            }
-            else
-            {
-                currentAmmo += currentStock;
-                currentStock = 0;
-            }
-            ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
+        currentAmmoInMag += currentWeaponStock.TakeAmmo(toFill); // досыпаем
+
+        if (toFill > 0 && currentWeaponStock.left > 0)
+        {
+            //if (currentStock >= toFill)
+            //{
+            //    currentStock -= toFill;
+            //    currentAmmo = magCapacity;
+            //}
+            //else
+            //{
+            //    currentAmmo += currentStock;
+            //    currentStock = 0;
+            //}
+            ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
+            Debug.Log($"Left {currentWeaponStock.left}");
         }
         else
         {
@@ -262,14 +280,16 @@ public class SCRIPT_Weapon : MonoBehaviour
         }
     }
 
-    public void AddAmmo(int ammo)
-    {
-        currentStock += ammo;
-        if (currentStock > ammoStock)
-            currentStock = ammoStock;
+    //public void AddAmmo(int ammo)
+    //{
+    //    ammoInStock
 
-        ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
-    }
+    //    currentStock += ammo;
+    //    if (currentStock > ammoStock)
+    //        currentStock = ammoStock;
+
+    //    ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
+    //}
 
     //public void IsReloading()
     //{

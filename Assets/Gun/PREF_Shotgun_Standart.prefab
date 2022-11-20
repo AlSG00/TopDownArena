@@ -163,23 +163,23 @@ MonoBehaviour:
     m_Bits: 6071
   muzzleFlame: {fileID: 1745050576683434268}
   ammoShells: {fileID: 1745050576683434269}
+  isReloading: 0
   reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
   audioSource: {fileID: 6339439357804092169}
   magCapacity: 8
-  ammoStock: 56
-  currentAmmo: 8
-  currentStock: 56
+  currentAmmoInMag: 8
+  ammoInStock: {fileID: 0}
   ammoCounter: {fileID: 0}
   singleShots: 1
   shotPerformed: 0
   projectilesPerShot: 12
   singleShotDelay: 0.3
-  weaponIdleAnimation: {fileID: 0}
-  weaponAimAnimation: {fileID: 0}
-  weaponSwapAnimation: {fileID: 0}
-  weaponReloadAnimation: {fileID: 0}
-  weaponShootAnimation: {fileID: 0}
+  magazine: {fileID: 0}
+  ejectMagSound: {fileID: 0}
+  putMagSound: {fileID: 0}
+  pullOutMagSound: {fileID: 0}
+  InsertMagSound: {fileID: 0}
 --- !u!1 &1744704210339246566
 GameObject:
   m_ObjectHideFlags: 0
