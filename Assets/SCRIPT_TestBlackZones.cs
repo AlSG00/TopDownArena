@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SCRIPT_TestBlackZones : MonoBehaviour
 {
     public GameObject[] blackZone;
-    public float visibilityDistance = 0f;
+    [Range(0, 1)] public float fadeSpeed = 0.3f;
+    [Range(0, 1)] public float increaseSpeed = 0.3f;
     public bool canSee = true;
 
     [HideInInspector] public bool inLineOfSight = false;
     [HideInInspector] public bool stayingInside = false;
-    [HideInInspector] public bool[] raycastHits;
+    /*[HideInInspector]*/ public bool[] raycastHits;
 
     private Renderer _renderer;
     private MaterialPropertyBlock _propertyBlock;
     private SCRIPT_TEST_LookAtBlackZone PlayerRaycastLook;
+    private Coroutine _lastCoroutine;
+    public bool inLOS = false;
 
     private void Start()
     {
         _propertyBlock = new MaterialPropertyBlock();
-        _renderer = GetComponent<Renderer>();
+        //_renderer = GetComponent<Renderer>();
     }
 
     private void Update()
@@ -33,6 +37,12 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
         //    }
         //    Debug.Log(temp);
         //}
+
+        if (raycastHits.All(x => x == false) && raycastHits.Count(x => x == true) <= 1 &&
+            !stayingInside)
+        {
+            IncreaseArea();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +56,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player" /*&& !inLineOfSight*/)
+        if (other.tag == "Player")
         {
             stayingInside = false;
             if (!inLineOfSight || !canSee)
@@ -58,6 +68,10 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
 
     public void FadeArea()
     {
+        //if (_lastCoroutine != null)
+       // {
+        //    StopCoroutine(_lastCoroutine);
+       // }
         StopAllCoroutines();
         for (int i = 0; i < blackZone.Length; i++)
         {
@@ -84,7 +98,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
                 renderer.material.color.r, 
                 renderer.material.color.g, 
                 renderer.material.color.b, 
-                renderer.material.color.a - 0.03f
+                renderer.material.color.a - fadeSpeed
                 );
         }
         renderer.material.color = new Color(
@@ -103,7 +117,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
                 renderer.material.color.r, 
                 renderer.material.color.g, 
                 renderer.material.color.b, 
-                renderer.material.color.a + 0.03f
+                renderer.material.color.a + increaseSpeed
                 );
         }
         renderer.material.color = new Color(
