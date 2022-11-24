@@ -5,6 +5,7 @@ using System.Linq;
 
 public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
 {
+    public LayerMask activeLayers;
     [Range(0, 360)] public int viewAngle = 180;
     public int raysCount = 10;
     private RaycastHit[] _hits;
@@ -40,7 +41,7 @@ public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
     {
         for (int i = 0; i < _hits.Length; i++)
         {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward) * 10, out _hits[i]))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward) * 10, out _hits[i]/*, activeLayers)*/))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward) * 10, Color.green);
                 if (_hits[i].collider.CompareTag("Black"))
