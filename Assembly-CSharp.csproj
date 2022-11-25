@@ -71,6 +71,7 @@
     <Compile Include="Assets\LightFlicker.cs" />
     <Compile Include="Assets\SCRIPT_TEST_LookAtBlackZone.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\Desaturate.cs" />
+    <Compile Include="Assets\SCRIPT_TEST_AutomaticDoor.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
@@ -161,7 +162,6 @@
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
-    <Compile Include="Assets\SCRIPT_TEST_AutomaticDoor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
