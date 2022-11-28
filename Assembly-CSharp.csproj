@@ -162,6 +162,10 @@
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_ItemGrid.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
+    <Compile Include="Assets\SCRIPT_GridInteract.cs" />
+    <Compile Include="Assets\IPointerHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
