@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\TestAnimationEvent.cs" />
     <Compile Include="Assets\Grass\Scripts\GrassTrample.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_ItemGrid.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
     <Compile Include="Assets\CheckPass.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerInfo.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Assets\RoachRunFrom.cs" />
     <Compile Include="Assets\SwapAudio.cs" />
     <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_GridInteract.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraShake.cs" />
     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
@@ -161,11 +163,11 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSMask.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
-    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_ItemGrid.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
-    <Compile Include="Assets\SCRIPT_GridInteract.cs" />
+    <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\IPointerHandler.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_InventoryItem.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_ItemData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
