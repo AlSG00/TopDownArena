@@ -8,11 +8,19 @@ public class SCRIPT_InventoryController : MonoBehaviour
     [HideInInspector] public SCRIPT_ItemGrid selectedItemGrid;
 
     SCRIPT_InventoryItem selectedItem;
+    SCRIPT_InventoryItem overlapItem;
     RectTransform rectTransform;
 
     [SerializeField] List<SCRIPT_ItemData> items;
     [SerializeField] GameObject itemPreafab;
     [SerializeField] Transform canvasTransform;
+
+    SCRIPT_InventoryHighlight inventoryHighlight;
+
+    private void Awake()
+    {
+        inventoryHighlight = GetComponent<SCRIPT_InventoryHighlight>();
+    }
 
     private void Update()
     {
@@ -27,10 +35,39 @@ public class SCRIPT_InventoryController : MonoBehaviour
         {
             return;
         }
-        
+
+        HandleHighlight();
+
         if (Input.GetMouseButtonDown(0))
         {
             LeftMouseButtonPress();
+        }
+    }
+
+    SCRIPT_InventoryItem itemToHighlight;
+    private void HandleHighlight()
+    {
+        Vector2Int positionOnGrid = GetTileGridPosition();
+
+        if (selectedItem == null)
+        {
+            itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
+
+            if (itemToHighlight != null)
+            {
+            inventoryHighlight.SetSize(itemToHighlight);
+            inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
+            }
+            else
+            {
+                iuQWLGDI
+
+                    1:28:11
+            }
+        }
+        else
+        {
+
         }
     }
 
@@ -57,7 +94,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     private void LeftMouseButtonPress()
     {
-        Vector2Int tileGridPosition = selectedItemGrid.GetTileGridPosition(Input.mousePosition);
+        Vector2Int tileGridPosition = GetTileGridPosition();
 
         if (selectedItem == null)
         {
@@ -69,12 +106,31 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
     }
 
+    private Vector2Int GetTileGridPosition()
+    {
+        Vector2 position = Input.mousePosition;
+
+        if (selectedItem != null)
+        {
+            position.x -= (selectedItem.itemData.width - 1) * SCRIPT_ItemGrid._tileSizeWidth / 2;
+            position.y += (selectedItem.itemData.height - 1) * SCRIPT_ItemGrid._tileSizeHeight / 2;
+        }
+
+        return selectedItemGrid.GetTileGridPosition(position);
+    }
+
     private void PlaceItem(Vector2Int tileGridPosition)
     {
-        bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+        bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
         if (complete)
         {
             selectedItem = null;
+            if (overlapItem != null)
+            {
+                selectedItem = overlapItem;
+                overlapItem = null;
+                rectTransform = selectedItem.GetComponent<RectTransform>();
+            }
         }
     }
 

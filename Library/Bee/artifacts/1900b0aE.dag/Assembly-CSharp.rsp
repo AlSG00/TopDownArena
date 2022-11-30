@@ -465,6 +465,7 @@
 "Assets/SCRIPT_DaytimeLight.cs"
 "Assets/SCRIPT_ExitGame.cs"
 "Assets/SCRIPT_FollowChild.cs"
+"Assets/SCRIPT_InventoryHighlight.cs"
 "Assets/SCRIPT_MusicLoop.cs"
 "Assets/SCRIPT_Screamer_Lamp.cs"
 "Assets/SCRIPT_SunRotation.cs"

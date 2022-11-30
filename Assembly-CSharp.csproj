@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Test_PlayOST.cs" />
     <Compile Include="Assets\Roach.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_ItemData.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilRenderer.cs" />
     <Compile Include="Assets\LightFlicker.cs" />
     <Compile Include="Assets\SCRIPT_TEST_LookAtBlackZone.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
     <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_InventoryItem.cs" />
     <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\TestAnimationEvent.cs" />
     <Compile Include="Assets\Grass\Scripts\GrassTrample.cs" />
@@ -166,8 +168,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\IPointerHandler.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_InventoryItem.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_ItemData.cs" />
+    <Compile Include="Assets\SCRIPT_InventoryHighlight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
