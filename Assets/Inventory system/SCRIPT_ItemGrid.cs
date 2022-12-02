@@ -140,7 +140,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
                             return false;
                         }
                     }
-                } 
+                }
             }
         }
 
@@ -162,7 +162,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return true;
     }
 
-    bool BoundaryCheck(int positionX, int positionY, int width, int height)
+    public bool BoundaryCheck(int positionX, int positionY, int width, int height)
     {
         if (PositionCheck(positionX, positionY) == false)
         {

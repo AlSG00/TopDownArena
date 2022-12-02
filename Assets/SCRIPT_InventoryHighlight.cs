@@ -6,6 +6,11 @@ public class SCRIPT_InventoryHighlight : MonoBehaviour
 {
     [SerializeField] RectTransform highlighter;
 
+    private void Start()
+    {
+        Show(false);
+    }
+
     public void Show(bool isShowing)
     {
         highlighter.gameObject.SetActive(isShowing);
@@ -20,12 +25,33 @@ public class SCRIPT_InventoryHighlight : MonoBehaviour
 
     public void SetPosition(SCRIPT_ItemGrid targetGrid, SCRIPT_InventoryItem targetItem)
     {
-        highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
+        // highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
 
         Vector2 position = targetGrid.CalculatePositionOnGrid(
             targetItem,
             targetItem.onGridPositionX,
             targetItem.onGridPositionY
+            );
+
+        highlighter.localPosition = position;
+    }
+
+    public void SetParent(SCRIPT_ItemGrid targetGrid)
+    {
+        if (targetGrid == null)
+        {
+            return;
+        }
+
+        highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
+    }
+
+    public void SetPosition(SCRIPT_ItemGrid targetGrid, SCRIPT_InventoryItem targetItem, int positionX, int positionY)
+    {
+        Vector2 position = targetGrid.CalculatePositionOnGrid(
+            targetItem,
+            positionX,
+            positionY
             );
 
         highlighter.localPosition = position;

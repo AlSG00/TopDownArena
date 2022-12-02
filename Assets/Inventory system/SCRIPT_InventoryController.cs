@@ -7,6 +7,16 @@ public class SCRIPT_InventoryController : MonoBehaviour
 {
     [HideInInspector] public SCRIPT_ItemGrid selectedItemGrid;
 
+    //public SCRIPT_ItemGrid SelectedItemGrid
+    //{
+    //    get => selectedItemGrid;
+    //    set
+    //    {
+    //        selectedItemGrid = value;
+    //        inventoryHighlight.SetParent(value);
+    //    }
+    //}
+
     SCRIPT_InventoryItem selectedItem;
     SCRIPT_InventoryItem overlapItem;
     RectTransform rectTransform;
@@ -31,23 +41,36 @@ public class SCRIPT_InventoryController : MonoBehaviour
             CreateRandomItem();
         }
 
+        Debug.Log("check_1");
         if (selectedItemGrid == null)
         {
+            Debug.Log("check_2");
+            inventoryHighlight.Show(false);
             return;
         }
 
+        //Debug.Log("check_2");
         HandleHighlight();
 
+        //Debug.Log("check_3");
         if (Input.GetMouseButtonDown(0))
         {
             LeftMouseButtonPress();
         }
     }
 
+    Vector2Int oldPosition;
     SCRIPT_InventoryItem itemToHighlight;
     private void HandleHighlight()
     {
         Vector2Int positionOnGrid = GetTileGridPosition();
+
+        if (oldPosition == positionOnGrid)
+        {
+            return;
+        }
+
+        oldPosition = positionOnGrid;
 
         if (selectedItem == null)
         {
@@ -55,18 +78,29 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
             if (itemToHighlight != null)
             {
-            inventoryHighlight.SetSize(itemToHighlight);
-            inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
+                inventoryHighlight.Show(true);
+                inventoryHighlight.SetSize(itemToHighlight);
+                inventoryHighlight.SetParent(selectedItemGrid);
+                inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
+
             }
             else
             {
-                iuQWLGDI
-
-                    1:28:11
+                inventoryHighlight.Show(false);
             }
         }
         else
         {
+            inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
+                positionOnGrid.x,
+                positionOnGrid.y,
+                selectedItem.itemData.width,
+                selectedItem.itemData.height)
+                );
+
+            inventoryHighlight.SetSize(selectedItem);
+            inventoryHighlight.SetParent(selectedItemGrid);
+            inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
 
         }
     }
