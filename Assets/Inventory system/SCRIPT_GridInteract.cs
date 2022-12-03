@@ -18,6 +18,7 @@ public class SCRIPT_GridInteract : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         inventoryController.selectedItemGrid = itemGrid;
+        inventoryController.gridRect = inventoryController.selectedItemGrid.GetComponent<RectTransform>();
     }
 
     public void OnPointerExit(PointerEventData eventData)

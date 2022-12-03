@@ -20,6 +20,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
     SCRIPT_InventoryItem selectedItem;
     SCRIPT_InventoryItem overlapItem;
     RectTransform rectTransform;
+    public RectTransform gridRect;
 
     [SerializeField] List<SCRIPT_ItemData> items;
     [SerializeField] GameObject itemPreafab;
@@ -41,22 +42,63 @@ public class SCRIPT_InventoryController : MonoBehaviour
             CreateRandomItem();
         }
 
-        Debug.Log("check_1");
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            InsertRandomItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RotateItem();
+        }
+
         if (selectedItemGrid == null)
         {
-            Debug.Log("check_2");
             inventoryHighlight.Show(false);
             return;
         }
 
-        //Debug.Log("check_2");
         HandleHighlight();
 
-        //Debug.Log("check_3");
         if (Input.GetMouseButtonDown(0))
         {
             LeftMouseButtonPress();
         }
+    }
+
+    private void RotateItem()
+    {
+        if (selectedItem == null)
+        {
+            return;
+        }
+
+        selectedItem.Rotated();
+    }
+
+    private void InsertRandomItem()
+    {
+        if (selectedItemGrid == null) 
+        { 
+            return;
+        }
+
+        CreateRandomItem();
+        SCRIPT_InventoryItem itemToInsert = selectedItem;
+        selectedItem = null;
+        InsertItem(itemToInsert);
+    }
+
+    private void InsertItem(SCRIPT_InventoryItem itemToInsert)
+    {
+        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+    
+        if (positionOnGrid == null)
+        {
+            return;
+        }
+
+        selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
     }
 
     Vector2Int oldPosition;
@@ -94,8 +136,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
             inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
                 positionOnGrid.x,
                 positionOnGrid.y,
-                selectedItem.itemData.width,
-                selectedItem.itemData.height)
+                selectedItem.Width,
+                selectedItem.Height)
                 );
 
             inventoryHighlight.SetSize(selectedItem);
@@ -112,9 +154,9 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
         rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
 
         int selectedItemID = UnityEngine.Random.Range(0, items.Count);
-        Debug.Log(selectedItemID);
         inventoryItem.Set(items[selectedItemID]);
     }
 
@@ -122,6 +164,16 @@ public class SCRIPT_InventoryController : MonoBehaviour
     {
         if (selectedItem != null)
         {
+            if (!gridRect.rect.Overlaps(rectTransform.rect))
+            {
+                rectTransform.SetParent(gridRect.parent);
+            }
+            else
+            {
+                rectTransform.SetParent(gridRect);
+            }
+
+            rectTransform.SetAsLastSibling();
             rectTransform.position = Input.mousePosition;
         }
     }
@@ -146,8 +198,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
         if (selectedItem != null)
         {
-            position.x -= (selectedItem.itemData.width - 1) * SCRIPT_ItemGrid._tileSizeWidth / 2;
-            position.y += (selectedItem.itemData.height - 1) * SCRIPT_ItemGrid._tileSizeHeight / 2;
+            position.x -= (selectedItem.Width - 1) * SCRIPT_ItemGrid._tileSizeWidth / 2;
+            position.y += (selectedItem.Height - 1) * SCRIPT_ItemGrid._tileSizeHeight / 2;
         }
 
         return selectedItemGrid.GetTileGridPosition(position);
@@ -164,6 +216,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
                 selectedItem = overlapItem;
                 overlapItem = null;
                 rectTransform = selectedItem.GetComponent<RectTransform>();
+                rectTransform.SetAsLastSibling();
             }
         }
     }
@@ -174,6 +227,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         if (selectedItem != null)
         {
             rectTransform = selectedItem.GetComponent<RectTransform>();
+            rectTransform.SetAsLastSibling();
         }
     }
 }

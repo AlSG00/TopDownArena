@@ -432,6 +432,7 @@
 "Assets/Inventory system/SCRIPT_InventoryItem.cs"
 "Assets/Inventory system/SCRIPT_ItemData.cs"
 "Assets/Inventory system/SCRIPT_ItemGrid.cs"
+"Assets/Inventory system/SCRIPT_TEST_UIHoverCheck.cs"
 "Assets/IPointerHandler.cs"
 "Assets/LightFlicker.cs"
 "Assets/Medkit.cs"

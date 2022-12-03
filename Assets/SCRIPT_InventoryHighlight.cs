@@ -18,8 +18,8 @@ public class SCRIPT_InventoryHighlight : MonoBehaviour
     public void SetSize(SCRIPT_InventoryItem targetItem)
     {
         Vector2 size = new Vector2();
-        size.x = targetItem.itemData.width * SCRIPT_ItemGrid._tileSizeWidth;
-        size.y = targetItem.itemData.height * SCRIPT_ItemGrid._tileSizeHeight;
+        size.x = targetItem.Width * SCRIPT_ItemGrid._tileSizeWidth;
+        size.y = targetItem.Height * SCRIPT_ItemGrid._tileSizeHeight;
         highlighter.sizeDelta = size;
     }
 
@@ -44,6 +44,7 @@ public class SCRIPT_InventoryHighlight : MonoBehaviour
         }
 
         highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
+        highlighter.SetAsFirstSibling();
     }
 
     public void SetPosition(SCRIPT_ItemGrid targetGrid, SCRIPT_InventoryItem targetItem, int positionX, int positionY)

@@ -40,9 +40,9 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     private void CleanGridReference(SCRIPT_InventoryItem item)
     {
-        for (int i = 0; i < item.itemData.width; i++)
+        for (int i = 0; i < item.Width; i++)
         {
-            for (int j = 0; j < item.itemData.height; j++)
+            for (int j = 0; j < item.Height; j++)
             {
                 inventoryItemSlot[item.onGridPositionX + i, item.onGridPositionY + j] = null;
             }
@@ -74,14 +74,34 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return tileGridPosition;
     }
 
+    public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
+    {
+        int height = _gridSizeHeight - itemToInsert.Height + 1;
+        int width = _gridSizeWidth - itemToInsert.Width + 1;
+
+        for (int j = 0; j < height; j++)
+        {
+            for (int i = 0; i < width; i++)
+            {
+            if (CheckAvailableSpace(i, j, itemToInsert.Width, itemToInsert.Height))
+                {
+                    return new Vector2Int(i, j);
+
+                }
+            }
+        }
+
+        return null;
+    }
+
     public bool PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY, ref SCRIPT_InventoryItem overlapItem)
     {
-        if (BoundaryCheck(positionX, positionY, inventoryItem.itemData.width, inventoryItem.itemData.height) == false)
+        if (BoundaryCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height) == false)
         {
             return false;
         }
 
-        if (OverlapCheck(positionX, positionY, inventoryItem.itemData.width, inventoryItem.itemData.height, ref overlapItem) == false)
+        if (OverlapCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height, ref overlapItem) == false)
         {
             overlapItem = null;
             return false;
@@ -92,12 +112,19 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             CleanGridReference(overlapItem);
         }
 
+        PlaceItem(inventoryItem, positionX, positionY);
+
+        return true;
+    }
+
+    public void PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY)
+    {
         RectTransform rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(this.rectTransform);
 
-        for (int i = 0; i < inventoryItem.itemData.width; i++)
+        for (int i = 0; i < inventoryItem.Width; i++)
         {
-            for (int j = 0; j < inventoryItem.itemData.height; j++)
+            for (int j = 0; j < inventoryItem.Height; j++)
             {
                 inventoryItemSlot[positionX + i, positionY + j] = inventoryItem;
             }
@@ -108,15 +135,13 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         Vector2 position = CalculatePositionOnGrid(inventoryItem, positionX, positionY);
 
         rectTransform.localPosition = position;
-
-        return true;
     }
 
     public Vector2 CalculatePositionOnGrid(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY)
     {
         Vector2 position = new Vector2();
-        position.x = positionX * _tileSizeWidth + _tileSizeWidth * inventoryItem.itemData.width / 2;
-        position.y = -(positionY * _tileSizeHeight + _tileSizeHeight * inventoryItem.itemData.height / 2);
+        position.x = positionX * _tileSizeWidth + _tileSizeWidth * inventoryItem.Width / 2;
+        position.y = -(positionY * _tileSizeHeight + _tileSizeHeight * inventoryItem.Height / 2);
         return position;
     }
 
@@ -140,6 +165,22 @@ public class SCRIPT_ItemGrid : MonoBehaviour
                             return false;
                         }
                     }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private bool CheckAvailableSpace(int positionX, int positionY, int width, int height)
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (inventoryItemSlot[positionX + i, positionY + j] != null)
+                {
+                    return false;
                 }
             }
         }
