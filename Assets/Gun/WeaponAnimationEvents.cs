@@ -8,6 +8,10 @@ using UnityEngine.Events;
 
 //}
 
+/// <summary>
+/// »венты дл€ перезар€дки оружи€ (пока только винтовка)
+/// </summary>
+
 public class WeaponAnimationEvents : MonoBehaviour
 {
     public Transform leftHand;
