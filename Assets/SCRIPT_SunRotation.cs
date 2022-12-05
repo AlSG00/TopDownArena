@@ -21,10 +21,6 @@ public class SCRIPT_SunRotation : MonoBehaviour
         RenderSettings.ambientIntensity = 0;
         sunAnimationController.speed = 1 / dayCycleDuration;
         sun = GetComponentInChildren<Light>();
-        //if (defaultStartTime != 0)
-        //{
-        //    sunAnimationController.Play("ANIM_Sun", 0, 1 / (dayCycleDuration + nightCycleDuration) * defaultStartTime);
-        //}
         sunAnimationController.Play("ANIM_Sun", 0, 0);
     }
 

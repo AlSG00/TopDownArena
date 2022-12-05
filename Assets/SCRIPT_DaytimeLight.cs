@@ -8,6 +8,8 @@ public class SCRIPT_DaytimeLight : MonoBehaviour
     public float targetIntensity = 1f;
     public float glowIncreasing = 0.1f;
     public float glowFading = 0.1f;
+    public float activatingDelay = 0f;
+    public float deactivatingDelay = 0f;
     private Light _lightOrigin;
 
     private void OnEnable()
@@ -34,13 +36,11 @@ public class SCRIPT_DaytimeLight : MonoBehaviour
 
     private void TurnOn()
     {
-        //_lightOrigin.intensity = 1;
         StartCoroutine(SmoothFading(false));
     }
 
     private void TurnOff()
     {
-        //_lightOrigin.intensity = 0;
         StartCoroutine(SmoothFading(true));
     }
 
@@ -48,6 +48,7 @@ public class SCRIPT_DaytimeLight : MonoBehaviour
     {
         if (!isDay)
         {
+            yield return new WaitForSeconds(activatingDelay);
             while (_lightOrigin.intensity < targetIntensity)
             {
                 yield return _lightOrigin.intensity += glowIncreasing;
@@ -56,6 +57,7 @@ public class SCRIPT_DaytimeLight : MonoBehaviour
         }
         else
         {
+            yield return new WaitForSeconds(deactivatingDelay);
             while (_lightOrigin.intensity > 0)
             {
                 yield return _lightOrigin.intensity -= glowFading;

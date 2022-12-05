@@ -38,6 +38,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return toReturn;
     }
 
+    // „истим инвентарь от ссылок на предмет, когда пертаскиваем или выкидываем предмет
     private void CleanGridReference(SCRIPT_InventoryItem item)
     {
         for (int i = 0; i < item.Width; i++)
@@ -74,8 +75,11 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return tileGridPosition;
     }
 
+    bool returnRotated;
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
+        returnRotated = false;
+
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;
 
@@ -83,10 +87,22 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         {
             for (int i = 0; i < width; i++)
             {
-            if (CheckAvailableSpace(i, j, itemToInsert.Width, itemToInsert.Height))
+                if (CheckAvailableSpace(i, j, itemToInsert.Width, itemToInsert.Height))
                 {
                     return new Vector2Int(i, j);
+                }
+            }
+        }
 
+        // ѕытаемс€ найти место повторно, но с повернутым предметом
+        for (int j = 0; j < height; j++)
+        {
+            for (int i = 0; i < width; i++)
+            {
+                if (CheckAvailableSpace(i, j, itemToInsert.Height, itemToInsert.Width))
+                {
+                    returnRotated = true;
+                    return new Vector2Int(i, j);
                 }
             }
         }

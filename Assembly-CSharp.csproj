@@ -146,7 +146,6 @@
     <Compile Include="Assets\SwapAudio.cs" />
     <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_GridInteract.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_TEST_UIHoverCheck.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraShake.cs" />
     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />

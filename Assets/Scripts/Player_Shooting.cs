@@ -5,15 +5,13 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 public class Player_Shooting : MonoBehaviour
 {
-
-    //public Rig aimLayer;
     public float aimingDuration = 0.1f;
     // TODO: REWORK THIS SCRIPT
-    public bool isShooting;
-    public bool isAiming;
-    //  public GameObject prefab;
-    //  public GameObject muzzle;
-    //public TestRaycastWeapon weapon;
+    public bool isShooting = false;
+    public bool isAiming = false;
+    public bool isCheckingStats = false;
+    public bool isCheckingInventory = false;
+    public GameObject inventory;
 
     public WeaponAnimationEvents animationEvents;
 
@@ -58,6 +56,25 @@ public class Player_Shooting : MonoBehaviour
 
     void ShootInput()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Vector2 position = new Vector2();
+            RectTransform inventoryRect = inventory.GetComponent<RectTransform>();
+
+            isCheckingInventory = !isCheckingInventory;
+            if (isCheckingInventory)
+            {
+                position.y = 630;
+            }
+            else
+            {
+                position.y = 3000;
+            }
+            position.x = inventoryRect.position.x;
+
+            inventoryRect.position = position;
+        }
+
         if (weapon)
         {
             if (Input.GetKeyDown(KeyCode.R) && isAiming && !activeWeapon.isReloading)
