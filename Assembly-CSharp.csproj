@@ -63,6 +63,7 @@
     <Compile Include="Assets\SCRIPT_ActiveWeapon.cs" />
     <Compile Include="Assets\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\nextSpawn.cs" />
+    <Compile Include="Assets\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Test_PlayOST.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
     <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\MouseInteraction.cs" />
+    <Compile Include="Assets\SCRIPT_ObjectInteraction.cs" />
     <Compile Include="Assets\StartGame.cs" />
     <Compile Include="Assets\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_PlayerFlashlight.cs" />
@@ -169,8 +171,6 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\IPointerHandler.cs" />
-    <Compile Include="Assets\SCRIPT_ObjectInteraction.cs" />
-    <Compile Include="Assets\SCRIPT_PickableObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

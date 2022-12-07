@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SCRIPT_ItemGrid : MonoBehaviour
 {
+    // Хранение данных об инвентаре
+
     public const float _tileSizeWidth = 32;
     public const float _tileSizeHeight = 32;
 

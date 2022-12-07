@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SCRIPT_InventoryController : MonoBehaviour
 {
-    [HideInInspector] public SCRIPT_ItemGrid selectedItemGrid;
+    /*[HideInInspector]*/ public SCRIPT_ItemGrid selectedItemGrid;
 
     //public SCRIPT_ItemGrid SelectedItemGrid
     //{
@@ -23,7 +23,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
     public RectTransform gridRect;
 
     [SerializeField] List<SCRIPT_ItemData> items;
-    [SerializeField] GameObject itemPreafab;
+    [SerializeField] GameObject itemPrefab;
     [SerializeField] Transform canvasTransform;
 
     SCRIPT_InventoryHighlight inventoryHighlight;
@@ -37,15 +37,15 @@ public class SCRIPT_InventoryController : MonoBehaviour
     {
         ItemIconDrag();
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            CreateRandomItem();
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    CreateRandomItem();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            InsertRandomItem();
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    InsertRandomItem();
+        //}
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -76,17 +76,23 @@ public class SCRIPT_InventoryController : MonoBehaviour
         selectedItem.Rotated();
     }
 
-    private void InsertRandomItem()
+    public void InsertItemIntoInventory(GameObject item)
     {
         if (selectedItemGrid == null) 
-        { 
+        {
+            Debug.Log("Grid is not selected");
             return;
         }
 
-        CreateRandomItem();
+        Debug.Log("Creating item...");
+        CreateItem(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
+
+        Debug.Log("Inserting item...");
         InsertItem(itemToInsert);
+
+        Debug.Log("Item inserted...");
     }
 
     private void InsertItem(SCRIPT_InventoryItem itemToInsert)
@@ -147,17 +153,30 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
     }
 
-    private void CreateRandomItem()
+    //private void CreateRandomItem(GameObject item)
+    //{
+    //    SCRIPT_InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<SCRIPT_InventoryItem>();
+    //    selectedItem = inventoryItem;
+
+    //    rectTransform = inventoryItem.GetComponent<RectTransform>();
+    //    rectTransform.SetParent(canvasTransform);
+    //    rectTransform.SetAsLastSibling();
+
+    //    inventoryItem.Set(items[selectedItemID]);
+    //}
+
+    private void CreateItem(GameObject item)
     {
-        SCRIPT_InventoryItem inventoryItem = Instantiate(itemPreafab).GetComponent<SCRIPT_InventoryItem>();
+        SCRIPT_InventoryItem inventoryItem = item.GetComponent<SCRIPT_InventoryItem>();
         selectedItem = inventoryItem;
+
+        Debug.Log("Selected item " + selectedItem);
 
         rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(canvasTransform);
         rectTransform.SetAsLastSibling();
 
-        int selectedItemID = UnityEngine.Random.Range(0, items.Count);
-        inventoryItem.Set(items[selectedItemID]);
+        inventoryItem.Set(inventoryItem.itemData);
     }
 
     private void ItemIconDrag()

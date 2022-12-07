@@ -42,7 +42,8 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     {
         var weapon = GetWeapon(activeWeaponIndex);
 
-        if (!weapon.isReloading)
+
+        if (weapon != null && !weapon.isReloading)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
