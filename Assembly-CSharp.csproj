@@ -63,7 +63,7 @@
     <Compile Include="Assets\SCRIPT_ActiveWeapon.cs" />
     <Compile Include="Assets\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\nextSpawn.cs" />
-    <Compile Include="Assets\SCRIPT_PickableObject.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Test_PlayOST.cs" />

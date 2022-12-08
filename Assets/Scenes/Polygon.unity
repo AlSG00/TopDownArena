@@ -13585,6 +13585,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPick: 0
+  alreadyPicking: 0
+  inventoryPrefab: {fileID: 0}
 --- !u!114 &249775833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67842,7 +67844,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 30e70269319f24942b0c268283757cfd, type: 2}
   - {fileID: 11400000, guid: f4434ac65e1e8e048aedff31b686a0f3, type: 2}
   - {fileID: 11400000, guid: 9e911267786f48b42a6502e28cf22045, type: 2}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 3847044455456163715, guid: 7086c75d860015a40a398a7073b5ad66,
+    type: 3}
   canvasTransform: {fileID: 633701947}
 --- !u!114 &1324311757
 MonoBehaviour:
@@ -80505,6 +80508,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canPick: 0
+  alreadyPicking: 0
+  inventoryPrefab: {fileID: 3847044455456163715, guid: 7086c75d860015a40a398a7073b5ad66,
+    type: 3}
 --- !u!114 &1570470900
 MonoBehaviour:
   m_ObjectHideFlags: 0

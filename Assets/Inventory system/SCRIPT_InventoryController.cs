@@ -84,15 +84,10 @@ public class SCRIPT_InventoryController : MonoBehaviour
             return;
         }
 
-        Debug.Log("Creating item...");
         CreateItem(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
-
-        Debug.Log("Inserting item...");
         InsertItem(itemToInsert);
-
-        Debug.Log("Item inserted...");
     }
 
     private void InsertItem(SCRIPT_InventoryItem itemToInsert)
@@ -153,7 +148,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
     }
 
-    //private void CreateRandomItem(GameObject item)
+    //private void CreateRandomItem()
     //{
     //    SCRIPT_InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<SCRIPT_InventoryItem>();
     //    selectedItem = inventoryItem;
@@ -162,20 +157,18 @@ public class SCRIPT_InventoryController : MonoBehaviour
     //    rectTransform.SetParent(canvasTransform);
     //    rectTransform.SetAsLastSibling();
 
-    //    inventoryItem.Set(items[selectedItemID]);
+    //    inventoryItem.Set(items[1]);
     //}
 
     private void CreateItem(GameObject item)
     {
-        SCRIPT_InventoryItem inventoryItem = item.GetComponent<SCRIPT_InventoryItem>();
+        itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
+        SCRIPT_InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<SCRIPT_InventoryItem>();
+
         selectedItem = inventoryItem;
-
-        Debug.Log("Selected item " + selectedItem);
-
         rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(canvasTransform);
         rectTransform.SetAsLastSibling();
-
         inventoryItem.Set(inventoryItem.itemData);
     }
 

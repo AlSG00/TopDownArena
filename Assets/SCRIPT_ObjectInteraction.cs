@@ -15,7 +15,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     float currentDistance;
     public GameObject player;
     public SCRIPT_PickableObject pickableObject;
-    //public SCRIPT_PickableObject previousPickableObject;
+
     private void Awake()
     {
         player = GameObject.Find("_Player");
@@ -62,11 +62,13 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
 
     private void ItemInteract()
     {
-        if (pickableObject == null || pickableObject.canPick == false)
+        if (pickableObject == null ||
+            pickableObject.canPick == false ||
+            pickableObject.alreadyPicking == true)
         {
             return;
         }
-
+        pickableObject.alreadyPicking = true;
         pickableObject.Pick();
         pickableObject = null;
     }
