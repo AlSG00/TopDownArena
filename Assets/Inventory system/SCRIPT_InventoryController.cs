@@ -5,32 +5,26 @@ using UnityEngine;
 
 public class SCRIPT_InventoryController : MonoBehaviour
 {
-    /*[HideInInspector]*/ public SCRIPT_ItemGrid selectedItemGrid;
-
-    //public SCRIPT_ItemGrid SelectedItemGrid
-    //{
-    //    get => selectedItemGrid;
-    //    set
-    //    {
-    //        selectedItemGrid = value;
-    //        inventoryHighlight.SetParent(value);
-    //    }
-    //}
+    public SCRIPT_ItemGrid selectedItemGrid;
 
     SCRIPT_InventoryItem selectedItem;
     SCRIPT_InventoryItem overlapItem;
     RectTransform rectTransform;
     public RectTransform gridRect;
+    public Transform dropPoint;
 
-    [SerializeField] List<SCRIPT_ItemData> items;
-    [SerializeField] GameObject itemPrefab;
+    [SerializeField] List<GameObject> items;
+     private GameObject _itemPrefab;
     [SerializeField] Transform canvasTransform;
 
     SCRIPT_InventoryHighlight inventoryHighlight;
 
+    //private List<GameObject> itemList;
+
     private void Awake()
     {
         inventoryHighlight = GetComponent<SCRIPT_InventoryHighlight>();
+        //itemList = new List<GameObject>();
     }
 
     private void Update()
@@ -64,6 +58,17 @@ public class SCRIPT_InventoryController : MonoBehaviour
         {
             LeftMouseButtonPress();
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            RightMouseButtonPress();
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            DropItem();
+        }
+
     }
 
     private void RotateItem()
@@ -162,8 +167,9 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     private void CreateItem(GameObject item)
     {
-        itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
-        SCRIPT_InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<SCRIPT_InventoryItem>();
+        //itemList.Add(item);
+        _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
+        SCRIPT_InventoryItem inventoryItem = Instantiate(_itemPrefab).GetComponent<SCRIPT_InventoryItem>();
 
         selectedItem = inventoryItem;
         rectTransform = inventoryItem.GetComponent<RectTransform>();
@@ -202,6 +208,57 @@ public class SCRIPT_InventoryController : MonoBehaviour
         {
             PlaceItem(tileGridPosition);
         }
+    }
+
+    private void RightMouseButtonPress()
+    {
+        Vector2Int tileGridPosition = GetTileGridPosition();
+        if (selectedItem == null)
+        {
+            PickUpItem(tileGridPosition);
+        }
+        selectedItem.GetComponent<SCRIPT_IItem>().Use();
+        Destroy(selectedItem.gameObject);
+        inventoryHighlight.Show(false);
+    }
+
+    private void DropItem()
+    {
+        
+        Vector2Int tileGridPosition = GetTileGridPosition();
+        if (selectedItem == null)
+        {
+            PickUpItem(tileGridPosition);
+        }
+
+        if (selectedItem == null)
+        {
+            return;
+        }
+
+        if (selectedItem.isDropping)
+        {
+            return;
+        }
+        selectedItem.isDropping = true;
+        Debug.Log($"SelectedItem is {selectedItem}");
+
+        //GameObject pref = selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab;
+
+        //if (pref == null)
+        //{
+        //    Debug.Log("Huba...");
+        //}
+
+        //if (dropPoint == null)
+        //{
+        //    Debug.Log("Buba...");
+        //}
+
+
+        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab, dropPoint.position, Quaternion.identity);
+        Destroy(selectedItem.gameObject);
+        inventoryHighlight.Show(false);
     }
 
     private Vector2Int GetTileGridPosition()

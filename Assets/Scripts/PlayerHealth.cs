@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField]
-    float health;
+    public float health;
     public float currentHealth;
 
     public HealtBarScript healthBar;
-    // Start is called before the first frame update
 
+    private void OnEnable()
+    {
+        //SCRIPT_Medkit_Small.HealPlayer += Heal;
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    //public delegate void HealingAction();
+    //public static event HealingAction Healing; 
     void Start()
     {
         Transform hud = GameObject.Find("HUD").transform;
@@ -42,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    public void Heal(float healing)
+    public void Heal(float healing, bool instant)
     {
         currentHealth += healing;
         if (currentHealth > health)

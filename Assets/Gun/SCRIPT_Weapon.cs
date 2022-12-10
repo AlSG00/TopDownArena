@@ -24,10 +24,6 @@ public class SCRIPT_Weapon : MonoBehaviour
     public GameObject hitEffectMetal;
     public GameObject hitEffectConcrete;
 
-
-    
-    //public ParticleSystem hitEffectMetal;
-    //public ParticleSystem hitEffectConcrete;
     public TrailRenderer tracerEffect;
     public Transform muzzle;
     public LayerMask activeLayers;
@@ -49,23 +45,14 @@ public class SCRIPT_Weapon : MonoBehaviour
     [SerializeField] private int magCapacity = 30;
     public int currentAmmoInMag = 30;
 
-    //[SerializeField] private int ammoStock = 150;                  // Боезапас
     public SCRIPT_PlayerAmmunition ammoInStock;
     
-    //public int currentStock = 90;
     public AmmoCounterTest ammoCounter;
     public bool singleShots;
     public bool shotPerformed;
     public int projectilesPerShot = 1;
     private ParticleSystem hitEffect;
     public float singleShotDelay = 0.3f;
-
-
-    //public AnimationClip weaponIdleAnimation;
-    //public AnimationClip weaponAimAnimation;
-    //public AnimationClip weaponSwapAnimation;
-    //public AnimationClip weaponReloadAnimation;
-    //public AnimationClip weaponShootAnimation;
 
     public GameObject magazine;
 
@@ -261,16 +248,6 @@ public class SCRIPT_Weapon : MonoBehaviour
 
         if (toFill > 0 && currentWeaponStock.left > 0)
         {
-            //if (currentStock >= toFill)
-            //{
-            //    currentStock -= toFill;
-            //    currentAmmo = magCapacity;
-            //}
-            //else
-            //{
-            //    currentAmmo += currentStock;
-            //    currentStock = 0;
-            //}
             ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
             Debug.Log($"Left {currentWeaponStock.left}");
         }
@@ -279,23 +256,6 @@ public class SCRIPT_Weapon : MonoBehaviour
             Debug.Log("Can't reload");
         }
     }
-
-    //public void AddAmmo(int ammo)
-    //{
-    //    ammoInStock
-
-    //    currentStock += ammo;
-    //    if (currentStock > ammoStock)
-    //        currentStock = ammoStock;
-
-    //    ammoCounter.SetCurrentAmmo(currentAmmo, currentStock);
-    //}
-
-    //public void IsReloading()
-    //{
-    //    if (isReloading == true && !audioSource.isPlaying)
-    //        isReloading = false;
-    //}
 
     public Vector3 GetSpreadDirection()
     {

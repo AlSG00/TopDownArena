@@ -54,7 +54,12 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     internal SCRIPT_InventoryItem GetItem(int x, int y)
     {
-        return inventoryItemSlot[x, y];
+        if (x > 0 && x < _gridSizeWidth && y > 0 && y < _gridSizeHeight)
+        {
+            return inventoryItemSlot[x, y];
+        }
+
+        return null;
     }
 
     private void Init(int width, int height)

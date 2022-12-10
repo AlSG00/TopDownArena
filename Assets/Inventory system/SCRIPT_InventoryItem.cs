@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class SCRIPT_InventoryItem : MonoBehaviour
 {
     public SCRIPT_ItemData itemData;
+    public GameObject prefab;
+    public bool isDropping;
 
     public int Height
     {
@@ -36,6 +38,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public int onGridPositionY;
 
     public bool isRotated = false;
+    public bool isUsable = true;
 
     internal void Set(SCRIPT_ItemData itemData)
     {
