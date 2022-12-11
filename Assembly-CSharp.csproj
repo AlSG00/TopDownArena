@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_ActiveWeapon.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\Scripts\nextSpawn.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_ItemInteract.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Scripts\PlayerHP.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
+    <Compile Include="Assets\Scripts\SCRIPT_Medkit_Small.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_DaytimeLight.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
+    <Compile Include="Assets\Items\SCRIPT_IItem.cs" />
     <Compile Include="Assets\Scripts\TextLookAt.cs" />
     <Compile Include="Assets\Scripts\RoachController.cs" />
     <Compile Include="Assets\Scripts\SwapScene.cs" />
@@ -125,7 +128,6 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryItem.cs" />
     <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\Scripts\TestAnimationEvent.cs" />
-    <Compile Include="Assets\Grass\Scripts\GrassTrample.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_ItemGrid.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
     <Compile Include="Assets\Scripts\CheckPass.cs" />
@@ -170,13 +172,11 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_ItemInteract.cs" />
-    <Compile Include="Assets\Scripts\SCRIPT_Medkit_Small.cs" />
-    <Compile Include="Assets\Items\SCRIPT_IItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Grass\testGrass\SkyboxCubemap.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSInclude.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSDepth.shader" />
@@ -195,7 +195,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSStencilMask.shader" />
-    <None Include="Assets\Grass\Shaders\GrassShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\_Sources\Desaturate.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -209,7 +208,6 @@
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSSkyBox.shader" />
-    <None Include="Assets\Grass\Shaders\CustomTessellation.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\_Sources\testwrite.shader" />
   </ItemGroup>

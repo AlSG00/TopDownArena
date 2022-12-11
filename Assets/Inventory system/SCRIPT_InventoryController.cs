@@ -224,7 +224,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     private void DropItem()
     {
-        
         Vector2Int tileGridPosition = GetTileGridPosition();
         if (selectedItem == null)
         {
@@ -244,7 +243,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
         Debug.Log($"SelectedItem is {selectedItem}");
 
         //GameObject pref = selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab;
-
         //if (pref == null)
         //{
         //    Debug.Log("Huba...");
@@ -254,7 +252,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
         //{
         //    Debug.Log("Buba...");
         //}
-
 
         Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab, dropPoint.position, Quaternion.identity);
         Destroy(selectedItem.gameObject);
