@@ -492,6 +492,8 @@
 "Assets/Scripts/TEST_UnlockDoor.cs"
 "Assets/Scripts/TextLookAt.cs"
 "Assets/Scripts/ToolTip.cs"
+"Assets/SCRIPT_IInteract.cs"
+"Assets/SCRIPT_TEST_ActivateShop.cs"
 "Assets/Shared/Ramps/Runtime/RampAsset.cs"
 "Assets/Shared/Scripts/AdjustTimeScale.cs"
 "Assets/Shared/Scripts/ProximityActivate.cs"

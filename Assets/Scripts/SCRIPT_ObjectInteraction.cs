@@ -15,6 +15,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     float currentDistance;
     public GameObject player;
     public SCRIPT_PickableObject pickableObject;
+    public SCRIPT_TEST_ActivateShop shop;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             ItemInteract();
+            Interact_2();
         }
     }
 
@@ -48,7 +50,14 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 pickableObject.canPick = true;
                 break;
             }
-            else if (hits.All(s => !s.transform.CompareTag("Item")))
+            else if(hits[i].transform.CompareTag("Interactable"))
+            {
+                shop = hits[i].transform.GetComponent<SCRIPT_TEST_ActivateShop>();
+                shop.onCursor = true;
+                break;
+            }
+
+            if (hits.All(s => !s.transform.CompareTag("Item")))
             {
                 if (pickableObject != null)
                 {
@@ -56,6 +65,16 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 }
 
                 pickableObject = null;
+            }
+
+            if (hits.All(s => !s.transform.CompareTag("Interactable")))
+            {
+                if (shop != null)
+                {
+                    shop.onCursor = false;
+                }
+
+                shop = null;
             }
         }
     }
@@ -72,4 +91,16 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
         pickableObject.Pick();
         pickableObject = null;
     }
+
+    private void Interact_2()
+    {
+        if (shop == null || shop.onCursor == false)
+        {
+            return;
+        }
+
+        shop.Interact();
+    }
+
+
 }
