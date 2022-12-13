@@ -15,7 +15,8 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     float currentDistance;
     public GameObject player;
     public SCRIPT_PickableObject pickableObject;
-    public SCRIPT_TEST_ActivateShop shop;
+    public SCRIPT_IInteractable interactableObject;
+    public SCRIPT_TEST_ActivateShop shop; 
 
     private void Awake()
     {
@@ -26,10 +27,10 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     {
         MouseCursorRaycast();
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
+
             ItemInteract();
-            Interact_2();
         }
     }
 
@@ -39,68 +40,41 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
         hits = Physics.RaycastAll(ray);
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i].transform.CompareTag("Item"))
+            if (hits[i].transform.CompareTag("Interactable"))
             {
-                if (pickableObject != null)
+                if (interactableObject != null)
                 {
-                    pickableObject.canPick = false;
-
-                }
-                pickableObject = hits[i].transform.GetComponent<SCRIPT_PickableObject>();
-                pickableObject.canPick = true;
-                break;
-            }
-            else if(hits[i].transform.CompareTag("Interactable"))
-            {
-                shop = hits[i].transform.GetComponent<SCRIPT_TEST_ActivateShop>();
-                shop.onCursor = true;
-                break;
-            }
-
-            if (hits.All(s => !s.transform.CompareTag("Item")))
-            {
-                if (pickableObject != null)
-                {
-                    pickableObject.canPick = false;
+                    interactableObject.canInteract = false;
                 }
 
-                pickableObject = null;
+                interactableObject = hits[i].transform.GetComponent<SCRIPT_IInteractable>();
+                interactableObject.canInteract = true;
+                break;
             }
 
             if (hits.All(s => !s.transform.CompareTag("Interactable")))
             {
-                if (shop != null)
+                if (interactableObject != null)
                 {
-                    shop.onCursor = false;
+                    interactableObject.canInteract = false;
                 }
 
-                shop = null;
+                interactableObject = null;
             }
         }
     }
 
     private void ItemInteract()
     {
-        if (pickableObject == null ||
-            pickableObject.canPick == false ||
-            pickableObject.alreadyPicking == true)
-        {
-            return;
-        }
-        pickableObject.alreadyPicking = true;
-        pickableObject.Pick();
-        pickableObject = null;
-    }
-
-    private void Interact_2()
-    {
-        if (shop == null || shop.onCursor == false)
+        if (interactableObject == null ||
+            interactableObject.canInteract == false ||
+            interactableObject.alreadyInteracting == true)
         {
             return;
         }
 
-        shop.Interact();
+        interactableObject.alreadyInteracting = true;
+        interactableObject.Interact();
+        //interactableObject = null;
     }
-
-
 }

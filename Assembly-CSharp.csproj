@@ -63,7 +63,6 @@
     <Compile Include="Assets\Scripts\SCRIPT_ActiveWeapon.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\Scripts\nextSpawn.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_ItemInteract.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
@@ -164,6 +163,7 @@
     <Compile Include="Assets\Scripts\SwapScenesInteractive.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_PlayerAmmunition.cs" />
     <Compile Include="Assets\Scripts\ToolTip.cs" />
+    <Compile Include="Assets\SCRIPT_TEST_ActivateShop.cs" />
     <Compile Include="Assets\Scripts\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSMask.cs" />
@@ -172,8 +172,9 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\SCRIPT_TEST_ActivateShop.cs" />
-    <Compile Include="Assets\SCRIPT_IInteract.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_IInteractable.cs" />
+    <Compile Include="Assets\SCRIPT_InteractableObjectTrigger.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_ItemContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

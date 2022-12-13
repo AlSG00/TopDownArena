@@ -7,6 +7,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
 {
     public SCRIPT_ItemGrid selectedItemGrid;
 
+
     SCRIPT_InventoryItem selectedItem;
     SCRIPT_InventoryItem overlapItem;
     RectTransform rectTransform;

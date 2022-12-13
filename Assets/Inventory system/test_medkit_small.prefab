@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9021800403020754573}
   m_Layer: 12
   m_Name: test_medkit_small
-  m_TagString: Item
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,8 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65dfbd2eedc5bbe459ef82c9c047095e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPick: 0
-  alreadyPicking: 0
   inventoryPrefab: {fileID: 3847044455456163715, guid: 7086c75d860015a40a398a7073b5ad66,
     type: 3}
 --- !u!54 &9021800403020754573
