@@ -7,15 +7,15 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 {
     // Хранение данных об инвентаре
 
-    public const float _tileSizeWidth = 32;
-    public const float _tileSizeHeight = 32;
+    public const float _tileSizeWidth = 64;
+    public const float _tileSizeHeight = 64;
 
     SCRIPT_InventoryItem[,] inventoryItemSlot;
 
     RectTransform rectTransform;
 
-    [SerializeField] private int _gridSizeWidth = 5;
-    [SerializeField] private int _gridSizeHeight = 5;
+    public int _gridSizeWidth = 5;
+    public int _gridSizeHeight = 5;
 
     Vector2 positionOnTheGrid = new Vector2();
     Vector2Int tileGridPosition;
@@ -54,7 +54,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     internal SCRIPT_InventoryItem GetItem(int x, int y)
     {
-        if (x > 0 && x < _gridSizeWidth && y > 0 && y < _gridSizeHeight)
+        if (x > 0 && x < _gridSizeWidth &&
+            y > 0 && y < _gridSizeHeight)
         {
             return inventoryItemSlot[x, y];
         }
@@ -62,7 +63,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return null;
     }
 
-    private void Init(int width, int height)
+    public void Init(int width, int height)
     {
         inventoryItemSlot = new SCRIPT_InventoryItem[width, height];
         Vector2 size = new Vector2(width * _tileSizeWidth, height * _tileSizeHeight);
@@ -78,7 +79,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         // Вычисление положения ячеек на сетке
         tileGridPosition.x = (int)(positionOnTheGrid.x / _tileSizeWidth);
         tileGridPosition.y = (int)(positionOnTheGrid.y / _tileSizeHeight);
-
+        Debug.Log($"Position: {tileGridPosition.x} : {tileGridPosition.y}");
         return tileGridPosition;
     }
 
@@ -102,17 +103,17 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         }
 
         // Пытаемся найти место повторно, но с повернутым предметом
-        for (int j = 0; j < height; j++)
-        {
-            for (int i = 0; i < width; i++)
-            {
-                if (CheckAvailableSpace(i, j, itemToInsert.Height, itemToInsert.Width))
-                {
-                    returnRotated = true;
-                    return new Vector2Int(i, j);
-                }
-            }
-        }
+        //for (int j = 0; j < height; j++)
+        //{
+        //    for (int i = 0; i < width; i++)
+        //    {
+        //        if (CheckAvailableSpace(i, j, itemToInsert.Height, itemToInsert.Width))
+        //        {
+        //            returnRotated = true;
+        //            return new Vector2Int(i, j);
+        //        }
+        //    }
+        //}
 
         return null;
     }
@@ -242,5 +243,10 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void ClearGrid()
+    {
+
     }
 }

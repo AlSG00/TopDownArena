@@ -112,6 +112,7 @@
     <Compile Include="Assets\Scripts\SwapScene.cs" />
     <Compile Include="Assets\Scripts\TEST_SpawnEnemies.cs" />
     <Compile Include="Assets\Scripts\ShowTooltip.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_ItemContainer.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_SunRotation.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\ILOSSource.cs" />
     <Compile Include="Assets\Camera\Player_Aim.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectHider.cs" />
     <Compile Include="Assets\Gun\SCRIPT_AmmoShells.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Inventory system\SCRIPT_IInteractable.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSVisibilityInfo.cs" />
     <Compile Include="Assets\Scripts\TEST_ActivateTriggers.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_TestBlackZones.cs" />
@@ -167,14 +169,12 @@
     <Compile Include="Assets\Scripts\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSMask.cs" />
+    <Compile Include="Assets\SCRIPT_InteractableObjectTrigger.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_IInteractable.cs" />
-    <Compile Include="Assets\SCRIPT_InteractableObjectTrigger.cs" />
-    <Compile Include="Assets\Inventory system\SCRIPT_ItemContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

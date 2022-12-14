@@ -8,9 +8,13 @@ public class Player_Shooting : MonoBehaviour
     public float aimingDuration = 0.1f;
     // TODO: REWORK THIS SCRIPT
     public bool isShooting = false;
+
     public bool isAiming = false;
+
     public bool isCheckingStats = false;
+
     public bool isCheckingInventory = false;
+
     public GameObject inventory;
 
     public WeaponAnimationEvents animationEvents;
@@ -35,6 +39,7 @@ public class Player_Shooting : MonoBehaviour
 
     private void Start()
     {
+        HandleInventory(false);
         TryGetComponent<SCRIPT_ActiveWeapon>(out activeWeapon);
         isShooting = false;
         Equip(weapon);
@@ -58,21 +63,8 @@ public class Player_Shooting : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            Vector2 position = new Vector2();
-            RectTransform inventoryRect = inventory.GetComponent<RectTransform>();
-
             isCheckingInventory = !isCheckingInventory;
-            if (isCheckingInventory)
-            {
-                position.y = 630;
-            }
-            else
-            {
-                position.y = 3000;
-            }
-            position.x = inventoryRect.position.x;
-
-            inventoryRect.position = position;
+            HandleInventory(isCheckingInventory);
         }
 
         if (weapon)
@@ -147,6 +139,25 @@ public class Player_Shooting : MonoBehaviour
         {
             GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
         }
+    }
+
+    private void HandleInventory(bool isActive)
+    {
+        Vector2 position = new Vector2();
+        RectTransform inventoryRect = inventory.GetComponent<RectTransform>();
+
+        if (isActive)
+        {
+            position.y = 630;
+        }
+        else
+        {
+            position.y = 3000;
+        }
+        position.x = inventoryRect.position.x;
+
+        inventoryRect.position = position;
+
     }
 
     public void Equip(SCRIPT_Weapon weaponToEquip)

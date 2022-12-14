@@ -6,7 +6,7 @@ using UnityEngine;
 public class SCRIPT_InventoryController : MonoBehaviour
 {
     public SCRIPT_ItemGrid selectedItemGrid;
-
+    public SCRIPT_ItemGrid selectedContainer;
 
     SCRIPT_InventoryItem selectedItem;
     SCRIPT_InventoryItem overlapItem;
@@ -107,6 +107,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
         selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
     }
+
 
     Vector2Int oldPosition;
     SCRIPT_InventoryItem itemToHighlight;
@@ -243,17 +244,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
         selectedItem.isDropping = true;
         Debug.Log($"SelectedItem is {selectedItem}");
 
-        //GameObject pref = selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab;
-        //if (pref == null)
-        //{
-        //    Debug.Log("Huba...");
-        //}
-
-        //if (dropPoint == null)
-        //{
-        //    Debug.Log("Buba...");
-        //}
-
         Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab, dropPoint.position, Quaternion.identity);
         Destroy(selectedItem.gameObject);
         inventoryHighlight.Show(false);
@@ -268,7 +258,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
             position.x -= (selectedItem.Width - 1) * SCRIPT_ItemGrid._tileSizeWidth / 2;
             position.y += (selectedItem.Height - 1) * SCRIPT_ItemGrid._tileSizeHeight / 2;
         }
-
+        
         return selectedItemGrid.GetTileGridPosition(position);
     }
 
