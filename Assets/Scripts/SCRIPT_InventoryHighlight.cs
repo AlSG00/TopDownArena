@@ -15,6 +15,7 @@ public class SCRIPT_InventoryHighlight : MonoBehaviour
     {
         highlighter.gameObject.SetActive(isShowing);
     }
+
     public void SetSize(SCRIPT_InventoryItem targetItem)
     {
         Vector2 size = new Vector2();

@@ -21,7 +21,14 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
     {
         Debug.Log("Interacting");
         canInteract = false;
-        inventory.InsertItemIntoInventory(gameObject);
-        Destroy(gameObject);
+        inventory.selectedItemGrid = inventory.inventoryGrid;
+        if (inventory.InsertItemIntoInventory(gameObject))
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            canInteract = true;
+        }
     }
 }

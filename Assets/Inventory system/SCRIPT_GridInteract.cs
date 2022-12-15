@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SCRIPT_ItemGrid))]
-public class SCRIPT_GridInteract : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandler*/
+public class SCRIPT_GridInteract : MonoBehaviour, IPointerEnterHandler//S, //IPointerExitHandler*/
 {
     SCRIPT_InventoryController inventoryController;
     SCRIPT_ItemGrid itemGrid;
@@ -16,11 +16,11 @@ public class SCRIPT_GridInteract : MonoBehaviour/*, IPointerEnterHandler, IPoint
         inventoryController.gridRect = inventoryController.selectedItemGrid.GetComponent<RectTransform>();
     }
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    inventoryController.selectedItemGrid = itemGrid;
-    //    inventoryController.gridRect = inventoryController.selectedItemGrid.GetComponent<RectTransform>();
-    //}
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        inventoryController.selectedItemGrid = itemGrid;
+        inventoryController.gridRect = inventoryController.selectedItemGrid.GetComponent<RectTransform>();
+    }
 
     //public void OnPointerExit(PointerEventData eventData)
     //{

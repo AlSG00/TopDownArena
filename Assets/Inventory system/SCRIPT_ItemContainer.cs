@@ -31,17 +31,28 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         canInteract = true;
     }
 
+    //private bool isInitialized;
     private void GridInit()
     {
         if (inventoryController == null)
         {
             inventoryController = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
         }
-        containerGrid.Init(containerGridWidth, containerGridHeight);
+        //if (!isInitialized)
+        //{
+            containerGrid._gridSizeWidth = containerGridWidth;
+            containerGrid._gridSizeHeight = containerGridHeight;
+            containerGrid.Init(containerGridWidth, containerGridHeight);
+        //    isInitialized = true;
+        //}
     }
 
     private void PlaceItems()
     {
+        //while (!isInitialized)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
         inventoryController.selectedItemGrid = containerGrid;
         for (int i = 0; i < loot.Length; i++)
         {

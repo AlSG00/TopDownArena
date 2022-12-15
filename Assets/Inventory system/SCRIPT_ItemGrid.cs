@@ -54,8 +54,10 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     internal SCRIPT_InventoryItem GetItem(int x, int y)
     {
-        if (x > 0 && x < _gridSizeWidth &&
-            y > 0 && y < _gridSizeHeight)
+        if (x >= 0 &&
+            y >= 0 &&
+            x < _gridSizeWidth &&
+            y < _gridSizeHeight)
         {
             return inventoryItemSlot[x, y];
         }
@@ -73,21 +75,33 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public Vector2Int GetTileGridPosition(Vector2 mousePosition)
     {
         positionOnTheGrid.x = mousePosition.x - rectTransform.position.x;
-
         positionOnTheGrid.y = rectTransform.position.y - mousePosition.y;
+       // Debug.Log($"Position on the grid: {positionOnTheGrid.x} : {positionOnTheGrid.y}");
+
 
         // Вычисление положения ячеек на сетке
         tileGridPosition.x = (int)(positionOnTheGrid.x / _tileSizeWidth);
         tileGridPosition.y = (int)(positionOnTheGrid.y / _tileSizeHeight);
-        Debug.Log($"Position: {tileGridPosition.x} : {tileGridPosition.y}");
+
+        if (positionOnTheGrid.x < 0)
+        {
+            tileGridPosition.x -= 1;
+        }
+
+        if (positionOnTheGrid.y < 0)
+        {
+            tileGridPosition.y -= 1;
+        }
+
+       // Debug.Log($"Position: {tileGridPosition.x} : {tileGridPosition.y}");
         return tileGridPosition;
     }
 
-    bool returnRotated;
+    //bool returnRotated;
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
-        returnRotated = false;
-
+       // returnRotated = false;
+       
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;
 

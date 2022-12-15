@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SCRIPT_InventoryController : MonoBehaviour
 {
+    public SCRIPT_ItemGrid inventoryGrid;
     public SCRIPT_ItemGrid selectedItemGrid;
     public SCRIPT_ItemGrid selectedContainer;
 
@@ -32,16 +33,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
     {
         ItemIconDrag();
 
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    CreateRandomItem();
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    InsertRandomItem();
-        //}
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             RotateItem();
@@ -65,7 +56,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
             RightMouseButtonPress();
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             DropItem();
         }
@@ -82,30 +73,38 @@ public class SCRIPT_InventoryController : MonoBehaviour
         selectedItem.Rotated();
     }
 
-    public void InsertItemIntoInventory(GameObject item)
+    public bool InsertItemIntoInventory(GameObject item)
     {
         if (selectedItemGrid == null) 
         {
             Debug.Log("Grid is not selected");
-            return;
+            return false;
         }
 
         CreateItem(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
-        InsertItem(itemToInsert);
+        if (InsertItem(itemToInsert))
+        {
+            return true;
+        }
+
+        return false;
     }
 
-    private void InsertItem(SCRIPT_InventoryItem itemToInsert)
+    private bool InsertItem(SCRIPT_InventoryItem itemToInsert)
     {
         Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
     
         if (positionOnGrid == null)
         {
-            return;
+            Debug.Log("No space left in the inventory");
+            Destroy(itemToInsert.gameObject);
+            return false;
         }
 
         selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+        return true;
     }
 
 
@@ -144,8 +143,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
             inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
                 positionOnGrid.x,
                 positionOnGrid.y,
-                selectedItem.Width,
-                selectedItem.Height)
+                selectedItem.itemData.width,
+                selectedItem.itemData.height)
                 );
 
             inventoryHighlight.SetSize(selectedItem);
@@ -155,21 +154,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
     }
 
-    //private void CreateRandomItem()
-    //{
-    //    SCRIPT_InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<SCRIPT_InventoryItem>();
-    //    selectedItem = inventoryItem;
-
-    //    rectTransform = inventoryItem.GetComponent<RectTransform>();
-    //    rectTransform.SetParent(canvasTransform);
-    //    rectTransform.SetAsLastSibling();
-
-    //    inventoryItem.Set(items[1]);
-    //}
-
     private void CreateItem(GameObject item)
     {
-        //itemList.Add(item);
         _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
         SCRIPT_InventoryItem inventoryItem = Instantiate(_itemPrefab).GetComponent<SCRIPT_InventoryItem>();
 
