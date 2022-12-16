@@ -73,38 +73,41 @@ public class SCRIPT_InventoryController : MonoBehaviour
         selectedItem.Rotated();
     }
 
-    public bool InsertItemIntoInventory(GameObject item)
+    public void InsertItemIntoInventory(GameObject item)
     {
         if (selectedItemGrid == null) 
         {
             Debug.Log("Grid is not selected");
-            return false;
+            // return false;
+            return;
         }
 
         CreateItem(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
-        if (InsertItem(itemToInsert))
-        {
-            return true;
-        }
+        InsertItem(itemToInsert);
+        //if (InsertItem(itemToInsert))
+        //{
+        //    return true;
+        //}
 
-        return false;
+        //return false;
     }
 
-    private bool InsertItem(SCRIPT_InventoryItem itemToInsert)
+    private void InsertItem(SCRIPT_InventoryItem itemToInsert)
     {
         Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
     
         if (positionOnGrid == null)
         {
-            Debug.Log("No space left in the inventory");
-            Destroy(itemToInsert.gameObject);
-            return false;
+            //Debug.Log("No space left in the inventory");
+            //Destroy(itemToInsert.gameObject);
+            // return false;
+            return;
         }
 
         selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-        return true;
+        //return true;
     }
 
 
@@ -154,7 +157,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
     }
 
-    private void CreateItem(GameObject item)
+    public void CreateItem(GameObject item)
     {
         _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
         SCRIPT_InventoryItem inventoryItem = Instantiate(_itemPrefab).GetComponent<SCRIPT_InventoryItem>();

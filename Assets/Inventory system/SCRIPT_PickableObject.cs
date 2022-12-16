@@ -19,16 +19,17 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
     public void Interact()
     {
-        Debug.Log("Interacting");
         canInteract = false;
+        Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryPrefab.GetComponent<SCRIPT_InventoryItem>());
+        if (positionOnGrid == null)
+        {
+            Debug.Log("No free space");
+            return;
+        }
+
         inventory.selectedItemGrid = inventory.inventoryGrid;
-        if (inventory.InsertItemIntoInventory(gameObject))
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            canInteract = true;
-        }
+        inventory.InsertItemIntoInventory(gameObject);
+        Destroy(gameObject);
+        // canInteract = true;
     }
 }
