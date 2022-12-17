@@ -8,7 +8,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
     public SCRIPT_ItemGrid inventoryGrid;
     public SCRIPT_ItemGrid selectedItemGrid;
     //public SCRIPT_ItemGrid selectedContainer;
-
+    public SCRIPT_ItemContainer itemContainer;
     public SCRIPT_InventoryItem selectedItem;
     SCRIPT_InventoryItem overlapItem;
     RectTransform rectTransform;
@@ -50,13 +50,11 @@ public class SCRIPT_InventoryController : MonoBehaviour
         {
             LeftMouseButtonPress();
         }
-
-        if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1))
         {
             RightMouseButtonPress();
         }
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
             DropItem();
         }
@@ -89,19 +87,51 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     public void InsertItemIntoContainer(GameObject item)
     {
-        Debug.Log("Creating item...");
-        CreateContainerItem(item);
 
-        Debug.Log("Inserting item...");
+        CreateContainerItem(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
         InsertItem(itemToInsert);
+
+        функция для вставки предметов в не инициализированный контейнер
+        предметы создаются заново
+        создаются экземпляры Storeditem и заполняются данными
     }
 
     public void InsertItemIntoInitializedContainer(GameObject item)
     {
-        SCRIPT_InventoryItem itemToInsert = item.GetComponent<SCRIPT_InventoryItem>();
-        selectedItemGrid.PlaceItem(itemToInsert, itemToInsert.onGridPositionX, itemToInsert.onGridPositionY);
+        функция для вставки предметов в уже инициализированный контейнер
+        предметы создаются
+        данные об их положении считываются из списка у контейнера
+
+        Продумать, как и когда должна производиться запись в список контейнера
+
+        Один из вариантов:
+        После каждого перемещения обновляются данные
+        Если предмет переносится в инвентарь, то его надо удалять из списка в контейнере???
+        
+        //CreateContainerItem(item);
+        //SCRIPT_InventoryItem itemToInsert = selectedItem;
+        //selectedItemGrid.PlaceItem(itemToInsert, itemToInsert.onGridPositionX, itemToInsert.onGridPositionY);
+        
+
+        CreateContainerItem(item);
+        SCRIPT_InventoryItem itemToInsert = selectedItem;
+        selectedItem = null;
+        //InsertItem(itemToInsert);
+
+        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+
+        if (positionOnGrid == null)
+        {
+            return;
+        }
+        selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+
+        SCRIPT_ItemContainer.StoredItem itemTostore = new SCRIPT_ItemContainer.StoredItem();
+        itemTostore.item = selectedItem;
+        itemTostore.positionOnGrid.x = positionOnGrid.x;
+        itemTostore.positionOnGrid.y = positionOnGrid.y;
     }
 
     public void CreateItem(GameObject item)
@@ -262,6 +292,33 @@ public class SCRIPT_InventoryController : MonoBehaviour
         Destroy(selectedItem.gameObject);
         inventoryHighlight.Show(false);
     }
+
+    //private void ClearGrid()
+    //{
+    //    if (selectedItemGrid == null)
+    //    {
+    //        return;
+    //    }
+
+    //    for (int i = 0; i < selectedItemGrid._gridSizeWidth; i++)
+    //    {
+    //        for (int j = 0; j < selectedItemGrid._gridSizeHeight; j++)
+    //        {
+    //            selectedItem = selectedItemGrid.PickUpItem(i, j);
+    //            if (selectedItem != null)
+    //            {
+    //                Destroy(selectedItem.gameObject);
+    //            }
+    //        }
+    //    }
+
+    //    //selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
+    //    //if (selectedItem != null)
+    //    //{
+    //    //    rectTransform = selectedItem.GetComponent<RectTransform>();
+    //    //    rectTransform.SetAsLastSibling();
+    //    //}
+    //}
 
     private Vector2Int GetTileGridPosition()
     {

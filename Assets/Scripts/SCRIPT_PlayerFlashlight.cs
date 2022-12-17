@@ -38,7 +38,6 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
     void Update()
     {
         UseFlashlight();
-        
     }
 
     private void UseFlashlight()

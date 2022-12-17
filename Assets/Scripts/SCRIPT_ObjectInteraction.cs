@@ -23,7 +23,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
         player = GameObject.Find("_Player");
     }
 
-    void Update()
+    private void Update()
     {
         MouseCursorRaycast();
 
@@ -50,8 +50,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 interactableObject.canInteract = true;
                 break;
             }
-
-            if (hits.All(s => !s.transform.CompareTag("Interactable")))
+            else if (hits.All(s => !s.transform.CompareTag("Interactable")))
             {
                 if (interactableObject != null)
                 {
@@ -61,6 +60,8 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 interactableObject = null;
             }
         }
+
+        
     }
 
     private void ItemInteract()

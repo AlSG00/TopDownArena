@@ -7,6 +7,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 {
     // Хранение данных об инвентаре
 
+    
+
     public const float _tileSizeWidth = 64;
     public const float _tileSizeHeight = 64;
 
@@ -22,7 +24,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     private void Start()
     {
-        
+        rectTransform = GetComponent<RectTransform>();
         Init(_gridSizeWidth, _gridSizeHeight);
     }
 
@@ -67,11 +69,9 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public void Init(int width, int height)
     {
-        rectTransform = GetComponent<RectTransform>();
         inventoryItemSlot = new SCRIPT_InventoryItem[width, height];
         Vector2 size = new Vector2(width * _tileSizeWidth, height * _tileSizeHeight);
         rectTransform.sizeDelta = size;
-
     }
 
     public Vector2Int GetTileGridPosition(Vector2 mousePosition)
@@ -261,12 +261,30 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return true;
     }
 
+    //public void ClearGrid()
+    //{
+    //    int childrenCount = transform.childCount;
+    //    for (int i = childrenCount - 1; i >= 0; i--)
+    //    {
+    //        //Destroy(transform.GetChild(i).gameObject);
+    //        DestroyImmediate(transform.GetChild(i).gameObject);
+    //    }
+    //}
+
     public void ClearGrid()
     {
+
+        GameObject highlighter = GameObject.Find("Highlighter");
+        
         int childrenCount = transform.childCount;
-        for (int i = childrenCount - 1; i > 0; i--)
+        for (int i = childrenCount - 1; i >= 0; i--)
         {
-            Destroy(transform.GetChild(i).gameObject);
+            if (transform.GetChild(i).name != "Highlighter")
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
         }
+
+        inventoryItemSlot = null;
     }
 }
