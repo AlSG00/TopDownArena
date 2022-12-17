@@ -18,12 +18,14 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     private void Awake()
     {
         inventoryController = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
+       // containerGrid = GameObject.Find("ContainerGrid").GetComponent<SCRIPT_ItemGrid>();
     }
 
     public void Interact()
     {
         if (canInteract == false)
         {
+            Debug.Log("Can't interact");
             return;
         }
 
@@ -39,33 +41,36 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
             inventoryController = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
         }
 
-        containerGrid._gridSizeWidth = containerGridWidth;
-        containerGrid._gridSizeHeight = containerGridHeight;
-        containerGrid.Init(containerGridWidth, containerGridHeight);
+        containerGrid.ClearGrid();
+        //containerGrid._gridSizeWidth = containerGridWidth;
+        //containerGrid._gridSizeHeight = containerGridHeight;
+        //containerGrid.Init(containerGridWidth, containerGridHeight);
         PlaceItems(isInitialized);
 
         isInitialized = true;
+        alreadyInteracting = false;
     }
 
     private void PlaceItems(bool initialized)
     {
-        если контейнер открывается впервые, то просто раскидываем предметы (придумать, как генерить рандомные предметы)
+       // если контейнер открывается впервые, то просто раскидываем предметы (придумать, как генерить рандомные предметы)
         if (initialized == false)
         {
             inventoryController.selectedItemGrid = containerGrid;
             for (int i = 0; i < loot.Length; i++)
             {
-                inventoryController.InsertItemIntoInventory(loot[i]);
+                //inventoryController.InsertItemIntoContainer(loot[i]);
+                inventoryController.InsertItemIntoContainer(loot[i]);
             }
         }
-        else
-        {
-            если контейнер уже был инициализирован, то надо где-то запомнить позиции предметов и расставлять предметы по своим позициям
-        }
-    }
-
-    private void PlaceItemsInitialized()
-    {
-
+        //else
+        //{
+        //    inventoryController.selectedItemGrid = containerGrid;
+        //    for (int i = 0; i < loot.Length; i++)
+        //    {
+        //        inventoryController.InsertItemIntoInitializedContainer(loot[i]);
+        //    }
+        //    //если контейнер уже был инициализирован, то надо где-то запомнить позиции предметов и расставлять предметы по своим позициям
+        //}
     }
 }

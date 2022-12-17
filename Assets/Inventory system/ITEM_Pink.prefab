@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 227.5, y: 73.5}
+  m_AnchoredPosition: {x: 64, y: -160}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1765722264743598900
@@ -94,7 +94,7 @@ MonoBehaviour:
   prefab: {fileID: 3868300638631363618, guid: 9032ba33769953441b2fdac0c2e53682, type: 3}
   isDropping: 0
   onGridPositionX: 0
-  onGridPositionY: 0
+  onGridPositionY: 2
   isRotated: 0
   isUsable: 1
 --- !u!114 &2346497512983539580

@@ -7,9 +7,9 @@ public class SCRIPT_InventoryController : MonoBehaviour
 {
     public SCRIPT_ItemGrid inventoryGrid;
     public SCRIPT_ItemGrid selectedItemGrid;
-    public SCRIPT_ItemGrid selectedContainer;
+    //public SCRIPT_ItemGrid selectedContainer;
 
-    SCRIPT_InventoryItem selectedItem;
+    public SCRIPT_InventoryItem selectedItem;
     SCRIPT_InventoryItem overlapItem;
     RectTransform rectTransform;
     public RectTransform gridRect;
@@ -78,7 +78,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
         if (selectedItemGrid == null) 
         {
             Debug.Log("Grid is not selected");
-            // return false;
             return;
         }
 
@@ -86,16 +85,54 @@ public class SCRIPT_InventoryController : MonoBehaviour
         SCRIPT_InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
         InsertItem(itemToInsert);
-        //if (InsertItem(itemToInsert))
-        //{
-        //    return true;
-        //}
+    }
 
-        //return false;
+    public void InsertItemIntoContainer(GameObject item)
+    {
+        Debug.Log("Creating item...");
+        CreateContainerItem(item);
+
+        Debug.Log("Inserting item...");
+        SCRIPT_InventoryItem itemToInsert = selectedItem;
+        selectedItem = null;
+        InsertItem(itemToInsert);
+    }
+
+    public void InsertItemIntoInitializedContainer(GameObject item)
+    {
+        SCRIPT_InventoryItem itemToInsert = item.GetComponent<SCRIPT_InventoryItem>();
+        selectedItemGrid.PlaceItem(itemToInsert, itemToInsert.onGridPositionX, itemToInsert.onGridPositionY);
+    }
+
+    public void CreateItem(GameObject item)
+    {
+        _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
+        SCRIPT_InventoryItem inventoryItem = Instantiate(_itemPrefab).GetComponent<SCRIPT_InventoryItem>();
+
+        selectedItem = inventoryItem;
+        rectTransform = inventoryItem.GetComponent<RectTransform>();
+        rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
+        inventoryItem.Set(inventoryItem.itemData);
+    }
+
+    private void CreateContainerItem(GameObject item)
+    {
+        //_itemPrefab = null;
+       // _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
+        SCRIPT_InventoryItem inventoryItem = Instantiate(item).GetComponent<SCRIPT_InventoryItem>();
+
+        selectedItem = inventoryItem;
+        Debug.Log($"Selected item is {selectedItem}");
+        rectTransform = inventoryItem.GetComponent<RectTransform>();
+        rectTransform.SetParent(canvasTransform);
+        rectTransform.SetAsLastSibling();
+        inventoryItem.Set(inventoryItem.itemData);
     }
 
     private void InsertItem(SCRIPT_InventoryItem itemToInsert)
     {
+        //Debug.Log("Finding space...");
         Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
     
         if (positionOnGrid == null)
@@ -105,7 +142,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
             // return false;
             return;
         }
-
+        //Debug.Log("Placing item...");
         selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
         //return true;
     }
@@ -155,18 +192,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
             inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
 
         }
-    }
-
-    public void CreateItem(GameObject item)
-    {
-        _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
-        SCRIPT_InventoryItem inventoryItem = Instantiate(_itemPrefab).GetComponent<SCRIPT_InventoryItem>();
-
-        selectedItem = inventoryItem;
-        rectTransform = inventoryItem.GetComponent<RectTransform>();
-        rectTransform.SetParent(canvasTransform);
-        rectTransform.SetAsLastSibling();
-        inventoryItem.Set(inventoryItem.itemData);
     }
 
     private void ItemIconDrag()

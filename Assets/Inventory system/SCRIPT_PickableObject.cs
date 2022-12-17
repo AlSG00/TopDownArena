@@ -23,8 +23,10 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
         Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryPrefab.GetComponent<SCRIPT_InventoryItem>());
         if (positionOnGrid == null)
         {
-            Debug.Log("No free space");
+            Debug.Log("No free space"); 
+            alreadyInteracting = false;
             return;
+            
         }
 
         inventory.selectedItemGrid = inventory.inventoryGrid;

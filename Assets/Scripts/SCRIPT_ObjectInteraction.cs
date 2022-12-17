@@ -29,7 +29,6 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-
             ItemInteract();
         }
     }
