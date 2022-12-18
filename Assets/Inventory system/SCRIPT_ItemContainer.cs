@@ -11,6 +11,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     public int containerGridWidth = 5;
     public int containerGridHeight = 5;
     public SCRIPT_InventoryController inventoryController;
+    public SCRIPT_InteractableObjectTrigger interactionTrigger;
 
     public SCRIPT_ItemGrid containerGrid;
     bool isInitialized = false;
@@ -19,12 +20,14 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     public class StoredItem
     {
-        public SCRIPT_InventoryItem item;
+        public GameObject item;
         public Vector2Int positionOnGrid;
+        public bool isRotated;
     }
 
     private void Awake()
     {
+        HandleContainerGrid(false);
         inventoryController = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
        // containerGrid = GameObject.Find("ContainerGrid").GetComponent<SCRIPT_ItemGrid>();
     }
@@ -32,12 +35,16 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     public void Interact()
     {
         alreadyInteracting = true;
-        if (canInteract == false)
+        if (canInteract == false ||
+            interactionTrigger.inInteractionArea == false)
         {
+            alreadyInteracting = false;
             Debug.Log("Can't interact");
             return;
         }
 
+        HandleContainerGrid(true);
+        inventoryController.HandleInventory(true);
         GridInit();
         canInteract = true;
     }
@@ -64,24 +71,52 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         alreadyInteracting = false;
     }
 
+    public void HandleContainerGrid(bool isActive)
+    {
+        Vector2 position = new Vector2();
+        RectTransform inventoryRect = containerGrid.GetComponent<RectTransform>();
+
+        if (isActive)
+        {
+            position.y = 630;
+        }
+        else
+        {
+
+            position.y = 3000;
+            alreadyInteracting = false;
+        }
+        position.x = inventoryRect.position.x;
+
+        inventoryRect.position = position;
+    }
+
     private void PlaceItems(bool initialized)
     {
+        inventoryController.selectedItemGrid = containerGrid;
+        if (inventoryController.itemContainer != null)
+        {
+            inventoryController.itemContainer.alreadyInteracting = false;
+        }
+        inventoryController.itemContainer = this;
         if (initialized == false)
         {
-            inventoryController.selectedItemGrid = containerGrid;
-            inventoryController.itemContainer = this;
+            
             for (int i = 0; i < loot.Length; i++)
             {
                 inventoryController.InsertItemIntoContainer(loot[i]);
+
+                //Debug.Log($"Stored item: {storedItemList[i].item}");
+                //Debug.Log($"Stored item posX: {storedItemList[i].positionOnGrid.x}");
+                //Debug.Log($"Stored item posY: {storedItemList[i].positionOnGrid.y}");
             }
         }
         else
         {
-            inventoryController.selectedItemGrid = containerGrid;
-            for (int i = 0; i < loot.Length; i++)
+            for (int i = 0; i < storedItemList.Count; i++)
             {
-                inventoryController.InsertItemIntoInitializedContainer(loot[i]);
-            }
+                inventoryController.InsertItemIntoInitializedContainer(storedItemList[i]);
+            } 
         }
     }
 }

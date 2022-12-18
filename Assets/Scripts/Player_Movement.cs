@@ -45,12 +45,38 @@ public class Player_Movement : MonoBehaviour
     public bool useProIKFeature = false;
     public bool showSolverDebug = true;
 
+    private SCRIPT_InventoryController inventory;
+
     #endregion
 
 
     private void Start()
     {
+        inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
         animationController = gameObject.GetComponent<Animator>();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+        Sprint();
+        HandleRotationInput();
+
+        if (!enableFeetIK)
+        {
+            return;
+        }
+        if (animationController == null)
+        {
+            return;
+        }
+
+        AdjustFeetTarget(ref _rightFootPosition, HumanBodyBones.RightFoot);
+        AdjustFeetTarget(ref _leftFootPosition, HumanBodyBones.LeftFoot);
+
+        FeetPositionSolver(_rightFootPosition, ref _rightFootIKPosition, ref _rightFootIKRotation);
+        FeetPositionSolver(_leftFootPosition, ref _leftFootIKPosition, ref _leftFootIKRotation);
+
     }
 
     private void Sprint()
@@ -89,6 +115,8 @@ public class Player_Movement : MonoBehaviour
         if (_movement.magnitude > 0)
         {
             animationController.SetBool("isWalking", true);
+            inventory.isCheckingInventory = false;
+            inventory.HandleInventory(false);
         }
         else
         {
@@ -132,29 +160,6 @@ public class Player_Movement : MonoBehaviour
     }
 
     #region FeetGrounding
-
-    private void FixedUpdate()
-    {
-        Move();
-        Sprint();
-        HandleRotationInput();
-
-        if (!enableFeetIK)
-        {
-            return;
-        }
-        if (animationController == null)
-        {
-            return;
-        }
-
-        AdjustFeetTarget(ref _rightFootPosition, HumanBodyBones.RightFoot);
-        AdjustFeetTarget(ref _leftFootPosition, HumanBodyBones.LeftFoot);
-
-        FeetPositionSolver(_rightFootPosition, ref _rightFootIKPosition, ref _rightFootIKRotation);
-        FeetPositionSolver(_leftFootPosition, ref _leftFootIKPosition, ref _leftFootIKRotation);
-
-    }
 
     private void OnAnimatorIK(int layerIndex)
     {

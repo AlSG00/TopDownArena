@@ -15,7 +15,7 @@ public class Player_Shooting : MonoBehaviour
 
     public bool isCheckingInventory = false;
 
-    public GameObject inventory;
+    //public GameObject inventory;
 
     public WeaponAnimationEvents animationEvents;
 
@@ -37,9 +37,13 @@ public class Player_Shooting : MonoBehaviour
     
     private GameObject magazineHand;
 
+    // Этой штуке нечего здесь делать. Переместить!
+    private SCRIPT_InventoryController inventory;
+
     private void Start()
     {
-        HandleInventory(false);
+        inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
+        //HandleInventory(false);
         TryGetComponent<SCRIPT_ActiveWeapon>(out activeWeapon);
         isShooting = false;
         Equip(weapon);
@@ -61,11 +65,12 @@ public class Player_Shooting : MonoBehaviour
 
     void ShootInput()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            isCheckingInventory = !isCheckingInventory;
-            HandleInventory(isCheckingInventory);
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    isCheckingInventory = !isCheckingInventory;
+        //    inventory.HandleInventory(isCheckingInventory);
+        //   // HandleInventory(isCheckingInventory);
+        //}
 
         if (weapon)
         {
@@ -141,24 +146,24 @@ public class Player_Shooting : MonoBehaviour
         }
     }
 
-    private void HandleInventory(bool isActive)
-    {
-        Vector2 position = new Vector2();
-        RectTransform inventoryRect = inventory.GetComponent<RectTransform>();
+    //private void HandleInventory(bool isActive)
+    //{
+    //    Vector2 position = new Vector2();
+    //    RectTransform inventoryRect = inventory.GetComponent<RectTransform>();
 
-        if (isActive)
-        {
-            position.y = 630;
-        }
-        else
-        {
-            position.y = 3000;
-        }
-        position.x = inventoryRect.position.x;
+    //    if (isActive)
+    //    {
+    //        position.y = 630;
+    //    }
+    //    else
+    //    {
+    //        position.y = 3000;
+    //    }
+    //    position.x = inventoryRect.position.x;
 
-        inventoryRect.position = position;
+    //    inventoryRect.position = position;
 
-    }
+    //}
 
     public void Equip(SCRIPT_Weapon weaponToEquip)
     {

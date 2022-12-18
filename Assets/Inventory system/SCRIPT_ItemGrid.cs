@@ -99,11 +99,9 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return tileGridPosition;
     }
 
-    //bool returnRotated;
+    public bool returnRotated = false;
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
-       // returnRotated = false;
-       
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;
 
@@ -118,19 +116,19 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             }
         }
 
-        // ѕытаемс€ найти место повторно, но с повернутым предметом
-        //for (int j = 0; j < height; j++)
-        //{
-        //    for (int i = 0; i < width; i++)
-        //    {
-        //        if (CheckAvailableSpace(i, j, itemToInsert.Height, itemToInsert.Width))
-        //        {
-        //            returnRotated = true;
-        //            return new Vector2Int(i, j);
-        //        }
-        //    }
-        //}
+        returnRotated = true;
+        for (int j = 0; j < height; j++)
+        {
+            for (int i = 0; i < width; i++)
+            {
+                if (CheckAvailableSpace(j, i, itemToInsert.Height, itemToInsert.Width))
+                {
+                    return new Vector2Int(j, i);
+                }
+            }
+        }
 
+        returnRotated = false;
         return null;
     }
 
@@ -159,6 +157,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public void PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY)
     {
+
+
         RectTransform rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(this.rectTransform);
 

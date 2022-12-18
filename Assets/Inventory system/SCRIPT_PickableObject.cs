@@ -20,13 +20,24 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
     public void Interact()
     {
         canInteract = false;
+        Debug.Log("Searching space 1");
         Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryPrefab.GetComponent<SCRIPT_InventoryItem>());
         if (positionOnGrid == null)
         {
-            Debug.Log("No free space"); 
+            //Debug.Log("Searching space 2");
+            //SCRIPT_InventoryItem itemToPick = inventoryPrefab.GetComponent<SCRIPT_InventoryItem>();/*inventoryPrefab.GetComponent<SCRIPT_InventoryItem>().Rotated();*/
+            //itemToPick.Rotated();
+            //positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryPrefab.GetComponent<SCRIPT_InventoryItem>());
+            //inventoryPrefab.GetComponent<SCRIPT_InventoryItem>().Rotated();
+            //if (positionOnGrid == null)
+            //{
+            //    Debug.Log("No free space");
+            //    alreadyInteracting = false;
+            //    return;
+            //}
+            Debug.Log("Fiasko");
             alreadyInteracting = false;
             return;
-            
         }
 
         inventory.selectedItemGrid = inventory.inventoryGrid;

@@ -418,6 +418,7 @@
 "Assets/Gun/SCRIPT_WeaponPickup.cs"
 "Assets/Gun/TestRaycastWeapon.cs"
 "Assets/Gun/WeaponAnimationEvents.cs"
+"Assets/Inventory system/IStoredItem.cs"
 "Assets/Inventory system/SCRIPT_GridInteract.cs"
 "Assets/Inventory system/SCRIPT_IInteractable.cs"
 "Assets/Inventory system/SCRIPT_InventoryController.cs"

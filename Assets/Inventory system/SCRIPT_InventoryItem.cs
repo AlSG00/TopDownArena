@@ -40,6 +40,11 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public bool isRotated = false;
     public bool isUsable = true;
 
+    //public void Start()
+    //{
+    //    isRotated = false;
+    //}
+
     internal void Set(SCRIPT_ItemData itemData)
     {
         this.itemData = itemData;
