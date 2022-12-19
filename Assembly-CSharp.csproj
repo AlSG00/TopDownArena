@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\TEST_Keycard.cs" />
     <Compile Include="Assets\Scripts\AmmoCrate.cs" />
+    <Compile Include="Assets\Inventory system\IStoredItem.cs" />
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_ExitGame.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_ActiveWeapon.cs" />
@@ -175,7 +176,6 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Inventory system\IStoredItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
