@@ -65,7 +65,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\Scripts\nextSpawn.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
-    <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+    <Compile Include="Assets\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Scripts\Test_PlayOST.cs" />
     <Compile Include="Assets\Scripts\Roach.cs" />
@@ -79,17 +79,17 @@
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
-    <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+    <Compile Include="Assets\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\TestClculationScript.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_FollowChild.cs" />
-    <Compile Include="Assets\Scripts\Player_Movement.cs" />
+    <Compile Include="Assets\Player\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\TEST_SetActive.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\Gun\RayProjectile.cs" />
     <Compile Include="Assets\Scripts\HealtBarScript.cs" />
-    <Compile Include="Assets\Scripts\Player_Scope.cs" />
-    <Compile Include="Assets\Scripts\PlayerHP.cs" />
+    <Compile Include="Assets\Player\Player_Scope.cs" />
+    <Compile Include="Assets\Player\PlayerHP.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_Medkit_Small.cs" />
@@ -103,7 +103,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_ObjectInteraction.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad.cs" />
-    <Compile Include="Assets\Scripts\SCRIPT_PlayerFlashlight.cs" />
+    <Compile Include="Assets\Player\SCRIPT_PlayerFlashlight.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_ItemContainer.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_SunRotation.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\ILOSSource.cs" />
-    <Compile Include="Assets\Camera\Player_Aim.cs" />
+    <Compile Include="Assets\Player\Player_Aim.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_InventoryHighlight.cs" />
     <Compile Include="Assets\Gun\SCRIPT_WeaponPickup.cs" />
@@ -142,7 +142,7 @@
     <Compile Include="Assets\Scripts\FixedRotation.cs" />
     <Compile Include="Assets\Scripts\SceneTransitions.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraMoving.cs" />
-    <Compile Include="Assets\Scripts\Player_Shooting.cs" />
+    <Compile Include="Assets\Player\Player_Shooting.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_Screamer_Lamp.cs" />
@@ -164,7 +164,7 @@
     <Compile Include="Assets\Scripts\TEST_ActivateTriggers.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_TestBlackZones.cs" />
     <Compile Include="Assets\Scripts\SwapScenesInteractive.cs" />
-    <Compile Include="Assets\Scripts\SCRIPT_PlayerAmmunition.cs" />
+    <Compile Include="Assets\Player\SCRIPT_PlayerAmmunition.cs" />
     <Compile Include="Assets\Scripts\ToolTip.cs" />
     <Compile Include="Assets\SCRIPT_TEST_ActivateShop.cs" />
     <Compile Include="Assets\Scripts\FieldOfView.cs" />
@@ -176,6 +176,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
+    <Compile Include="Assets\Player\SCRIPT_PlayerInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

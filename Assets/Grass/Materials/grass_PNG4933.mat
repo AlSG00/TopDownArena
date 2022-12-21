@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: grass_PNG4933
-  m_Shader: {fileID: -6465566751694194690, guid: 2785e1f4dd2aebc4fb4b35baa9aa9b46,
+  m_Shader: {fileID: -6465566751694194690, guid: 4491fd097025bed4986e32e26ea6081c,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -29,8 +29,7 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2465
-  stringTagMap:
-    RenderType: TransparentCutout
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -109,13 +108,13 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _Wind_density: 0.77
-    - _Wind_strength: -0.06
+    - _Wind_density: 0.22
+    - _Wind_strength: 0.16
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Vector2: {r: -0.14, g: -0.27, b: 0, a: 0}
-    - _Wind_Movement: {r: 3, g: 0, b: 0, a: 0}
-    - _Wind_movement_2: {r: 3.08, g: 2.26, b: 3.79, a: 0}
+    - _Wind_Movement: {r: 0, g: 0, b: 0, a: 0}
+    - _Wind_movement_2: {r: 1.2, g: 1.15, b: 0, a: 0}
   m_BuildTextureStacks: []
