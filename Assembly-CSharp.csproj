@@ -211,6 +211,7 @@
     <None Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\_Sources\testread.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Grass\Materials\Foliage Flat.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSSkyBox.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\_Sources\testwrite.shader" />
