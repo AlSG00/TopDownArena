@@ -15,7 +15,7 @@ D:/Documents & projects/Unity projects/Project_TopDown/TopDownArena
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-63759
+60819
 Successfully changed project path to: D:/Documents & projects/Unity projects/Project_TopDown/TopDownArena
 D:/Documents & projects/Unity projects/Project_TopDown/TopDownArena
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ D:/Documents & projects/Unity projects/Project_TopDown/TopDownArena
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 147.38 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 166.46 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.6f1 (7da38d85baf6)
 [Subsystems] Discovering subsystems at path E:/Programs/Unity Editor/2021.3.6f1/Editor/Data/Resources/UnitySubsystems
@@ -63,53 +63,53 @@ Initialize mono
 Mono path[0] = 'E:/Programs/Unity Editor/2021.3.6f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Programs/Unity Editor/2021.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'E:/Programs/Unity Editor/2021.3.6f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56436
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56208
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Programs/Unity Editor/2021.3.6f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: E:/Programs/Unity Editor/2021.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.004247 seconds.
+Registered in 0.003429 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 167.90 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 178.59 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.928 seconds
+- Completed reload, in  0.971 seconds
 Domain Reload Profiling:
-	ReloadAssembly (928ms)
-		BeginReloadAssembly (91ms)
+	ReloadAssembly (972ms)
+		BeginReloadAssembly (118ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (688ms)
-			LoadAssemblies (90ms)
+			CreateAndSetChildDomain (12ms)
+		EndReloadAssembly (691ms)
+			LoadAssemblies (106ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (210ms)
+			SetupTypeCache (172ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (32ms)
-			SetupLoadedEditorAssemblies (389ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (399ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (11ms)
+				InitializePlatformSupportModulesInManaged (9ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (168ms)
-				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (144ms)
-				ProcessInitializeOnLoadMethodAttributes (63ms)
+				RefreshPlugins (179ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (155ms)
+				ProcessInitializeOnLoadMethodAttributes (54ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.013854 seconds.
+Registered in 0.016864 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 161.10 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 207.98 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 System.Exception: Error! Visual Scripting: couldn't find visual scripting package
   at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00043] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:31 
@@ -128,44 +128,70 @@ UnityEngine.Logger:Log (UnityEngine.LogType,object)
 UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 
+Error loading file Library/StateCache/LayerSettings/9e/9ecc5c3c162a7aba29bafa64c8b94b7c.json. Error: System.IO.IOException: Sharing violation on path D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\StateCache\LayerSettings\9e\9ecc5c3c162a7aba29bafa64c8b94b7c.json
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions)
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks, System.Int32 bufferSize) [0x00055] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.StreamReader..ctor(string,System.Text.Encoding,bool)
+  at System.IO.File.InternalReadAllText (System.String path, System.Text.Encoding encoding) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at System.IO.File.ReadAllText (System.String path, System.Text.Encoding encoding) [0x00034] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at UnityEditor.StateCache`1[T].GetState (UnityEngine.Hash128 key, T defaultValue) [0x00041] in <44a70d1b13cf47e29810e30f45ffae08>:0 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.StateCache`1<UnityEditor.Tools/LayerSettings>:GetState (UnityEngine.Hash128,UnityEditor.Tools/LayerSettings)
+UnityEditor.Tools:OnEnable ()
+UnityEngine.ScriptableObject:CreateInstance (System.Type)
+UnityEngine.ScriptableObject:CreateInstance<UnityEditor.Tools> ()
+UnityEditor.Tools:get_get ()
+UnityEditor.Tools:get_visibleLayers ()
+UnityEditor.Animations.Rigging.BoneRendererUtils:.cctor () (at Library/PackageCache/com.unity.animation.rigging@1.1.1/Editor/Utils/BoneRendererUtils.cs:121)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Library/PackageCache/com.unity.animation.rigging@1.1.1/Editor/Utils/BoneRendererUtils.cs Line: 121)
+
 Mono: successfully reloaded assembly
-- Completed reload, in  2.305 seconds
+- Completed reload, in  2.748 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2307ms)
-		BeginReloadAssembly (117ms)
+	ReloadAssembly (2750ms)
+		BeginReloadAssembly (136ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (6ms)
+			DisableScriptedObjects (9ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (22ms)
-		EndReloadAssembly (2058ms)
-			LoadAssemblies (121ms)
+			CreateAndSetChildDomain (24ms)
+		EndReloadAssembly (2463ms)
+			LoadAssemblies (115ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (374ms)
+			SetupTypeCache (440ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (85ms)
-			SetupLoadedEditorAssemblies (1417ms)
+			RebuildScriptCaches (95ms)
+			SetupLoadedEditorAssemblies (1724ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (7ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (161ms)
-				BeforeProcessingInitializeOnLoad (172ms)
-				ProcessInitializeOnLoadAttributes (990ms)
-				ProcessInitializeOnLoadMethodAttributes (83ms)
+				RefreshPlugins (208ms)
+				BeforeProcessingInitializeOnLoad (184ms)
+				ProcessInitializeOnLoadAttributes (1201ms)
+				ProcessInitializeOnLoadMethodAttributes (119ms)
 				AfterProcessingInitializeOnLoad (4ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
+			AwakeInstancesAfterBackupRestoration (13ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 1.02 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 1.97 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5705 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 67 unused Assets / (1.9 MB). Loaded Objects now: 6192.
-Memory consumption went from 310.2 MB to 308.3 MB.
-Total: 21.129600 ms (FindLiveObjects: 0.470300 ms CreateObjectMapping: 0.520700 ms MarkObjects: 19.388500 ms  DeleteObjects: 0.749000 ms)
+Unloading 5709 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 67 unused Assets / (1.9 MB). Loaded Objects now: 6196.
+Memory consumption went from 312.4 MB to 310.4 MB.
+Total: 17.499400 ms (FindLiveObjects: 0.583000 ms CreateObjectMapping: 0.571300 ms MarkObjects: 15.622300 ms  DeleteObjects: 0.721400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -179,125 +205,115 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 167909.028867 seconds.
-  path: Assets/Grass/Materials/grass_PNG4933.mat
-  artifactKey: Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_PNG4933.mat using Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af6c0f43862603f425a2df15df9d3ed1') in 0.203619 seconds 
+  Time since last request: 259069.603250 seconds.
+  path: Assets/Player/Camera.prefab
+  artifactKey: Guid(a7990cc7f150640449fb5acb12fa4ad9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player/Camera.prefab using Guid(a7990cc7f150640449fb5acb12fa4ad9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff0f8ee3eeac05f95a6dda625aca8196') in 0.177976 seconds 
 ========================================================================
-Received Import Request.
-  Time since last request: 120.749243 seconds.
-  path: Assets/Grass/Materials/grass_PNG4933.mat
-  artifactKey: Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_PNG4933.mat using Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c085a6fc1097542a9515c0dea46b3153') in 0.016115 seconds 
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007569 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 144.86 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00043] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:31 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x00525] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00009] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00034] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x0002c] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x0000d] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:33 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x00000] in D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Error loading file Library/StateCache/LayerSettings/9e/9ecc5c3c162a7aba29bafa64c8b94b7c.json. Error: System.IO.IOException: Sharing violation on path D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\StateCache\LayerSettings\9e\9ecc5c3c162a7aba29bafa64c8b94b7c.json
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions)
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks, System.Int32 bufferSize) [0x00055] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.StreamReader..ctor(string,System.Text.Encoding,bool)
+  at System.IO.File.InternalReadAllText (System.String path, System.Text.Encoding encoding) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at System.IO.File.ReadAllText (System.String path, System.Text.Encoding encoding) [0x00034] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at UnityEditor.StateCache`1[T].GetState (UnityEngine.Hash128 key, T defaultValue) [0x00041] in <44a70d1b13cf47e29810e30f45ffae08>:0 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.StateCache`1<UnityEditor.Tools/LayerSettings>:GetState (UnityEngine.Hash128,UnityEditor.Tools/LayerSettings)
+UnityEditor.Tools:OnEnable ()
+UnityEngine.ScriptableObject:CreateInstance (System.Type)
+UnityEngine.ScriptableObject:CreateInstance<UnityEditor.Tools> ()
+UnityEditor.Tools:get_get ()
+UnityEditor.Tools:get_visibleLayers ()
+UnityEditor.Animations.Rigging.BoneRendererUtils:.cctor () (at Library/PackageCache/com.unity.animation.rigging@1.1.1/Editor/Utils/BoneRendererUtils.cs:121)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Library/PackageCache/com.unity.animation.rigging@1.1.1/Editor/Utils/BoneRendererUtils.cs Line: 121)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  2.728 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2729ms)
+		BeginReloadAssembly (192ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (59ms)
+		EndReloadAssembly (2427ms)
+			LoadAssemblies (361ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (384ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (1031ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (11ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (145ms)
+				BeforeProcessingInitializeOnLoad (121ms)
+				ProcessInitializeOnLoadAttributes (674ms)
+				ProcessInitializeOnLoadMethodAttributes (75ms)
+				AfterProcessingInitializeOnLoad (4ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Script is not up to date after domain reload: guid(21cb495ffbca0404d878640680165899) path("Assets/Prefab Brush/Scripts/PB_SaveObject.cs") state(2)
+Script is not up to date after domain reload: guid(94a59635c45323047b2dd001a2452a07) path("Assets/Prefab Brush/Scripts/Editor/PrefabBrush.cs") state(2)
+Script is not up to date after domain reload: guid(3580070d1bfc96b45874dbca18a3933a) path("Assets/Prefab Brush/Scripts/PB_PrefabData.cs") state(2)
+Script is not up to date after domain reload: guid(f11340a2cf4367647b01139e6b5cb97c) path("Assets/Prefab Brush/Scripts/PB_Enums.cs") state(2)
+Refreshing native plugins compatible for Editor in 3.67 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6190 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 57 unused Assets / (3.2 MB). Loaded Objects now: 6771.
+Memory consumption went from 323.5 MB to 320.2 MB.
+Total: 13.516300 ms (FindLiveObjects: 0.459500 ms CreateObjectMapping: 0.409000 ms MarkObjects: 11.936400 ms  DeleteObjects: 0.710500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
-Received Import Request.
-  Time since last request: 69.054704 seconds.
-  path: Assets/Grass/Materials/grass_PNG4933.mat
-  artifactKey: Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_PNG4933.mat using Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cc3a75b3770234cf0b6b38923aa2f51') in 0.013467 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2984.559196 seconds.
-  path: Assets/Grass/Materials/grass_3.fbx
-  artifactKey: Guid(7ccc1d3a592ed6446a99ad1a461ae3db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_3.fbx using Guid(7ccc1d3a592ed6446a99ad1a461ae3db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a92aae8aff3eef316a4d7a7ab1dd1159') in 0.110687 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/Grass/Materials/grass_sunflower.fbx
-  artifactKey: Guid(7804e6bf7132eb046b40265674c33d26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_sunflower.fbx using Guid(7804e6bf7132eb046b40265674c33d26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7140fd8c47529adb91965480bf63546a') in 0.076120 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 31.022668 seconds.
-  path: Assets/Grass/Materials/grass_3.fbx
-  artifactKey: Guid(7ccc1d3a592ed6446a99ad1a461ae3db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_3.fbx using Guid(7ccc1d3a592ed6446a99ad1a461ae3db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f500b60e9fa14d22a20d1182d067ad7f') in 0.063647 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Grass/Materials/grass_sunflower.fbx
-  artifactKey: Guid(7804e6bf7132eb046b40265674c33d26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_sunflower.fbx using Guid(7804e6bf7132eb046b40265674c33d26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8640383b0d1a2a0bb079656e457079ce') in 0.063815 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Grass/Materials/PngItem_812468.png
-  artifactKey: Guid(bcdf08550b8b9b247bc7fc14abf2db0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/PngItem_812468.png using Guid(bcdf08550b8b9b247bc7fc14abf2db0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89fafe62b545bcc61b0b7568f5855dc3') in 0.021661 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 17.602027 seconds.
-  path: Assets/Grass/Materials/grass_2.fbx
-  artifactKey: Guid(11a9246367e6720429637423318027ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_2.fbx using Guid(11a9246367e6720429637423318027ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34ac63e6e00d295a3436161c5b6b851d') in 0.064426 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Grass/Materials/pngwing.com.png
-  artifactKey: Guid(e49d77f3de7677b4fa75b7fccb15528f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/pngwing.com.png using Guid(e49d77f3de7677b4fa75b7fccb15528f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '887c4fd4d95f9789beb5d0add84cbc44') in 0.108248 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/Grass/Materials/grass_4.fbx
-  artifactKey: Guid(a73cad0b4ef97fe47a6828aa3fb231c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_4.fbx using Guid(a73cad0b4ef97fe47a6828aa3fb231c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa85ad151084dd5e5a412696a7caad38') in 0.069295 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Grass/Materials/PngItem_812468.png
-  artifactKey: Guid(bcdf08550b8b9b247bc7fc14abf2db0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/PngItem_812468.png using Guid(bcdf08550b8b9b247bc7fc14abf2db0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '404a2389b2b2c501e593c3939e05669f') in 0.043168 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 10.421011 seconds.
-  path: Assets/Grass/Materials/grass_PNG4933 1.mat
-  artifactKey: Guid(2a77d98f2cf0d5143b5a8c19b4763df4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_PNG4933 1.mat using Guid(2a77d98f2cf0d5143b5a8c19b4763df4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8421e469c1aebabb53386c53fc272d35') in 0.071310 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000036 seconds.
-  path: Assets/Grass/Materials/grass_PNG4933.mat
-  artifactKey: Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_PNG4933.mat using Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6055be651e49b3f9890d8b76e552e1f7') in 0.014464 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 101.284235 seconds.
-  path: Assets/Grass/Materials/MTR_Grass_3.mat
-  artifactKey: Guid(0efeb9b5c9c32fb43b4c42c9cf8d4521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/MTR_Grass_3.mat using Guid(0efeb9b5c9c32fb43b4c42c9cf8d4521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c5dea4d91ab828e7400a364ea48d9c6') in 0.019685 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Grass/Materials/MTR_Grass_Sunflower 1.mat
-  artifactKey: Guid(f12271201263d8245b3d4a1a19b4cb64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/MTR_Grass_Sunflower 1.mat using Guid(f12271201263d8245b3d4a1a19b4cb64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '253971d7f9703ee0e5ff06bfd6ed8cde') in 0.019611 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 303.025030 seconds.
-  path: Assets/Grass/Materials/MTR_Grass_Sunflower.mat
-  artifactKey: Guid(77f8772ffb58a824a9e662de516fd620) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/MTR_Grass_Sunflower.mat using Guid(77f8772ffb58a824a9e662de516fd620) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fe94c390d8fd96fdb119c1547e65769') in 0.033505 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 773.023005 seconds.
-  path: Assets/Grass/Materials/grass_PNG4933.mat
-  artifactKey: Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/grass_PNG4933.mat using Guid(6b543f4b1737ef046b2368551c46956f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '962c6ba0d350e33a47ff649a2ee4db35') in 0.021977 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Grass/Materials/MTR_Grass_3.mat
-  artifactKey: Guid(0efeb9b5c9c32fb43b4c42c9cf8d4521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/MTR_Grass_3.mat using Guid(0efeb9b5c9c32fb43b4c42c9cf8d4521) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3f4a543b7ef1767db28b7057ed928e8') in 0.018103 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Grass/Materials/MTR_Grass_2.mat
-  artifactKey: Guid(2a77d98f2cf0d5143b5a8c19b4763df4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Grass/Materials/MTR_Grass_2.mat using Guid(2a77d98f2cf0d5143b5a8c19b4763df4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d3f17cc3f8a147840264acba7d0a997') in 0.044755 seconds 
-Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-AssetImportWorker is now disconnected from the server
-Process exiting
-Exiting without the bug reporter. Application will terminate with return code 0
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.009108 seconds.

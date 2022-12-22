@@ -79,6 +79,7 @@
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
+    <Compile Include="Assets\Player\SCRIPT_PlayerInput.cs" />
     <Compile Include="Assets\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\TestClculationScript.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_FollowChild.cs" />
@@ -176,7 +177,9 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Player\SCRIPT_PlayerInput.cs" />
+    <Compile Include="Assets\Prefab Brush\Scripts\PB_PrefabData.cs" />
+    <Compile Include="Assets\Prefab Brush\Scripts\PB_SaveObject.cs" />
+    <Compile Include="Assets\Prefab Brush\Scripts\PB_Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -1000,6 +1003,12 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

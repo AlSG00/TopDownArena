@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638033844354168230
-    m_Hash: 1237666335
+      ticks: 638073185650565122
+    m_Hash: 1485783960
   m_LockFileStatus:
     m_FilePath: D:/Documents & projects/Unity projects/Project_TopDown/TopDownArena/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638033844355462372
-    m_Hash: 4044063889
+      ticks: 638073185652714898
+    m_Hash: 921876135
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -291,6 +291,7 @@ m_ResolvedPackages:
     - 2.9.0-pre.6
     - 2.9.1
     - 2.9.2
+    - 2.9.4
     - 3.0.0-pre.3
     compatible:
     - 2.8.6
@@ -299,6 +300,7 @@ m_ResolvedPackages:
     - 2.9.0-pre.6
     - 2.9.1
     - 2.9.2
+    - 2.9.4
     verified: 2.8.9
   dependencies:
   - name: com.unity.test-framework
@@ -369,7 +371,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: Editor
-  type: 
+  type: asset
   description: The Version Control package gives you the ability to use either Collaborate
     or Plastic SCM for Unity (beta) in the Unity editor. To use Plastic SCM for Unity
     (beta), a Plastic SCM subscription is required. Learn more about how you can
@@ -429,6 +431,7 @@ m_ResolvedPackages:
     - 1.17.1
     - 1.17.2
     - 1.17.6
+    - 1.17.7
     - 2.0.0-preview.6
     - 2.0.0-preview.8
     - 2.0.0-preview.15
@@ -445,6 +448,7 @@ m_ResolvedPackages:
     - 1.17.1
     - 1.17.2
     - 1.17.6
+    - 1.17.7
     - 2.0.0-preview.6
     - 2.0.0-preview.8
     - 2.0.0-preview.15
@@ -489,7 +493,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637888962690000000
   documentationUrl: 
@@ -602,7 +606,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: asset
   description: The JetBrains Rider Editor package provides an integration for using
     the JetBrains Rider IDE as a code editor for Unity. It adds support for generating
     .csproj files for code completion and auto-discovery of installations.
@@ -642,10 +646,12 @@ m_ResolvedPackages:
     - 3.0.14
     - 3.0.15
     - 3.0.16
+    - 3.0.17
     compatible:
     - 3.0.15
     - 3.0.16
-    verified: 3.0.16
+    - 3.0.17
+    verified: 3.0.17
   dependencies:
   - name: com.unity.ext.nunit
     version: 1.0.6
@@ -660,7 +666,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637914298700000000
   documentationUrl: 
@@ -687,7 +693,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: asset
   description: Code editor integration for supporting Visual Studio as code editor
     for unity. Adds support for generating csproj files for intellisense purposes,
     auto discovery of installations, etc.
@@ -714,9 +720,11 @@ m_ResolvedPackages:
     - 2.0.14
     - 2.0.15
     - 2.0.16
+    - 2.0.17
     compatible:
     - 2.0.16
-    verified: 2.0.16
+    - 2.0.17
+    verified: 2.0.17
   dependencies:
   - name: com.unity.test-framework
     version: 1.1.9
@@ -737,7 +745,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637914298680000000
   documentationUrl: 
@@ -1277,7 +1285,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: Unity Test Framework
-  type: 
+  type: asset
   description: Test framework for running Edit mode and Play mode tests in Unity.
   status: 4
   errors: []
@@ -1318,14 +1326,20 @@ m_ResolvedPackages:
     - 1.1.31
     - 1.1.33
     - 1.3.0
+    - 1.3.1
+    - 1.3.2
     - 2.0.1-exp.1
+    - 2.0.1-exp.2
     - 2.0.1-pre.12
     - 2.0.1-pre.18
     compatible:
     - 1.1.31
     - 1.1.33
     - 1.3.0
+    - 1.3.1
+    - 1.3.2
     - 2.0.1-exp.1
+    - 2.0.1-exp.2
     - 2.0.1-pre.12
     - 2.0.1-pre.18
     verified: 1.1.33
@@ -1353,7 +1367,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637804266210000000
   documentationUrl: 
@@ -1380,7 +1394,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: Text Rendering
-  type: 
+  type: asset
   description: 'TextMeshPro is the ultimate text solution for Unity. It''s the perfect
     replacement for Unity''s UI Text and the legacy Text Mesh.
 
@@ -1488,12 +1502,14 @@ m_ResolvedPackages:
     - 3.2.0-pre.1
     - 3.2.0-pre.2
     - 3.2.0-pre.3
+    - 3.2.0-pre.4
     - 4.0.0-pre.1
     compatible:
     - 3.0.6
     - 3.2.0-pre.1
     - 3.2.0-pre.2
     - 3.2.0-pre.3
+    - 3.2.0-pre.4
     verified: 3.0.6
   dependencies:
   - name: com.unity.ugui
@@ -1518,7 +1534,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637547111200000000
   documentationUrl: 
@@ -1545,7 +1561,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: asset
   description: Use Unity Timeline to create cinematic content, game-play sequences,
     audio sequences, and complex particle effects.
   status: 4
@@ -1625,6 +1641,7 @@ m_ResolvedPackages:
     - 1.7.0
     - 1.7.1
     - 1.7.2
+    - 1.8.0
     compatible:
     - 1.6.4
     - 1.7.0-pre.1
@@ -1632,6 +1649,7 @@ m_ResolvedPackages:
     - 1.7.0
     - 1.7.1
     - 1.7.2
+    - 1.8.0
     verified: 1.6.4
   dependencies:
   - name: com.unity.modules.director
@@ -1664,7 +1682,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637789039180000000
   documentationUrl: 
@@ -1739,6 +1757,148 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.0.0
     nextVersion: 
+- packageId: com.unity.visualeffectgraph@12.1.7
+  testable: 0
+  isDirectDependency: 1
+  version: 12.1.7
+  source: 2
+  resolvedPath: D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualeffectgraph@12.1.7
+  assetPath: Packages/com.unity.visualeffectgraph
+  name: com.unity.visualeffectgraph
+  displayName: Visual Effect Graph
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: The Visual Effect Graph is a node based visual effect editor. It allows
+    you to author next generation visual effects that Unity simulates directly on
+    the GPU. The Visual Effect Graph is production-ready for the High Definition
+    Render Pipeline and runs on all platforms supported by it. Full support for the
+    Universal Render Pipeline and compatible mobile devices is still in development.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 4.3.0-preview
+    - 4.6.0-preview
+    - 4.8.0-preview
+    - 4.9.0-preview
+    - 4.10.0-preview
+    - 5.2.0-preview
+    - 5.2.1-preview
+    - 5.2.3-preview
+    - 5.3.1-preview
+    - 5.6.1-preview
+    - 5.7.2-preview
+    - 5.8.2-preview
+    - 5.10.0-preview
+    - 5.13.0-preview
+    - 5.16.1-preview
+    - 6.5.2-preview
+    - 6.5.3-preview
+    - 6.7.1-preview
+    - 6.9.0-preview
+    - 6.9.1-preview
+    - 6.9.2-preview
+    - 7.0.0
+    - 7.0.1
+    - 7.1.1
+    - 7.1.2
+    - 7.1.5
+    - 7.1.6
+    - 7.1.7
+    - 7.1.8
+    - 7.2.0
+    - 7.2.1
+    - 7.3.1
+    - 7.4.1
+    - 7.4.2
+    - 7.4.3
+    - 7.5.1
+    - 7.5.2
+    - 7.5.3
+    - 7.6.0
+    - 7.7.0
+    - 7.7.1
+    - 8.0.1
+    - 8.1.0
+    - 8.2.0
+    - 8.3.1
+    - 9.0.0-preview.13
+    - 9.0.0-preview.33
+    - 9.0.0-preview.54
+    - 9.0.0-preview.71
+    - 10.0.0-preview.27
+    - 10.1.0
+    - 10.2.0
+    - 10.2.1
+    - 10.2.2
+    - 10.3.1
+    - 10.3.2
+    - 10.4.0
+    - 10.5.0
+    - 10.5.1
+    - 10.6.0
+    - 10.7.0
+    - 10.8.0
+    - 10.8.1
+    - 10.9.0
+    - 10.10.0
+    - 10.10.1
+    - 12.1.7
+    compatible:
+    - 12.1.7
+    verified: 12.1.7
+  dependencies:
+  - name: com.unity.shadergraph
+    version: 12.1.7
+  - name: com.unity.render-pipelines.core
+    version: 12.1.7
+  resolvedDependencies:
+  - name: com.unity.shadergraph
+    version: 12.1.7
+  - name: com.unity.render-pipelines.core
+    version: 12.1.7
+  - name: com.unity.ugui
+    version: 1.0.0
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.physics
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.searcher
+    version: 4.9.1
+  keywords:
+  - vfx
+  - visualeffect
+  - graph
+  - effect
+  - particles
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 12.1.7
+    nextVersion: 
 - packageId: com.unity.visualscripting@1.7.8
   testable: 0
   isDirectDependency: 1
@@ -1753,7 +1913,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: tool
   description: 'Visual scripting is a workflow that uses visual, node-based graphs
     to design behaviors rather than write lines of C# script.
 
@@ -1786,8 +1946,10 @@ m_ResolvedPackages:
     - 1.7.7
     - 1.7.8
     - 1.8.0-pre.1
+    - 1.8.0
     compatible:
     - 1.7.8
+    - 1.8.0
     verified: 1.7.8
   dependencies:
   - name: com.unity.ugui
@@ -3564,66 +3726,6 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 
     nextVersion: 
-- packageId: com.unity.ext.nunit@1.0.6
-  testable: 0
-  isDirectDependency: 0
-  version: 1.0.6
-  source: 1
-  resolvedPath: D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.ext.nunit@1.0.6
-  assetPath: Packages/com.unity.ext.nunit
-  name: com.unity.ext.nunit
-  displayName: Custom NUnit
-  author:
-    name: 
-    email: 
-    url: 
-  category: Libraries
-  type: 
-  description: Custom version of the nunit package build to work with Unity. Used
-    by the Unity Test Framework.
-  status: 4
-  errors: []
-  versions:
-    all:
-    - 0.1.5-preview
-    - 0.1.6-preview
-    - 0.1.9-preview
-    - 1.0.0
-    - 1.0.5
-    - 1.0.6
-    - 2.0.2
-    - 2.0.3
-    compatible:
-    - 1.0.6
-    - 2.0.2
-    - 2.0.3
-    verified: 1.0.6
-  dependencies: []
-  resolvedDependencies: []
-  keywords:
-  - nunit
-  - unittest
-  - test
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-  hideInEditor: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 637429759280000000
-  documentationUrl: 
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.cds.internal.unity3d.com/unity/com.unity.ext.nunit.git
-    revision: 29ea4d6504a5f58fb3a6934db839aa80ae6d9d88
-    path: 
-  unityLifecycle:
-    version: 1.0.6
-    nextVersion: 
 - packageId: com.unity.render-pipelines.core@12.1.7
   testable: 0
   isDirectDependency: 0
@@ -3790,6 +3892,66 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 12.1.7
+    nextVersion: 
+- packageId: com.unity.ext.nunit@1.0.6
+  testable: 0
+  isDirectDependency: 0
+  version: 1.0.6
+  source: 1
+  resolvedPath: D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.ext.nunit@1.0.6
+  assetPath: Packages/com.unity.ext.nunit
+  name: com.unity.ext.nunit
+  displayName: Custom NUnit
+  author:
+    name: 
+    email: 
+    url: 
+  category: Libraries
+  type: 
+  description: Custom version of the nunit package build to work with Unity. Used
+    by the Unity Test Framework.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 0.1.5-preview
+    - 0.1.6-preview
+    - 0.1.9-preview
+    - 1.0.0
+    - 1.0.5
+    - 1.0.6
+    - 2.0.2
+    - 2.0.3
+    compatible:
+    - 1.0.6
+    - 2.0.2
+    - 2.0.3
+    verified: 1.0.6
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - nunit
+  - unittest
+  - test
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637429759280000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/com.unity.ext.nunit.git
+    revision: 29ea4d6504a5f58fb3a6934db839aa80ae6d9d88
+    path: 
+  unityLifecycle:
+    version: 1.0.6
     nextVersion: 
 - packageId: com.unity.searcher@4.9.1
   testable: 0
@@ -4085,6 +4247,7 @@ m_ResolvedPackages:
     - 1.2.0-exp.7
     - 1.2.0
     - 1.2.1
+    - 1.2.2
     compatible:
     - 1.0.1
     - 1.1.0
@@ -4098,6 +4261,7 @@ m_ResolvedPackages:
     - 1.2.0-exp.7
     - 1.2.0
     - 1.2.1
+    - 1.2.2
     verified: 1.0.1
   dependencies:
   - name: com.unity.test-framework
@@ -4181,6 +4345,7 @@ m_ResolvedPackages:
     - 1.4.3
     - 1.5.2
     - 1.6.0
+    - 1.7.0
     compatible:
     - 1.4.0
     - 1.4.1
@@ -4188,6 +4353,7 @@ m_ResolvedPackages:
     - 1.4.3
     - 1.5.2
     - 1.6.0
+    - 1.7.0
     verified: 1.4.3
   dependencies:
   - name: com.unity.modules.unitywebrequest
@@ -4238,7 +4404,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: asset
   description: Burst is a compiler that translates from IL/.NET bytecode to highly
     optimized native code using LLVM.
   status: 4
@@ -4363,6 +4529,7 @@ m_ResolvedPackages:
     - 1.8.0-pre.2
     - 1.8.0
     - 1.8.1
+    - 1.8.2
     compatible:
     - 1.6.6
     - 1.7.0-pre.1
@@ -4375,6 +4542,7 @@ m_ResolvedPackages:
     - 1.8.0-pre.2
     - 1.8.0
     - 1.8.1
+    - 1.8.2
     verified: 1.6.6
   dependencies:
   - name: com.unity.mathematics
@@ -4390,7 +4558,7 @@ m_ResolvedPackages:
     scopes: []
     isDefault: 1
     capabilities: 7
-  hideInEditor: 1
+  hideInEditor: 0
   isAssetStorePackage: 0
   datePublishedTicks: 637902875830000000
   documentationUrl: 

@@ -343,13 +343,15 @@ public class SCRIPT_InventoryController : MonoBehaviour
                         selectedItemGrid = inventoryGrid;
                         return;
                     }
-                    selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+                    //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+                    //PlaceItem(positionOnGrid);
                     selectedItemGrid = inventoryGrid;
                 }
             }
             else
             {
-                доделать метод
+                я заболел и сдох, доделать завтра
+                //selectedItemGrid = inventoryGrid;
             }
 
             

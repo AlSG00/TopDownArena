@@ -386,6 +386,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualEffectGraph.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualEffectGraph.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Core.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Core.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualScripting.Flow.Editor.ref.dll"
@@ -406,6 +408,7 @@
 "Assets/GameObjectBrush/Scripts/Editor/BrushObject.cs"
 "Assets/GameObjectBrush/Scripts/Editor/GameObjectBrushEditor.cs"
 "Assets/GameObjectBrush/Scripts/Editor/StringPopupDialog.cs"
+"Assets/Prefab Brush/Scripts/Editor/PrefabBrush.cs"
 "Assets/Shared/Ramps/Editor/RampAssetEditor.cs"
 "Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs"
 -langversion:9.0
