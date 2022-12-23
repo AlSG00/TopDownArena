@@ -58,7 +58,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                LeftMouseButtonWithShift();
+                //LeftMouseButtonWithShift();
+                Debug.Log("Work in progress");
             }
             else
             {
@@ -327,35 +328,125 @@ public class SCRIPT_InventoryController : MonoBehaviour
         {
             PickUpItem(tileGridPosition);
         }
+
+        if (selectedItem == null)
+        {
+            return;
+        }
+
+        SCRIPT_InventoryItem itemToInsert = selectedItem;
+        selectedItem = null;
+
+        if (selectedItemGrid == inventoryGrid)
+        {
+            if (itemContainer != null)
+            {
+                selectedItemGrid = itemContainer.containerGrid;
+                Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+                if (positionOnGrid == null)
+                {
+                    selectedItemGrid = inventoryGrid;
+                    return;
+                }
+                selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+
+                //if (pickedInventoryItem == null)
+                //{
+                //    pickedInventoryItem = new InventoryItem();
+                //    inventoryItemList.Add(pickedInventoryItem);
+                //    pickedInventoryItem.item = pickedItem.item;
+                //    pickedInventoryItem.isRotated = pickedItem.isRotated;
+                //    itemContainer.storedItemList.Remove(pickedItem);
+                //}
+
+                //pickedInventoryItem.positionOnGrid.x = tileGridPosition.x;
+                //pickedInventoryItem.positionOnGrid.y = tileGridPosition.y;
+
+                if (pickedItem == null)
+                {
+                    Debug.Log($"Picked inventory item {pickedInventoryItem}");
+                    pickedItem = new SCRIPT_ItemContainer.StoredItem();
+                    itemContainer.storedItemList.Add(pickedItem);
+                    pickedItem.item = pickedInventoryItem.item;
+                    pickedItem.isRotated = pickedInventoryItem.isRotated;
+                    inventoryItemList.Remove(pickedInventoryItem);
+                }
+                pickedItem.positionOnGrid.x = tileGridPosition.x;
+                pickedItem.positionOnGrid.y = tileGridPosition.y;
+
+                selectedItemGrid = inventoryGrid;
+            }
+        }
         else
         {
-            SCRIPT_InventoryItem itemToInsert = selectedItem;
-            selectedItem = null;
-
-            if (selectedItemGrid == inventoryGrid)
+            selectedItemGrid = inventoryGrid;
+            Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+            if (positionOnGrid == null)
             {
-                if (itemContainer != null)
-                {
-                    selectedItemGrid = itemContainer.containerGrid;
-                    Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
-                    if (positionOnGrid == null)
-                    {
-                        selectedItemGrid = inventoryGrid;
-                        return;
-                    }
-                    //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-                    //PlaceItem(positionOnGrid);
-                    selectedItemGrid = inventoryGrid;
-                }
+                selectedItemGrid = itemContainer.containerGrid;
+                return;
             }
-            else
-            {
-                я заболел и сдох, доделать завтра
-                //selectedItemGrid = inventoryGrid;
-            }
+            selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
 
-            
+
+            //if (pickedItem == null)
+            //{
+            //    pickedItem = new SCRIPT_ItemContainer.StoredItem();
+            //    itemContainer.storedItemList.Add(pickedItem);
+            //    pickedItem.item = pickedInventoryItem.item;
+            //    pickedItem.isRotated = pickedInventoryItem.isRotated;
+            //    inventoryItemList.Remove(pickedInventoryItem);
+            //}
+            //pickedItem.positionOnGrid.x = tileGridPosition.x;
+            //pickedItem.positionOnGrid.y = tileGridPosition.y;
+
+            if (pickedInventoryItem == null)
+            {
+                Debug.Log($"Picked item {pickedItem}");
+                pickedInventoryItem = new InventoryItem();
+                inventoryItemList.Add(pickedInventoryItem);
+                pickedInventoryItem.item = pickedItem.item;
+                pickedInventoryItem.isRotated = pickedItem.isRotated;
+                itemContainer.storedItemList.Remove(pickedItem);
+            }
+            pickedInventoryItem.positionOnGrid.x = tileGridPosition.x;
+            pickedInventoryItem.positionOnGrid.y = tileGridPosition.y;
+
+            selectedItemGrid = itemContainer.containerGrid;
+
         }
+
+        pickedItem = null;
+        pickedInventoryItem = null;
+
+        //if (selectedItemGrid != inventoryGrid)
+        //{
+        //    if (pickedItem == null)
+        //    {
+        //        pickedItem = new SCRIPT_ItemContainer.StoredItem();
+        //        itemContainer.storedItemList.Add(pickedItem);
+        //        pickedItem.item = pickedInventoryItem.item;
+        //        pickedItem.isRotated = pickedInventoryItem.isRotated;
+        //        inventoryItemList.Remove(pickedInventoryItem);
+        //    }
+        //    pickedItem.positionOnGrid.x = tileGridPosition.x;
+        //    pickedItem.positionOnGrid.y = tileGridPosition.y;
+
+        //}
+        //else
+        //{
+        //    if (pickedInventoryItem == null)
+        //    {
+        //        pickedInventoryItem = new InventoryItem();
+        //        inventoryItemList.Add(pickedInventoryItem);
+        //        pickedInventoryItem.item = pickedItem.item;
+        //        pickedInventoryItem.isRotated = pickedItem.isRotated;
+        //        itemContainer.storedItemList.Remove(pickedItem);
+        //    }
+
+        //    pickedInventoryItem.positionOnGrid.x = tileGridPosition.x;
+        //    pickedInventoryItem.positionOnGrid.y = tileGridPosition.y;
+        //}
     }
 
     private void RightMouseButtonPress()
@@ -410,7 +501,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
             return;
         }
         selectedItem.isDropping = true;
-        //Debug.Log($"SelectedItem is {selectedItem}");
 
         Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab, dropPoint.position, Quaternion.identity);
         inventoryItemList.Remove(pickedInventoryItem);
@@ -532,8 +622,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
                 x.positionOnGrid.x == previousPosition.x &&
                 x.positionOnGrid.y == previousPosition.y
                 );
-
-                //Debug.Log($"Picked {pickedItem.item.name} : {selectedItem.onGridPositionX} : {selectedItem.onGridPositionY}");
             }
             else
             {
@@ -544,8 +632,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
                 x.positionOnGrid.x == previousPosition.x &&
                 x.positionOnGrid.y == previousPosition.y
                 );
-
-               //Debug.Log($"Picked {pickedInventoryItem.item.name} : {selectedItem.onGridPositionX} : {selectedItem.onGridPositionY}");
             }
 
             rectTransform = selectedItem.GetComponent<RectTransform>();
@@ -581,6 +667,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         
     }
 
+    // Возвращает обратно в инвентарь предмет на курсоре
     public void GetItemBack()
     {
         if (selectedItem == null)
@@ -599,18 +686,10 @@ public class SCRIPT_InventoryController : MonoBehaviour
             selectedItemGrid = inventoryGrid;
         }
         PlaceItem(lastPosition);
-
-        //if (pickedInventoryItem != null)
-        //{
-        //    inventoryGrid.PlaceItem(selectedItem, selectedItem.onGridPositionX, selectedItem.onGridPositionY);
-        //    pickedInventoryItem = null;
-        //}
-        //else if (pickedItem != null)
-        //{
-        //    itemContainer.containerGrid.PlaceItem(selectedItem, selectedItem.onGridPositionX, selectedItem.onGridPositionY);
-        //    pickedItem = null;
-        //}
     }
+
+
+
     public void OpenInventory()
     {
 

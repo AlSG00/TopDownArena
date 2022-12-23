@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\nextSpawn.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Player\PlayerHealth.cs" />
+    <Compile Include="Assets\Prefab Brush\Scripts\PB_SaveObject.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Scripts\Test_PlayOST.cs" />
     <Compile Include="Assets\Scripts\Roach.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
     <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryItem.cs" />
+    <Compile Include="Assets\Prefab Brush\Scripts\PB_PrefabData.cs" />
     <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\Scripts\TestAnimationEvent.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_ItemGrid.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Assets\Scripts\RoachRunFrom.cs" />
     <Compile Include="Assets\Scripts\SwapAudio.cs" />
     <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
+    <Compile Include="Assets\Prefab Brush\Scripts\PB_Enums.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_GridInteract.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraShake.cs" />
     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
@@ -177,9 +180,6 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Prefab Brush\Scripts\PB_PrefabData.cs" />
-    <Compile Include="Assets\Prefab Brush\Scripts\PB_SaveObject.cs" />
-    <Compile Include="Assets\Prefab Brush\Scripts\PB_Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -917,6 +917,9 @@
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
@@ -925,6 +928,9 @@
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
@@ -1003,12 +1009,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
