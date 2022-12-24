@@ -20,7 +20,7 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
     public void Interact()
     {
         canInteract = false;
-        Debug.Log("Searching space 1");
+        //Debug.Log("Searching space 1");
         Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryPrefab.GetComponent<SCRIPT_InventoryItem>());
         if (positionOnGrid == null)
         {
@@ -35,7 +35,7 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
             //    alreadyInteracting = false;
             //    return;
             //}
-            Debug.Log("Fiasko");
+            //Debug.Log("Fiasko");
             alreadyInteracting = false;
             return;
         }

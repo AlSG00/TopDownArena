@@ -318,19 +318,19 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   filtering:
     overrideState: 1
-    value: {x: 16.908388, y: 61.908394}
+    value: {x: 84.30355, y: 99}
   minLuminance:
     overrideState: 1
-    value: -1.8
+    value: -7
   maxLuminance:
     overrideState: 1
-    value: -1.7
+    value: 9
   keyValue:
     overrideState: 1
-    value: 1
+    value: 0.3
   eyeAdaptation:
     overrideState: 1
     value: 0

@@ -21,8 +21,10 @@ public class SCRIPT_Weapon : MonoBehaviour
     public float impactForce;
     public float damage;
     public float bulletSpreadValue;
+
     public GameObject hitEffectMetal;
     public GameObject hitEffectConcrete;
+    public GameObject hitEffectFlesh;
 
     public TrailRenderer tracerEffect;
     public Transform muzzle;
@@ -119,7 +121,7 @@ public class SCRIPT_Weapon : MonoBehaviour
             ammoShells.EjectShell();
 
             currentAmmoInMag--;
-            Debug.Log($"In mag {currentAmmoInMag}");
+            //Debug.Log($"In mag {currentAmmoInMag}");
             ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
         }
     }
@@ -201,21 +203,19 @@ public class SCRIPT_Weapon : MonoBehaviour
                 hitInfo.rigidbody.AddForce(-hitInfo.normal * impactForce);
             }
 
-          //  GameObject impactObj;
             if (hitInfo.transform.CompareTag("Concrete"))
             {
-                 impactObj = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                impactObj = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 //hitEffect = hitEffectConcrete;
             }
-            else
+            else if (hitInfo.transform.CompareTag("Metal"))
             {
-                //hitEffect = hitEffectMetal;
                 impactObj = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
-          //  impactObj.GetComponent<ParticleSystem>().Play();
-            //hitEffect.transform.position = hitInfo.point;
-            //hitEffect.transform.forward = hitInfo.normal;
-            //hitEffect.Play();
+            else if (hitInfo.transform.CompareTag("Flesh"))
+            {
+                impactObj = Instantiate(hitEffectFlesh, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            }
 
             Destroy(impactObj, 12f);
 

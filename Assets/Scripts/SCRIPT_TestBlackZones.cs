@@ -8,88 +8,51 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
     public GameObject[] blackZone;
     [Range(0, 1)] public float fadeSpeed = 0.3f;
     [Range(0, 1)] public float increaseSpeed = 0.3f;
-    //public bool canSee = true;
 
     [HideInInspector] public bool inLineOfSight = false;
     [HideInInspector] public bool stayingInside = false;
-    /*[HideInInspector]*/ //public bool[] raycastHits;
 
     private Renderer _renderer;
-    //private MaterialPropertyBlock _propertyBlock;
-    //private SCRIPT_TEST_LookAtBlackZone PlayerRaycastLook;
-    //private Coroutine _lastCoroutine;
-    //public bool inLOS = false;
-    private bool _isFaded = false;
+
+    //private bool _isFaded = false;
     public float increaseDelay = 1f;
     [HideInInspector] public float increaseCooldown;
 
-    //private _inArea = false;
-   // public float increaseCooldownTemp;
-
-
-    private void Awake()
+    private void FixedUpdate()
     {
-        //_propertyBlock = new MaterialPropertyBlock();
-        
-        //_renderer = GetComponent<Renderer>();
-    }
-
-    private void Update()
-    {
-        //if (raycastHits != null)
-        //{
-        //    string temp = "";
-        //    for (int i = 0; i < raycastHits.Length; i++)
-        //    {
-        //        temp += $"{raycastHits[i]} | ";
-        //    }
-        //    Debug.Log(temp);
-        //}
-
-
         if (increaseCooldown + increaseDelay <= Time.time)
         {
             increaseCooldown = Time.time;
             inLineOfSight = false;
 
-            //if (increaseCooldown + increaseDelay <= Time.time)
-           // {
-                if (!stayingInside && !inLineOfSight)
-                {
-                    IncreaseArea();
-                }
-           // }
+            if (!stayingInside && !inLineOfSight)
+            {
+                IncreaseArea();
+            }
         }
         else if ((inLineOfSight || stayingInside))
         {
             FadeArea();
-            //_isFaded = true;
         }
+    }
 
+    private void Update()
+    {
+        //Debug.Log($"IncreaseCooldown: {increaseCooldown}");
 
-        //if (!inLineOfSight && !stayingInside)
+        //if (increaseCooldown + increaseDelay <= Time.time)
         //{
-        //    if (!stayingInside)
-        //    {
-        //        if (increaseCooldown + increaseDelay <= Time.time)
+        //    increaseCooldown = (float)Time.time;
+        //    inLineOfSight = false;
+
+        //        if (!stayingInside && !inLineOfSight)
         //        {
         //            IncreaseArea();
         //        }
-        //    }
-        //    else
-        //    {
-        //        increaseCooldown = Time.time;
-        //    }
         //}
-        //else
+        //else if ((inLineOfSight || stayingInside))
         //{
-        //    //increaseCooldown = Time.time;
         //    FadeArea();
-        //}
-        //if (raycastHits.All(x => x == false) && raycastHits.Count(x => x == true) <= 1 &&
-        //    !stayingInside)
-        //{
-        //    IncreaseArea();
         //}
     }
 
@@ -99,7 +62,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
         {
             increaseCooldown = Time.time;
             stayingInside = true;
-            _isFaded = true;
+            //_isFaded = true;
             //FadeArea();
         }
     }

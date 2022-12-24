@@ -160,7 +160,7 @@ MonoBehaviour:
   muzzle: {fileID: 6339439357886136595}
   activeLayers:
     serializedVersion: 2
-    m_Bits: 6071
+    m_Bits: 268215
   muzzleFlame: {fileID: 1745050576683434268}
   ammoShells: {fileID: 1745050576683434269}
   isReloading: 0
