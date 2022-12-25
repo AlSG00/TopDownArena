@@ -12,6 +12,7 @@ TagManager:
   - Black
   - Item
   - Interactable
+  - Flesh
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - Weapon
   - Black
   - Interactable
-  - 
+  - Unprocessable decals
   - 
   - 
   - 

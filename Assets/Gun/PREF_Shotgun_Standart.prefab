@@ -155,6 +155,8 @@ MonoBehaviour:
     type: 3}
   hitEffectConcrete: {fileID: 7314358844588756561, guid: 0259bac27d2bbdd48b522aa87b29969d,
     type: 3}
+  hitEffectFlesh: {fileID: 2020388907439012045, guid: 03d78ae064eba0e4e8b0c1bce06a95ef,
+    type: 3}
   tracerEffect: {fileID: 9081275519731484546, guid: 6c02991fdfc257c4784192cdc3e92c1e,
     type: 3}
   muzzle: {fileID: 6339439357886136595}
