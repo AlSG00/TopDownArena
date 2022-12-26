@@ -472,6 +472,7 @@
 "Assets/Scripts/SCRIPT_ActiveWeapon.cs"
 "Assets/Scripts/SCRIPT_DaytimeLight.cs"
 "Assets/Scripts/SCRIPT_ExitGame.cs"
+"Assets/Scripts/SCRIPT_FixedRotation.cs"
 "Assets/Scripts/SCRIPT_FollowChild.cs"
 "Assets/Scripts/SCRIPT_InventoryHighlight.cs"
 "Assets/Scripts/SCRIPT_Medkit_Small.cs"

@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class SCRIPT_PlayerFlashlight : MonoBehaviour
 {
 
     [SerializeField] private Light _flashlight;
-    //[SerializeField] private Light _ambient;
     [SerializeField] private AudioSource _flashlightAudioSource;
     [SerializeField] private AudioClip _turnOnSound;
     [SerializeField] private AudioClip _turnOffSound;
@@ -16,6 +16,12 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
     private bool _isActive = false;
     public float chargeRemaining;
     public bool consoleDebug = false;
+    [SerializeField] private Image FlashlightChargeRadialBar;
+    [SerializeField] private float _radialBarAppearanceSpeed = 1f;
+
+    [SerializeField] private float _hideDelay = 3f;
+    private float _hideTime;
+
     private void Start()
     {
         if (!_isActive)
@@ -26,13 +32,14 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
         {
             _flashlight.intensity = 4.43f;
         }
-
+        StartCoroutine(HideRadialBar());
         chargeRemaining = chargeCapacity;
+        FlashlightChargeRadialBar.fillAmount = chargeRemaining;
     }
 
     private void FixedUpdate()
     {
-        UpdateFlashlightCharge();
+        UpdateFlashlightCharge();        
     }
 
     void Update()
@@ -73,10 +80,63 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
             TurnOff();
         }
 
+        FlashlightChargeRadialBar.fillAmount = chargeRemaining / 100f;
+
         if (consoleDebug)
         {
-            Debug.Log($"Flashlight: {chargeRemaining}");
+            Debug.Log($"Flashlight: {chargeRemaining} : {chargeRemaining / 100f}");
         }
+
+        if (_isActive == false)
+        {
+            if (_hideTime + _hideDelay <= Time.time)
+            {
+                _hideTime = Time.time;
+
+                StopAllCoroutines();
+                StartCoroutine(HideRadialBar());
+            }
+        }
+    }
+
+    private IEnumerator HideRadialBar()
+    {
+        while (FlashlightChargeRadialBar.color.a > 0)
+        {
+            yield return FlashlightChargeRadialBar.color = new Color(
+                FlashlightChargeRadialBar.color.r,
+                FlashlightChargeRadialBar.color.g,
+                FlashlightChargeRadialBar.color.b,
+                FlashlightChargeRadialBar.color.a - _radialBarAppearanceSpeed
+                );
+        }
+
+        yield return FlashlightChargeRadialBar.color = new Color(
+                FlashlightChargeRadialBar.color.r,
+                FlashlightChargeRadialBar.color.g,
+                FlashlightChargeRadialBar.color.b,
+                0f
+                );
+    }
+
+    private IEnumerator ShowRadialBar()
+    {
+        while (FlashlightChargeRadialBar.color.a < 1)
+        {
+            yield return FlashlightChargeRadialBar.color = new Color(
+                FlashlightChargeRadialBar.color.r,
+                FlashlightChargeRadialBar.color.g,
+                FlashlightChargeRadialBar.color.b,
+                FlashlightChargeRadialBar.color.a + _radialBarAppearanceSpeed
+                );
+        }
+
+        yield return FlashlightChargeRadialBar.color = new Color(
+                FlashlightChargeRadialBar.color.r,
+                FlashlightChargeRadialBar.color.g,
+                FlashlightChargeRadialBar.color.b,
+                1f
+                );
     }
 
     private void TurnOn()
@@ -86,6 +146,9 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
             _isActive = true;
             _flashlight.intensity = 4.43f;
             _flashlightAudioSource.PlayOneShot(_turnOnSound);
+
+            StopAllCoroutines();
+            StartCoroutine(ShowRadialBar());
         }
     }
 
@@ -96,6 +159,11 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
             _isActive = false;
             _flashlight.intensity = 0;
             _flashlightAudioSource.PlayOneShot(_turnOffSound);
+
+            //StopAllCoroutines();
+            //StartCoroutine(HideRadialBar());
+
+            _hideTime = Time.time;
         }
     }
 }
