@@ -99,6 +99,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_DaytimeLight.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSDebugView.cs" />
+    <Compile Include="Assets\Scripts\SCRIPT_FixedRotation.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
     <Compile Include="Assets\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Scripts\MouseInteraction.cs" />
@@ -180,7 +181,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Scripts\SCRIPT_FixedRotation.cs" />
+    <Compile Include="Assets\Scripts\Test scripts\TestLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

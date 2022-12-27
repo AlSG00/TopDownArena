@@ -5,23 +5,31 @@ using UnityEngine;
 
 public class SCRIPT_PlayerFlashlight : MonoBehaviour
 {
-
+    [Header("Light source")]
     [SerializeField] private Light _flashlight;
+
+    [Header("Sound")]
     [SerializeField] private AudioSource _flashlightAudioSource;
     [SerializeField] private AudioClip _turnOnSound;
     [SerializeField] private AudioClip _turnOffSound;
+
+    [Header("UI")]
+    [SerializeField] private Image FlashlightChargeRadialBar;
+    [SerializeField] private float _radialBarAppearanceSpeed = 1f;
+    [SerializeField] private float _radialBarDissapearingSpeed = 1f;
+    [SerializeField] private float _hideDelay = 1f;
+    private float _hideTime;
+
+    [Header("Parameters")]
     public float chargeCapacity = 100f;
     public float dischargeSpeed = 0.01f;
     public float regenerationSpeed = 0f;
+    [HideInInspector] public float chargeRemaining;
     private bool _isActive = false;
-    public float chargeRemaining;
+    
+    [Space]
     public bool consoleDebug = false;
-    [SerializeField] private Image FlashlightChargeRadialBar;
-    [SerializeField] private float _radialBarAppearanceSpeed = 1f;
-
-    [SerializeField] private float _hideDelay = 3f;
-    private float _hideTime;
-
+    
     private void Start()
     {
         if (!_isActive)
@@ -72,6 +80,12 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
             {
                 chargeRemaining = chargeCapacity;
             }
+
+            if (regenerationSpeed != 0 &&
+                chargeRemaining != chargeCapacity)
+            {
+                _hideTime = Time.time;
+            }
         }
 
         if (chargeRemaining <= 0)
@@ -107,7 +121,7 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
                 FlashlightChargeRadialBar.color.r,
                 FlashlightChargeRadialBar.color.g,
                 FlashlightChargeRadialBar.color.b,
-                FlashlightChargeRadialBar.color.a - _radialBarAppearanceSpeed
+                FlashlightChargeRadialBar.color.a - _radialBarDissapearingSpeed
                 );
         }
 
@@ -159,9 +173,6 @@ public class SCRIPT_PlayerFlashlight : MonoBehaviour
             _isActive = false;
             _flashlight.intensity = 0;
             _flashlightAudioSource.PlayOneShot(_turnOffSound);
-
-            //StopAllCoroutines();
-            //StartCoroutine(HideRadialBar());
 
             _hideTime = Time.time;
         }
