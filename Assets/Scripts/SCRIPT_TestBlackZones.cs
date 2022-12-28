@@ -22,6 +22,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
     {
         if (increaseCooldown + increaseDelay <= Time.time)
         {
+            //Debug.Log($"IC {increaseCooldown} : ID {increaseDelay}");
             increaseCooldown = Time.time;
             inLineOfSight = false;
 

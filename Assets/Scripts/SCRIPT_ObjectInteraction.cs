@@ -81,10 +81,10 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100, cursorLayer))
         {
-            Debug.Log("Raycasting...");
+            //Debug.Log("Raycasting...");
             if (hit.transform.CompareTag("Interactable"))
             {
-                Debug.Log($"Found interactable {hit.transform.name}");
+                //Debug.Log($"Found interactable {hit.transform.name}");
                 if (interactableObject != null)
                 {
                     interactableObject.canInteract = false;
@@ -92,10 +92,10 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 interactableObject = hit.transform.GetComponent<SCRIPT_IInteractable>();
                 interactableObject.canInteract = true;
             }
-            else
-            {
-                Debug.Log($"Not interactable {hit.transform.name}");
-            }
+            //else
+            //{
+            //    Debug.Log($"Not interactable {hit.transform.name}");
+            //}
             //interactableObject = hits[i].transform.GetComponent<SCRIPT_IInteractable>();
 
             // break;

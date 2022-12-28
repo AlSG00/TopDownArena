@@ -10,7 +10,7 @@ public class SCRIPT_Medkit_Small : MonoBehaviour, SCRIPT_IItem
     PlayerHealth playerHealth;
 
 
-    private void Awake()
+    private void Start()
     {
         isUsable = true;
         playerHealth = GameObject.Find("_Player").GetComponent<PlayerHealth>();

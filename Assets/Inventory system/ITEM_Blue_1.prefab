@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1765722264743598900}
   - component: {fileID: 1765722264743598903}
   - component: {fileID: 1765722264743598902}
-  - component: {fileID: 2346497512983539580}
+  - component: {fileID: 2702102103260729258}
   m_Layer: 0
   m_Name: ITEM_Blue_1
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MonoBehaviour:
   onGridPositionY: 1
   isRotated: 0
   isUsable: 1
---- !u!114 &2346497512983539580
+--- !u!114 &2702102103260729258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,7 +106,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3847044455456163715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775089f3665fca04b9f21652f9038bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ae7fc24fa486184b87ea160ba789f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healingBonus: 10

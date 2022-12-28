@@ -457,6 +457,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
             PickUpItem(tileGridPosition);
         }
 
+        //TODO: По идее, здесь не сработает данное условие, переделать на обращение к InventoryItem
         if (selectedItem.GetComponent<SCRIPT_IItem>().isUsable == false)
         {
             PlaceItem(tileGridPosition);

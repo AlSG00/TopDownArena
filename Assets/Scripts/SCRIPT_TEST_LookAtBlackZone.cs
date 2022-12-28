@@ -47,6 +47,14 @@ public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
                         blackZone.increaseCooldown = Time.time;
                     }
                 }
+                else
+                {
+                    if (blackZone != null)
+                    {
+                        blackZone.increaseCooldown = Time.time;
+                        blackZone = null;
+                    }
+                }
             }
 
             angle += _angleStep;

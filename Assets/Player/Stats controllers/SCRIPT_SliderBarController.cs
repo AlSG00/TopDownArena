@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SCRIPT_SliderBarController : MonoBehaviour
+{
+    [SerializeField] private Slider _sliderBar;
+
+    public void SetMaxBarValue(float satiety)
+    {
+        _sliderBar.maxValue = satiety;
+        _sliderBar.value = satiety;
+    }
+
+    public void SetBarValue(float satiety)
+    {
+        _sliderBar.value = satiety;
+    }
+}

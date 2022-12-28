@@ -65,7 +65,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\Scripts\nextSpawn.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
-    <Compile Include="Assets\Player\PlayerHealth.cs" />
+    <Compile Include="Assets\Player\Stats controllers\PlayerHealth.cs" />
     <Compile Include="Assets\Prefab Brush\Scripts\PB_SaveObject.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />
     <Compile Include="Assets\Scripts\Test_PlayOST.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_TEST_AutomaticDoor.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
+    <Compile Include="Assets\Scripts\Test scripts\TestLine.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
     <Compile Include="Assets\Player\SCRIPT_PlayerInput.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\Gun\RayProjectile.cs" />
-    <Compile Include="Assets\Scripts\HealtBarScript.cs" />
+    <Compile Include="Assets\Player\Stats controllers\HealtBarScript.cs" />
     <Compile Include="Assets\Player\Player_Scope.cs" />
     <Compile Include="Assets\Player\PlayerHP.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Player\SCRIPT_PlayerFlashlight.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_SatietyBar.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
     <Compile Include="Assets\Items\SCRIPT_IItem.cs" />
     <Compile Include="Assets\Scripts\TextLookAt.cs" />
@@ -172,6 +174,7 @@
     <Compile Include="Assets\Player\SCRIPT_PlayerAmmunition.cs" />
     <Compile Include="Assets\Scripts\ToolTip.cs" />
     <Compile Include="Assets\SCRIPT_TEST_ActivateShop.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerSatiety.cs" />
     <Compile Include="Assets\Scripts\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSMask.cs" />
@@ -181,7 +184,10 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Scripts\Test scripts\TestLine.cs" />
+    <Compile Include="Assets\SCRIPT_Food.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_SliderBarController.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerHydration.cs" />
+    <Compile Include="Assets\SCRIPT_Drink.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
