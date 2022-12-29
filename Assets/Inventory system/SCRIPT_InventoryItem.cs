@@ -9,6 +9,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public SCRIPT_ItemData itemData;
     public GameObject prefab;
     public bool isDropping;
+    public float weight;
 
     public int Height
     {

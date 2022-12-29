@@ -116,7 +116,7 @@ public class Player_Movement : MonoBehaviour
         {
             animationController.SetBool("isWalking", true);
             inventory.isCheckingInventory = false;
-            inventory.HandleInventory(false);
+            inventory.HandleInventoryGrid(false);
         }
         else
         {

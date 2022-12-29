@@ -440,6 +440,7 @@
 "Assets/Player/SCRIPT_PlayerInput.cs"
 "Assets/Player/Stats controllers/HealtBarScript.cs"
 "Assets/Player/Stats controllers/PlayerHealth.cs"
+"Assets/Player/Stats controllers/SCRIPT_PlayerCarryingWeight.cs"
 "Assets/Player/Stats controllers/SCRIPT_PlayerHydration.cs"
 "Assets/Player/Stats controllers/SCRIPT_PlayerSatiety.cs"
 "Assets/Player/Stats controllers/SCRIPT_SatietyBar.cs"

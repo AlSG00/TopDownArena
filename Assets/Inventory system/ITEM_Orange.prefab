@@ -93,6 +93,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: f4434ac65e1e8e048aedff31b686a0f3, type: 2}
   prefab: {fileID: 151321801300639515, guid: 91949a9c16199fe43b3b6af47c80233f, type: 3}
   isDropping: 0
+  weight: 1
   onGridPositionX: 0
   onGridPositionY: 0
   isRotated: 0
@@ -109,3 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9730458d9e48b439b0deb1371f43fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodSatiety: 25

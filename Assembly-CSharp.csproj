@@ -73,6 +73,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_ItemData.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilRenderer.cs" />
     <Compile Include="Assets\Scripts\LightFlicker.cs" />
+    <Compile Include="Assets\SCRIPT_Drink.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_TEST_LookAtBlackZone.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\Desaturate.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_TEST_AutomaticDoor.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Assets\Scripts\Test_PlayAnimation.cs" />
     <Compile Include="Assets\Scripts\TEST_UnlockDoor.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_SliderBarController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
     <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryItem.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Assets\Camera\SCRIPT_CameraMoving.cs" />
     <Compile Include="Assets\Player\Player_Shooting.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerHydration.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_Screamer_Lamp.cs" />
     <Compile Include="Assets\Scripts\RoachRunFrom.cs" />
@@ -175,6 +178,7 @@
     <Compile Include="Assets\Scripts\ToolTip.cs" />
     <Compile Include="Assets\SCRIPT_TEST_ActivateShop.cs" />
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerSatiety.cs" />
+    <Compile Include="Assets\SCRIPT_Food.cs" />
     <Compile Include="Assets\Scripts\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSMask.cs" />
@@ -184,10 +188,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\SCRIPT_Food.cs" />
-    <Compile Include="Assets\Player\Stats controllers\SCRIPT_SliderBarController.cs" />
-    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerHydration.cs" />
-    <Compile Include="Assets\SCRIPT_Drink.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerCarryingWeight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -23,7 +23,23 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         public GameObject item;
         public Vector2Int positionOnGrid;
         public bool isRotated;
+        public float weight;
+
+        public StoredItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight)
+        {
+            item = _item;
+            positionOnGrid.x = _positionOnGridX;
+            positionOnGrid.y = _positionOnGridY;
+            isRotated = _isRotated;
+            weight = _weight;
+        }
     }
+    //{
+    //    //public GameObject item;
+    //    //public Vector2Int positionOnGrid;
+    //    //public bool isRotated;
+    //    //public float weight;
+    //}
 
     private void Awake()
     {
@@ -44,7 +60,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         }
 
         HandleContainerGrid(true);
-        inventoryController.HandleInventory(true);
+        inventoryController.HandleInventoryGrid(true);
         GridInit();
         canInteract = true;
     }

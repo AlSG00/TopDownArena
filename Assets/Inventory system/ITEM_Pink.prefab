@@ -93,6 +93,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 9e911267786f48b42a6502e28cf22045, type: 2}
   prefab: {fileID: 3868300638631363618, guid: 9032ba33769953441b2fdac0c2e53682, type: 3}
   isDropping: 0
+  weight: 2
   onGridPositionX: 0
   onGridPositionY: 0
   isRotated: 0

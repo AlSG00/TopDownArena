@@ -93,6 +93,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 6b0fa27cdad009442ac7bf6c946fa9dd, type: 2}
   prefab: {fileID: 7908950061278218334, guid: 0681385ec7c8ad545a5fcdb0e93856b7, type: 3}
   isDropping: 0
+  weight: 1
   onGridPositionX: 1
   onGridPositionY: 1
   isRotated: 0
@@ -109,3 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae7fc24fa486184b87ea160ba789f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hydration: 25
