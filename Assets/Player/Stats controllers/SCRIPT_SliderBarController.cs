@@ -7,13 +7,13 @@ public class SCRIPT_SliderBarController : MonoBehaviour
 {
     [SerializeField] private Slider _sliderBar;
 
-    public void SetMaxBarValue(float satiety)
+    public void SetMaxValue(float satiety)
     {
         _sliderBar.maxValue = satiety;
         _sliderBar.value = satiety;
     }
 
-    public void SetBarValue(float satiety)
+    public void SetValue(float satiety)
     {
         _sliderBar.value = satiety;
     }

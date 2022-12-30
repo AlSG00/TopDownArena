@@ -20,6 +20,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
 
     private PlayerHealth _health;
     private SCRIPT_PlayerSatiety _satiety;
+    private SCRIPT_PlayerStamina _stamina;
     
     private void Awake()
     {
@@ -34,7 +35,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
 
     private void Start()
     {
-        _hydrationBar.SetMaxBarValue(maxHydration);
+        _hydrationBar.SetMaxValue(maxHydration);
     }
 
     private void UpdateHydration()
@@ -59,7 +60,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
             }
         }
 
-        _hydrationBar.SetBarValue(currentHydration);
+        _hydrationBar.SetValue(currentHydration);
     }
 
     public void Drink(float hydration)
@@ -69,6 +70,6 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
         {
             currentHydration = maxHydration;
         }
-        _hydrationBar.SetBarValue(currentHydration);
+        _hydrationBar.SetValue(currentHydration);
     }
 }

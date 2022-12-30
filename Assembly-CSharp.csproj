@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_ExitGame.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_ActiveWeapon.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_MusicLoop.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerCarryingWeight.cs" />
     <Compile Include="Assets\Scripts\nextSpawn.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Player\Stats controllers\PlayerHealth.cs" />
@@ -188,7 +189,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerCarryingWeight.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerStamina.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

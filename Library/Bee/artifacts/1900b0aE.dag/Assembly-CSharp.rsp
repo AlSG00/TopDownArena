@@ -443,6 +443,7 @@
 "Assets/Player/Stats controllers/SCRIPT_PlayerCarryingWeight.cs"
 "Assets/Player/Stats controllers/SCRIPT_PlayerHydration.cs"
 "Assets/Player/Stats controllers/SCRIPT_PlayerSatiety.cs"
+"Assets/Player/Stats controllers/SCRIPT_PlayerStamina.cs"
 "Assets/Player/Stats controllers/SCRIPT_SatietyBar.cs"
 "Assets/Player/Stats controllers/SCRIPT_SliderBarController.cs"
 "Assets/Prefab Brush/Scripts/PB_Enums.cs"

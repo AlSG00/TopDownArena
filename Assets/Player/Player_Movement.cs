@@ -11,8 +11,8 @@ public class Player_Movement : MonoBehaviour
    // public Rigidbody rigidBody;
     //public Camera camera;
     private float sprintSpeed;
-    private bool isSprinting;
-    private Vector3 movement;
+    public bool isRunning = false;
+    public Vector3 movement;
     [SerializeField] private AudioSource footstepsSource;
     [SerializeField] private List<AudioClip> footstepsSample;
     [SerializeField] private Animator animationController;
@@ -47,6 +47,9 @@ public class Player_Movement : MonoBehaviour
 
     private SCRIPT_InventoryController inventory;
 
+    [SerializeField] private SCRIPT_PlayerStamina _playerStamina;
+
+    //public Vector3 movement;
     #endregion
 
 
@@ -83,15 +86,25 @@ public class Player_Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            sprintSpeed = player_sprint;
-            animationController.SetBool("isRunning", true);
+            if (!_playerStamina.isExhaused)
+            {
+                sprintSpeed = player_sprint;
+                isRunning = true;
+                animationController.SetBool("isRunning", true);
+            }
+            else
+            {
+                sprintSpeed = 1;
+                isRunning = false;
+                animationController.SetBool("isRunning", false);
+            }
         }
         else
         {
             sprintSpeed = 1;
+            isRunning = false;
             animationController.SetBool("isRunning", false);
         }
-        
     }
 
     private void Move()
@@ -111,8 +124,10 @@ public class Player_Movement : MonoBehaviour
         double sinForce = Mathf.Abs(Mathf.Sin(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
         double cosForce = Mathf.Abs(Mathf.Cos(Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"))));
 
-        Vector3 _movement = new Vector3(Input.GetAxisRaw("Horizontal") * (float)cosForce, 0, Input.GetAxisRaw("Vertical") * (float)sinForce);
-        if (_movement.magnitude > 0)
+        //Vector3 _movement = new Vector3(Input.GetAxisRaw("Horizontal") * (float)cosForce, 0, Input.GetAxisRaw("Vertical") * (float)sinForce);
+        movement = new Vector3(Input.GetAxisRaw("Horizontal") * (float)cosForce, 0, Input.GetAxisRaw("Vertical") * (float)sinForce);
+
+        if (movement.magnitude > 0)
         {
             animationController.SetBool("isWalking", true);
             inventory.isCheckingInventory = false;
@@ -123,7 +138,7 @@ public class Player_Movement : MonoBehaviour
             animationController.SetBool("isWalking", false);
         }
 
-        transform.Translate(_movement * player_speed * sprintSpeed * Time.deltaTime, Space.World);
+        transform.Translate(movement * player_speed * sprintSpeed * Time.deltaTime, Space.World);
 
     }
 
