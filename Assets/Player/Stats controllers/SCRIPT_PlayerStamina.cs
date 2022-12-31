@@ -71,10 +71,8 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
         {
             if (lastTimeRun + staminaRestoringDelay <= Time.time)
             {
-                Debug.Log("stamina cooldown check");
                 if (_hydration.currentHydration > 0)
                 {
-                    Debug.Log("hydration check");
                     if (currentStamina < maxStamina)
                     {
                         currentStamina += staminaIncreaseValue;

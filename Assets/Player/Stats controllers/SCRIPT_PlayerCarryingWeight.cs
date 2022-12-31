@@ -6,17 +6,18 @@ using UnityEngine;
 public class SCRIPT_PlayerCarryingWeight : MonoBehaviour
 {
     // скрипт со стаминой добавить
-    [SerializeField] private SCRIPT_PlayerHydration _playerHydration;
-    [SerializeField] private Player_Movement _playerMovement;
+    [SerializeField] private SCRIPT_PlayerHydration _hydration;
+    [SerializeField] private Player_Movement _movement;
 
     public float maxCarryingWeight;
     public float currentCarryingWeight;
-    public float hydrationDecreaseDebuff;
-    private bool _isOvercarried = false;
+    public float hydrationDecreaseDebuff = 0.01f;
+    public bool _isOvercarried = false;
 
     private void Update()
     {
         HandleCaryingWeight();
+        CalculateWalkSpeedDebuff();
     }
 
     private void HandleCaryingWeight()
@@ -27,7 +28,7 @@ public class SCRIPT_PlayerCarryingWeight : MonoBehaviour
             if (!_isOvercarried)
             {
                 _isOvercarried = true;
-                _playerHydration.hydrationDecreaseValue += hydrationDecreaseDebuff;
+                _hydration.hydrationDecreaseValue += hydrationDecreaseDebuff;
             }
         }
         else
@@ -35,8 +36,22 @@ public class SCRIPT_PlayerCarryingWeight : MonoBehaviour
             if (_isOvercarried)
             {
                 _isOvercarried = false;
-                _playerHydration.hydrationDecreaseValue += hydrationDecreaseDebuff;
+                _hydration.hydrationDecreaseValue += hydrationDecreaseDebuff;
             }
         }
+    }
+
+    
+    private void CalculateWalkSpeedDebuff()
+    {
+        if (_isOvercarried)
+        {
+            _movement.walkSpeedDebuff = (currentCarryingWeight - maxCarryingWeight) * 0.1f;
+        }
+        else
+        {
+            _movement.walkSpeedDebuff = 0f;
+        }
+        
     }
 }

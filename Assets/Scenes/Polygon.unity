@@ -26098,7 +26098,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108382910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.383, y: 1.361, z: -45.894}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -518340,8 +518340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5f1e80fba63c04eb2c78cb69cfe3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_speed: 3
-  player_sprint: 2
+  walkSpeed: 0
+  walkSpeedDebuff: 0
+  sprintSpeed: 0
   isRunning: 0
   movement: {x: 0, y: 0, z: 0}
   footstepsSource: {fileID: 6831854521327000184}
@@ -518351,20 +518352,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6b03a1cc0a14c1d46bbf34cfed7cb474, type: 3}
   animationController: {fileID: 0}
   turnSpeed: 0.1
-  enableFeetIK: 1
-  heightFromGroundRaycast: 1
-  raycastDownDistance: 1
-  environmentLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  pelvisOffset: 0
-  pelvisUpAndDownSpeed: 0.2
-  feetToIKPositionSpeed: 0.5
-  leftFootAnimVariableName: LeftFootCurve
-  rightFootAnimVariableName: RightFootCurve
-  useProIKFeature: 0
-  showSolverDebug: 1
-  _playerStamina: {fileID: 0}
+  _stamina: {fileID: 0}
+  _carryingWeight: {fileID: 0}
 --- !u!114 &6831854521137588237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519636,8 +519625,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5f1e80fba63c04eb2c78cb69cfe3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_speed: 2
-  player_sprint: 2
+  walkSpeed: 2
+  walkSpeedDebuff: 0
+  sprintSpeed: 2
   isRunning: 0
   movement: {x: 0, y: 0, z: 0}
   footstepsSource: {fileID: 1463753827}
@@ -519647,20 +519637,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6b03a1cc0a14c1d46bbf34cfed7cb474, type: 3}
   animationController: {fileID: 3824020741422590188}
   turnSpeed: 0.15
-  enableFeetIK: 1
-  heightFromGroundRaycast: 0.01
-  raycastDownDistance: 1
-  environmentLayer:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  pelvisOffset: 0
-  pelvisUpAndDownSpeed: 0.2
-  feetToIKPositionSpeed: 0.5
-  leftFootAnimVariableName: LeftFootCurve
-  rightFootAnimVariableName: RightFootCurve
-  useProIKFeature: 0
-  showSolverDebug: 1
-  _playerStamina: {fileID: 7546444054703482941}
+  _stamina: {fileID: 7546444054703482941}
+  _carryingWeight: {fileID: 7546444054703482940}
 --- !u!136 &7546444054703482932
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -519916,11 +519894,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ae7e9799d3ec6498b4208617fbee80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHydration: {fileID: 0}
-  _playerMovement: {fileID: 0}
-  maxCarryingWeight: 20
+  _hydration: {fileID: 7546444054703482939}
+  _movement: {fileID: 7546444054703482931}
+  maxCarryingWeight: 5
   currentCarryingWeight: 0
   hydrationDecreaseDebuff: 0
+  _isOvercarried: 0
 --- !u!114 &7546444054703482941
 MonoBehaviour:
   m_ObjectHideFlags: 0
