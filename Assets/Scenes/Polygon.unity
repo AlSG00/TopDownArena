@@ -519901,6 +519901,7 @@ MonoBehaviour:
   maxHydration: 100
   currentHydration: 100
   hydrationDecreaseValue: 0.01
+  hydrationDecreaseDebuff: 0
   satietyDecreaseDebuff: 0.1
   healthDecreaseValue: 0.01
 --- !u!114 &7546444054703482940
@@ -519933,14 +519934,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _staminaBar: {fileID: 345789099}
-  _playerMovement: {fileID: 7546444054703482931}
-  _playerHydration: {fileID: 7546444054703482939}
+  _movement: {fileID: 7546444054703482931}
+  _hydration: {fileID: 7546444054703482939}
   maxStamina: 100
   currentStamina: 100
   staminaDecreaseValue: 0.1
   staminaIncreaseValue: 0.1
   staminaRestoringDelay: 3
-  hydrationDecreaseDebuff: 0.1
   lastTimeRun: 0
   tiredness: 0
   isExhaused: 0

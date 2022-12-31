@@ -7,8 +7,8 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private SCRIPT_SliderBarController _staminaBar;
-    [SerializeField] private Player_Movement _playerMovement;
-    [SerializeField] private SCRIPT_PlayerHydration _playerHydration;
+    [SerializeField] private Player_Movement _movement;
+    [SerializeField] private SCRIPT_PlayerHydration _hydration;
 
     [Header("Stamina parameters")]
     public float maxStamina = 100f;
@@ -20,7 +20,6 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
     //public bool _isTired = false;
 
     [Header("Affection on player")]
-    public float hydrationDecreaseDebuff = 0.1f;
 
     [HideInInspector] public float lastTimeRun;
 
@@ -50,8 +49,8 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
 
     private void HandleStamina()
     {
-        if (_playerMovement.movement.magnitude != 0 &&
-            _playerMovement.isRunning)
+        if (_movement.movement.magnitude != 0 &&
+            _movement.isRunning)
         {
             lastTimeRun = Time.time;
 
@@ -72,13 +71,18 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
         {
             if (lastTimeRun + staminaRestoringDelay <= Time.time)
             {
-                if (currentStamina < maxStamina)
+                Debug.Log("stamina cooldown check");
+                if (_hydration.currentHydration > 0)
                 {
-                    currentStamina += staminaIncreaseValue;
-                }
-                else
-                {
-                    currentStamina = maxStamina;
+                    Debug.Log("hydration check");
+                    if (currentStamina < maxStamina)
+                    {
+                        currentStamina += staminaIncreaseValue;
+                    }
+                    else
+                    {
+                        currentStamina = maxStamina;
+                    }
                 }
             }
         }

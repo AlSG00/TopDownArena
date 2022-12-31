@@ -14,6 +14,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
     public float maxHydration = 100f;
     public float currentHydration = 100f;
     public float hydrationDecreaseValue = 0.01f;
+    public float hydrationDecreaseDebuff = 0f;
     public float satietyDecreaseDebuff = 0.05f; 
     public float healthDecreaseValue = 0.01f;
     private bool _isDehydrated = false;
@@ -26,11 +27,13 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
     {
         _health = gameObject.GetComponent<PlayerHealth>();
         _satiety = gameObject.GetComponent<SCRIPT_PlayerSatiety>();
+        _stamina = gameObject.GetComponent<SCRIPT_PlayerStamina>();
     }
 
     private void FixedUpdate()
     {
         UpdateHydration();
+        CalculateHydrationDebuffByStamina();
     }
 
     private void Start()
@@ -42,7 +45,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
     {
         if (currentHydration > 0)
         {
-            currentHydration -= hydrationDecreaseValue;
+            currentHydration -= hydrationDecreaseValue + hydrationDecreaseDebuff;
             if (_isDehydrated)
             {
                 _isDehydrated = false;
@@ -61,6 +64,11 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
         }
 
         _hydrationBar.SetValue(currentHydration);
+    }
+
+    private void CalculateHydrationDebuffByStamina()
+    {
+        hydrationDecreaseDebuff = (_stamina.maxStamina - _stamina.currentStamina) * 0.0001f;
     }
 
     public void Drink(float hydration)
