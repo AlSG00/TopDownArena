@@ -13,6 +13,7 @@ TagManager:
   - Item
   - Interactable
   - Flesh
+  - InteractionArea
   layers:
   - Default
   - TransparentFX

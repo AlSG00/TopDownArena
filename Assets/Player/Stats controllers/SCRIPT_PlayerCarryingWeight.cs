@@ -8,16 +8,35 @@ public class SCRIPT_PlayerCarryingWeight : MonoBehaviour
     // скрипт со стаминой добавить
     [SerializeField] private SCRIPT_PlayerHydration _hydration;
     [SerializeField] private Player_Movement _movement;
+    [SerializeField] private SCRIPT_CarryingWeightText _carryingWeightUI;
 
     public float maxCarryingWeight;
     public float currentCarryingWeight;
     public float hydrationDecreaseDebuff = 0.01f;
     public bool _isOvercarried = false;
 
+    private float _hideTime;
+
+    private void Start()
+    {
+        _carryingWeightUI.SetWeightText(currentCarryingWeight, maxCarryingWeight);
+        _carryingWeightUI.HideUI();
+    }
+
     private void Update()
     {
+        HandleUIVisibility();
         HandleCaryingWeight();
         CalculateWalkSpeedDebuff();
+    }
+
+    private void HandleUIVisibility()
+    {
+        if (_hideTime + _carryingWeightUI.uiDissapearingDelay < Time.time &&
+            _carryingWeightUI.isVisible)
+        {
+            _carryingWeightUI.HideUI();
+        }
     }
 
     private void HandleCaryingWeight()
@@ -41,6 +60,21 @@ public class SCRIPT_PlayerCarryingWeight : MonoBehaviour
         }
     }
 
+    public void AddWeight(float weight)
+    {
+        currentCarryingWeight += weight;
+        _carryingWeightUI.SetWeightText(currentCarryingWeight, maxCarryingWeight);
+        _carryingWeightUI.ShowUI();
+        _hideTime = Time.time;
+    }
+
+    public void TakeWeight(float weight)
+    {
+        currentCarryingWeight -= weight;
+        _carryingWeightUI.SetWeightText(currentCarryingWeight, maxCarryingWeight);
+        _carryingWeightUI.ShowUI();
+        _hideTime = Time.time;
+    }
     
     private void CalculateWalkSpeedDebuff()
     {
@@ -52,6 +86,5 @@ public class SCRIPT_PlayerCarryingWeight : MonoBehaviour
         {
             _movement.walkSpeedDebuff = 0f;
         }
-        
     }
 }

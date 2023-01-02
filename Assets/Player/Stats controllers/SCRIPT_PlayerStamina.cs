@@ -9,6 +9,7 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
     [SerializeField] private SCRIPT_SliderBarController _staminaBar;
     [SerializeField] private Player_Movement _movement;
     [SerializeField] private SCRIPT_PlayerHydration _hydration;
+    [SerializeField] private SCRIPT_PlayerCarryingWeight _carryingWeight;
 
     [Header("Stamina parameters")]
     public float maxStamina = 100f;
@@ -17,10 +18,8 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
     public float staminaIncreaseValue = 0.1f;
     public float staminaRestoringDelay = 3f;
 
-    //public bool _isTired = false;
-
     [Header("Affection on player")]
-
+    public float StaminaDecreaseDebuff = 0.05f;
     [HideInInspector] public float lastTimeRun;
 
     public enum Tiredness
@@ -44,9 +43,9 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
     private void Update()
     {
         HandleStamina();
+        HandleStaminaWhenOvercarrying();
         HandleTiredness();
     }
-
     private void HandleStamina()
     {
         if (_movement.movement.magnitude != 0 &&
@@ -71,7 +70,8 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
         {
             if (lastTimeRun + staminaRestoringDelay <= Time.time)
             {
-                if (_hydration.currentHydration > 0)
+                if (_hydration.currentHydration > 0 &&
+                    !_carryingWeight._isOvercarried)
                 {
                     if (currentStamina < maxStamina)
                     {
@@ -86,6 +86,15 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
         }
 
         _staminaBar.SetValue(currentStamina);
+    }
+
+    private void HandleStaminaWhenOvercarrying()
+    {
+        if (_movement.movement.magnitude != 0 &&
+            _carryingWeight._isOvercarried)
+        {
+            currentStamina -= StaminaDecreaseDebuff;
+        }
     }
 
     private void HandleTiredness()

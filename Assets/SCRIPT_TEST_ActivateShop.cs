@@ -6,6 +6,7 @@ public class SCRIPT_TEST_ActivateShop : MonoBehaviour, SCRIPT_IInteractable
 {
     public bool canInteract { get; set; }
     public bool alreadyInteracting { get; set; }
+    public bool inInteractionArea { get; set; }
     public Transform canSpawner;
     public GameObject canPrefab;
     public SCRIPT_InteractableObjectTrigger interactableTrigger;

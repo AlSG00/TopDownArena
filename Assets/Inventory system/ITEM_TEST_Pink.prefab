@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3336847624974042241}
   - component: {fileID: 3336847624974042269}
   - component: {fileID: 2692894639388091121}
-  m_Layer: 12
+  m_Layer: 18
   m_Name: ITEM_TEST_Pink
   m_TagString: Interactable
   m_Icon: {fileID: 0}

@@ -6,5 +6,6 @@ public interface SCRIPT_IInteractable
 {
     public bool alreadyInteracting { get; set; }
     public bool canInteract { get; set; }
+    public bool inInteractionArea { get; set; }
     public virtual void Interact() { }
 }

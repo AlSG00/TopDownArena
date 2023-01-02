@@ -156,8 +156,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         //itemToPick.isRotated = itemToInsert.isRotated;
         //itemToPick.weight = itemToInsert.weight;
         inventoryItemList.Add(itemToPick);
-        _playerCarryingWeight.currentCarryingWeight += itemToPick.weight;
-        Debug.Log($"Current weight: {_playerCarryingWeight.currentCarryingWeight}");
+        _playerCarryingWeight.AddWeight(itemToPick.weight);
     }
 
     //функция для вставки предметов в не инициализированный контейнер
@@ -508,7 +507,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         else
         {
             inventoryItemList.Remove(pickedInventoryItem);
-            _playerCarryingWeight.currentCarryingWeight -= pickedInventoryItem.weight;
+            _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         }
 
         Destroy(selectedItem.gameObject);
@@ -541,7 +540,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
         Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab, dropPoint.position, Quaternion.identity);
         inventoryItemList.Remove(pickedInventoryItem);
-        _playerCarryingWeight.currentCarryingWeight -= pickedInventoryItem.weight;
+        _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         Destroy(selectedItem.gameObject);
         inventoryHighlight.Show(false);
     }
@@ -625,8 +624,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
                 //pickedItem.item = pickedInventoryItem.item;
                 //pickedItem.isRotated = pickedInventoryItem.isRotated;
                 inventoryItemList.Remove(pickedInventoryItem);
-                _playerCarryingWeight.currentCarryingWeight -= pickedInventoryItem.weight;
-                Debug.Log($"Current weight: {_playerCarryingWeight.currentCarryingWeight}");
+                _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
             }
             pickedItem.positionOnGrid.x = tileGridPosition.x;
             pickedItem.positionOnGrid.y = tileGridPosition.y;
@@ -649,8 +647,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
                 //pickedInventoryItem.item = pickedItem.item;
                 //pickedInventoryItem.isRotated = pickedItem.isRotated;
                 itemContainer.storedItemList.Remove(pickedItem);
-                _playerCarryingWeight.currentCarryingWeight += pickedItem.weight;
-                Debug.Log($"Current weight: {_playerCarryingWeight.currentCarryingWeight}");
+                _playerCarryingWeight.AddWeight(pickedItem.weight);
             }
 
             pickedInventoryItem.positionOnGrid.x = tileGridPosition.x;

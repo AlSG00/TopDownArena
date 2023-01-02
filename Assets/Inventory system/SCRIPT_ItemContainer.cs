@@ -6,6 +6,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 {
     public bool alreadyInteracting { get; set; }
     public bool canInteract { get; set; }
+    public bool inInteractionArea { get; set; }
 
     public GameObject[] loot;
     public int containerGridWidth = 5;

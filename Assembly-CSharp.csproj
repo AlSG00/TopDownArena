@@ -161,11 +161,13 @@
     <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
     <Compile Include="Assets\Prefab Brush\Scripts\PB_Enums.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_GridInteract.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_CarryingWeightText.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraShake.cs" />
     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Gun.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSCuller.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\SCRIPT_PlayerInteractionArea.cs" />
     <Compile Include="Assets\Scripts\AmmoCounterTest.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectHider.cs" />
     <Compile Include="Assets\Gun\SCRIPT_AmmoShells.cs" />
