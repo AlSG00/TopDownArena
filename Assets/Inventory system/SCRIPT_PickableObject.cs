@@ -7,6 +7,8 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
     public bool canInteract { get; set; }
     public bool alreadyInteracting { get; set; }
     public bool inInteractionArea { get; set; }
+    public AudioClip pickUpAudio;
+    public AudioSource pickUpAudioSource;
     public GameObject inventoryPrefab;
     private SCRIPT_InventoryController inventory;
 
@@ -17,6 +19,7 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
         canInteract = false;
         inInteractionArea = false;
         inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
+        pickUpAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
     }
 
     public void Interact()
@@ -31,6 +34,13 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
         inventory.selectedItemGrid = inventory.inventoryGrid;
         inventory.InsertItemIntoInventory(gameObject);
+        
+        if (pickUpAudioSource != null &&
+            pickUpAudio != null)
+        {
+            pickUpAudioSource.PlayOneShot(pickUpAudio);
+        }
+
         Destroy(gameObject);
     }
 }
