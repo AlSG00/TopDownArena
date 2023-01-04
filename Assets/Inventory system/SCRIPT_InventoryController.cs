@@ -498,6 +498,12 @@ public class SCRIPT_InventoryController : MonoBehaviour
             return;
         }
 
+        if (selectedItem.useItemAudioSource != null &&
+            selectedItem.useItemAudio != null)
+        {
+            selectedItem.useItemAudioSource.PlayOneShot(selectedItem.useItemAudio);
+        }
+        
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
         if (selectedItemGrid != inventoryGrid)

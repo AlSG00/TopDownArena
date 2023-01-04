@@ -8,6 +8,8 @@ public class SCRIPT_InventoryItem : MonoBehaviour
 {
     public SCRIPT_ItemData itemData;
     public GameObject prefab;
+    public AudioClip useItemAudio;
+    public AudioSource useItemAudioSource;
     public bool isDropping;
     public float weight;
 
@@ -41,10 +43,10 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public bool isRotated = false;
     public bool isUsable = true;
 
-    //public void Start()
-    //{
-    //    isRotated = false;
-    //}
+    private void Start()
+    {
+        useItemAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
+    }
 
     internal void Set(SCRIPT_ItemData itemData)
     {

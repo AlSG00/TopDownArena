@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65dfbd2eedc5bbe459ef82c9c047095e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpAudio: {fileID: 8300000, guid: 8df70a97e4b36fa4ba2f32d7f61ac7a7, type: 3}
+  pickUpAudio: {fileID: 8300000, guid: 4ab4a3e88f9814a40917106cb6a8472c, type: 3}
   pickUpAudioSource: {fileID: 0}
   inventoryPrefab: {fileID: 3847044455456163715, guid: 7086c75d860015a40a398a7073b5ad66,
     type: 3}
