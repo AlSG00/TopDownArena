@@ -3583,6 +3583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9857380}
   - component: {fileID: 9857381}
+  - component: {fileID: 9857382}
   m_Layer: 5
   m_Name: WakefulnessBar
   m_TagString: Untagged
@@ -3664,6 +3665,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9857382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9857379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9547c819c7fbaf141aac8bfe84f95702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sliderBar: {fileID: 9857381}
 --- !u!1 &10324599
 GameObject:
   m_ObjectHideFlags: 0
@@ -519777,6 +519791,7 @@ GameObject:
   - component: {fileID: 7546444054703482941}
   - component: {fileID: 7546444054703482938}
   - component: {fileID: 7546444054703482939}
+  - component: {fileID: 7546444054703482942}
   - component: {fileID: 7546444054703482940}
   - component: {fileID: 7546444054703482937}
   - component: {fileID: 7546444054703482929}
@@ -520203,6 +520218,25 @@ MonoBehaviour:
   lastTimeRun: 0
   tiredness: 0
   isExhaused: 0
+--- !u!114 &7546444054703482942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546444054703482924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c181ba1797454340b8158e7fb6899bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wakefulnessBar: {fileID: 9857382}
+  _sanity: {fileID: 0}
+  maxWakefulness: 100
+  currentWakefulness: 100
+  wakefulnessDecreaseValue: 0.001
+  sanityDecreaseDebuff: 0.001
+  isTired: 0
 --- !u!4 &7608158032332585050
 Transform:
   m_ObjectHideFlags: 0
