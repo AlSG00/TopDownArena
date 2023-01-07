@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_TEST_AutomaticDoor.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerWakefulness.cs" />
     <Compile Include="Assets\Scripts\Test scripts\TestLine.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Gun\TestRaycastWeapon.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Assets\Scripts\Test_PlayAnimation.cs" />
     <Compile Include="Assets\Scripts\TEST_UnlockDoor.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
+    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerSanity.cs" />
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_SliderBarController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSBufferStorage.cs" />
     <Compile Include="Assets\Shared\Scripts\ProximityActivate.cs" />
@@ -191,8 +193,6 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerWakefulness.cs" />
-    <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerSanity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
