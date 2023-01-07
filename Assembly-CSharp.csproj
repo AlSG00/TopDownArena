@@ -115,7 +115,7 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_SatietyBar.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
-    <Compile Include="Assets\Items\SCRIPT_IItem.cs" />
+    <Compile Include="Assets\Props and Items\SCRIPT_IItem.cs" />
     <Compile Include="Assets\Scripts\TextLookAt.cs" />
     <Compile Include="Assets\Scripts\RoachController.cs" />
     <Compile Include="Assets\Scripts\SwapScene.cs" />
