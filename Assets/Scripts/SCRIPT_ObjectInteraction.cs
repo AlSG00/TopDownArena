@@ -47,22 +47,44 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 {
                     _interactableObject.canInteract = true;
                 }
+
+                try
+                {
+                    _interactableObject.ShowInteractionIcon();
+                }
+                catch
+                {
+                    Debug.Log("Method doesn't exist");
+                }
             }
             else
             {
                 if (_interactableObject != null)
                 {
                     _interactableObject.canInteract = false;
+                    _interactableObject.RemoveInteractionIcon();
                     _interactableObject = null;
+                    //try
+                    //{
+                        
+                    //}
+                    //catch
+                    //{
+                    //    Debug.Log("Method doesn't exist");
+                    //}
                 }
             }
+
+            
         }
         else
         {
             if (_interactableObject != null)
             {
                 _interactableObject.canInteract = false;
+                _interactableObject.RemoveInteractionIcon();
                 _interactableObject = null;
+                
             }
         }
     }

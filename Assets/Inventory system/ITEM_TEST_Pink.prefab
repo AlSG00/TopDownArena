@@ -111,8 +111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65dfbd2eedc5bbe459ef82c9c047095e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpAudio: {fileID: 0}
+  pickUpAudioSource: {fileID: 0}
   inventoryPrefab: {fileID: 3847044455456163715, guid: 774f5c50bd32be64ba04cf1c88527439,
     type: 3}
+  pickableImagePrefab: {fileID: 1772238699815821576, guid: 46f253d413ebd894d9bc947979f8d9ea,
+    type: 3}
+  pickableImage: {fileID: 0}
 --- !u!54 &2692894639388091121
 Rigidbody:
   m_ObjectHideFlags: 0

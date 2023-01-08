@@ -22,7 +22,16 @@ public class SCRIPT_SunRotation : MonoBehaviour
         sunAnimationController.speed = 1 / dayCycleDuration;
         sun = GetComponentInChildren<Light>();
         sunAnimationController.Play("ANIM_Sun", 0, 0);
+
+        AnimationState state;
+        AnimatorClipInfo clipInfo;
     }
+
+    //private void Update()
+    //{
+    //    float myTime = sunAnimationController.GetCurrentAnimatorClipInfo(0).Length * sunAnimationController.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    //    Debug.Log(myTime);
+    //}
 
     public void SetDay()
     {

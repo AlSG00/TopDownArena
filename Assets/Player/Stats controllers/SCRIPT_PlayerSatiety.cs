@@ -48,6 +48,8 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
         _satietyBar.SetSatiety(currentSatiety);
     }
 
+
+
     public void Eat(float satiety)
     {
         currentSatiety += satiety;

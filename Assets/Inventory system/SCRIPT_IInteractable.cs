@@ -8,4 +8,7 @@ public interface SCRIPT_IInteractable
     public bool canInteract { get; set; }
     public bool inInteractionArea { get; set; }
     public virtual void Interact() { }
+    public virtual void ShowInteractionIcon() { }
+    public virtual void RemoveInteractionIcon() { }
+    public virtual void HighlightIconWithScanner() { }
 }

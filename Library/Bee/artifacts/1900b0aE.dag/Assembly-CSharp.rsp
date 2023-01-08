@@ -450,6 +450,7 @@
 "Assets/Prefab Brush/Scripts/PB_Enums.cs"
 "Assets/Prefab Brush/Scripts/PB_PrefabData.cs"
 "Assets/Prefab Brush/Scripts/PB_SaveObject.cs"
+"Assets/Props and Items/SCRIPT_Bed.cs"
 "Assets/Props and Items/SCRIPT_IItem.cs"
 "Assets/Scripts/AmmoCounterTest.cs"
 "Assets/Scripts/AmmoCrate.cs"
@@ -520,6 +521,7 @@
 "Assets/Shared/Scripts/ProximityActivate.cs"
 "Assets/Shared/Scripts/SimpleCameraController.cs"
 "Assets/Shared/Scripts/SimpleCharacterMotor.cs"
+"Assets/TestScannerScript.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
 
