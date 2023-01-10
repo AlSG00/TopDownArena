@@ -433,6 +433,7 @@
 "Assets/Player/Player_Aim.cs"
 "Assets/Player/Player_Movement.cs"
 "Assets/Player/Player_Shooting.cs"
+"Assets/Player/SCRIPT_AreaScanner.cs"
 "Assets/Player/SCRIPT_PlayerAmmunition.cs"
 "Assets/Player/SCRIPT_PlayerFlashlight.cs"
 "Assets/Player/SCRIPT_PlayerInput.cs"

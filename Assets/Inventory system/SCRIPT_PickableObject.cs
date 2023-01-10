@@ -15,6 +15,13 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
     public Image pickableImagePrefab;
     public Image pickableImage;
 
+    //public Texture2D defaultCursor;
+
+    //private void Awake()
+    //{
+    //    SetCursor(defaultCursor);
+    //}
+
     private void Start()
     {
         alreadyInteracting = false;
@@ -45,20 +52,6 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
         Destroy(gameObject);
     }
-
-    //private void OnMouseOver()
-    //{
-
-    //}
-
-    //private void OnMouseEnter()
-    //{
-    //}
-
-    //private void OnMouseExit()
-    //{
-    //    Destroy(pickableImage);
-    //}
 
     private void Update()
     {
@@ -101,6 +94,11 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
             StopAllCoroutines();
             StartCoroutine(RemoveHighlightediconRoutine());
         }
+        else
+        {
+            StopAllCoroutines();
+            StartCoroutine(RemoveHighlightediconRoutine());
+        }
     }
 
     private IEnumerator RemoveHighlightediconRoutine()
@@ -133,4 +131,9 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
         Destroy(pickableImage.gameObject);
     }
+
+    //private void SetCursor(Texture2D texture)
+    //{
+    //    Cursor.SetCursor(texture, Vector2.zero, CursorMode.ForceSoftware);
+    //}
 }

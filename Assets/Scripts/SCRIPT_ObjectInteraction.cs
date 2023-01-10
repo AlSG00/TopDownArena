@@ -15,6 +15,15 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     public float distanceToObject;
     public Collider playerInteractionArea;
 
+    public Texture2D defaultCursor;
+
+    private void Awake()
+    {
+        SetCursor(defaultCursor);
+        defaultCursor.Resize(5, 5);
+    }
+
+
 
     private void Update()
     {
@@ -48,21 +57,21 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                     _interactableObject.canInteract = true;
                 }
 
-                try
-                {
-                    _interactableObject.ShowInteractionIcon();
-                }
-                catch
-                {
-                    Debug.Log("Method doesn't exist");
-                }
+                //try
+                //{
+                //    _interactableObject.ShowInteractionIcon();
+                //}
+                //catch
+                //{
+                //    Debug.Log("Method doesn't exist");
+                //}
             }
             else
             {
                 if (_interactableObject != null)
                 {
                     _interactableObject.canInteract = false;
-                    _interactableObject.RemoveInteractionIcon();
+                    //_interactableObject.RemoveInteractionIcon();
                     _interactableObject = null;
                     //try
                     //{
@@ -82,7 +91,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
             if (_interactableObject != null)
             {
                 _interactableObject.canInteract = false;
-                _interactableObject.RemoveInteractionIcon();
+                //_interactableObject.RemoveInteractionIcon();
                 _interactableObject = null;
                 
             }
@@ -102,4 +111,8 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
         _interactableObject.Interact();
     }
 
+    private void SetCursor(Texture2D texture)
+    {
+        Cursor.SetCursor(texture, Vector2.zero, CursorMode.ForceSoftware);
+    }
 }

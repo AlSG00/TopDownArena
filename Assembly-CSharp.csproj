@@ -116,6 +116,7 @@
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_SatietyBar.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
     <Compile Include="Assets\Props and Items\SCRIPT_IItem.cs" />
+    <Compile Include="Assets\TestScannerScript.cs" />
     <Compile Include="Assets\Scripts\TextLookAt.cs" />
     <Compile Include="Assets\Scripts\RoachController.cs" />
     <Compile Include="Assets\Scripts\SwapScene.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerHydration.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_Screamer_Lamp.cs" />
+    <Compile Include="Assets\Props and Items\SCRIPT_Bed.cs" />
     <Compile Include="Assets\Scripts\RoachRunFrom.cs" />
     <Compile Include="Assets\Scripts\SwapAudio.cs" />
     <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
@@ -193,8 +195,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Props and Items\SCRIPT_Bed.cs" />
-    <Compile Include="Assets\TestScannerScript.cs" />
+    <Compile Include="Assets\Player\SCRIPT_AreaScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
