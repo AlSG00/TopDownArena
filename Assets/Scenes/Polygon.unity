@@ -515596,6 +515596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scannedArea: {fileID: 1929702935}
   scanRadius: 5
+  highlightTime: 5
   scannerUseCooldown: 5
 --- !u!1 &7644119067976055816
 GameObject:

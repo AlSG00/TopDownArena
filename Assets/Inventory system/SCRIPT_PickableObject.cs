@@ -14,7 +14,11 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
     private SCRIPT_InventoryController inventory;
     public Image pickableImagePrefab;
     public Image pickableImage;
+    public SCRIPT_AreaScanner _scanner;
 
+    private float highlightTime = 5f;
+
+    private bool coroutineFinished;
     //public Texture2D defaultCursor;
 
     //private void Awake()
@@ -29,6 +33,7 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
         inInteractionArea = false;
         inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
         pickUpAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
+        _scanner = GameObject.Find("_Player").GetComponent<SCRIPT_AreaScanner>();
     }
 
     public void Interact()
@@ -92,16 +97,33 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
                             .GetComponent<Image>();
 
             StopAllCoroutines();
-            StartCoroutine(RemoveHighlightediconRoutine());
+            StartCoroutine(ShowHighlighteddIconRoutine());
         }
         else
         {
             StopAllCoroutines();
-            StartCoroutine(RemoveHighlightediconRoutine());
+            StartCoroutine(ShowHighlighteddIconRoutine());
         }
     }
 
-    private IEnumerator RemoveHighlightediconRoutine()
+    private IEnumerator ShowHighlighteddIconRoutine()
+    {
+        while(pickableImage.color.a < 1)
+        {
+            yield return pickableImage.color = new Color(
+                pickableImage.color.r,
+                pickableImage.color.g,
+                pickableImage.color.b,
+                pickableImage.color.a + 0.05f
+                );
+
+            //yield return StartCoroutine(ShowHighlighteddIconRoutine());
+        }
+
+        yield return StartCoroutine(RemoveHighlightedIconRoutine());
+    }
+
+        private IEnumerator RemoveHighlightedIconRoutine()
     {
         yield return pickableImage.color = new Color(
                 pickableImage.color.r,
@@ -110,7 +132,7 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
                 1f
                 );
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
 
         while(pickableImage.color.a > 0)
         {

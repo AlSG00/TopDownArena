@@ -12,6 +12,7 @@ public class SCRIPT_AreaScanner : MonoBehaviour
     private Vector3 _startSize;
     private Vector3 _finalSize;
 
+    public float highlightTime = 5f;
     public float scannerUseCooldown = 5f;
     private float scannerLastUse;
 

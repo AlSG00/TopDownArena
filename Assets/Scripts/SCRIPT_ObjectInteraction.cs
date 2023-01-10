@@ -20,7 +20,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     private void Awake()
     {
         SetCursor(defaultCursor);
-        defaultCursor.Resize(5, 5);
+        //defaultCursor.Resize(5, 5);
     }
 
 

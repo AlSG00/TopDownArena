@@ -163,6 +163,7 @@
     <Compile Include="Assets\Scripts\RoachRunFrom.cs" />
     <Compile Include="Assets\Scripts\SwapAudio.cs" />
     <Compile Include="Assets\Gun\SCRIPT_MuzzleFlame.cs" />
+    <Compile Include="Assets\Player\SCRIPT_AreaScanner.cs" />
     <Compile Include="Assets\Prefab Brush\Scripts\PB_Enums.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_GridInteract.cs" />
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_CarryingWeightText.cs" />
@@ -195,7 +196,6 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Player\SCRIPT_AreaScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
