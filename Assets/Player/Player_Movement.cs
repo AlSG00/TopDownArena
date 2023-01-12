@@ -8,21 +8,29 @@ public class Player_Movement : MonoBehaviour
 
     //TODO: Переименовать и красивенько оформить переменные
 
+    [Header("References")]
+    [SerializeField] private SCRIPT_InventoryController inventory;
+    [SerializeField] private SCRIPT_PlayerStamina _stamina;
+    [SerializeField] private SCRIPT_PlayerCarryingWeight _carryingWeight;
+
+    [Header("Movement parameters")]
     public float walkSpeed;
     public float walkSpeedDebuff;
     public float sprintSpeed;
-    private float sprint;
-    // public Rigidbody rigidBody;
-    //public Camera camera;
+    private float sprint; // Переименовать переменные по-нормальному
+    public bool isRunning = false; 
+    public float turnSpeed = 0.1f; // TODO: Пока не используется, исправить
+    public Vector3 movement; //TODO: Нафига оно тут??
+    
+    [Header("Movement audio")]
+    [SerializeField] private AudioSource footstepsAudioSource;
+    [SerializeField] private List<AudioClip> fotstepsAudioClips;
 
-    public bool isRunning = false;
-    public Vector3 movement;
-    [SerializeField] private AudioSource footstepsSource;
-    [SerializeField] private List<AudioClip> footstepsSample;
+    [Header("Movement animation")]
     [SerializeField] private Animator animationController;
+    private Vector3 _moveDirection = Vector3.zero;
+    [SerializeField] private LayerMask _footstepSoundLayer;
 
-    public float turnSpeed = 0.1f;
-    private Vector3 moveDirection = Vector3.zero;
 
     /*НЕ УДАЛЯТЬ*/
     //private Vector3 _leftFootPosition;
@@ -50,10 +58,7 @@ public class Player_Movement : MonoBehaviour
     //public bool useProIKFeature = false;
     //public bool showSolverDebug = true;
 
-    private SCRIPT_InventoryController inventory;
 
-    [SerializeField] private SCRIPT_PlayerStamina _stamina;
-    [SerializeField] private SCRIPT_PlayerCarryingWeight _carryingWeight;
 
     //public Vector3 movement;
     #endregion
@@ -121,6 +126,7 @@ public class Player_Movement : MonoBehaviour
         float horiz = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
 
+        //TODO: Переименовать метод
         Animating(horiz, vert);
 
       //  animationController.SetFloat("horizontal", horiz);
@@ -164,23 +170,29 @@ public class Player_Movement : MonoBehaviour
     private void PlayFootstepsSound()
     {
         //footstepsSource.clip = footstepsSample[Random.Range(0, footstepsSample.Count - 1)];
-        footstepsSource.PlayOneShot(footstepsSample[Random.Range(0, footstepsSample.Count - 1)]);
+        //footstepsAudioSource.PlayOneShot([Random.Range(0, footstepsSample.Count - 1)]);
+        //Ray _ray = new Ray(gameObject.transform.position, Vector3.forward);
+        //RaycastHit _hit;
+        //if (Physics.Raycast(_ray, out _hit, 100, _footstepSoundLayer))
+        //{
+        //    _hit.collider
+        //}
     }
 
     // Используется, чтобы анимация проигрывалась корректно независимо от поворота игрока
     private void Animating(float h, float v)
     {
-        moveDirection = new Vector3(h, 0, v);
+        _moveDirection = new Vector3(h, 0, v);
 
-        if (moveDirection.magnitude > 1.0f)
+        if (_moveDirection.magnitude > 1.0f)
         {
-            moveDirection = moveDirection.normalized;
+            _moveDirection = _moveDirection.normalized;
         }
 
-        moveDirection = transform.InverseTransformDirection(moveDirection).normalized;
+        _moveDirection = transform.InverseTransformDirection(_moveDirection).normalized;
 
-        animationController.SetFloat("horizontal", moveDirection.x, 1f, Time.deltaTime * 10f);
-        animationController.SetFloat("vertical", moveDirection.z, 1f, Time.deltaTime * 10f);
+        animationController.SetFloat("horizontal", _moveDirection.x, 1f, Time.deltaTime * 10f);
+        animationController.SetFloat("vertical", _moveDirection.z, 1f, Time.deltaTime * 10f);
     }
 
 

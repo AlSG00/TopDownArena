@@ -448,6 +448,7 @@
 "Assets/Player/Stats controllers/SCRIPT_PlayerWakefulness.cs"
 "Assets/Player/Stats controllers/SCRIPT_SatietyBar.cs"
 "Assets/Player/Stats controllers/SCRIPT_SliderBarController.cs"
+"Assets/Player/TerrainChecker.cs"
 "Assets/Prefab Brush/Scripts/PB_Enums.cs"
 "Assets/Prefab Brush/Scripts/PB_PrefabData.cs"
 "Assets/Prefab Brush/Scripts/PB_SaveObject.cs"
