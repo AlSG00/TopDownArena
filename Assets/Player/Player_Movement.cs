@@ -31,6 +31,8 @@ public class Player_Movement : MonoBehaviour
     private Vector3 _moveDirection = Vector3.zero;
     [SerializeField] private LayerMask _footstepSoundLayer;
 
+    private FootstepSwapper _swapper;
+    public LayerMask activeLayers;
 
     /*Ќ≈ ”ƒјЋя“№*/
     //private Vector3 _leftFootPosition;
@@ -68,6 +70,7 @@ public class Player_Movement : MonoBehaviour
     {
         inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
         animationController = gameObject.GetComponent<Animator>();
+        _swapper = GetComponent<FootstepSwapper>();
     }
 
     private void FixedUpdate()
@@ -92,6 +95,11 @@ public class Player_Movement : MonoBehaviour
         //FeetPositionSolver(_rightFootPosition, ref _rightFootIKPosition, ref _rightFootIKRotation);
         //FeetPositionSolver(_leftFootPosition, ref _leftFootIKPosition, ref _leftFootIKRotation);
 
+    }
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down * 5, Color.yellow);
     }
 
     private void Sprint()
@@ -167,8 +175,15 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
-    private void PlayFootstepsSound()
+    private void PlayFootstepsSound(AnimationEvent evt)
     {
+        _swapper.CheckLayers(activeLayers);
+        if (evt.animatorClipInfo.weight > 0.5f)
+        {
+            //Debug.Log("Step");
+            int n = Random.Range(0, fotstepsAudioClips.Count);
+            footstepsAudioSource.PlayOneShot(fotstepsAudioClips[n]);
+        }
         //footstepsSource.clip = footstepsSample[Random.Range(0, footstepsSample.Count - 1)];
         //footstepsAudioSource.PlayOneShot([Random.Range(0, footstepsSample.Count - 1)]);
         //Ray _ray = new Ray(gameObject.transform.position, Vector3.forward);
@@ -177,6 +192,16 @@ public class Player_Movement : MonoBehaviour
         //{
         //    _hit.collider
         //}
+    }
+
+    public void SwapFootsteps(FootstepCollection collection)
+    {
+        fotstepsAudioClips.Clear();
+        for (int i = 0; i < collection.footstepSound.Count; i++)
+        {
+            fotstepsAudioClips.Add(collection.footstepSound[i]);
+        }
+
     }
 
     // »спользуетс€, чтобы анимаци€ проигрывалась корректно независимо от поворота игрока
