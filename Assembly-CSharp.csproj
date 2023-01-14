@@ -56,7 +56,6 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\TEST_Keycard.cs" />
     <Compile Include="Assets\Scripts\AmmoCrate.cs" />
     <Compile Include="Assets\Inventory system\IStoredItem.cs" />
     <Compile Include="Assets\Scripts\ProjectileSleeve.cs" />
@@ -131,7 +130,6 @@
     <Compile Include="Assets\Gun\SCRIPT_WeaponPickup.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Test_PlayAnimation.cs" />
-    <Compile Include="Assets\Scripts\TEST_UnlockDoor.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerSanity.cs" />
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_SliderBarController.cs" />
@@ -150,9 +148,11 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSSource.cs" />
     <Compile Include="Assets\Gun\SCRIPT_Weapon.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
+    <Compile Include="Assets\Player\FootstepCollection.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\FixedRotation.cs" />
     <Compile Include="Assets\Scripts\SceneTransitions.cs" />
+    <Compile Include="Assets\Player\SurfaceType.cs" />
     <Compile Include="Assets\Camera\SCRIPT_CameraMoving.cs" />
     <Compile Include="Assets\Player\Player_Shooting.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
@@ -179,6 +179,7 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Player\TerrainChecker.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_IInteractable.cs" />
+    <Compile Include="Assets\Player\FootstepSwapper.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSVisibilityInfo.cs" />
     <Compile Include="Assets\Scripts\TEST_ActivateTriggers.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_TestBlackZones.cs" />
@@ -197,9 +198,13 @@
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Player\FootstepSwapper.cs" />
-    <Compile Include="Assets\Player\FootstepCollection.cs" />
-    <Compile Include="Assets\Player\SurfaceType.cs" />
+    <Compile Include="Assets\Player\SCRIPT_PlayerResources.cs" />
+    <Compile Include="Assets\SCRIPT_ResourceItem.cs" />
+    <Compile Include="Assets\SCRIPT_ImplantShop.cs" />
+    <Compile Include="Assets\Player\SCRIPT_ImplantUpgrades.cs" />
+    <Compile Include="Assets\SCRIPT_BuyImplant.cs" />
+    <Compile Include="Assets\Player\Implants\IImplant.cs" />
+    <Compile Include="Assets\Player\TestLegsImplant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
