@@ -74,6 +74,7 @@
     <Compile Include="Assets\Inventory system\SCRIPT_ItemData.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSStencilRenderer.cs" />
     <Compile Include="Assets\Scripts\LightFlicker.cs" />
+    <Compile Include="Assets\Player\TestLegsImplant.cs" />
     <Compile Include="Assets\SCRIPT_Drink.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_TEST_LookAtBlackZone.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Image Effects\Desaturate.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\Scripts\TestClculationScript.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_FollowChild.cs" />
     <Compile Include="Assets\Player\Player_Movement.cs" />
+    <Compile Include="Assets\SCRIPT_ResourceItem.cs" />
     <Compile Include="Assets\Scripts\TEST_SetActive.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
@@ -112,7 +114,9 @@
     <Compile Include="Assets\Player\SCRIPT_PlayerFlashlight.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
+    <Compile Include="Assets\SCRIPT_ImplantShop.cs" />
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_SatietyBar.cs" />
+    <Compile Include="Assets\Player\SCRIPT_ImplantUpgrades.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
     <Compile Include="Assets\Props and Items\SCRIPT_IItem.cs" />
     <Compile Include="Assets\TestScannerScript.cs" />
@@ -179,6 +183,7 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Player\TerrainChecker.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_IInteractable.cs" />
+    <Compile Include="Assets\Player\Implants\IImplant.cs" />
     <Compile Include="Assets\Player\FootstepSwapper.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSVisibilityInfo.cs" />
     <Compile Include="Assets\Scripts\TEST_ActivateTriggers.cs" />
@@ -194,17 +199,14 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSMask.cs" />
     <Compile Include="Assets\SCRIPT_InteractableObjectTrigger.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
+    <Compile Include="Assets\Player\SCRIPT_PlayerResources.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
+    <Compile Include="Assets\SCRIPT_BuyImplant.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Player\SCRIPT_PlayerResources.cs" />
-    <Compile Include="Assets\SCRIPT_ResourceItem.cs" />
-    <Compile Include="Assets\SCRIPT_ImplantShop.cs" />
-    <Compile Include="Assets\Player\SCRIPT_ImplantUpgrades.cs" />
-    <Compile Include="Assets\SCRIPT_BuyImplant.cs" />
-    <Compile Include="Assets\Player\Implants\IImplant.cs" />
-    <Compile Include="Assets\Player\TestLegsImplant.cs" />
+    <Compile Include="Assets\SCRIPT_ImplantShopMenuController.cs" />
+    <Compile Include="Assets\SCRIPT_ImplantMenuButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

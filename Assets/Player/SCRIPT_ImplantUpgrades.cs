@@ -32,14 +32,6 @@ public class SCRIPT_ImplantUpgrades : MonoBehaviour
         implant.GetComponent<IImplant>().Activate();
     }
 
-
-
-
-
-
-
-
-
     //[Header("Limbs meshes")]
     //public List<GameObject> headLimbs = new List<GameObject>();
     //public List<GameObject> bodysLimbs = new List<GameObject>();
