@@ -12,6 +12,16 @@ public class SCRIPT_PlayerResources : MonoBehaviour
     
     // TODO: может добавить каких-нибудь еще ресурсов
 
+    public int GetMoney()
+    {
+        return _money;
+    }
+
+    public int GetPills()
+    {
+        return _pills;
+    }
+
     public void AddMoney(int money)
     {
         _money += money;

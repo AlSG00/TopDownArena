@@ -46,10 +46,13 @@ public class SCRIPT_ImplantShopMenuController : MonoBehaviour
         {
             for (int i = 0; i < implantsToBuy.Count; i++)
             {
+                Debug.Log($"{i} : {implantsToBuy[i].implant.name}");
                 implantsToBuy[i].Deselect();
+                i--;
             }
         }
 
+       // Debug.Log("Check");
         gameObject.SetActive(false);
         _playerMovement.enabled = true;
         _playerShooting.enabled = true;
@@ -83,6 +86,7 @@ public class SCRIPT_ImplantShopMenuController : MonoBehaviour
             {
                 _playerImplants.ActivateNewImplant(implantsToBuy[i].implant);
                 implantsToBuy[i].SetAsBuyed();
+                i--;
             }
             implantsToBuy.Clear();
         }

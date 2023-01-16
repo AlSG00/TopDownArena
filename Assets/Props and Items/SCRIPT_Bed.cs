@@ -25,6 +25,7 @@ public class SCRIPT_Bed : MonoBehaviour, SCRIPT_IInteractable
     {
         Debug.Log("using bed...");
         _wakefulness.Sleep();
+        alreadyInteracting = false;
         Debug.Log("used bed");
     }
 }

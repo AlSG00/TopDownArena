@@ -19,14 +19,12 @@ public class SCRIPT_TEST_ActivateShop : MonoBehaviour, SCRIPT_IInteractable
         if (canInteract == false ||
             interactableTrigger.inInteractionArea == false)
         {
-            Debug.Log($"Can't interact {canInteract} {interactableTrigger.inInteractionArea}");
             alreadyInteracting = false;
             return;
         }
 
         if (testCooldown + cooldown > Time.time)
         {
-            Debug.Log($"Can't interact: cooldown");
             alreadyInteracting = false;
             return;
         }
@@ -36,7 +34,6 @@ public class SCRIPT_TEST_ActivateShop : MonoBehaviour, SCRIPT_IInteractable
 
     private void spawnCan()
     {
-        Debug.Log("Started");
         cooldown = Time.time;
         GameObject can = Instantiate(canPrefab, canSpawner.position, Quaternion.Euler(
             canPrefab.transform.rotation.x,
@@ -46,6 +43,5 @@ public class SCRIPT_TEST_ActivateShop : MonoBehaviour, SCRIPT_IInteractable
 
         can.GetComponent<Rigidbody>().AddRelativeForce(Vector3.right * canThrowingForce);
         alreadyInteracting = false;
-        Debug.Log("Finished");
     }
 }

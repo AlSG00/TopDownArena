@@ -104,6 +104,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
             _interactableObject.canInteract == false ||
             _interactableObject.alreadyInteracting == true)
         {
+           // Debug.Log($"{_interactableObject} : {_interactableObject.canInteract} : {_interactableObject.alreadyInteracting}")
             return;
         }
 

@@ -27,16 +27,16 @@ TagManager:
   - Ground
   - Postprocessing
   - Player
-  - Small props
+  - Prop
   - Trigger
   - Decals
   - Particles
   - Weapon
   - Black
   - Interactable
+  - BigInteractable
   - Unprocessable decals
-  - 
-  - 
+  - BigProp
   - 
   - 
   - 

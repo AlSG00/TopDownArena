@@ -525,6 +525,7 @@
 "Assets/SCRIPT_ImplantShop.cs"
 "Assets/SCRIPT_ImplantShopMenuController.cs"
 "Assets/SCRIPT_InteractableObjectTrigger.cs"
+"Assets/SCRIPT_PickableWeapon.cs"
 "Assets/SCRIPT_PlayerInteractionArea.cs"
 "Assets/SCRIPT_ResourceItem.cs"
 "Assets/SCRIPT_TEST_ActivateShop.cs"
@@ -533,6 +534,7 @@
 "Assets/Shared/Scripts/ProximityActivate.cs"
 "Assets/Shared/Scripts/SimpleCameraController.cs"
 "Assets/Shared/Scripts/SimpleCharacterMotor.cs"
+"Assets/TestResourceCounter.cs"
 "Assets/TestScannerScript.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0

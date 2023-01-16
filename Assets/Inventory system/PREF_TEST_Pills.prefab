@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6828332325090538571}
   - component: {fileID: 1337085575743804219}
   - component: {fileID: 9108455157954493662}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: PREF_TEST_Pills
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

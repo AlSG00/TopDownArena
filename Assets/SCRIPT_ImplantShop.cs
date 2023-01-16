@@ -10,10 +10,14 @@ public class SCRIPT_ImplantShop : MonoBehaviour, SCRIPT_IInteractable
 
     public SCRIPT_ImplantShopMenuController _implantMenu;
 
-    public GameObject ImplantShopMenu;
+    //public GameObject ImplantShopMenu;
     // TODO: ссылка на меню прокачки имплантов
     private void Start()
     {
+        canInteract = false;
+        alreadyInteracting = false;
+        inInteractionArea = false;
+
         _implantMenu = GameObject.Find("ImplantUpgradeMenu").GetComponent<SCRIPT_ImplantShopMenuController>();
         //_playerImplants = GameObject.Find("_Player").GetComponent<SCRIPT_ImplantUpgrades>();
     }
@@ -22,6 +26,7 @@ public class SCRIPT_ImplantShop : MonoBehaviour, SCRIPT_IInteractable
     {
         // TODO: Открыть меню прокачки имплантов
         _implantMenu.OpenMenu();
+        alreadyInteracting = false;
        // _playerImplants.SetImplant();
     }
 
