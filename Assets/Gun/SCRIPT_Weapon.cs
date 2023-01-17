@@ -217,7 +217,7 @@ public class SCRIPT_Weapon : MonoBehaviour
                 impactObj = Instantiate(hitEffectFlesh, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
 
-            Destroy(impactObj.gameObject, 1200f);
+            Destroy(impactObj, 1200f);
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.lifeTime = maxLifeTime;

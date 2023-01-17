@@ -8,23 +8,21 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
     public bool canInteract { get; set; }
     public bool alreadyInteracting { get; set; }
     public bool inInteractionArea { get; set; }
-    public AudioClip pickUpAudio;
-    public AudioSource pickUpAudioSource;
+
     public GameObject inventoryPrefab;
+
+    [Header("References")]
     private SCRIPT_InventoryController inventory;
-    public Image pickableImagePrefab;
-    public Image pickableImage;
     public SCRIPT_AreaScanner _scanner;
 
-    private float highlightTime = 5f;
+    [Header("Audio")]
+    public AudioClip pickUpAudio;
+    public AudioSource pickUpAudioSource;
 
-    private bool coroutineFinished;
-    //public Texture2D defaultCursor;
-
-    //private void Awake()
-    //{
-    //    SetCursor(defaultCursor);
-    //}
+    [Header("Image for scaned state")]
+    public Image pickableImagePrefab;
+    private Image _pickableImage;
+    public float highlightTime = 5f;
 
     private void Start()
     {
@@ -60,37 +58,17 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
     private void Update()
     {
-        if (pickableImage != null)
+        if (_pickableImage != null)
         {
-            pickableImage.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-        }
-    }
-
-    public void ShowInteractionIcon()
-    {
-        if (pickableImage == null && inInteractionArea && canInteract)
-        {
-            pickableImage = Instantiate(pickableImagePrefab, 
-                Camera.main.WorldToScreenPoint(gameObject.transform.position), 
-                Quaternion.identity, 
-                GameObject.Find("_HUD").transform)
-                .GetComponent<Image>();
-        }
-    }
-
-    public void RemoveInteractionIcon()
-    {
-        if (pickableImage != null)
-        {
-            Destroy(pickableImage.gameObject);
+            _pickableImage.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         }
     }
 
     public void HighlightIconWithScanner()
     {
-        if (pickableImage == null)
+        if (_pickableImage == null)
         {
-            pickableImage = Instantiate(pickableImagePrefab,
+            _pickableImage = Instantiate(pickableImagePrefab,
                             Camera.main.WorldToScreenPoint(gameObject.transform.position),
                             Quaternion.identity,
                             GameObject.Find("_HUD").transform)
@@ -108,16 +86,14 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
     private IEnumerator ShowHighlighteddIconRoutine()
     {
-        while(pickableImage.color.a < 1)
+        while(_pickableImage.color.a < 1)
         {
-            yield return pickableImage.color = new Color(
-                pickableImage.color.r,
-                pickableImage.color.g,
-                pickableImage.color.b,
-                pickableImage.color.a + 0.05f
+            yield return _pickableImage.color = new Color(
+                _pickableImage.color.r,
+                _pickableImage.color.g,
+                _pickableImage.color.b,
+                _pickableImage.color.a + 0.05f
                 );
-
-            //yield return StartCoroutine(ShowHighlighteddIconRoutine());
         }
 
         yield return StartCoroutine(RemoveHighlightedIconRoutine());
@@ -125,37 +101,32 @@ public class SCRIPT_PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
         private IEnumerator RemoveHighlightedIconRoutine()
     {
-        yield return pickableImage.color = new Color(
-                pickableImage.color.r,
-                pickableImage.color.g,
-                pickableImage.color.b,
+        yield return _pickableImage.color = new Color(
+                _pickableImage.color.r,
+                _pickableImage.color.g,
+                _pickableImage.color.b,
                 1f
                 );
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(highlightTime);
 
-        while(pickableImage.color.a > 0)
+        while(_pickableImage.color.a > 0)
         {
-            yield return pickableImage.color = new Color(
-                pickableImage.color.r,
-                pickableImage.color.g,
-                pickableImage.color.b,
-                pickableImage.color.a - 0.01f
+            yield return _pickableImage.color = new Color(
+                _pickableImage.color.r,
+                _pickableImage.color.g,
+                _pickableImage.color.b,
+                _pickableImage.color.a - 0.01f
                 );
         }
 
-        yield return pickableImage.color = new Color(
-                pickableImage.color.r,
-                pickableImage.color.g,
-                pickableImage.color.b,
+        yield return _pickableImage.color = new Color(
+                _pickableImage.color.r,
+                _pickableImage.color.g,
+                _pickableImage.color.b,
                 0f
                 );
 
-        Destroy(pickableImage.gameObject);
+        Destroy(_pickableImage.gameObject);
     }
-
-    //private void SetCursor(Texture2D texture)
-    //{
-    //    Cursor.SetCursor(texture, Vector2.zero, CursorMode.ForceSoftware);
-    //}
 }

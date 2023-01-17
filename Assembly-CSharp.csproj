@@ -93,6 +93,7 @@
     <Compile Include="Assets\SCRIPT_ResourceItem.cs" />
     <Compile Include="Assets\SCRIPT_ImplantShopMenuController.cs" />
     <Compile Include="Assets\Scripts\TEST_SetActive.cs" />
+    <Compile Include="Assets\SCRIPT_PickableWeapon.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\Gun\RayProjectile.cs" />
@@ -205,10 +206,9 @@
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
     <Compile Include="Assets\SCRIPT_BuyImplant.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_InventoryController.cs" />
+    <Compile Include="Assets\TestResourceCounter.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\TestResourceCounter.cs" />
-    <Compile Include="Assets\SCRIPT_PickableWeapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
