@@ -8,7 +8,7 @@ public class TestScannerScript : MonoBehaviour
     {
         if (other.CompareTag("Interactable"))
         {
-            other.GetComponent<SCRIPT_PickableObject>().HighlightIconWithScanner();
+            other.GetComponent<SCRIPT_ScannerImpactHandler>().HighlightIconWithScanner();
         }
     }
 }

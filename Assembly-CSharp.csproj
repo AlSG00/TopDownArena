@@ -209,6 +209,7 @@
     <Compile Include="Assets\TestResourceCounter.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
+    <Compile Include="Assets\SCRIPT_ScannerImpactHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

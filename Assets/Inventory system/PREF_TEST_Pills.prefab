@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6828332325090538571}
   - component: {fileID: 1337085575743804219}
   - component: {fileID: 9108455157954493662}
+  - component: {fileID: -3050517066005367590}
   m_Layer: 18
   m_Name: PREF_TEST_Pills
   m_TagString: Interactable
@@ -115,3 +116,19 @@ MonoBehaviour:
   _interactionAudio: {fileID: 0}
   moneyValue: 0
   pillsValue: 10
+--- !u!114 &-3050517066005367590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278356412669037332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3533e1599adf6084f8b28742db1a16b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickableImagePrefab: {fileID: 1772238699815821576, guid: 46f253d413ebd894d9bc947979f8d9ea,
+    type: 3}
+  highlightTime: 5
+  iconPivot: {fileID: 0}

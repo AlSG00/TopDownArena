@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7183572811409657408}
   - component: {fileID: 8524753584168656560}
   - component: {fileID: 1453816604081961652}
+  - component: {fileID: 874943109264218056}
   m_Layer: 18
   m_Name: PREF_TEST_Money
   m_TagString: Interactable
@@ -97,3 +98,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &874943109264218056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989685281503919602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3533e1599adf6084f8b28742db1a16b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickableImagePrefab: {fileID: 1772238699815821576, guid: 46f253d413ebd894d9bc947979f8d9ea,
+    type: 3}
+  highlightTime: 5
+  iconPivot: {fileID: 0}

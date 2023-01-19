@@ -528,6 +528,7 @@
 "Assets/SCRIPT_PickableWeapon.cs"
 "Assets/SCRIPT_PlayerInteractionArea.cs"
 "Assets/SCRIPT_ResourceItem.cs"
+"Assets/SCRIPT_ScannerImpactHandler.cs"
 "Assets/SCRIPT_TEST_ActivateShop.cs"
 "Assets/Shared/Ramps/Runtime/RampAsset.cs"
 "Assets/Shared/Scripts/AdjustTimeScale.cs"

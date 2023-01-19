@@ -179,6 +179,8 @@ GameObject:
   - component: {fileID: 203043349411825469}
   - component: {fileID: 4604101712345115775}
   - component: {fileID: 7325591786742353437}
+  - component: {fileID: 1138518995718475675}
+  - component: {fileID: -2781010953859318941}
   m_Layer: 18
   m_Name: PREF_ShotgunItem
   m_TagString: Interactable
@@ -282,3 +284,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05839298, y: 0.14343147, z: 0.9765624}
   m_Center: {x: -0.00009217393, y: -0.056315687, z: 0.009858907}
+--- !u!114 &1138518995718475675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805414814385806695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f66c7d14e8d159842a7fe3b4f7c1f496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 1745050576683434243, guid: 9fa3d3f0320501d45bf1cbb9c952c52a,
+    type: 3}
+--- !u!114 &-2781010953859318941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805414814385806695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3533e1599adf6084f8b28742db1a16b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickableImagePrefab: {fileID: 1772238699815821576, guid: 46f253d413ebd894d9bc947979f8d9ea,
+    type: 3}
+  highlightTime: 5
+  iconPivot: {fileID: 0}

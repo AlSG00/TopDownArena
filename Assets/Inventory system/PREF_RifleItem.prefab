@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9086487111187962198}
   - component: {fileID: 2450856648081147209}
   - component: {fileID: 1432303043221618518}
+  - component: {fileID: -4376182083252733335}
   m_Layer: 18
   m_Name: PREF_RifleItem
   m_TagString: Interactable
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3541160466102168151}
   m_LocalRotation: {x: 0.6532815, y: 0.6532815, z: 0.27059805, w: 0.27059805}
   m_LocalPosition: {x: 0.076, y: 0, z: -2.792}
-  m_LocalScale: {x: 0.88292426, y: 0.88292426, z: 0.88292426}
+  m_LocalScale: {x: 1.2298001, y: 1.2298, z: 1.2298002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5438793898760376069}
@@ -132,6 +133,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66c7d14e8d159842a7fe3b4f7c1f496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 1048267339396752250, guid: 80dc430c2efa0314090d9be8a7ed2f3d,
+    type: 3}
+--- !u!114 &-4376182083252733335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541160466102168151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3533e1599adf6084f8b28742db1a16b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickableImagePrefab: {fileID: 1772238699815821576, guid: 46f253d413ebd894d9bc947979f8d9ea,
+    type: 3}
+  highlightTime: 5
+  iconPivot: {fileID: 0}
 --- !u!1 &5434729158959779985
 GameObject:
   m_ObjectHideFlags: 0

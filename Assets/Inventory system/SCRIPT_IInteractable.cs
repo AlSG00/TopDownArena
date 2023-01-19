@@ -10,7 +10,5 @@ public interface SCRIPT_IInteractable
     public abstract void Interact();
 
     // TODO: Наверное, это можно убрать отсюда
-    public virtual void ShowInteractionIcon() { }
-    public virtual void RemoveInteractionIcon() { }
-    public virtual void HighlightIconWithScanner() { }
+    //public virtual void HighlightIconWithScanner() { }
 }
