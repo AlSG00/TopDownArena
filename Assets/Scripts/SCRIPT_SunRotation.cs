@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SCRIPT_SunRotation : MonoBehaviour
 {
-    public int defaultStartTime = 0;
-    public float dayCycleDuration = 1;
-    public float nightCycleDuration = 1;
+    [Range(0,1)] public float defaultStartTime = 0f;
+    public float dayCycleDuration = 1f;
+    public float nightCycleDuration = 1f;
     public float switchToNightIntensitySpeed = 0.005f;
     public float switchToDayIntensitySpeed = 0.005f;
     public Animator sunAnimationController;
@@ -21,7 +21,7 @@ public class SCRIPT_SunRotation : MonoBehaviour
         RenderSettings.ambientIntensity = 0;
         sunAnimationController.speed = 1 / dayCycleDuration;
         sun = GetComponentInChildren<Light>();
-        sunAnimationController.Play("ANIM_Sun", 0, 0);
+        sunAnimationController.Play("ANIM_Sun", 0, defaultStartTime);
 
         AnimationState state;
         AnimatorClipInfo clipInfo;
