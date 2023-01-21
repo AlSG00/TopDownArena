@@ -147,6 +147,7 @@
     <Compile Include="Assets\Scripts\BulletRaycast.cs" />
     <Compile Include="Assets\Scripts\TestAnimationEvent.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_ItemGrid.cs" />
+    <Compile Include="Assets\Scripts\SCRIPT_DoubleColorLightningHandler.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
     <Compile Include="Assets\Scripts\CheckPass.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerInfo.cs" />
@@ -210,7 +211,6 @@
     <Compile Include="Assets\TestResourceCounter.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Scripts\SCRIPT_DoubleColorLightningHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -8,7 +8,9 @@ public class SCRIPT_DoubleColorLightningHandler : MonoBehaviour
     [SerializeField] private GameObject[] _lightMesh;
 
     public Color DaylightningColor;
+    public Color DaylightningMeshColor;
     public Color NightlightningColor;
+    public Color NightlightningMeshColor;
 
     public float daylightIntensity = 1f;
     public float nightlightIntensity = 1f;
@@ -42,7 +44,12 @@ public class SCRIPT_DoubleColorLightningHandler : MonoBehaviour
     {
         for (int i = 0; i < _lightOrigin.Length; i++)
         {
-            StartCoroutine(SwapColorRoutine(DaylightningColor, _lightOrigin[i], daylightIntensity));
+            StartCoroutine(SwapLightColorRoutine(DaylightningColor, _lightOrigin[i], daylightIntensity));
+        }
+
+        for (int i = 0; i < _lightMesh.Length; i++)
+        {
+            StartCoroutine(SwapMeshColorRoutine(DaylightningMeshColor, _lightMesh[i]));
         }
     }
 
@@ -50,19 +57,23 @@ public class SCRIPT_DoubleColorLightningHandler : MonoBehaviour
     {
         for (int i = 0; i < _lightOrigin.Length; i++)
         {
-            StartCoroutine(SwapColorRoutine(NightlightningColor, _lightOrigin[i], nightlightIntensity));
+            StartCoroutine(SwapLightColorRoutine(NightlightningColor, _lightOrigin[i], nightlightIntensity));
+        }
+        for (int i = 0; i < _lightMesh.Length; i++)
+        {
+            StartCoroutine(SwapMeshColorRoutine(NightlightningMeshColor, _lightMesh[i]));
         }
     }
 
-    private IEnumerator SwapColorRoutine(Color lightColor, Light lightOrigin, float targetIntensity)
+    private IEnumerator SwapLightColorRoutine(Color lightColor, Light lightOrigin, float targetIntensity)
     {
         yield return new WaitForSeconds(deactivatingDelay);
+
         while (lightOrigin.intensity > 0)
         {
             yield return lightOrigin.intensity -= intensityDecreasing;
         }
         lightOrigin.intensity = 0;
-
         lightOrigin.color = lightColor;
 
         yield return new WaitForSeconds(activatingDelay);
@@ -72,5 +83,55 @@ public class SCRIPT_DoubleColorLightningHandler : MonoBehaviour
             yield return lightOrigin.intensity += intensityIncreasing;
         }
         lightOrigin.intensity = targetIntensity;
+    }
+
+    private IEnumerator SwapMeshColorRoutine(Color lightColor, GameObject lightMesh)
+    {
+        yield return new WaitForSeconds(deactivatingDelay);
+
+        var mat = lightMesh.GetComponent<Renderer>().sharedMaterial;
+        mat.EnableKeyword("_EMISSION");
+
+        DynamicGI.UpdateEnvironment();
+
+        while (mat.color.a > 0)
+        {
+            yield return mat.color = new Color(
+                mat.color.r,
+                mat.color.g,
+                mat.color.b,
+                mat.color.a - intensityDecreasing
+                );
+        }
+
+        mat.color = new Color(
+            lightColor.r,
+            lightColor.g,
+            lightColor.b,
+            0f
+            );
+
+        mat.SetColor("_EmissionColor", lightColor);
+
+        yield return new WaitForSeconds(activatingDelay);
+
+        while (mat.color.a < 1)
+        {
+            yield return mat.color = new Color(
+                mat.color.r,
+                mat.color.g,
+                mat.color.b,
+                mat.color.a + intensityIncreasing
+                );
+        }
+
+        
+
+        //mat.color = new Color(
+        //   lightColor.r,
+        //   lightColor.g,
+        //   lightColor.b,
+        //   1f
+        //   );
     }
 }
