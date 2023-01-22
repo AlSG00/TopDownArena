@@ -5,17 +5,17 @@ using UnityEngine;
 public class SCRIPT_DoubleColorLightningHandler : MonoBehaviour
 {
     [SerializeField] private Light[] _lightOrigin;
-    [SerializeField] private GameObject[] _lightMesh;
+    //[SerializeField] private GameObject[] _lightMesh;
 
     public Color DaylightningColor;
-    public Color DaylightningMeshColor;
+    //public Color DaylightningMeshColor;
     public Color NightlightningColor;
-    public Color NightlightningMeshColor;
+   // public Color NightlightningMeshColor;
 
     public float daylightIntensity = 1f;
     public float nightlightIntensity = 1f;
-    public float intensityIncreasing = 0.1f;
-    public float intensityDecreasing = 0.1f;
+    public float intensityIncreasingSpeed = 0.1f;
+    public float intensityDecreasingSpeed = 0.1f;
     public float activatingDelay = 0f;
     public float deactivatingDelay = 0f;
 
@@ -42,27 +42,34 @@ public class SCRIPT_DoubleColorLightningHandler : MonoBehaviour
 
     private void SetDayLightning()
     {
-        for (int i = 0; i < _lightOrigin.Length; i++)
+        if (_lightOrigin != null &&
+            _lightOrigin.Length != 0)
         {
-            StartCoroutine(SwapLightColorRoutine(DaylightningColor, _lightOrigin[i], daylightIntensity));
+            for (int i = 0; i < _lightOrigin.Length; i++)
+            {
+                StartCoroutine(SwapLightColorRoutine(DaylightningColor, _lightOrigin[i], daylightIntensity));
+            }
         }
-
-        for (int i = 0; i < _lightMesh.Length; i++)
-        {
-            StartCoroutine(SwapMeshColorRoutine(DaylightningMeshColor, _lightMesh[i]));
-        }
+        //for (int i = 0; i < _lightMesh.Length; i++)
+        //{
+        //    StartCoroutine(SwapMeshColorRoutine(DaylightningMeshColor, _lightMesh[i]));
+        //}
     }
 
     private void SetNightLightning()
     {
-        for (int i = 0; i < _lightOrigin.Length; i++)
+        if (_lightOrigin != null &&
+            _lightOrigin.Length != 0)
         {
-            StartCoroutine(SwapLightColorRoutine(NightlightningColor, _lightOrigin[i], nightlightIntensity));
+            for (int i = 0; i < _lightOrigin.Length; i++)
+            {
+                StartCoroutine(SwapLightColorRoutine(NightlightningColor, _lightOrigin[i], nightlightIntensity));
+            }
         }
-        for (int i = 0; i < _lightMesh.Length; i++)
-        {
-            StartCoroutine(SwapMeshColorRoutine(NightlightningMeshColor, _lightMesh[i]));
-        }
+        //for (int i = 0; i < _lightMesh.Length; i++)
+        //{
+        //    StartCoroutine(SwapMeshColorRoutine(NightlightningMeshColor, _lightMesh[i]));
+        //}
     }
 
     private IEnumerator SwapLightColorRoutine(Color lightColor, Light lightOrigin, float targetIntensity)
@@ -71,67 +78,69 @@ public class SCRIPT_DoubleColorLightningHandler : MonoBehaviour
 
         while (lightOrigin.intensity > 0)
         {
-            yield return lightOrigin.intensity -= intensityDecreasing;
+            yield return lightOrigin.intensity -= intensityDecreasingSpeed;
         }
-        lightOrigin.intensity = 0;
+
+        yield return lightOrigin.intensity = 0;
+
         lightOrigin.color = lightColor;
 
         yield return new WaitForSeconds(activatingDelay);
 
         while (lightOrigin.intensity < targetIntensity)
         {
-            yield return lightOrigin.intensity += intensityIncreasing;
+            yield return lightOrigin.intensity += intensityIncreasingSpeed;
         }
-        lightOrigin.intensity = targetIntensity;
+
+        yield return lightOrigin.intensity = targetIntensity;
     }
 
-    private IEnumerator SwapMeshColorRoutine(Color lightColor, GameObject lightMesh)
-    {
-        yield return new WaitForSeconds(deactivatingDelay);
+    //private IEnumerator SwapMeshColorRoutine(Color lightColor, GameObject lightMesh)
+    //{
+    //    yield return new WaitForSeconds(deactivatingDelay);
 
-        var mat = lightMesh.GetComponent<Renderer>().sharedMaterial;
-        mat.EnableKeyword("_EMISSION");
+    //    var mat = lightMesh.GetComponent<Renderer>().sharedMaterial;
+    //    mat.EnableKeyword("_EMISSION");
 
-        DynamicGI.UpdateEnvironment();
+    //    DynamicGI.UpdateEnvironment();
 
-        while (mat.color.a > 0)
-        {
-            yield return mat.color = new Color(
-                mat.color.r,
-                mat.color.g,
-                mat.color.b,
-                mat.color.a - intensityDecreasing
-                );
-        }
+    //    while (mat.color.a > 0)
+    //    {
+    //        yield return mat.color = new Color(
+    //            mat.color.r,
+    //            mat.color.g,
+    //            mat.color.b,
+    //            mat.color.a - intensityDecreasing
+    //            );
+    //    }
 
-        mat.color = new Color(
-            lightColor.r,
-            lightColor.g,
-            lightColor.b,
-            0f
-            );
+    //    mat.color = new Color(
+    //        lightColor.r,
+    //        lightColor.g,
+    //        lightColor.b,
+    //        0f
+    //        );
+    //    mat.SetColor("_EmissionColor", lightColor);
 
-        mat.SetColor("_EmissionColor", lightColor);
-
-        yield return new WaitForSeconds(activatingDelay);
-
-        while (mat.color.a < 1)
-        {
-            yield return mat.color = new Color(
-                mat.color.r,
-                mat.color.g,
-                mat.color.b,
-                mat.color.a + intensityIncreasing
-                );
-        }
+    //    yield return new WaitForSeconds(activatingDelay);
+    //    DynamicGI.UpdateEnvironment();
+    //    while (mat.color.a < 1)
+    //    {
+    //        yield return mat.color = new Color(
+    //            mat.color.r,
+    //            mat.color.g,
+    //            mat.color.b,
+    //            mat.color.a + intensityIncreasing
+    //            );
+    //    }
 
         
 
-        //mat.color = new Color(
-        //   lightColor.r,
-        //   lightColor.g,
-        //   lightColor.b,
-        //   1f
-        //   );
-    }
+    //    //mat.color = new Color(
+    //    //   lightColor.r,
+    //    //   lightColor.g,
+    //    //   lightColor.b,
+    //    //   1f
+    //    //   );
+    //}
 }

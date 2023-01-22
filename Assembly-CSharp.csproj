@@ -66,6 +66,7 @@
     <Compile Include="Assets\Player\Stats controllers\SCRIPT_PlayerStamina.cs" />
     <Compile Include="Assets\Scripts\nextSpawn.cs" />
     <Compile Include="Assets\Inventory system\SCRIPT_PickableObject.cs" />
+    <Compile Include="Assets\Scripts\SCRIPT_DoubleColorMeshLightningHandler.cs" />
     <Compile Include="Assets\Player\Stats controllers\PlayerHealth.cs" />
     <Compile Include="Assets\Prefab Brush\Scripts\PB_SaveObject.cs" />
     <Compile Include="Assets\Scripts\FireFlameFlashing.cs" />

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Player_Movement : MonoBehaviour
 {
     #region Variables
 
     //TODO: Переименовать и красивенько оформить переменные
+    [SerializeField] CinemachineVirtualCamera _vcamera;
 
     [Header("References")]
     [SerializeField] private SCRIPT_InventoryController inventory;
