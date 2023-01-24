@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SCRIPT_DoubleColorMeshLightningHandler : MonoBehaviour
 {
+    [SerializeField] private SCRIPT_SunRotation _sun;
+
     [SerializeField] private GameObject[] _lightMesh;
 
     public Color DaylightningMeshColor;
@@ -13,6 +15,12 @@ public class SCRIPT_DoubleColorMeshLightningHandler : MonoBehaviour
     public float intensityDecreasingSpeed = 0.1f;
     public float activatingDelay = 0f;
     public float deactivatingDelay = 0f;
+
+    private void Start()
+    {
+        _sun = GameObject.Find("Sun").GetComponent<SCRIPT_SunRotation>();
+        SetLighthningStartColor();
+    }
 
     private void OnEnable()
     {
@@ -94,5 +102,24 @@ public class SCRIPT_DoubleColorMeshLightningHandler : MonoBehaviour
             lightColor.b,
             1f
             );
+    }
+
+    private void SetLighthningStartColor()
+    {
+        Debug.Log(_sun.isDay);
+        for (int i = 0; i < _lightMesh.Length; i++)
+        {
+            var mat = _lightMesh[i].GetComponent<Renderer>().sharedMaterial;
+            mat.EnableKeyword("_EMISSION");
+
+            if (_sun.isDay)
+            {
+                mat.SetColor("_EmissionColor", DaylightningMeshColor * 3);
+            }
+            else
+            {
+                mat.SetColor("_EmissionColor", NightlightningMeshColor * 3);
+            }
+        }
     }
 }

@@ -16,6 +16,9 @@ public class SCRIPT_SunRotation : MonoBehaviour
     public static event DaytimeAction NightStarted;
 
     private Light sun;
+
+    public bool isDay = false;
+
     private void Start()
     {
         RenderSettings.ambientIntensity = 0;
@@ -23,21 +26,25 @@ public class SCRIPT_SunRotation : MonoBehaviour
         sun = GetComponentInChildren<Light>();
         sunAnimationController.Play("ANIM_Sun", 0, defaultStartTime);
 
+        if (defaultStartTime >= 0.5)
+        {
+            isDay = false;
+        }
+        else
+        {
+            isDay = true;
+        }
+
         AnimationState state;
         AnimatorClipInfo clipInfo;
     }
-
-    //private void Update()
-    //{
-    //    float myTime = sunAnimationController.GetCurrentAnimatorClipInfo(0).Length * sunAnimationController.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    //    Debug.Log(myTime);
-    //}
 
     public void SetDay()
     {
         sunAnimationController.speed = 1 / dayCycleDuration;
         StartCoroutine(SetDayAmbient());
         Debug.Log("Day");
+        isDay = true;
         DayStarted?.Invoke();
     }
 
@@ -46,6 +53,7 @@ public class SCRIPT_SunRotation : MonoBehaviour
         sunAnimationController.speed = 1 / nightCycleDuration;
         StartCoroutine(SetNightAmbient());
         Debug.Log("Night");
+        isDay = false;
         NightStarted?.Invoke();
     }
 

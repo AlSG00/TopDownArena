@@ -12,11 +12,19 @@ public class SCRIPT_ScannerImpactHandler : MonoBehaviour
 
     [SerializeField] private Transform iconPivot;
 
+    private void Start()
+    {
+        if (iconPivot == null)
+        {
+            iconPivot = gameObject.transform;
+        }
+    }
+
     private void Update()
     {
         if (_pickableImage != null)
         {
-            _pickableImage.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+            _pickableImage.rectTransform.position = Camera.main.WorldToScreenPoint(iconPivot.position);
         }
     }
 
@@ -94,6 +102,11 @@ public class SCRIPT_ScannerImpactHandler : MonoBehaviour
                 0f
                 );
 
+        Destroy(_pickableImage.gameObject);
+    }
+
+    private void OnDestroy()
+    {
         Destroy(_pickableImage.gameObject);
     }
 }
