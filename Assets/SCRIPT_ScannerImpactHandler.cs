@@ -20,7 +20,7 @@ public class SCRIPT_ScannerImpactHandler : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (_pickableImage != null)
         {

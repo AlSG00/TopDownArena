@@ -164,7 +164,6 @@ public class Player_Movement : MonoBehaviour
         }
 
         transform.Translate(movement * (walkSpeed - walkSpeedDebuff + sprint) * Time.deltaTime, Space.World);
-
     }
 
     void HandleRotationInput()

@@ -13,6 +13,7 @@
 -a="D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PlayerScriptAssemblies\NavMeshComponents.dll"
 -a="D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PlayerScriptAssemblies\Unity.Services.Core.Threading.dll"
 -a="D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PlayerScriptAssemblies\Unity.ProGrids.dll"
+-a="D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PlayerScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll"
 -a="D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PlayerScriptAssemblies\UnityEngine.TestRunner.dll"
 -a="D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PlayerScriptAssemblies\Unity.Timeline.dll"
 -a="D:\Documents & projects\Unity projects\Project_TopDown\TopDownArena\Library\PlayerScriptAssemblies\Unity.TextMeshPro.dll"
