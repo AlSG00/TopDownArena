@@ -17,6 +17,9 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
 
     public Texture2D defaultCursor;
 
+    public AudioSource cantInteractAudio;
+    public AudioClip cantInteracClip;
+
     private void Awake()
     {
         SetCursor(defaultCursor);
@@ -104,7 +107,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
             _interactableObject.canInteract == false ||
             _interactableObject.alreadyInteracting == true)
         {
-           // Debug.Log($"{_interactableObject} : {_interactableObject.canInteract} : {_interactableObject.alreadyInteracting}")
+            cantInteractAudio.PlayOneShot(cantInteracClip);
             return;
         }
 

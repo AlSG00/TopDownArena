@@ -107,6 +107,9 @@ public class SCRIPT_ScannerImpactHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(_pickableImage.gameObject);
+        if (_pickableImage != null)
+        {
+            Destroy(_pickableImage.gameObject);
+        }
     }
 }
