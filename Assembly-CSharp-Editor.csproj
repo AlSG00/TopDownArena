@@ -59,7 +59,7 @@
     <Compile Include="Assets\Shared\Ramps\Editor\RampAssetEditor.cs" />
     <Compile Include="Assets\GameObjectBrush\Scripts\Editor\StringPopupDialog.cs" />
     <Compile Include="Assets\GameObjectBrush\Scripts\Editor\BrushCollection.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Thirdparty\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
     <Compile Include="Assets\EntroPi\GPU Line Of Sight\Scripts\Editor\LOSStencilRendererEditor.cs" />
     <Compile Include="Assets\Prefab Brush\Scripts\Editor\PrefabBrush.cs" />
     <Compile Include="Assets\GameObjectBrush\Scripts\Editor\GameObjectBrushEditor.cs" />

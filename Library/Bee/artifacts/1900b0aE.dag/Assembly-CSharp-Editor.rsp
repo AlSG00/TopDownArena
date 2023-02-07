@@ -410,7 +410,7 @@
 "Assets/GameObjectBrush/Scripts/Editor/StringPopupDialog.cs"
 "Assets/Prefab Brush/Scripts/Editor/PrefabBrush.cs"
 "Assets/Shared/Ramps/Editor/RampAssetEditor.cs"
-"Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs"
+"Assets/Thirdparty/TutorialInfo/Scripts/Editor/ReadmeEditor.cs"
 -langversion:9.0
 
 /deterministic
