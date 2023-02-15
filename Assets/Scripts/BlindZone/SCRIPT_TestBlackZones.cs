@@ -122,11 +122,14 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
             renderer.material.color.b, 
             0f
             );
+        //renderer.gameObject.layer = 0;
+        
     }
 
     private IEnumerator Increase(Renderer renderer)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f); //
+        renderer.gameObject.SetActive(true);
         if (!inLineOfSight)
         {
             while (renderer.material.color.a < 1)
@@ -144,6 +147,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
                 renderer.material.color.b,
                 1f
                 );
+            
         }
     }
 }
