@@ -5,24 +5,22 @@ using System.Linq;
 
 public class SCRIPT_TestBlackZones : MonoBehaviour
 {
-    public GameObject[] blackZone;
+    [SerializeField] private GameObject[] _blackZones;
+
+    [Header("Black zone parameters")]
+    public float increaseDelay = 1f;
     [Range(0, 1)] public float fadeSpeed = 0.3f;
     [Range(0, 1)] public float increaseSpeed = 0.3f;
 
+    [HideInInspector] public float increaseCooldown;
     [HideInInspector] public bool inLineOfSight = false;
     [HideInInspector] public bool stayingInside = false;
-
     private Renderer _renderer;
-
-    //private bool _isFaded = false;
-    public float increaseDelay = 1f;
-    [HideInInspector] public float increaseCooldown;
 
     private void FixedUpdate()
     {
         if (increaseCooldown + increaseDelay <= Time.time)
         {
-            //Debug.Log($"IC {increaseCooldown} : ID {increaseDelay}");
             increaseCooldown = Time.time;
             inLineOfSight = false;
 
@@ -37,34 +35,12 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        //Debug.Log($"IncreaseCooldown: {increaseCooldown}");
-
-        //if (increaseCooldown + increaseDelay <= Time.time)
-        //{
-        //    increaseCooldown = (float)Time.time;
-        //    inLineOfSight = false;
-
-        //        if (!stayingInside && !inLineOfSight)
-        //        {
-        //            IncreaseArea();
-        //        }
-        //}
-        //else if ((inLineOfSight || stayingInside))
-        //{
-        //    FadeArea();
-        //}
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") /*&& !inLineOfSight*/)
+        if (other.CompareTag("Player"))
         {
             increaseCooldown = Time.time;
             stayingInside = true;
-            //_isFaded = true;
-            //FadeArea();
         }
     }
 
@@ -74,23 +50,15 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
         {
             increaseCooldown = Time.time;
             stayingInside = false;
-            //if (!inLineOfSight || !canSee)
-            //{
-            //    IncreaseArea();
-            //}
         }
     }
 
     public void FadeArea()
     {
-        //if (_lastCoroutine != null)
-       // {
-        //    StopCoroutine(_lastCoroutine);
-       // }
         StopAllCoroutines();
-        for (int i = 0; i < blackZone.Length; i++)
+        for (int i = 0; i < _blackZones.Length; i++)
         {
-            _renderer = blackZone[i].GetComponent<Renderer>();
+            _renderer = _blackZones[i].GetComponent<Renderer>();
             StartCoroutine(Fade(_renderer));
         }
     }
@@ -98,15 +66,16 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
     public void IncreaseArea()
     {
         StopAllCoroutines();
-        for (int i = 0; i < blackZone.Length; i++)
+        for (int i = 0; i < _blackZones.Length; i++)
         {
-            _renderer = blackZone[i].GetComponent<Renderer>();
+            _renderer = _blackZones[i].GetComponent<Renderer>();
             StartCoroutine(Increase(_renderer));
         }
     }
 
     private IEnumerator Fade(Renderer renderer)
     {
+        renderer.gameObject.layer = 2;
         while (renderer.material.color.a > 0)
         {
             yield return renderer.material.color = new Color(
@@ -122,14 +91,10 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
             renderer.material.color.b, 
             0f
             );
-        //renderer.gameObject.layer = 0;
-        
     }
 
     private IEnumerator Increase(Renderer renderer)
     {
-        yield return new WaitForSeconds(0.1f); //
-        renderer.gameObject.SetActive(true);
         if (!inLineOfSight)
         {
             while (renderer.material.color.a < 1)
@@ -147,7 +112,7 @@ public class SCRIPT_TestBlackZones : MonoBehaviour
                 renderer.material.color.b,
                 1f
                 );
-            
+            renderer.gameObject.layer = 17;
         }
     }
 }

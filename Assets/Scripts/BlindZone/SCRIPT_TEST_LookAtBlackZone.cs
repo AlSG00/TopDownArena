@@ -5,7 +5,7 @@ using System.Linq;
 
 public class SCRIPT_TEST_LookAtBlackZone : MonoBehaviour
 {
-    public LayerMask activeLayers;
+    //public LayerMask activeLayers;
     [Range(0, 360)] public int viewAngle = 180;
     public int raysCount = 10;
     private RaycastHit[] _hits;
