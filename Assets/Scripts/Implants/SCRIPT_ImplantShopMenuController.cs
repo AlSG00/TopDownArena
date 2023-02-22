@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SCRIPT_ImplantShopMenuController : MonoBehaviour
 {
-    public Player_Movement _playerMovement;
-    public Player_Shooting _playerShooting;
-    public SCRIPT_ImplantUpgrades _playerImplants;
-    public SCRIPT_PlayerResources _playerResources;
+    [Header("References")]
+    [SerializeField] private Player_Movement _playerMovement;
+    [SerializeField] private Player_Shooting _playerShooting;
+    [SerializeField] private SCRIPT_ImplantUpgrades _playerImplants;
+    [SerializeField] private SCRIPT_PlayerResources _playerResources;
     public bool isOpened;
 
     public int finalMoneyPrice = 0;
     public int finalPillsPrice = 0;
 
     public List<SCRIPT_ImplantMenuButton> implantsToBuy = new List<SCRIPT_ImplantMenuButton>();
-
 
 
     private void Start()
@@ -52,13 +52,12 @@ public class SCRIPT_ImplantShopMenuController : MonoBehaviour
             }
         }
 
-       // Debug.Log("Check");
         gameObject.SetActive(false);
         _playerMovement.enabled = true;
         _playerShooting.enabled = true;
     }
 
-    public void ExitButtonPress()
+    public void PressExitButton()
     {
         CloseMenu();
     }

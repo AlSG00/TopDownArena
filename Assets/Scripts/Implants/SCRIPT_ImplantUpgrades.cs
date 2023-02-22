@@ -25,9 +25,9 @@ public class SCRIPT_ImplantUpgrades : MonoBehaviour
     }
 
     // TODO: Сделать, чтобы коллекция имплантов хранилась в scriptable objects
+    // TODO: Переименовать скрипт, он вносит дезу
     public void ActivateNewImplant(GameObject implant)
     {
-        //implantList.Find(x => x == implant).GetComponent<IImplant>().Activate();
         implantList.Add(implant);
         implant.GetComponent<IImplant>().Activate();
     }

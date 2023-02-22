@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Audio\SCRIPT_MusicLoop.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerCarryingWeight.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerStamina.cs" />
+    <Compile Include="Assets\Scripts\Implants\EyeAccessImplant.cs" />
     <Compile Include="Assets\Scripts\SceneSwap\nextSpawn.cs" />
     <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_DoubleColorMeshLightningHandler.cs" />
@@ -125,10 +126,12 @@
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\ILOSSource.cs" />
     <Compile Include="Assets\Scripts\Player\Player_Aim.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
+    <Compile Include="Assets\Scripts\InteractableApproachingHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory\SCRIPT_InventoryHighlight.cs" />
     <Compile Include="Assets\Scripts\Weapon\SCRIPT_WeaponPickup.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Test_PlayAnimation.cs" />
+    <Compile Include="Assets\Scripts\Doors\ProtectedDoor.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerSanity.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_SliderBarController.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="Assets\Scripts\Weapon\BulletRaycast.cs" />
     <Compile Include="Assets\Scripts\Inventory\SCRIPT_ItemGrid.cs" />
     <Compile Include="Assets\Scripts\Lightning\SCRIPT_DoubleColorLightningHandler.cs" />
+    <Compile Include="Assets\Scripts\Doors\AutomaticDoor.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSManager.cs" />
     <Compile Include="Assets\Scripts\CheckPass.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerInfo.cs" />
@@ -147,6 +151,7 @@
     <Compile Include="Assets\Scripts\Weapon\SCRIPT_Weapon.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
     <Compile Include="Assets\Scripts\Player\FootstepsSoundController\FootstepCollection.cs" />
+    <Compile Include="Assets\Scripts\Doors\AccessType.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\FixedRotation.cs" />
     <Compile Include="Assets\Scripts\SceneSwap\SceneTransitions.cs" />
@@ -205,6 +210,7 @@
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSDepth.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\Scripts\Implants\FAQ.txt" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSStencilRenderer.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />

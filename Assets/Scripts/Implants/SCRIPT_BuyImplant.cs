@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// TODO: Возможно, этот скрипт вообще больше не нужен
 public class SCRIPT_BuyImplant : MonoBehaviour
 {
     public int moneyPrice = 0;
