@@ -7,6 +7,11 @@ public class InteractableApproachingHandler : MonoBehaviour
     // ќбрабатывает, когда игрок приближаетс€ к интерактивному объекту
     // (например, когда он приближаетс€ к магазину, активируетс€ подсветка)
 
+    // ” создаваемых аниматоров должны быть одинаковые свойства
+
+    [SerializeField] private Animator _animator;
+    [SerializeField] private float _deactivationDelay;
+
     private void OnTriggerEnter(Collider other)
     {
         // јктивировать

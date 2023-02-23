@@ -8,6 +8,11 @@ public class AutomaticDoor : MonoBehaviour, SCRIPT_IInteractable
     public bool alreadyInteracting { get; set; }
     public bool inInteractionArea { get; set; }
 
+    [SerializeField] private Animator _animator;
+
+    [SerializeField] private ProtectedDoor _doorProtection;
+    // TODO: Переименовать в какую-нибудь InteractiveDoor
+
     private void Awake()
     {
         canInteract = false;
@@ -17,6 +22,20 @@ public class AutomaticDoor : MonoBehaviour, SCRIPT_IInteractable
 
     public void Interact()
     {
+        if (_doorProtection != null)
+        {
+
+        }
         // Открыть дверь
+    }
+
+    private void Open()
+    {
+
+    }
+
+    private void Close()
+    {
+
     }
 }

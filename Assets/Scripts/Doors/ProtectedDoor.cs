@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ProtectedDoor : MonoBehaviour
 {
+    // «акидываетс€ только на двери, которые должны быть изначально заперты
+
     public AccessType.Type accesType;
-    //public enum accessType
-    //{
-    //    Utility,
-    //    Armory,
-    //    Security,
-    //    Director
-    //}
+    // public ссылка на коллекцию достпов игрока
+
+    public void CheckAccess()
+    {
+
+    }
 }
