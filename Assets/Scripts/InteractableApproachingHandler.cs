@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractableApproachingHandler : MonoBehaviour
 {
+    
     // Обрабатывает, когда игрок приближается к интерактивному объекту
     // (например, когда он приближается к магазину, активируется подсветка)
 
@@ -15,10 +16,12 @@ public class InteractableApproachingHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Активировать
+        Debug.Log("Entered door area");
     }
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("Leaved door area");
         // Деактивировать
     }
 }

@@ -23,8 +23,8 @@ public class EyeAccessImplant : MonoBehaviour, IImplant
         AccessCollection.Add(accessType);
     }
 
-    public void RemoveAccessType()
+    public void RemoveAccessType(AccessType.Type accessType)
     {
-
+        AccessCollection.Remove(accessType);
     }
 }

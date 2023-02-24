@@ -7,8 +7,9 @@ public class AccessType : MonoBehaviour
     public enum Type
     {
         Utility,
-        Armory,
         Security,
+        Medic,
+        Scientist,
         Director
     }
 }
