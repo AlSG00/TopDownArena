@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AutomaticDoor))]
 public class ProtectedDoor : MonoBehaviour
 {
     // Закидывается только на двери, которые должны быть изначально заперты
@@ -12,6 +13,7 @@ public class ProtectedDoor : MonoBehaviour
 
     public bool CheckAccess()
     {
+        accessImplant = GameObject.Find("_Player").GetComponent<EyeAccessImplant>();
         if (accessImplant.AccessCollection.Contains(accesType))
         {
             return true;
