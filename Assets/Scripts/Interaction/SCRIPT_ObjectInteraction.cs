@@ -8,25 +8,22 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
 { 
     private Ray _ray;
     private RaycastHit _hit;
-    public LayerMask cursorLayer;
+    [SerializeField] private LayerMask _cursorLayer;
     public float interactionDistance = 1f;
     float currentDistance;
     private SCRIPT_IInteractable _interactableObject;
-    public float distanceToObject;
-    public Collider playerInteractionArea;
+    //public float distanceToObject;
+    [SerializeField] private Collider _playerInteractionArea;
 
     public Texture2D defaultCursor;
 
-    public AudioSource cantInteractAudio;
+    public AudioSource cantInteractAudio; // ѕроигрывать звук, когда наводишьс€ на предмет, с которым можно взаимодействовать
     public AudioClip cantInteracClip;
 
     private void Awake()
     {
         SetCursor(defaultCursor);
-        //defaultCursor.Resize(5, 5);
     }
-
-
 
     private void Update()
     {
@@ -42,7 +39,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     {
         _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
-        if (Physics.Raycast(_ray, out _hit, 100, cursorLayer))
+        if (Physics.Raycast(_ray, out _hit, 100, _cursorLayer))
         {
             if (_hit.transform.CompareTag("Interactable"))
             {
@@ -52,51 +49,26 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 }
                 _interactableObject = _hit.transform.GetComponent<SCRIPT_IInteractable>();
 
-
-                //_interactableObject.canInteract = true;
-
                 if (_interactableObject.inInteractionArea)
                 {
                     _interactableObject.canInteract = true;
                 }
-
-                //try
-                //{
-                //    _interactableObject.ShowInteractionIcon();
-                //}
-                //catch
-                //{
-                //    Debug.Log("Method doesn't exist");
-                //}
             }
             else
             {
                 if (_interactableObject != null)
                 {
                     _interactableObject.canInteract = false;
-                    //_interactableObject.RemoveInteractionIcon();
                     _interactableObject = null;
-                    //try
-                    //{
-                        
-                    //}
-                    //catch
-                    //{
-                    //    Debug.Log("Method doesn't exist");
-                    //}
                 }
             }
-
-            
         }
         else
         {
             if (_interactableObject != null)
             {
                 _interactableObject.canInteract = false;
-                //_interactableObject.RemoveInteractionIcon();
                 _interactableObject = null;
-                
             }
         }
     }

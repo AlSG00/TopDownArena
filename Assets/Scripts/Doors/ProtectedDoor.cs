@@ -13,7 +13,7 @@ public class ProtectedDoor : MonoBehaviour
 
     public bool CheckAccess()
     {
-        accessImplant = GameObject.Find("_Player").GetComponent<EyeAccessImplant>();
+        //accessImplant = GameObject.Find("_Player").GetComponent<EyeAccessImplant>();
         if (accessImplant.AccessCollection.Contains(accesType))
         {
             return true;

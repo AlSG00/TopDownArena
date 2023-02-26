@@ -16,12 +16,19 @@ public class InteractableApproachingHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Активировать
-        Debug.Log("Entered door area");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Entered door area");
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Leaved door area");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Leaved door area");
+        }
         // Деактивировать
     }
 }
