@@ -746,16 +746,4 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
         PlaceItem(lastPosition);
     }
-
-
-
-    public void OpenInventory()
-    {
-
-    }
-
-    public void CloseInventory()
-    {
-
-    }
 }
