@@ -12,58 +12,68 @@ public class SCRIPT_Weapon : MonoBehaviour
         public TrailRenderer tracer;
     }
 
+    [Header("References")]
+    public SCRIPT_MuzzleFlame muzzleFlame;
+    public SCRIPT_AmmoShells ammoShells;
+    public SCRIPT_PlayerAmmunition ammoInStock;
+    public AmmoCounterTest ammoCounter;
+    public SCRIPT_PlayerAmmunition.Ammo currentWeaponStock;
+
+    // ѕрикрутить ссылку на скрипт, в котором будет AnimationEvents дл€ перезар€дки каждой отдельной пушки
+    // —ейчас перезар€дка захардкожена под автомат
+
+    [Header("Weapon parameters")]
     public string weaponName;
     public SCRIPT_ActiveWeapon.WeaponSlot WeaponSlot;
-
-    public bool isFiring = false;
     public float fireRate = 25;
     public float bulletSpeed = 1000f;
+    public int projectilesPerShot = 1;
+
+    public float singleShotDelay = 0.3f;
     public float impactForce;
     public float damage;
     public float bulletSpreadValue;
+    [SerializeField] private int magCapacity = 30;
+    public int currentAmmoInMag = 30;
+    public bool singleShots;
 
+    [Header("Visual")]
     public GameObject hitEffectMetal;
     public GameObject hitEffectConcrete;
     public GameObject hitEffectFlesh;
 
     public TrailRenderer tracerEffect;
+
+    private ParticleSystem hitEffect;
+    public GameObject magazine;
     public Transform muzzle;
-    public LayerMask activeLayers;
-    private Ray ray;
-    private RaycastHit hitInfo;
-    private float accumulatedTime;
-    private List<Bullet> bullets = new List<Bullet>();
-    private float maxLifeTime = 3f;
-    public SCRIPT_MuzzleFlame muzzleFlame;
-    public SCRIPT_AmmoShells ammoShells;
-    public bool isReloading;
-    private float lastTimeShot;
-    private float fireDelay;
+
+    [Header("Audio")]
     public AudioClip reloadSound;
     public AudioClip shotSound;
     public AudioSource audioSource;
 
-
-    [SerializeField] private int magCapacity = 30;
-    public int currentAmmoInMag = 30;
-
-    public SCRIPT_PlayerAmmunition ammoInStock;
-    
-    public AmmoCounterTest ammoCounter;
-    public bool singleShots;
-    public bool shotPerformed;
-    public int projectilesPerShot = 1;
-    private ParticleSystem hitEffect;
-    public float singleShotDelay = 0.3f;
-
-    public GameObject magazine;
-
+    [Header("Temp rifle reload audio")]
     public AudioClip ejectMagSound;
     public AudioClip putMagSound;
     public AudioClip pullOutMagSound;
     public AudioClip InsertMagSound;
 
-    public SCRIPT_PlayerAmmunition.Ammo currentWeaponStock;
+    // Other
+    private Ray ray;
+    private RaycastHit hitInfo;
+    private float accumulatedTime;
+    public LayerMask activeLayers;
+    private List<Bullet> bullets = new List<Bullet>();
+    private float _maxBulletLifetime = 3f;
+
+    public bool isReloading;
+    public bool isFiring = false;
+    public bool shotPerformed;
+
+    private float lastTimeShot;
+    private float fireDelay;
+
 
     private void Start()
     {
@@ -220,7 +230,7 @@ public class SCRIPT_Weapon : MonoBehaviour
             Destroy(impactObj, 1200f);
 
             bullet.tracer.transform.position = hitInfo.point;
-            bullet.lifeTime = maxLifeTime;
+            bullet.lifeTime = _maxBulletLifetime;
             //Destroy(bullet.tracer, 1f);
         }
         else
@@ -237,7 +247,7 @@ public class SCRIPT_Weapon : MonoBehaviour
     //  онтроль времени жизни пули, если она никуда не врезалась
     private void DestroyBullets()
     {
-        bullets.RemoveAll(bullet => bullet.lifeTime >= maxLifeTime);
+        bullets.RemoveAll(bullet => bullet.lifeTime >= _maxBulletLifetime);
     }
 
     public void Reload()
