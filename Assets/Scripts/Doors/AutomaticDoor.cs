@@ -47,6 +47,7 @@ public class AutomaticDoor : MonoBehaviour, SCRIPT_IInteractable
         }
     }
 
+    // TODO: заполнить функции ниже звуковыми эффектами, анимациями и т.д.
     private void Open()
     {
         Debug.Log("Door opened");

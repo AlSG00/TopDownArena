@@ -149,6 +149,7 @@
     <Compile Include="Assets\Scripts\Weapon\WeaponAnimationEvents.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSSource.cs" />
     <Compile Include="Assets\Scripts\Weapon\SCRIPT_Weapon.cs" />
+    <Compile Include="Assets\Scripts\Doors\AccessItem.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
     <Compile Include="Assets\Scripts\Player\FootstepsSoundController\FootstepCollection.cs" />
     <Compile Include="Assets\Scripts\Doors\AccessType.cs" />
@@ -201,7 +202,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Scripts\Doors\AccessItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />
