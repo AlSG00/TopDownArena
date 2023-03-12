@@ -7,16 +7,24 @@ public class ProtectedDoor : MonoBehaviour
 {
     // «акидываетс€ только на двери, которые должны быть изначально заперты
 
-    public AccessType.Type accesType;
+    public AccessType.Type accessType;
     [SerializeField] private EyeAccessImplant accessImplant;
     // public ссылка на коллекцию достпов игрока
+
+    private void Awake()
+    {
+        
+    }
 
     public bool CheckAccess()
     {
         //accessImplant = GameObject.Find("_Player").GetComponent<EyeAccessImplant>();
-        if (accessImplant.AccessCollection.Contains(accesType))
+        if (accessImplant != null)
         {
-            return true;
+            if (accessImplant.AccessCollection.Contains(accessType))
+            {
+                return true;
+            }
         }
 
         return false;

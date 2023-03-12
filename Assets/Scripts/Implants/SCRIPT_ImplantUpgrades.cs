@@ -31,40 +31,4 @@ public class SCRIPT_ImplantUpgrades : MonoBehaviour
         implantList.Add(implant);
         implant.GetComponent<IImplant>().Activate();
     }
-
-    //[Header("Limbs meshes")]
-    //public List<GameObject> headLimbs = new List<GameObject>();
-    //public List<GameObject> bodysLimbs = new List<GameObject>();
-    //public List<GameObject> handsLimbs = new List<GameObject>();
-    //public List<GameObject> legsLimbs = new List<GameObject>();
-
-    //private void Start()
-    //{
-    //    for (int i = 0; i < handsLimbs.Count; i++)
-    //    {
-    //        handsLimbs[i].SetActive(false);
-    //    }
-    //}
-
-    //public void SetImplant()
-    //{
-    //    for (int i = 0; i < handsLimbs.Count; i++)
-    //    {
-    //        handsLimbs[i].SetActive(true);
-    //    }
-    //}
-    // Пока не понимаю, зачем данный скрипт
-
-    // Вижу два варианта
-    // 1) навешать протезы на игрока и прятать их
-    // 2) хранить здесь ссылки на нужные точки на теле, на которых потом спавнить протезы
-
-    //[SerializeField]
-    //public class Implant
-    //{
-    //    GameObject ImplantMesh;
-    //    bool isActive;
-    //}
-
-    //public List<Implant> implants = new List<Implant>();
 }

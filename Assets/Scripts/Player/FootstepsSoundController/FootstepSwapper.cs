@@ -14,7 +14,6 @@ public class FootstepSwapper : MonoBehaviour
     {
         checker = new TerrainChecker();
         _playerMovement = GetComponent<Player_Movement>();
-        //fpc = firstpersoncontroller
     }
 
     public void CheckLayers(LayerMask activeLayers)
@@ -27,7 +26,6 @@ public class FootstepSwapper : MonoBehaviour
         {
             if (_hit.transform.GetComponent<Terrain>() != null)
             {
-                Debug.Log("terrain");
                 Terrain terrain = _hit.transform.GetComponent<Terrain>();
 
                 if (currentLayer != checker.GetLayerName(transform.position, terrain))
@@ -45,7 +43,6 @@ public class FootstepSwapper : MonoBehaviour
             }
             if (_hit.transform.GetComponent<SurfaceType>() != null)
             {
-                Debug.Log("surface");
                 FootstepCollection collection = _hit.transform.GetComponent<SurfaceType>().footstepCollection;
                 currentLayer = collection.name;
                 _playerMovement.SwapFootsteps(collection);

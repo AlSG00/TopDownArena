@@ -7,8 +7,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 {
     // Хранение данных об инвентаре
 
-    
-
     public const float _tileSizeWidth = 64;
     public const float _tileSizeHeight = 64;
 
