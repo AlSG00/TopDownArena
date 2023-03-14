@@ -489,6 +489,8 @@
 "Assets/Scripts/Test_PlayAnimation.cs"
 "Assets/Scripts/Test_PlayOST.cs"
 "Assets/Scripts/TextLookAt.cs"
+"Assets/Scripts/UI/StateIconVisibilityHandler.cs"
+"Assets/Scripts/UI/UIToWorldPositionConverter.cs"
 "Assets/Scripts/Weapon/AmmoCounterTest.cs"
 "Assets/Scripts/Weapon/BulletRaycast.cs"
 "Assets/Scripts/Weapon/Gun.cs"

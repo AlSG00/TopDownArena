@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+
     public float health;
     public float currentHealth;
     [HideInInspector] public float healtDecreaseByDebuff = 0f;
@@ -16,19 +18,6 @@ public class PlayerHealth : MonoBehaviour
     public bool isTired = false;
     public bool isInsane = false;
     
-
-    //private void OnEnable()
-    //{
-    //    //SCRIPT_Medkit_Small.HealPlayer += Heal;
-    //}
-
-    //private void OnDisable()
-    //{
-        
-    //}
-
-    //public delegate void HealingAction();
-    //public static event HealingAction Healing; 
     void Start()
     {
         Transform hud = GameObject.Find("HUD").transform;
