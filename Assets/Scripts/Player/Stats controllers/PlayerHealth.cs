@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-
+    [SerializeField] private StateIconVisibilityHandler _stateIcon;
 
     public float health;
     public float currentHealth;
@@ -17,9 +17,21 @@ public class PlayerHealth : MonoBehaviour
     public bool isDehydrated = false;
     public bool isTired = false;
     public bool isInsane = false;
-    
+
+
+
+    private float previousHealthValue = 0f;
+
+    private void Awake()
+    {
+        //fullHpIndicationValue = health;
+        //halfHpIndicationValue = health / 2;
+        //quarterHpIndicationValue = health / 4;
+    }
+
     void Start()
     {
+        _stateIcon.Initialize(health);
         Transform hud = GameObject.Find("HUD").transform;
         Transform _hud = hud.transform.GetChild(0);
         healthBar = _hud.GetChild(0).GetComponent<HealtBarScript>();
@@ -47,6 +59,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void TakeDamageByDebuff()
     {
+        previousHealthValue = currentHealth;
         currentHealth -= healtDecreaseByDebuff;
     }
 
@@ -57,17 +70,46 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        previousHealthValue = currentHealth;
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        //HandleStateIcon(false);
+        _stateIcon.HandleStateIconVisibility(currentHealth, previousHealthValue, )
     }
 
     public void Heal(float healing, bool instant)
     {
+        previousHealthValue = currentHealth;
         currentHealth += healing;
         if (currentHealth > health)
             currentHealth = health;
 
         healthBar.SetHealth(currentHealth);
+        //HandleStateIcon(true);
+    }
+
+    private void HandleStateIcon(bool isHpIncreased)
+    {
+        //_stateIcon.HandleStateIconVisibility()
+        //Debug.Log($"HandleStateIcon : {isHpIncreased} : {oldHealthValue} : {halfHpIndicationValue}");
+
+        //if (isHpIncreased)
+        //{
+        //    if (currentHealth >= halfHpIndicationValue &&
+        //        oldHealthValue < halfHpIndicationValue)
+        //    {
+                
+        //        _stateIcon.ShowStateChange();
+        //    }
+        //}
+        //else
+        //{
+        //    if (currentHealth < halfHpIndicationValue &&
+        //        oldHealthValue > halfHpIndicationValue)
+        //    {
+        //        _stateIcon.ShowStateChange();
+        //    }
+        //}
     }
 
     public void CalculateDamageByDebuff()

@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\Implants\SCRIPT_ImplantUpgrades.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_IItem.cs" />
+    <Compile Include="Assets\Scripts\UI\UIToWorldPositionConverter.cs" />
     <Compile Include="Assets\Scripts\TestScannerScript.cs" />
     <Compile Include="Assets\Scripts\TextLookAt.cs" />
     <Compile Include="Assets\Scripts\RoachController.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\DoorSliding.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponAnimationEvents.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSSource.cs" />
+    <Compile Include="Assets\Scripts\UI\StateIconVisibilityHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon\SCRIPT_Weapon.cs" />
     <Compile Include="Assets\Scripts\Doors\AccessItem.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSFinalResolve.cs" />
@@ -202,8 +204,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Scripts\UI\UIToWorldPositionConverter.cs" />
-    <Compile Include="Assets\Scripts\UI\StateIconVisibilityHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />
