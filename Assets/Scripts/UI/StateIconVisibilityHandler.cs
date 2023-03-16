@@ -24,13 +24,23 @@ public class StateIconVisibilityHandler : MonoBehaviour
     public StateValue currentStateValueRange;
     public StateValue previousStateValueRange;
 
+    [Header("Status change notification parameters")]
+    [SerializeField] private float _notificationAppearingSpeed;
+    [SerializeField] private float _notificationDisappearingSpeed;
+    [SerializeField] private float _notificationShowDuration;
+
+    [Header("Status warning notification parameters")]
+    [SerializeField] private float _warningAppearingSpeed;
+    [SerializeField] private float _warningDisappearingSpeed;
+    [SerializeField] private float _warningBlinksCount;
+    [SerializeField] private float _warningShowDuration;
+
+
     public void Initialize(float maxStateValue)
     {
         highIndicationValue = maxStateValue;
         mediumIndicationValue = maxStateValue / 2;
         lowIndicationValue = maxStateValue / 4;
-
-
     }
 
     private void Awake()
@@ -56,25 +66,38 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     public void ShowStateChange()
     {
-        Debug.Log("ShowStateChange");
-        StartCoroutine(TestMethod());
+        StartCoroutine(TestChangeMethod());
     }
 
-    public IEnumerator TestMethod()
+    private void ShowStateWarning()
+    {
+        StartCoroutine(TestWarningMethod());
+    }
+
+    public IEnumerator TestChangeMethod()
     {
         EnableIcon();
         yield return new WaitForSeconds(5f);
         DisableIcon();
     }
 
-    private void ShowStateWarning()
-    {
+    //public IEnumerator TestChangeMethod()
+    //{
+    //    EnableIcon();
+    //    yield return new WaitForSeconds(5f);
+    //    DisableIcon();
+    //}
 
+    public IEnumerator TestWarningMethod()
+    {
+        EnableIcon();
+
+        yield return new WaitForSeconds(_notificationShowDuration);
+        DisableIcon();
     }
 
     private IEnumerator BlinkIconRoutine()
     {
-        // for (int i = 0; i < warningBlinksCount)
         yield return null;
     }
 
@@ -106,8 +129,14 @@ public class StateIconVisibilityHandler : MonoBehaviour
         {
             if (currentStateValueRange != previousStateValueRange)
             {
-                // TODO: добавить условие, чтобы, помимо обычного отобржаения, здесь еще вызывалась функция моргания, если значение упало до критического
-                ShowStateChange();
+                if (currentStateValueRange == StateValue.Low)
+                {
+                    ShowStateWarning();
+                }
+                else
+                {
+                    ShowStateChange();
+                }
             }
         }
 
