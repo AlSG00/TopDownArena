@@ -15,7 +15,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     [SerializeField] private Image[] _iconElements;
 
-    public int warningBlinksCount = 0; // Число морганий иконки при появлении предупреждения
+    //public int warningBlinksCount = 0; // Число морганий иконки при появлении предупреждения
 
     public float highIndicationValue;
     public float mediumIndicationValue;
@@ -24,14 +24,18 @@ public class StateIconVisibilityHandler : MonoBehaviour
     public StateValue currentStateValueRange;
     public StateValue previousStateValueRange;
 
+    public Color maxStateValueColor;
+    public Color normalStateValueColor;
+    public Color lowStateValueColor;
+
     [Header("Status change notification parameters")]
-    [SerializeField] private float _notificationAppearingSpeed;
-    [SerializeField] private float _notificationDisappearingSpeed;
+    [SerializeField][Range(0, 1)] private float _notificationAppearingSpeed;
+    [SerializeField][Range(0, 1)] private float _notificationDisappearingSpeed;
     [SerializeField] private float _notificationShowDuration;
 
     [Header("Status warning notification parameters")]
-    [SerializeField] private float _warningAppearingSpeed;
-    [SerializeField] private float _warningDisappearingSpeed;
+    [SerializeField][Range(0, 1)] private float _warningAppearingSpeed;
+    [SerializeField][Range(0, 1)] private float _warningDisappearingSpeed;
     [SerializeField] private float _warningBlinksCount;
     [SerializeField] private float _warningShowDuration;
 
@@ -48,52 +52,344 @@ public class StateIconVisibilityHandler : MonoBehaviour
         DisableIcon();
     }
 
+    // TODO: Изменения прозрачности вынеси в отдельную компоненту
     private void EnableIcon()
     {
-        for (int i = 0; i < _iconElements.Length; i++)
-        {
-            _iconElements[i].enabled = true;
-        }
+        _iconElements[0].color = new Color(
+            _iconElements[0].color.r,
+            _iconElements[0].color.g,
+            _iconElements[0].color.b,
+            1);
+
+        _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            1);
+
+        _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            1);
     }
 
     private void DisableIcon()
     {
-        for (int i = 0; i < _iconElements.Length; i++)
+        _iconElements[0].color = new Color(
+            _iconElements[0].color.r,
+            _iconElements[0].color.g,
+            _iconElements[0].color.b,
+            0);
+
+        _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            0);
+
+        _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            0);
+    }
+
+    public IEnumerator ShowStateNotificationRoutine()
+    {
+        //EnableIcon();
+
+        yield return _iconElements[0].color = new Color(
+            _iconElements[0].color.r,
+            _iconElements[0].color.g,
+            _iconElements[0].color.b,
+            0);
+
+        yield return _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            0);
+
+        yield return _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            0);
+
+        while (_iconElements[0].color.a < 1)
         {
-            _iconElements[i].enabled = false;
+            yield return _iconElements[0].color = new Color(
+                _iconElements[0].color.r,
+                _iconElements[0].color.g,
+                _iconElements[0].color.b,
+                _iconElements[0].color.a + _notificationAppearingSpeed);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[1].color.r,
+                _iconElements[1].color.g,
+                _iconElements[1].color.b,
+                _iconElements[1].color.a + _notificationAppearingSpeed);
+
+            yield return _iconElements[2].color = new Color(
+                _iconElements[2].color.r,
+                _iconElements[2].color.g,
+                _iconElements[2].color.b,
+                _iconElements[2].color.a + _notificationAppearingSpeed);
         }
-    }
 
-    public void ShowStateChange()
-    {
-        StartCoroutine(TestChangeMethod());
-    }
+        yield return _iconElements[0].color = new Color(
+            _iconElements[0].color.r,
+            _iconElements[0].color.g,
+            _iconElements[0].color.b,
+            1);
 
-    private void ShowStateWarning()
-    {
-        StartCoroutine(TestWarningMethod());
-    }
+        yield return _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            1);
 
-    public IEnumerator TestChangeMethod()
-    {
-        EnableIcon();
-        yield return new WaitForSeconds(5f);
-        DisableIcon();
-    }
-
-    //public IEnumerator TestChangeMethod()
-    //{
-    //    EnableIcon();
-    //    yield return new WaitForSeconds(5f);
-    //    DisableIcon();
-    //}
-
-    public IEnumerator TestWarningMethod()
-    {
-        EnableIcon();
+        yield return _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            1);
 
         yield return new WaitForSeconds(_notificationShowDuration);
-        DisableIcon();
+
+        while (_iconElements[0].color.a > 0)
+        {
+            yield return _iconElements[0].color = new Color(
+                _iconElements[0].color.r,
+                _iconElements[0].color.g,
+                _iconElements[0].color.b,
+                _iconElements[0].color.a - _notificationDisappearingSpeed);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[1].color.r,
+                _iconElements[1].color.g,
+                _iconElements[1].color.b,
+                _iconElements[1].color.a - _notificationDisappearingSpeed);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[2].color.r,
+                _iconElements[2].color.g,
+                _iconElements[2].color.b,
+                _iconElements[2].color.a - _notificationDisappearingSpeed);
+
+        }
+
+        yield return _iconElements[0].color = new Color(
+            _iconElements[0].color.r,
+            _iconElements[0].color.g,
+            _iconElements[0].color.b,
+            0);
+
+        yield return _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            0);
+
+        yield return _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            0);
+
+        //DisableIcon();
+    }
+
+    // TODO: Устанавливать нужный цвет в начале корутины
+    // TODO: Пресет нужных цветов задавать через инспектор
+
+    public IEnumerator ShowStateWarningRoutine()
+    {
+        //yield return _iconElements[0].color = new Color(
+        //    _iconElements[0].color.r,
+        //    _iconElements[0].color.g,
+        //    _iconElements[0].color.b,
+        //    0);
+
+        yield return _iconElements[0].color = new Color(255, 0, 0, 0);
+
+        yield return _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            0);
+
+        yield return _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            0);
+
+        for (int i = 0; i < _warningBlinksCount; i++)
+        {
+            while (_iconElements[0].color.a < 1)
+            {
+                /*yield return*/ _iconElements[0].color = new Color(
+                    _iconElements[0].color.r,
+                    _iconElements[0].color.g,
+                    _iconElements[0].color.b,
+                    _iconElements[0].color.a + _warningAppearingSpeed);
+
+                /*yield return*/ _iconElements[1].color = new Color(
+                    _iconElements[1].color.r,
+                    _iconElements[1].color.g,
+                    _iconElements[1].color.b,
+                    _iconElements[1].color.a + _warningAppearingSpeed);
+
+                /*yield return*/ _iconElements[2].color = new Color(
+                    _iconElements[2].color.r,
+                    _iconElements[2].color.g,
+                    _iconElements[2].color.b,
+                    _iconElements[2].color.a + _warningAppearingSpeed);
+
+                yield return null;
+            }
+
+            yield return _iconElements[0].color = new Color(
+            _iconElements[0].color.r,
+            _iconElements[0].color.g,
+            _iconElements[0].color.b,
+            1);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[1].color.r,
+                _iconElements[1].color.g,
+                _iconElements[1].color.b,
+                1);
+
+            yield return _iconElements[2].color = new Color(
+                _iconElements[2].color.r,
+                _iconElements[2].color.g,
+                _iconElements[2].color.b,
+                1);
+
+            while (_iconElements[0].color.a > 0)
+            {
+                yield return _iconElements[0].color = new Color(
+                    _iconElements[0].color.r,
+                    _iconElements[0].color.g,
+                    _iconElements[0].color.b,
+                    _iconElements[0].color.a - _warningDisappearingSpeed);
+
+                yield return _iconElements[1].color = new Color(
+                    _iconElements[1].color.r,
+                    _iconElements[1].color.g,
+                    _iconElements[1].color.b,
+                    _iconElements[1].color.a - _warningDisappearingSpeed);
+
+                yield return _iconElements[1].color = new Color(
+                    _iconElements[2].color.r,
+                    _iconElements[2].color.g,
+                    _iconElements[2].color.b,
+                    _iconElements[2].color.a - _warningDisappearingSpeed);
+
+            }
+
+            yield return _iconElements[0].color = new Color(
+           _iconElements[0].color.r,
+           _iconElements[0].color.g,
+           _iconElements[0].color.b,
+           0);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[1].color.r,
+                _iconElements[1].color.g,
+                _iconElements[1].color.b,
+                0);
+
+            yield return _iconElements[2].color = new Color(
+                _iconElements[2].color.r,
+                _iconElements[2].color.g,
+                _iconElements[2].color.b,
+                0);
+        }
+
+        while (_iconElements[0].color.a < 1)
+        {
+            yield return _iconElements[0].color = new Color(
+                _iconElements[0].color.r,
+                _iconElements[0].color.g,
+                _iconElements[0].color.b,
+                _iconElements[0].color.a + _warningAppearingSpeed);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[1].color.r,
+                _iconElements[1].color.g,
+                _iconElements[1].color.b,
+                _iconElements[1].color.a + _warningAppearingSpeed);
+
+            yield return _iconElements[2].color = new Color(
+                _iconElements[2].color.r,
+                _iconElements[2].color.g,
+                _iconElements[2].color.b,
+                _iconElements[2].color.a + _warningAppearingSpeed);
+        }
+
+        yield return _iconElements[0].color = new Color(
+        _iconElements[0].color.r,
+        _iconElements[0].color.g,
+        _iconElements[0].color.b,
+        1);
+
+        yield return _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            1);
+
+        yield return _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            1);
+
+        yield return new WaitForSeconds(_warningShowDuration);
+
+        while (_iconElements[0].color.a > 0)
+        {
+            yield return _iconElements[0].color = new Color(
+                _iconElements[0].color.r,
+                _iconElements[0].color.g,
+                _iconElements[0].color.b,
+                _iconElements[0].color.a - _warningDisappearingSpeed);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[1].color.r,
+                _iconElements[1].color.g,
+                _iconElements[1].color.b,
+                _iconElements[1].color.a - _warningDisappearingSpeed);
+
+            yield return _iconElements[1].color = new Color(
+                _iconElements[2].color.r,
+                _iconElements[2].color.g,
+                _iconElements[2].color.b,
+                _iconElements[2].color.a - _warningDisappearingSpeed);
+
+        }
+
+        yield return _iconElements[0].color = new Color(
+            _iconElements[0].color.r,
+            _iconElements[0].color.g,
+            _iconElements[0].color.b,
+            0);
+
+        yield return _iconElements[1].color = new Color(
+            _iconElements[1].color.r,
+            _iconElements[1].color.g,
+            _iconElements[1].color.b,
+            0);
+
+        yield return _iconElements[2].color = new Color(
+            _iconElements[2].color.r,
+            _iconElements[2].color.g,
+            _iconElements[2].color.b,
+            0);
     }
 
     private IEnumerator BlinkIconRoutine()
@@ -117,12 +413,14 @@ public class StateIconVisibilityHandler : MonoBehaviour
         previousStateValueRange = currentStateValueRange;
         bool isIncreased = SetValueChangeDirectionFlag(currentStateValue, previousStateValue);
         GetValueRange(currentStateValue, previousStateValue);
-        //int stateValueRange = GetValueRange(currentStateValue, previousStateValue);
+        //GetStateIconColor();
         if (isIncreased)
         {
             if (currentStateValueRange != previousStateValueRange)
             {
-                ShowStateChange();
+                //ShowStateChange();
+
+                StartCoroutine(ShowStateNotificationRoutine());
             }
         }
         else
@@ -131,11 +429,15 @@ public class StateIconVisibilityHandler : MonoBehaviour
             {
                 if (currentStateValueRange == StateValue.Low)
                 {
-                    ShowStateWarning();
+                    //ShowStateWarning();
+
+                    StartCoroutine(ShowStateWarningRoutine());
                 }
                 else
                 {
-                    ShowStateChange();
+                    //ShowStateChange();
+
+                    StartCoroutine(ShowStateNotificationRoutine());
                 }
             }
         }
@@ -195,4 +497,12 @@ public class StateIconVisibilityHandler : MonoBehaviour
             currentStateValueRange = StateValue.High;
         }
     }
+
+    //private void GetStateIconColor()
+    //{
+    //    switch(currentStateValueRange)
+    //    {
+    //        case StateValue.Low
+    //    }
+    //}
 }
