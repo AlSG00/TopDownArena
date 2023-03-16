@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,6 @@ using UnityEngine.UI;
 
 public class StateIconVisibilityHandler : MonoBehaviour
 {
-    [SerializeField] private Image[] _iconElements;
-
-    public int warningBlinksCount = 0; // „исло морганий иконки при по€влении предупреждени€
-
-    public float fullIndicationValue;
-    public float halfIndicationValue;
-    public float quarterIndicationValue;
-
     public enum StateValue
     {
         Low,
@@ -20,11 +13,24 @@ public class StateIconVisibilityHandler : MonoBehaviour
         High
     }
 
+    [SerializeField] private Image[] _iconElements;
+
+    public int warningBlinksCount = 0; // „исло морганий иконки при по€влении предупреждени€
+
+    public float highIndicationValue;
+    public float mediumIndicationValue;
+    public float lowIndicationValue;
+
+    public StateValue currentStateValueRange;
+    public StateValue previousStateValueRange;
+
     public void Initialize(float maxStateValue)
     {
-        fullIndicationValue = maxStateValue;
-        halfIndicationValue = maxStateValue / 2;
-        quarterIndicationValue = maxStateValue / 4;
+        highIndicationValue = maxStateValue;
+        mediumIndicationValue = maxStateValue / 2;
+        lowIndicationValue = maxStateValue / 4;
+
+
     }
 
     private void Awake()
@@ -84,15 +90,25 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     public void HandleStateIconVisibility(float currentStateValue, float previousStateValue)
     {
-        bool isIncreased = SetValueChangeDirectionFlag(currentStateValue, previousStateValue);
 
+        previousStateValueRange = currentStateValueRange;
+        bool isIncreased = SetValueChangeDirectionFlag(currentStateValue, previousStateValue);
+        GetValueRange(currentStateValue, previousStateValue);
+        //int stateValueRange = GetValueRange(currentStateValue, previousStateValue);
         if (isIncreased)
         {
-
+            if (currentStateValueRange != previousStateValueRange)
+            {
+                ShowStateChange();
+            }
         }
         else
         {
-
+            if (currentStateValueRange != previousStateValueRange)
+            {
+                // TODO: добавить условие, чтобы, помимо обычного отобржаени€, здесь еще вызывалась функци€ моргани€, если значение упало до критического
+                ShowStateChange();
+            }
         }
 
         // TODO: ƒописать систему индикации:
@@ -105,23 +121,23 @@ public class StateIconVisibilityHandler : MonoBehaviour
         
 
 
-        if (isHpIncreased)
-        {
-            if (currentHealth >= halfHpIndicationValue &&
-                oldHealthValue < halfHpIndicationValue)
-            {
+        //if (isHpIncreased)
+        //{
+        //    if (currentHealth >= halfHpIndicationValue &&
+        //        oldHealthValue < halfHpIndicationValue)
+        //    {
 
-                _stateIcon.ShowStateChange();
-            }
-        }
-        else
-        {
-            if (currentHealth < halfHpIndicationValue &&
-                oldHealthValue > halfHpIndicationValue)
-            {
-                _stateIcon.ShowStateChange();
-            }
-        }
+        //        _stateIcon.ShowStateChange();
+        //    }
+        //}
+        //else
+        //{
+        //    if (currentHealth < halfHpIndicationValue &&
+        //        oldHealthValue > halfHpIndicationValue)
+        //    {
+        //        _stateIcon.ShowStateChange();
+        //    }
+        //}
     }
 
     private bool SetValueChangeDirectionFlag(float currentStateValue, float previousStateValue)
@@ -132,5 +148,22 @@ public class StateIconVisibilityHandler : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void GetValueRange(float currentStateValue, float previousStateValue)
+    {
+        if (currentStateValue < lowIndicationValue)
+        {
+            currentStateValueRange = StateValue.Low;
+        }
+        else if (currentStateValue > lowIndicationValue &&
+            currentStateValue < mediumIndicationValue)
+        {
+            currentStateValueRange = StateValue.Medium;
+        }
+        else
+        {
+            currentStateValueRange = StateValue.High;
+        }
     }
 }

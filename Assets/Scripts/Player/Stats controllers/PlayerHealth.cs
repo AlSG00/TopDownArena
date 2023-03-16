@@ -73,8 +73,7 @@ public class PlayerHealth : MonoBehaviour
         previousHealthValue = currentHealth;
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-        //HandleStateIcon(false);
-        _stateIcon.HandleStateIconVisibility(currentHealth, previousHealthValue, )
+        _stateIcon.HandleStateIconVisibility(currentHealth, previousHealthValue);
     }
 
     public void Heal(float healing, bool instant)
@@ -85,31 +84,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = health;
 
         healthBar.SetHealth(currentHealth);
-        //HandleStateIcon(true);
-    }
-
-    private void HandleStateIcon(bool isHpIncreased)
-    {
-        //_stateIcon.HandleStateIconVisibility()
-        //Debug.Log($"HandleStateIcon : {isHpIncreased} : {oldHealthValue} : {halfHpIndicationValue}");
-
-        //if (isHpIncreased)
-        //{
-        //    if (currentHealth >= halfHpIndicationValue &&
-        //        oldHealthValue < halfHpIndicationValue)
-        //    {
-                
-        //        _stateIcon.ShowStateChange();
-        //    }
-        //}
-        //else
-        //{
-        //    if (currentHealth < halfHpIndicationValue &&
-        //        oldHealthValue > halfHpIndicationValue)
-        //    {
-        //        _stateIcon.ShowStateChange();
-        //    }
-        //}
+        _stateIcon.HandleStateIconVisibility(currentHealth, previousHealthValue);
     }
 
     public void CalculateDamageByDebuff()
