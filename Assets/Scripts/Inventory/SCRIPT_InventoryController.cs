@@ -24,6 +24,12 @@ public class SCRIPT_InventoryController : MonoBehaviour
     public bool isCheckingInventory = false;
     public List<InventoryItem> inventoryItemList = new List<InventoryItem>();
 
+    public delegate void OpenAction();
+    public static event OpenAction OnInventoryOpened;
+
+    public delegate void CloseAction();
+    public static event CloseAction OnInventoryClosed;
+
     [SerializeField] private SCRIPT_PlayerCarryingWeight _playerCarryingWeight;
 
     public class InventoryItem
@@ -698,6 +704,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
     }
 
+    // TODO: Переделать метод. Он не учитывает другие размеры экрана кроме фулл хд
     public void HandleInventoryGrid(bool isCheckingInventory)
     {
         Vector2 position = new Vector2();
@@ -708,6 +715,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         if (isCheckingInventory)
         {
             position.y = 630;
+            OnInventoryOpened?.Invoke();
         }
         else
         {
@@ -718,12 +726,12 @@ public class SCRIPT_InventoryController : MonoBehaviour
             {
                 itemContainer.HandleContainerGrid(false);
             }
+
+            OnInventoryClosed?.Invoke();
         }
         position.x = inventoryRect.position.x;
 
         inventoryRect.position = position;
-
-        
     }
 
     // Возвращает обратно в инвентарь предмет на курсоре

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class StateIconVisibilityHandler : MonoBehaviour
 {
+    [SerializeField] private SCRIPT_InventoryController inventory;
     public enum StateValue
     {
         Low,
@@ -14,8 +15,6 @@ public class StateIconVisibilityHandler : MonoBehaviour
     }
 
     [SerializeField] private Image[] _iconElements;
-
-    //public int warningBlinksCount = 0; // „исло морганий иконки при по€влении предупреждени€
 
     public float highIndicationValue;
     public float mediumIndicationValue;
@@ -53,7 +52,58 @@ public class StateIconVisibilityHandler : MonoBehaviour
         HideIcon();
     }
 
-    // TODO: »зменени€ прозрачности вынеси в отдельную компоненту
+    private void OnEnable()
+    {
+        SCRIPT_InventoryController.OnInventoryOpened += ShowForInventory;
+        SCRIPT_InventoryController.OnInventoryClosed += HideOnInventoryClosed;
+    }
+
+    private void OnDisable()
+    {
+        SCRIPT_InventoryController.OnInventoryOpened -= ShowForInventory;
+        SCRIPT_InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
+    }
+
+    public bool isInInventory = false;
+    private void ShowForInventory()
+    {
+        isInInventory = true;
+        StartCoroutine(SmoothAppearRoutine());
+    }
+
+    private void HideOnInventoryClosed()
+    {
+        isInInventory = false;
+        StartCoroutine(SmoothDisappearRoutine());
+    }
+
+    private IEnumerator SmoothAppearRoutine()
+    {
+        while (_iconElements[0].color.a < 1)
+        {
+            IncreaseImageAlphaColor(ref _iconElements[0], _notificationAppearingSpeed);
+            IncreaseImageAlphaColor(ref _iconElements[1], _notificationAppearingSpeed);
+            IncreaseImageAlphaColor(ref _iconElements[2], _notificationAppearingSpeed);
+            yield return null;
+        }
+
+        ShowIcon();
+    }
+
+    private IEnumerator SmoothDisappearRoutine()
+    {
+        while (_iconElements[0].color.a > 0)
+        {
+            DecreaseImageAlphaColor(ref _iconElements[0], _notificationDisappearingSpeed);
+            DecreaseImageAlphaColor(ref _iconElements[1], _notificationDisappearingSpeed);
+            DecreaseImageAlphaColor(ref _iconElements[2], _notificationDisappearingSpeed);
+
+            yield return null;
+        }
+
+        HideIcon();
+    }
+
     private void ShowIcon()
     {
         _iconElements[0].color = new Color(
@@ -98,8 +148,6 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     public IEnumerator ShowStateNotificationRoutine()
     {
-        //EnableIcon();
-
         yield return _iconElements[0].color = new Color(255, 255, 255, 0);
 
         yield return _iconElements[1].color = new Color(
@@ -128,20 +176,22 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
         yield return new WaitForSeconds(_notificationShowDuration);
 
-        while (_iconElements[0].color.a > 0)
+        if (isInInventory == false)
         {
-            DecreaseImageAlphaColor(ref _iconElements[0], _notificationDisappearingSpeed);
-            DecreaseImageAlphaColor(ref _iconElements[1], _notificationDisappearingSpeed);
-            DecreaseImageAlphaColor(ref _iconElements[2], _notificationDisappearingSpeed);
+            while (_iconElements[0].color.a > 0)
+            {
+                DecreaseImageAlphaColor(ref _iconElements[0], _notificationDisappearingSpeed);
+                DecreaseImageAlphaColor(ref _iconElements[1], _notificationDisappearingSpeed);
+                DecreaseImageAlphaColor(ref _iconElements[2], _notificationDisappearingSpeed);
 
-            yield return null;
+                yield return null;
+            }
+
+
+            HideIcon();
         }
-
-        HideIcon();
     }
 
-    // TODO: ”станавливать нужный цвет в начале корутины
-    // TODO: ѕресет нужных цветов задавать через инспектор
 
     public IEnumerator ShowStateWarningRoutine()
     {
@@ -196,15 +246,18 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
         yield return new WaitForSeconds(_warningShowDuration);
 
-        while (_iconElements[0].color.a > 0)
+        if (isInInventory == false)
         {
-            DecreaseImageAlphaColor(ref _iconElements[0], _warningDisappearingSpeed);
-            DecreaseImageAlphaColor(ref _iconElements[1], _warningDisappearingSpeed);
-            DecreaseImageAlphaColor(ref _iconElements[2], _warningDisappearingSpeed);
-            yield return null;
-        }
+            while (_iconElements[0].color.a > 0)
+            {
+                DecreaseImageAlphaColor(ref _iconElements[0], _warningDisappearingSpeed);
+                DecreaseImageAlphaColor(ref _iconElements[1], _warningDisappearingSpeed);
+                DecreaseImageAlphaColor(ref _iconElements[2], _warningDisappearingSpeed);
+                yield return null;
+            }
 
-        HideIcon();
+            HideIcon();
+        }
     }
 
     private void IncreaseImageAlphaColor(ref Image image, float increaseValue)
@@ -227,34 +280,17 @@ public class StateIconVisibilityHandler : MonoBehaviour
             );
     }
 
-    private IEnumerator BlinkIconRoutine()
-    {
-        yield return null;
-    }
-
-    private IEnumerator SmoothAppearingRoutine()
-    {
-        yield return null;
-    }
-
-    private IEnumerator SmoothDissapearingRoutine()
-    {
-        yield return null;
-    }
-
     public void HandleStateIconVisibility(float currentStateValue, float previousStateValue)
     {
 
         previousStateValueRange = currentStateValueRange;
         bool isIncreased = SetValueChangeDirectionFlag(currentStateValue, previousStateValue);
         GetValueRange(currentStateValue, previousStateValue);
-        //GetStateIconColor();
+
         if (isIncreased)
         {
             if (currentStateValueRange != previousStateValueRange)
             {
-                //ShowStateChange();
-
                 StartCoroutine(ShowStateNotificationRoutine());
             }
         }
@@ -264,25 +300,14 @@ public class StateIconVisibilityHandler : MonoBehaviour
             {
                 if (currentStateValueRange == StateValue.Low)
                 {
-                    //ShowStateWarning();
-
                     StartCoroutine(ShowStateWarningRoutine());
                 }
                 else
                 {
-                    //ShowStateChange();
-
                     StartCoroutine(ShowStateNotificationRoutine());
                 }
             }
         }
-
-        // TODO: ƒописать систему индикации:
-        // ¬ы€вл€ть, в какую область попадает текущее значение переменной (низкое значение, среднее или высокое)
-        // ¬ы€вл€ть, уменьшилось оно или увеличилось
-        // »сход€ из вышеперечисленного определ€ть способ отображение (плавное по€вление или, например, быстрое мерцание, если значение уменьшилось и оказалось в нижней области, а так же цвет индикатора)
-        
-        // TODO: тут будет метод дл€ определени€, в какую область значений попал индикатор
     }
 
     private bool SetValueChangeDirectionFlag(float currentStateValue, float previousStateValue)

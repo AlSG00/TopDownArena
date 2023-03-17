@@ -13,7 +13,7 @@ public class Player_Shooting : MonoBehaviour
 
     public bool isCheckingStats = false;
 
-    public bool isCheckingInventory = false;
+    //public bool isCheckingInventory = false;
 
     //public GameObject inventory;
 
