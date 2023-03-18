@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     [HideInInspector] public float healtDecreaseByDebuff = 0f;
 
+    // TODO: Заменить на SliderController
     public HealtBarScript healthBar;
 
     public bool isExhaused = false;
@@ -17,8 +18,6 @@ public class PlayerHealth : MonoBehaviour
     public bool isDehydrated = false;
     public bool isTired = false;
     public bool isInsane = false;
-
-
 
     private float previousHealthValue = 0f;
 

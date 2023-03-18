@@ -9,6 +9,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private SCRIPT_SliderBarController _hydrationBar;
+    [SerializeField] private StateIconVisibilityHandler _stateIcon;
 
     [Header("Hydration parameters")]
     public float maxHydration = 100f;
@@ -22,7 +23,10 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
     private PlayerHealth _health;
     private SCRIPT_PlayerSatiety _satiety;
     private SCRIPT_PlayerStamina _stamina;
-    
+
+    private float previousHydrationValue = 0f;
+
+
     private void Awake()
     {
         _health = gameObject.GetComponent<PlayerHealth>();
@@ -39,6 +43,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
     private void Start()
     {
         _hydrationBar.SetMaxValue(maxHydration);
+        _stateIcon.Initialize(maxHydration, currentHydration);
     }
 
     private void UpdateHydration()
@@ -64,6 +69,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
         }
 
         _hydrationBar.SetValue(currentHydration);
+        _stateIcon.HandleStateIconVisibility(currentHydration, previousHydrationValue);
     }
 
     private void CalculateHydrationDebuffByStamina()
@@ -79,5 +85,6 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
             currentHydration = maxHydration;
         }
         _hydrationBar.SetValue(currentHydration);
+        _stateIcon.HandleStateIconVisibility(currentHydration, previousHydrationValue);
     }
 }

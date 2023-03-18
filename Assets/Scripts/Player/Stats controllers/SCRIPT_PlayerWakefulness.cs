@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class SCRIPT_PlayerWakefulness : MonoBehaviour
 {
+    [SerializeField] private StateIconVisibilityHandler _stateIcon;
+
+
     [Header("References")]
     [SerializeField] private SCRIPT_SliderBarController _wakefulnessBar;
     [SerializeField] private SCRIPT_PlayerSatiety _satiety;
@@ -29,9 +32,12 @@ public class SCRIPT_PlayerWakefulness : MonoBehaviour
 
     public bool isTired = false;
 
+    private float previousWakefulnessValue = 0f;
+
     private void Start()
     {
         _wakefulnessBar.SetMaxValue(maxWakefulness);
+        _stateIcon.Initialize(maxWakefulness, currentWakefulness);
     }
 
     private void Update()
@@ -52,6 +58,7 @@ public class SCRIPT_PlayerWakefulness : MonoBehaviour
         }
 
         _wakefulnessBar.SetValue(currentWakefulness);
+        _stateIcon.HandleStateIconVisibility(currentWakefulness, previousWakefulnessValue);
     }
 
     private void HandleTirednessFlag()
@@ -87,16 +94,6 @@ public class SCRIPT_PlayerWakefulness : MonoBehaviour
         StopAllCoroutines();
         Debug.Log("Starting new coroutine");
         StartCoroutine(SleepRoutine());
-
-        //_blackScreen.color = new Color(
-        //    _blackScreen.color.r,
-        //    _blackScreen.color.g,
-        //    _blackScreen.color.b,
-        //    1f
-        //    );
-
-        
-       // _wakefulnessBar.SetValue(currentWakefulness);
     }
 
     private IEnumerator SleepRoutine()
@@ -163,5 +160,6 @@ public class SCRIPT_PlayerWakefulness : MonoBehaviour
            );
 
         Debug.Log("Complete!");
+        _stateIcon.HandleStateIconVisibility(currentWakefulness, previousWakefulnessValue);
     }
 }

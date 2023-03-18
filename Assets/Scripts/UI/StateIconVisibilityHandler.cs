@@ -47,6 +47,11 @@ public class StateIconVisibilityHandler : MonoBehaviour
         GetValueRange(currentStateValue, currentStateValue);
     }
 
+    //private void Update()
+    //{
+    //    Debug.Log(isHandlingIcon);
+    //}
+
     private void Awake()
     {
         HideIcon();
@@ -73,6 +78,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     private void HideOnInventoryClosed()
     {
+        Debug.Log("HideForInventory");
         isInInventory = false;
         StartCoroutine(SmoothDisappearRoutine());
     }
@@ -88,6 +94,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
         }
 
         ShowIcon();
+        yield return null;
     }
 
     private IEnumerator SmoothDisappearRoutine()
@@ -102,6 +109,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
         }
 
         HideIcon();
+        yield return null;
     }
 
     private void ShowIcon()
@@ -148,6 +156,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     public IEnumerator ShowStateNotificationRoutine()
     {
+        Debug.Log("Notification");
         yield return _iconElements[0].color = new Color(255, 255, 255, 0);
 
         yield return _iconElements[1].color = new Color(
@@ -190,11 +199,14 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
             HideIcon();
         }
+
+        _isNotifyActive = false;
     }
 
 
     public IEnumerator ShowStateWarningRoutine()
     {
+        Debug.Log("Warning");
         yield return _iconElements[0].color = new Color(255, 0, 0, 0);
 
         yield return _iconElements[1].color = new Color(
@@ -258,6 +270,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
             HideIcon();
         }
+
+        _isWarningActive = false;
     }
 
     private void IncreaseImageAlphaColor(ref Image image, float increaseValue)
@@ -280,17 +294,24 @@ public class StateIconVisibilityHandler : MonoBehaviour
             );
     }
 
+    private bool _isNotifyActive = false;
+    private bool _isWarningActive = false;
     public void HandleStateIconVisibility(float currentStateValue, float previousStateValue)
     {
-
+        //if (isHandlingIcon == false)
+        //{
+        //isHandlingIcon = true;
         previousStateValueRange = currentStateValueRange;
-        bool isIncreased = SetValueChangeDirectionFlag(currentStateValue, previousStateValue);
         GetValueRange(currentStateValue, previousStateValue);
 
+        bool isIncreased = SetValueChangeDirectionFlag(currentStateValue, previousStateValue);
+        
         if (isIncreased)
         {
-            if (currentStateValueRange != previousStateValueRange)
+            if (currentStateValueRange != previousStateValueRange &&
+            _isNotifyActive == false)
             {
+                _isNotifyActive = true;
                 StartCoroutine(ShowStateNotificationRoutine());
             }
         }
@@ -298,16 +319,24 @@ public class StateIconVisibilityHandler : MonoBehaviour
         {
             if (currentStateValueRange != previousStateValueRange)
             {
-                if (currentStateValueRange == StateValue.Low)
+                if (currentStateValueRange == StateValue.Low &&
+                _isWarningActive == false)
                 {
+                    _isWarningActive = true;
                     StartCoroutine(ShowStateWarningRoutine());
                 }
                 else
                 {
-                    StartCoroutine(ShowStateNotificationRoutine());
+                    if (_isNotifyActive == false)
+                    {
+                        _isNotifyActive = true;
+                        StartCoroutine(ShowStateNotificationRoutine());
+                    }
+
                 }
             }
         }
+        // }
     }
 
     private bool SetValueChangeDirectionFlag(float currentStateValue, float previousStateValue)
@@ -326,7 +355,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
         {
             currentStateValueRange = StateValue.Low;
         }
-        else if (currentStateValue > lowIndicationValue &&
+        else if (currentStateValue >= lowIndicationValue &&
             currentStateValue < mediumIndicationValue)
         {
             currentStateValueRange = StateValue.Medium;

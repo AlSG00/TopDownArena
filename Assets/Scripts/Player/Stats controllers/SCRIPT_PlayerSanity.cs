@@ -7,6 +7,7 @@ public class SCRIPT_PlayerSanity : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private SCRIPT_SliderBarController _sanityBar;
+    [SerializeField] private StateIconVisibilityHandler _stateIcon;
 
     [Header("Sanity parameters")]
     public float maxSanity = 100f;
@@ -14,10 +15,12 @@ public class SCRIPT_PlayerSanity : MonoBehaviour
     public float sanityDecreaseValue = 0f;
     public float sanityDecreaseDebuff = 0f;
 
+    private float previousSanityValue = 0f;
 
     private void Start()
     {
         _sanityBar.SetMaxValue(maxSanity);
+        _stateIcon.Initialize(maxSanity, currentSanity);
     }
 
     private void Update()
@@ -37,5 +40,6 @@ public class SCRIPT_PlayerSanity : MonoBehaviour
         }
 
         _sanityBar.SetValue(currentSanity);
+        _stateIcon.HandleStateIconVisibility(currentSanity, previousSanityValue);
     }
 }

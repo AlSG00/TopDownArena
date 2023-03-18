@@ -8,7 +8,9 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private SCRIPT_SatietyBar _satietyBar;
-    
+    [SerializeField] private StateIconVisibilityHandler _stateIcon;
+
+
     [Header("Satiety parameters")]
     public float maxSatiety = 100f;
     public float currentSatiety = 100f;
@@ -17,6 +19,8 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
 
     private PlayerHealth _health;
 
+    private float previousSatietyValue = 0f;
+
     private void Awake()
     {
         _health = gameObject.GetComponent<PlayerHealth>();
@@ -24,7 +28,9 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
 
     private void Start()
     {
+        // TODO: возможно, во все характеристики придется поставить setCurrentValue или типа того
         _satietyBar.SetMaxSatiety(maxSatiety);
+        _stateIcon.Initialize(maxSatiety, currentSatiety);
     }
 
     private void FixedUpdate()
@@ -36,6 +42,7 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
     {
         if (currentSatiety > 0)
         {
+            previousSatietyValue = currentSatiety;
             currentSatiety -= satietyDecreaseValue;
         }
         else
@@ -44,26 +51,19 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
             //_health.healtDecreaseByDebuff
             _health.TakeDamage(healthDecreaseValue);
         }
-
         _satietyBar.SetSatiety(currentSatiety);
+        _stateIcon.HandleStateIconVisibility(currentSatiety, previousSatietyValue);
     }
-
-
 
     public void Eat(float satiety)
     {
+        previousSatietyValue = currentSatiety;
         currentSatiety += satiety;
         if (currentSatiety > maxSatiety)
         {
             currentSatiety = maxSatiety;
         }
         _satietyBar.SetSatiety(currentSatiety);
-        //StopAllCoroutines();
-        //StartCoroutine(SatietyBarSmoothUpdate());
+        _stateIcon.HandleStateIconVisibility(currentSatiety, previousSatietyValue);
     }
-
-    //private IEnumerator SatietyBarSmoothUpdate()
-    //{
-    //    while ()
-    //}
 }
