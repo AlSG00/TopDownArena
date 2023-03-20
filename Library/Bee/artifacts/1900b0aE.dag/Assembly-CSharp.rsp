@@ -455,6 +455,7 @@
 "Assets/Scripts/Player/SCRIPT_PlayerFlashlight.cs"
 "Assets/Scripts/Player/SCRIPT_PlayerInput.cs"
 "Assets/Scripts/Player/SCRIPT_PlayerResources.cs"
+"Assets/Scripts/Player/ShoulderLightController.cs"
 "Assets/Scripts/Player/Stats controllers/HealtBarScript.cs"
 "Assets/Scripts/Player/Stats controllers/PlayerHealth.cs"
 "Assets/Scripts/Player/Stats controllers/SCRIPT_CarryingWeightText.cs"

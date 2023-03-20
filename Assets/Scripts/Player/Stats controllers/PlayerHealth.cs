@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private StateIconVisibilityHandler _stateIcon;
+    [SerializeField] private ShoulderLightController _shoulderLight;
 
-    public float health;
+    public float maxHealth;
     public float currentHealth;
     [HideInInspector] public float healtDecreaseByDebuff = 0f;
 
@@ -21,23 +22,26 @@ public class PlayerHealth : MonoBehaviour
 
     private float previousHealthValue = 0f;
 
-    private void Awake()
-    {
-        //fullHpIndicationValue = health;
-        //halfHpIndicationValue = health / 2;
-        //quarterHpIndicationValue = health / 4;
-    }
+    //private void Awake()
+    //{
+    //    //fullHpIndicationValue = health;
+    //    //halfHpIndicationValue = health / 2;
+    //    //quarterHpIndicationValue = health / 4;
+    //}
 
     void Start()
     {
-        _stateIcon.Initialize(health, currentHealth);
+        _shoulderLight.Initialize(maxHealth);
+        _shoulderLight.SetHealthColor(currentHealth);
+
+        _stateIcon.Initialize(maxHealth, currentHealth);
         Transform hud = GameObject.Find("HUD").transform;
         Transform _hud = hud.transform.GetChild(0);
         //healthBar = _hud.GetChild(0).GetComponent<HealtBarScript>();
 
         if (currentHealth == 0)          
-            currentHealth = health;
-        healthBar.SetMaxHealth(health);
+            currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
         healthBar.SetHealth(currentHealth);
     }
 
@@ -56,10 +60,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // TODO: Перенести в FixedUpdate какой-нибудь
     private void TakeDamageByDebuff()
     {
         previousHealthValue = currentHealth;
         currentHealth -= healtDecreaseByDebuff;
+        //_stateIcon.HandleStateIconVisibility(currentHealth, previousHealthValue);
+        //_shoulderLight.SetHealthColor(currentHealth);
     }
 
     private void Die()
@@ -73,17 +80,19 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         _stateIcon.HandleStateIconVisibility(currentHealth, previousHealthValue);
+        _shoulderLight.SetHealthColor(currentHealth);
     }
 
     public void Heal(float healing, bool instant)
     {
         previousHealthValue = currentHealth;
         currentHealth += healing;
-        if (currentHealth > health)
-            currentHealth = health;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
 
         healthBar.SetHealth(currentHealth);
         _stateIcon.HandleStateIconVisibility(currentHealth, previousHealthValue);
+        _shoulderLight.SetHealthColor(currentHealth);
     }
 
     public void CalculateDamageByDebuff()
