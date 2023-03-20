@@ -48,6 +48,7 @@ public class SCRIPT_PlayerWakefulness : MonoBehaviour
 
     private void HandleWakefulness()
     {
+        previousWakefulnessValue = currentWakefulness;
         if (currentWakefulness > 0)
         {
             currentWakefulness -= wakefulnessDecreaseValue;

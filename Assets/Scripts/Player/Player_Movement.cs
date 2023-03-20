@@ -11,7 +11,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera _vcamera;
 
     [Header("References")]
-    [SerializeField] private SCRIPT_InventoryController inventory;
+    //[SerializeField] private SCRIPT_InventoryController inventory;
     [SerializeField] private SCRIPT_PlayerStamina _stamina;
     [SerializeField] private SCRIPT_PlayerCarryingWeight _carryingWeight;
 
@@ -70,7 +70,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Start()
     {
-        inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
+        //inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
         animationController = gameObject.GetComponent<Animator>();
         _swapper = GetComponent<FootstepSwapper>();
     }
@@ -155,8 +155,13 @@ public class Player_Movement : MonoBehaviour
         if (movement.magnitude > 0)
         {
             animationController.SetBool("isWalking", true);
-            inventory.isCheckingInventory = false;
-            inventory.HandleInventoryGrid(false);
+
+            //inventory.isCheckingInventory = false;
+
+            //if (inventory.isCheckingInventory)
+            //{
+            //    inventory.HandleInventoryGrid(false);
+            //}
         }
         else
         {

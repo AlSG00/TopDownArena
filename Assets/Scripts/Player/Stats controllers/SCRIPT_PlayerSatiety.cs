@@ -40,9 +40,9 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
 
     private void UpdateSatiety()
     {
+        previousSatietyValue = currentSatiety;
         if (currentSatiety > 0)
-        {
-            previousSatietyValue = currentSatiety;
+        { 
             currentSatiety -= satietyDecreaseValue;
         }
         else

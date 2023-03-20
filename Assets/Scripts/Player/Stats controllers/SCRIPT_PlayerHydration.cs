@@ -48,6 +48,7 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
 
     private void UpdateHydration()
     {
+        previousHydrationValue = currentHydration;
         if (currentHydration > 0)
         {
             currentHydration -= hydrationDecreaseValue + hydrationDecreaseDebuff;

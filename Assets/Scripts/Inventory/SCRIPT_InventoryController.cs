@@ -32,6 +32,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     [SerializeField] private SCRIPT_PlayerCarryingWeight _playerCarryingWeight;
 
+    [SerializeField] private Player_Movement _playerMovement;
+
     public class InventoryItem
     {
         public GameObject item;
@@ -705,20 +707,20 @@ public class SCRIPT_InventoryController : MonoBehaviour
     }
 
     // TODO: Переделать метод. Он не учитывает другие размеры экрана кроме фулл хд
-    public void HandleInventoryGrid(bool isCheckingInventory)
+    public void HandleInventoryGrid(bool isInventoryOpened)
     {
         Vector2 position = new Vector2();
         RectTransform inventoryRect = inventoryGrid.GetComponent<RectTransform>();
 
-        //Destroy(selectedItem);
-
-        if (isCheckingInventory)
+        if (isInventoryOpened)
         {
+            _playerMovement.enabled = false;
             position.y = 630;
             OnInventoryOpened?.Invoke();
         }
         else
         {
+            _playerMovement.enabled = true;
             GetItemBack();
             position.y = 3000;
 

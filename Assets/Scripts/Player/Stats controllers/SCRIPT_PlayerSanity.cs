@@ -30,6 +30,7 @@ public class SCRIPT_PlayerSanity : MonoBehaviour
 
     private void HandleSanity()
     {
+        previousSanityValue = currentSanity;
         if (currentSanity > 0)
         {
             currentSanity -= sanityDecreaseValue + sanityDecreaseDebuff;
