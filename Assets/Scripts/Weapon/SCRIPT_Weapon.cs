@@ -28,7 +28,7 @@ public class SCRIPT_Weapon : MonoBehaviour
     public float fireRate = 25;
     public float bulletSpeed = 1000f;
     public int projectilesPerShot = 1;
-
+    public LayerMask activeLayers;
     public float singleShotDelay = 0.3f;
     public float impactForce;
     public float damage;
@@ -53,7 +53,7 @@ public class SCRIPT_Weapon : MonoBehaviour
     public AudioClip shotSound;
     public AudioSource audioSource;
 
-    [Header("Temp rifle reload audio")]
+    [Header("[Temp rifle reload audio]")]
     public AudioClip ejectMagSound;
     public AudioClip putMagSound;
     public AudioClip pullOutMagSound;
@@ -63,7 +63,6 @@ public class SCRIPT_Weapon : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
     private float accumulatedTime;
-    public LayerMask activeLayers;
     private List<Bullet> bullets = new List<Bullet>();
     private float _maxBulletLifetime = 3f;
 
@@ -104,9 +103,6 @@ public class SCRIPT_Weapon : MonoBehaviour
         FireBullet();
     }
 
-    // Выстрел
-    // Проигрывание Пламени от выстрела
-    // Создание и добавление в список экземпляра пули
     private void FireBullet()
     {
         if ((lastTimeShot + fireDelay <= Time.time)
@@ -115,10 +111,6 @@ public class SCRIPT_Weapon : MonoBehaviour
         {
             lastTimeShot = Time.time;
             audioSource.PlayOneShot(shotSound);
-            //Vector3 velocity = (raycastDestination.position - muzzle.position).normalized * bulletSpeed;
-            //Vector3 velocity = transform.forward/*.normalized*/ * bulletSpeed;
-
-            //Vector3 velocity = GetSpreadDirection() * bulletSpeed;
 
             for (int i = 0; i < projectilesPerShot; i++)
             {
@@ -131,12 +123,10 @@ public class SCRIPT_Weapon : MonoBehaviour
             ammoShells.EjectShell();
 
             currentAmmoInMag--;
-            //Debug.Log($"In mag {currentAmmoInMag}");
             ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
         }
     }
 
-    // Функция создает пулю в момент выстрела
     Bullet CreateBullet(Vector3 position, Vector3 velocity)
     {
         Bullet bullet = new Bullet();
@@ -196,11 +186,7 @@ public class SCRIPT_Weapon : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, distance, activeLayers))
         {
-            //hitEffect.transform.position = hitInfo.point;
-            //hitEffect.transform.forward = hitInfo.normal;
-            //hitEffect.Emit(1);
-
-            GameObject impactObj = null/* Instantiate(impactEffect, point, Quaternion.LookRotation(normal) /*gunbarrel*//*Quaternion.Euler(normal))*/;
+            GameObject impactObj = null;
 
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
@@ -216,7 +202,6 @@ public class SCRIPT_Weapon : MonoBehaviour
             if (hitInfo.transform.CompareTag("Concrete"))
             {
                 impactObj = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                //hitEffect = hitEffectConcrete;
             }
             else if (hitInfo.transform.CompareTag("Metal"))
             {
@@ -231,7 +216,6 @@ public class SCRIPT_Weapon : MonoBehaviour
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.lifeTime = _maxBulletLifetime;
-            //Destroy(bullet.tracer, 1f);
         }
         else
         {
@@ -247,7 +231,16 @@ public class SCRIPT_Weapon : MonoBehaviour
     // Контроль времени жизни пули, если она никуда не врезалась
     private void DestroyBullets()
     {
-        bullets.RemoveAll(bullet => bullet.lifeTime >= _maxBulletLifetime);
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            if (bullets[i].lifeTime >= _maxBulletLifetime)
+            {
+                Destroy(bullets[i].tracer.gameObject, 3f);
+                bullets.Remove(bullets[i]);
+                i--;
+            }
+        }
+        //bullets.RemoveAll(bullet => bullet.lifeTime >= _maxBulletLifetime);
     }
 
     public void Reload()
