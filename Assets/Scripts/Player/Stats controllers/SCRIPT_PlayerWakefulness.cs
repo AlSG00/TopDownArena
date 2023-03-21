@@ -34,13 +34,18 @@ public class SCRIPT_PlayerWakefulness : MonoBehaviour
 
     private float previousWakefulnessValue = 0f;
 
+    private void Awake()
+    {
+        previousWakefulnessValue = currentWakefulness;
+    }
+
     private void Start()
     {
         _wakefulnessBar.SetMaxValue(maxWakefulness);
         _stateIcon.Initialize(maxWakefulness, currentWakefulness);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleWakefulness();
         HandleTirednessFlag();

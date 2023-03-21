@@ -24,6 +24,8 @@ public class SCRIPT_PlayerSatiety : MonoBehaviour
     private void Awake()
     {
         _health = gameObject.GetComponent<PlayerHealth>();
+
+        previousSatietyValue = currentSatiety;
     }
 
     private void Start()

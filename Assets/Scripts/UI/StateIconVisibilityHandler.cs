@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class StateIconVisibilityHandler : MonoBehaviour
 {
-    [SerializeField] private SCRIPT_InventoryController inventory;
+    //[SerializeField] private SCRIPT_InventoryController inventory;
     public enum StateValue
     {
+        Empty,
         Low,
         Medium,
-        High
+        High,
+        Max
     }
 
     [SerializeField] private Image[] _iconElements;
@@ -44,13 +46,11 @@ public class StateIconVisibilityHandler : MonoBehaviour
         highIndicationValue = maxStateValue;
         mediumIndicationValue = maxStateValue / 2;
         lowIndicationValue = maxStateValue / 5;
-        GetValueRange(currentStateValue, currentStateValue);
-    }
+        //GetValueRange(currentStateValue, currentStateValue);
+        //previousStateValueRange = currentStateValueRange;
 
-    //private void Update()
-    //{
-    //    Debug.Log(isHandlingIcon);
-    //}
+        //Debug.Log($"hg{highIndicationValue} : md{mediumIndicationValue} : lw{lowIndicationValue} - {currentStateValue} : {maxStateValue}");
+    }
 
     private void Awake()
     {
@@ -78,7 +78,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     private void HideOnInventoryClosed()
     {
-        Debug.Log("HideForInventory");
+        //Debug.Log("HideForInventory");
         isInInventory = false;
         StartCoroutine(SmoothDisappearRoutine());
     }
@@ -156,8 +156,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     public IEnumerator ShowStateNotificationRoutine()
     {
-        Debug.Log("Notification");
-        yield return _iconElements[0].color = new Color(255, 255, 255, 0);
+        //Debug.Log("Notification");
+        yield return _iconElements[0].color = new Color(1, 1, 1, 0);
 
         yield return _iconElements[1].color = new Color(
             _iconElements[1].color.r,
@@ -203,11 +203,10 @@ public class StateIconVisibilityHandler : MonoBehaviour
         _isNotifyActive = false;
     }
 
-
     public IEnumerator ShowStateWarningRoutine()
     {
-        Debug.Log("Warning");
-        yield return _iconElements[0].color = new Color(255, 0, 0, 0);
+        //Debug.Log("Warning");
+        yield return _iconElements[0].color = new Color(1, 0, 0, 0);
 
         yield return _iconElements[1].color = new Color(
             _iconElements[1].color.r,
@@ -298,17 +297,18 @@ public class StateIconVisibilityHandler : MonoBehaviour
     private bool _isWarningActive = false;
     public void HandleStateIconVisibility(float currentStateValue, float previousStateValue)
     {
-        //if (isHandlingIcon == false)
-        //{
-        //isHandlingIcon = true;
-        previousStateValueRange = currentStateValueRange;
-        GetValueRange(currentStateValue, previousStateValue);
-
         bool isIncreased = SetValueChangeDirectionFlag(currentStateValue, previousStateValue);
-        
+        previousStateValueRange = currentStateValueRange;
+        GetValueRange(currentStateValue, previousStateValue/*, isIncreased*/);
+
         if (isIncreased)
         {
-            if (currentStateValueRange != previousStateValueRange &&
+            if (currentStateValueRange != StateValue.Low)
+            {
+                _iconElements[0].color = new Color(1, 1, 1, _iconElements[0].color.a);
+            }
+
+            if ((currentStateValueRange == StateValue.Max) &&
             _isNotifyActive == false)
             {
                 _isNotifyActive = true;
@@ -317,8 +317,10 @@ public class StateIconVisibilityHandler : MonoBehaviour
         }
         else
         {
-            if (currentStateValueRange != previousStateValueRange)
+            if (currentStateValueRange != previousStateValueRange &&
+                previousStateValueRange != StateValue.Empty)
             {
+                //Debug.Log($"{currentStateValueRange} : {previousStateValueRange}");
                 if (currentStateValueRange == StateValue.Low &&
                 _isWarningActive == false)
                 {
@@ -332,7 +334,6 @@ public class StateIconVisibilityHandler : MonoBehaviour
                         _isNotifyActive = true;
                         StartCoroutine(ShowStateNotificationRoutine());
                     }
-
                 }
             }
         }
@@ -349,7 +350,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
         return false;
     }
 
-    private void GetValueRange(float currentStateValue, float previousStateValue)
+    private void GetValueRange(float currentStateValue, float previousStateValue/*, bool isIncreased*/)
     {
         if (currentStateValue < lowIndicationValue)
         {
@@ -360,9 +361,14 @@ public class StateIconVisibilityHandler : MonoBehaviour
         {
             currentStateValueRange = StateValue.Medium;
         }
-        else
+        else if (currentStateValue >= mediumIndicationValue &&
+            currentStateValue < highIndicationValue)
         {
             currentStateValueRange = StateValue.High;
+        }
+        else
+        {
+            currentStateValueRange = StateValue.Max;
         }
     }
 }

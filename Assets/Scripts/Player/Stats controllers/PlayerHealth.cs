@@ -29,6 +29,11 @@ public class PlayerHealth : MonoBehaviour
     //    //quarterHpIndicationValue = health / 4;
     //}
 
+    private void Awake()
+    {
+        previousHealthValue = currentHealth;
+    }
+
     void Start()
     {
         _shoulderLight.Initialize(maxHealth);

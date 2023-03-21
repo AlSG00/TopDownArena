@@ -11,13 +11,16 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
     [SerializeField] private SCRIPT_PlayerHydration _hydration;
     [SerializeField] private SCRIPT_PlayerCarryingWeight _carryingWeight;
 
+    [SerializeField] private StateIconVisibilityHandler _stateIcon;
+
     [Header("Stamina parameters")]
     public float maxStamina = 100f;
     public float currentStamina = 100f;
+    private float _previousStaminaValue = 0f;
     public float staminaDecreaseValue = 0.1f;
     public float staminaIncreaseValue = 0.1f;
     public float staminaRestoringDelay = 3f;
-
+    
     [Header("Affection on player")]
     public float StaminaDecreaseDebuff = 0.05f;
     [HideInInspector] public float lastTimeRun;
@@ -34,13 +37,19 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
 
     public bool isExhaused = false;
 
+    private void Awake()
+    {
+        _previousStaminaValue = currentStamina;
+    }
+
     private void Start()
     {
         _staminaBar.SetMaxValue(maxStamina);
         _staminaBar.SetValue(currentStamina);
+        _stateIcon.Initialize(maxStamina, currentStamina);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleStamina();
         HandleStaminaWhenOvercarrying();
@@ -48,11 +57,12 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
     }
     private void HandleStamina()
     {
+        _previousStaminaValue = currentStamina;
         if (_movement.movement.magnitude != 0 &&
             _movement.isRunning)
         {
             lastTimeRun = Time.time;
-
+            
             if (currentStamina > 0)
             {
                 currentStamina -= staminaDecreaseValue;
@@ -84,8 +94,9 @@ public class SCRIPT_PlayerStamina : MonoBehaviour
                 }
             }
         }
-
+        
         _staminaBar.SetValue(currentStamina);
+        _stateIcon.HandleStateIconVisibility(currentStamina, _previousStaminaValue);
     }
 
     private void HandleStaminaWhenOvercarrying()

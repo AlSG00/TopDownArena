@@ -17,13 +17,18 @@ public class SCRIPT_PlayerSanity : MonoBehaviour
 
     private float previousSanityValue = 0f;
 
+    private void Awake()
+    {
+        previousSanityValue = currentSanity;
+    }
+
     private void Start()
     {
         _sanityBar.SetMaxValue(maxSanity);
         _stateIcon.Initialize(maxSanity, currentSanity);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleSanity();
     }

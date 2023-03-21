@@ -106,7 +106,7 @@ public class SCRIPT_DoubleColorMeshLightningHandler : MonoBehaviour
 
     private void SetLighthningStartColor()
     {
-        Debug.Log(_sun.isDay);
+        //Debug.Log(_sun.isDay);
         for (int i = 0; i < _lightMesh.Length; i++)
         {
             var mat = _lightMesh[i].GetComponent<Renderer>().sharedMaterial;

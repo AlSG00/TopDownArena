@@ -32,18 +32,20 @@ public class SCRIPT_PlayerHydration : MonoBehaviour
         _health = gameObject.GetComponent<PlayerHealth>();
         _satiety = gameObject.GetComponent<SCRIPT_PlayerSatiety>();
         _stamina = gameObject.GetComponent<SCRIPT_PlayerStamina>();
-    }
 
-    private void FixedUpdate()
-    {
-        UpdateHydration();
-        CalculateHydrationDebuffByStamina();
+        previousHydrationValue = currentHydration;
     }
 
     private void Start()
     {
         _hydrationBar.SetMaxValue(maxHydration);
         _stateIcon.Initialize(maxHydration, currentHydration);
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateHydration();
+        CalculateHydrationDebuffByStamina();
     }
 
     private void UpdateHydration()

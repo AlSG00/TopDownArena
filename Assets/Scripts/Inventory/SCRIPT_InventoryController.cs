@@ -22,6 +22,12 @@ public class SCRIPT_InventoryController : MonoBehaviour
     SCRIPT_InventoryHighlight inventoryHighlight;
 
     public bool isCheckingInventory = false;
+    public bool isCheckingState = false;
+    public bool isHoldingButton = false;
+    public bool isHighlightingIcons = false;
+
+    public float timeToHold = 0.3f;
+
     public List<InventoryItem> inventoryItemList = new List<InventoryItem>();
 
     public delegate void OpenAction();
@@ -62,6 +68,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
         _playerCarryingWeight = GameObject.Find("_Player").GetComponent<SCRIPT_PlayerCarryingWeight>();
     }
 
+    float buttonHoldTime = 0;
+    
     private void Update()
     {
         ItemIconDrag();
@@ -101,10 +109,47 @@ public class SCRIPT_InventoryController : MonoBehaviour
             DropItem();
         }
 
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    isCheckingInventory = !isCheckingInventory;
+        //    HandleInventoryGrid(isCheckingInventory);
+        //}
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            isCheckingInventory = !isCheckingInventory;
-            HandleInventoryGrid(isCheckingInventory);
+            isHoldingButton = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            isHoldingButton = false;
+            isHighlightingIcons = false;
+
+            if (buttonHoldTime < timeToHold)
+            {
+                isCheckingInventory = !isCheckingInventory;
+                HandleInventoryGrid(isCheckingInventory);
+            }
+            else
+            {
+                if (!isCheckingInventory)
+                {
+                    OnInventoryClosed?.Invoke();
+                }
+            }
+
+            buttonHoldTime = 0f;
+        }
+
+        if (isHoldingButton)
+        {
+            buttonHoldTime += Time.deltaTime;
+            if (buttonHoldTime >= timeToHold
+                && isHighlightingIcons == false)
+            {
+                isHighlightingIcons = true;
+                OnInventoryOpened?.Invoke();
+            }
         }
     }
 
