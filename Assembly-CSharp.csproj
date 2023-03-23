@@ -1059,6 +1059,10 @@
       <Project>{212ED75E-06E8-A468-3161-E160F75C0978}</Project>
       <Name>NavMeshComponentsEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="com.ben-w.erp.csproj">
+      <Project>{179EB6D9-91DA-B363-E974-A6B3C17A8FD7}</Project>
+      <Name>com.ben-w.erp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
