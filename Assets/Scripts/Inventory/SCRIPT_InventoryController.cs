@@ -30,11 +30,19 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     public List<InventoryItem> inventoryItemList = new List<InventoryItem>();
 
+
+
+
+
     public delegate void OpenAction();
     public static event OpenAction OnInventoryOpened;
 
     public delegate void CloseAction();
     public static event CloseAction OnInventoryClosed;
+
+
+
+
 
     [SerializeField] private SCRIPT_PlayerCarryingWeight _playerCarryingWeight;
 
@@ -109,12 +117,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
             DropItem();
         }
 
-        //if (Input.GetKeyDown(KeyCode.Tab))
-        //{
-        //    isCheckingInventory = !isCheckingInventory;
-        //    HandleInventoryGrid(isCheckingInventory);
-        //}
-
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             isHoldingButton = true;
@@ -141,7 +143,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
             buttonHoldTime = 0f;
         }
 
-        if (isHoldingButton)
+        if (isHoldingButton &&
+            isCheckingInventory == false)
         {
             buttonHoldTime += Time.deltaTime;
             if (buttonHoldTime >= timeToHold
@@ -755,7 +758,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
     public void HandleInventoryGrid(bool isInventoryOpened)
     {
         Vector2 position = new Vector2();
-        RectTransform inventoryRect = inventoryGrid.GetComponent<RectTransform>();
+        RectTransform inventoryRect = inventoryGrid.GetComponent<RectTransform>(); // TODO: убрать GetComponent
 
         if (isInventoryOpened)
         {
@@ -765,7 +768,6 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
         else
         {
-            _playerMovement.enabled = true;
             GetItemBack();
             position.y = 3000;
 
@@ -775,9 +777,9 @@ public class SCRIPT_InventoryController : MonoBehaviour
             }
 
             OnInventoryClosed?.Invoke();
+            _playerMovement.enabled = true;
         }
         position.x = inventoryRect.position.x;
-
         inventoryRect.position = position;
     }
 

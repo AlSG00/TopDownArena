@@ -99,10 +99,10 @@ public class Player_Movement : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down * 5, Color.yellow);
-    }
+    //private void Update()
+    //{
+    //    Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down * 5, Color.yellow);
+    //}
 
     private void Sprint()
     {
