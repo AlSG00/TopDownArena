@@ -73,6 +73,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
     private void ShowForInventory()
     {
         isInInventory = true;
+        StopAllCoroutines();
         StartCoroutine(SmoothAppearRoutine());
     }
 
@@ -80,6 +81,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
     {
         //Debug.Log("HideForInventory");
         isInInventory = false;
+        StopAllCoroutines();
         StartCoroutine(SmoothDisappearRoutine());
     }
 
@@ -90,7 +92,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
             IncreaseImageAlphaColor(ref _iconElements[0], _notificationAppearingSpeed);
             IncreaseImageAlphaColor(ref _iconElements[1], _notificationAppearingSpeed);
             IncreaseImageAlphaColor(ref _iconElements[2], _notificationAppearingSpeed);
-            yield return null;
+            //yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         ShowIcon();
@@ -105,7 +108,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
             DecreaseImageAlphaColor(ref _iconElements[1], _notificationDisappearingSpeed);
             DecreaseImageAlphaColor(ref _iconElements[2], _notificationDisappearingSpeed);
 
-            yield return null;
+            //yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         HideIcon();
@@ -178,7 +182,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
             IncreaseImageAlphaColor(ref _iconElements[0], _notificationAppearingSpeed);
             IncreaseImageAlphaColor(ref _iconElements[1], _notificationAppearingSpeed);
             IncreaseImageAlphaColor(ref _iconElements[2], _notificationAppearingSpeed);
-            yield return null;
+            //yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         ShowIcon();
@@ -193,7 +198,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
                 DecreaseImageAlphaColor(ref _iconElements[1], _notificationDisappearingSpeed);
                 DecreaseImageAlphaColor(ref _iconElements[2], _notificationDisappearingSpeed);
 
-                yield return null;
+                //yield return null;
+                yield return new WaitForFixedUpdate();
             }
 
 
@@ -227,7 +233,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
                 IncreaseImageAlphaColor(ref _iconElements[0], _warningAppearingSpeed);
                 IncreaseImageAlphaColor(ref _iconElements[1], _warningAppearingSpeed);
                 IncreaseImageAlphaColor(ref _iconElements[2], _warningAppearingSpeed);
-                yield return null;
+                //yield return null;
+                yield return new WaitForFixedUpdate();
             }
 
             ShowIcon();
@@ -239,7 +246,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
                 DecreaseImageAlphaColor(ref _iconElements[0], _warningDisappearingSpeed);
                 DecreaseImageAlphaColor(ref _iconElements[1], _warningDisappearingSpeed);
                 DecreaseImageAlphaColor(ref _iconElements[2], _warningDisappearingSpeed);
-                yield return null;
+                //yield return null;
+                yield return new WaitForFixedUpdate();
             }
 
             HideIcon();
@@ -264,7 +272,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
                 DecreaseImageAlphaColor(ref _iconElements[0], _warningDisappearingSpeed);
                 DecreaseImageAlphaColor(ref _iconElements[1], _warningDisappearingSpeed);
                 DecreaseImageAlphaColor(ref _iconElements[2], _warningDisappearingSpeed);
-                yield return null;
+                //yield return null;
+                yield return new WaitForFixedUpdate();
             }
 
             HideIcon();
@@ -312,6 +321,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
             _isNotifyActive == false)
             {
                 _isNotifyActive = true;
+                StopAllCoroutines();
                 StartCoroutine(ShowStateNotificationRoutine());
             }
         }
@@ -325,6 +335,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
                 _isWarningActive == false)
                 {
                     _isWarningActive = true;
+                    StopAllCoroutines();
                     StartCoroutine(ShowStateWarningRoutine());
                 }
                 else
@@ -332,6 +343,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
                     if (_isNotifyActive == false)
                     {
                         _isNotifyActive = true;
+                        StopAllCoroutines();
                         StartCoroutine(ShowStateNotificationRoutine());
                     }
                 }
