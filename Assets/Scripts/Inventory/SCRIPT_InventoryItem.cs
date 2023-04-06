@@ -13,6 +13,9 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public bool isDropping;
     public float weight;
 
+    // TODO: добавить int для отслеживания количества предметов в стаке
+    // TODO: запретить вращать предмет, если он размером одну клетку (может не надо?)
+
     public int Height
     {
         get
