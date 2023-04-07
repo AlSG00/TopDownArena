@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SCRIPT_InventoryItem : MonoBehaviour
 {
+    public string name;
     public SCRIPT_ItemData itemData;
     public GameObject prefab;
     public AudioClip useItemAudio;
     public AudioSource useItemAudioSource;
     public bool isDropping;
     public float weight;
+    public bool isStackable = false;
+    public int stackCount = 0;
+    public int maxStackCount = 0;
 
-    // TODO: добавить int для отслеживания количества предметов в стаке
-    // TODO: запретить вращать предмет, если он размером одну клетку (может не надо?)
+    public TextMeshProUGUI stackCounter;
 
     public int Height
     {
@@ -54,8 +58,8 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     internal void Set(SCRIPT_ItemData itemData)
     {
         this.itemData = itemData;
-
-        GetComponent<Image>().sprite = itemData.itemIcon;
+        name = itemData.name;
+        GetComponent<Image>().sprite = itemData.icon;
 
         Vector2 size = new Vector2();
         size.x = itemData.width * SCRIPT_ItemGrid._tileSizeWidth;
@@ -65,8 +69,12 @@ public class SCRIPT_InventoryItem : MonoBehaviour
 
     internal void Rotated()
     {
+        if (Height == 1 && Width == 1)
+        {
+            Debug.Log("Not rotatable");
+            return;
+        }
         isRotated = !isRotated;
-
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.rotation = Quaternion.Euler(0, 0, isRotated == true ? 90f : 0f);
     }

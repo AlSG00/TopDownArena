@@ -19,20 +19,26 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     public List<StoredItem> storedItemList = new List<StoredItem>();
 
+    // TODO: подкласс item вынести отдельно, потому что пришлось дублировать его здесь и в InventoryController
     public class StoredItem
     {
         public GameObject item;
         public Vector2Int positionOnGrid;
         public bool isRotated;
         public float weight;
+        public bool isRotatable;
+        public int Width;
+        public int Height;
 
-        public StoredItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight)
+        public StoredItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight, int width, int height)
         {
             item = _item;
             positionOnGrid.x = _positionOnGridX;
             positionOnGrid.y = _positionOnGridY;
             isRotated = _isRotated;
             weight = _weight;
+            Width = width;
+            Height = height;
         }
     }
 

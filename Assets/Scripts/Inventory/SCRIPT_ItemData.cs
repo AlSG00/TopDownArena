@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu]
 public class SCRIPT_ItemData : ScriptableObject
 {
+    public string name;
+    public Sprite icon;
     public int width = 1;
     public int height = 1;
 
-    public Sprite itemIcon;
+    
 }

@@ -244,6 +244,7 @@
     <None Include="Assets\Thirdparty\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Materials\Foliage Flat.shader" />
+    <None Include="Assets\NewSurfaceShader.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSSkyBox.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Image Effects\_Sources\testwrite.shader" />

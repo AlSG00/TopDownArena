@@ -100,6 +100,9 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public bool returnRotated = false;
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
+        // TODO: сюда сделать, чтобы предметы стакались. Может сделать именную метку?
+        //if ()
+
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;
 
