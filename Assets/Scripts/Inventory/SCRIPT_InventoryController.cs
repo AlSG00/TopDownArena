@@ -48,45 +48,46 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     [SerializeField] private Player_Movement _playerMovement;
 
-    public class InventoryItem
-    {
-        public string Name;
-        public GameObject Item;
-        public Vector2Int PositionOnGrid;
+    //public class InventoryItem
+    //{
+    //    public string Name;
+    //    public GameObject Item;
+    //    public Vector2Int PositionOnGrid;
         
-        public bool IsRotated;
-        public float Weight;
-        public int Width;
-        public int Height;
-        public bool isRotatable;
-        public bool isStackable;
-        public int stackCount;
-        public int maxStackCount;
+    //    public bool IsRotated;
+    //    public float Weight;
+    //    public int Width;
+    //    public int Height;
+    //    public bool isRotatable;
+    //    public bool isStackable;
+    //    public int stackCount;
+    //    public int maxStackCount;
+    //    public SCRIPT_InventoryItem inventoryItem;
 
-        public InventoryItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight, int _width, int _height)
-        {
-            Item = _item;
-            PositionOnGrid.x = _positionOnGridX;
-            PositionOnGrid.y = _positionOnGridY;
-            IsRotated = _isRotated;
-            Weight = _weight;
-            Width = _width;
-            Height = _height;
-            stackCount = 1;
-        }
+    //    public InventoryItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight, int _width, int _height)
+    //    {
+    //        Item = _item;
+    //        PositionOnGrid.x = _positionOnGridX;
+    //        PositionOnGrid.y = _positionOnGridY;
+    //        IsRotated = _isRotated;
+    //        Weight = _weight;
+    //        Width = _width;
+    //        Height = _height;
+    //        stackCount = 1;
+    //    }
 
-        public bool TryAddToStack()
-        {
-            if (stackCount < maxStackCount)
-            {
-                stackCount++;
-                // TODO: Надо еще как-то обновить счетчик
-                return true;
-            }
+    //    public bool TryAddToStack()
+    //    {
+    //        if (stackCount < maxStackCount)
+    //        {
+    //            stackCount++;
+    //            // TODO: Надо еще как-то обновить счетчик
+    //            return true;
+    //        }
 
-            return false;
-        }
-    }
+    //        return false;
+    //    }
+    //}
 
     private void Awake()
     {
@@ -238,6 +239,10 @@ public class SCRIPT_InventoryController : MonoBehaviour
             itemToInsert.Height
             );
 
+        itemToPick.inventoryItem = itemToInsert;
+        itemToPick.Name = itemToInsert.name;
+        itemToPick.maxStackCount = itemToInsert.maxStackCount;
+
         //itemToPick.item = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
         //itemToPick.positionOnGrid.x = itemToInsert.onGridPositionX;
         //itemToPick.positionOnGrid.y = itemToInsert.onGridPositionY;
@@ -347,6 +352,8 @@ public class SCRIPT_InventoryController : MonoBehaviour
             {
                 if (itemToStack.TryAddToStack())
                 {
+                    //itemToStack.inventoryItem.stackCounter.text = itemToStack.stackCount.ToString();
+                    itemToInsert.stackCounter.text = itemToStack.stackCount.ToString();
                     return;
 
                     // На память, а то кодил в полудрёме:

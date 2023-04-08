@@ -90,12 +90,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a0ff9da7f9ea048adce079d9d22e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: water
   itemData: {fileID: 11400000, guid: 6b0fa27cdad009442ac7bf6c946fa9dd, type: 2}
   prefab: {fileID: 7908950061278218334, guid: 0681385ec7c8ad545a5fcdb0e93856b7, type: 3}
   useItemAudio: {fileID: 8300000, guid: 4c970b6d0db5c194a8ecb5be17e6dda5, type: 3}
   useItemAudioSource: {fileID: 0}
   isDropping: 0
   weight: 1
+  isStackable: 1
+  stackCount: 0
+  maxStackCount: 5
+  stackCounter: {fileID: 0}
   onGridPositionX: 1
   onGridPositionY: 1
   isRotated: 0
