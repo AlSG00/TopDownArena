@@ -274,7 +274,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public void ClearGrid()
     {
-
         GameObject highlighter = GameObject.Find("Highlighter");
         
         int childrenCount = transform.childCount;

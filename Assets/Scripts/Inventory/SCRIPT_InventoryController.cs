@@ -15,9 +15,9 @@ public class SCRIPT_InventoryController : MonoBehaviour
     public RectTransform gridRect;
     public Transform dropPoint;
 
-    [SerializeField] List<GameObject> items;
+    //[SerializeField] List<GameObject> items;
      private GameObject _itemPrefab;
-    [SerializeField] Transform canvasTransform;
+    [SerializeField] Transform canvasTransform; // Холст, на котором висят все инвентари
 
     SCRIPT_InventoryHighlight inventoryHighlight;
 
@@ -48,46 +48,46 @@ public class SCRIPT_InventoryController : MonoBehaviour
 
     [SerializeField] private Player_Movement _playerMovement;
 
-    //public class InventoryItem
-    //{
-    //    public string Name;
-    //    public GameObject Item;
-    //    public Vector2Int PositionOnGrid;
-        
-    //    public bool IsRotated;
-    //    public float Weight;
-    //    public int Width;
-    //    public int Height;
-    //    public bool isRotatable;
-    //    public bool isStackable;
-    //    public int stackCount;
-    //    public int maxStackCount;
-    //    public SCRIPT_InventoryItem inventoryItem;
+    public class InventoryItem
+    {
+        public string Name;
+        public GameObject Item;
+        public Vector2Int PositionOnGrid;
 
-    //    public InventoryItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight, int _width, int _height)
-    //    {
-    //        Item = _item;
-    //        PositionOnGrid.x = _positionOnGridX;
-    //        PositionOnGrid.y = _positionOnGridY;
-    //        IsRotated = _isRotated;
-    //        Weight = _weight;
-    //        Width = _width;
-    //        Height = _height;
-    //        stackCount = 1;
-    //    }
+        public bool IsRotated;
+        public float Weight;
+        public int Width;
+        public int Height;
+        public bool isRotatable;
+        public bool isStackable;
+        public int stackCount;
+        public int maxStackCount;
+        public SCRIPT_InventoryItem inventoryItem;
 
-    //    public bool TryAddToStack()
-    //    {
-    //        if (stackCount < maxStackCount)
-    //        {
-    //            stackCount++;
-    //            // TODO: Надо еще как-то обновить счетчик
-    //            return true;
-    //        }
+        public InventoryItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight, int _width, int _height)
+        {
+            Item = _item;
+            PositionOnGrid.x = _positionOnGridX;
+            PositionOnGrid.y = _positionOnGridY;
+            IsRotated = _isRotated;
+            Weight = _weight;
+            Width = _width;
+            Height = _height;
+            stackCount = 1;
+        }
 
-    //        return false;
-    //    }
-    //}
+        public bool TryAddToStack()
+        {
+            if (stackCount < maxStackCount)
+            {
+                stackCount++;
+                // TODO: Надо еще как-то обновить счетчик
+                return true;
+            }
+
+            return false;
+        }
+    }
 
     private void Awake()
     {
@@ -447,7 +447,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
     {
         if (selectedItem != null)
         {
-            if (!gridRect.rect.Overlaps(rectTransform.rect))
+            if (gridRect.rect.Overlaps(rectTransform.rect))
             {
                 rectTransform.SetParent(gridRect.parent);
             }

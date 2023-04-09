@@ -15,6 +15,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public bool isDropping;
     public float weight;
     public bool isStackable = false;
+    public bool isRotatable = false;
     public int stackCount = 0;
     public int maxStackCount = 0;
 

@@ -26,8 +26,6 @@ public class SCRIPT_InventoryHighlight : MonoBehaviour
 
     public void SetPosition(SCRIPT_ItemGrid targetGrid, SCRIPT_InventoryItem targetItem)
     {
-        // highlighter.SetParent(targetGrid.GetComponent<RectTransform>());
-
         Vector2 position = targetGrid.CalculatePositionOnGrid(
             targetItem,
             targetItem.onGridPositionX,

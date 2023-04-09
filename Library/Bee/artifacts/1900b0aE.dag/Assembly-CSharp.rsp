@@ -428,6 +428,7 @@
 "Assets/Scripts/Interaction/SCRIPT_PickableObject.cs"
 "Assets/Scripts/Interaction/SCRIPT_PickableWeapon.cs"
 "Assets/Scripts/Interaction/SCRIPT_PlayerInteractionArea.cs"
+"Assets/Scripts/Inventory/InventoryController.cs"
 "Assets/Scripts/Inventory/IStoredItem.cs"
 "Assets/Scripts/Inventory/SCRIPT_GridInteract.cs"
 "Assets/Scripts/Inventory/SCRIPT_InventoryController.cs"
