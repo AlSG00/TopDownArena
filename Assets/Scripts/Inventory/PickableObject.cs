@@ -54,13 +54,17 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
         }
 
         inventory.selectedItemGrid = inventory.inventoryGrid;
-        inventory.InsertIntoAvailableStacks(inventoryItem, stackCount);
-        inventory.InsertItemIntoInventory(inventoryItem);
-
-        if (pickUpAudioSource != null &&
-            pickUpAudio != null)
+        int stackCountRemaining = inventory.InsertIntoAvailableStacks(inventoryItem, stackCount);
+        if (stackCountRemaining > 0)
         {
-            pickUpAudioSource.PlayOneShot(pickUpAudio);
+            inventoryItem.stackCount = stackCountRemaining;
+            inventory.InsertItemIntoInventory(inventoryItem);
+
+            if (pickUpAudioSource != null &&
+                pickUpAudio != null)
+            {
+                pickUpAudioSource.PlayOneShot(pickUpAudio);
+            }
         }
 
         Destroy(gameObject);

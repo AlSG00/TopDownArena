@@ -9,6 +9,4 @@ public class SCRIPT_ItemData : ScriptableObject
     public Sprite icon;
     public int width = 1;
     public int height = 1;
-
-    
 }

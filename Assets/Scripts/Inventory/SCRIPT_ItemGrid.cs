@@ -103,8 +103,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
         // TODO: сюда сделать, чтобы предметы стакались. ћожет сделать именную метку?
-        if (itemToInsert.isStackable == true)
-        {
+        //if (itemToInsert.isStackable == true)
+        //{
             //SCRIPT_InventoryItem itemTostack = inventory.inventoryItemList.Find(item => item.name == itemToInsert.name);
             //if (itemTostack != null &&
 
@@ -141,26 +141,26 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
             //if (inventory.stackableItemsTemporaryList != null)
             //{
-            int toStack = itemToInsert.stackCount;
-                for (int i = 0; i < inventoryItemSlot.Length; i++)
-                {
-                    for (int j = 0; j < inventoryItemSlot.Length; j++)
-                    {
-                        if (inventoryItemSlot[i, j] != null &&
-                            inventoryItemSlot[i, j].isStackable &&
-                            inventoryItemSlot[i, j].stackCount < inventoryItemSlot[i, j].maxStackCount)
-                        {
+            //int toStack = itemToInsert.stackCount;
+            //    for (int i = 0; i < inventoryItemSlot.Length; i++)
+            //    {
+            //        for (int j = 0; j < inventoryItemSlot.Length; j++)
+            //        {
+            //            if (inventoryItemSlot[i, j] != null &&
+            //                inventoryItemSlot[i, j].isStackable &&
+            //                inventoryItemSlot[i, j].stackCount < inventoryItemSlot[i, j].maxStackCount)
+            //            {
                             
-                            Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
+            //                Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
 
-                            «десь прописать какую-нибудь логику, чтобы провер€ть, добавилс€ ли стак полностью
-                            учесть, что подбираема€ пачка не может быть больше, чем максимальный размер стака. Ћогично, но все же
-                            return;
-                        }
-                    }
-                }
+            //                «десь прописать какую-нибудь логику, чтобы провер€ть, добавилс€ ли стак полностью
+            //                учесть, что подбираема€ пачка не может быть больше, чем максимальный размер стака. Ћогично, но все же
+            //                return;
+            //            }
+            //        }
+            //    }
             //}
-        }
+        //}
 
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;

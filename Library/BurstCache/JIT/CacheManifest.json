@@ -3,7 +3,7 @@
   "Assemblies": [
     {
       "FullName": "Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-04-11T15:33:27.2464265Z"
+      "LastWriteTime": "2023-04-11T16:30:55.4768706Z"
     },
     {
       "FullName": "netstandard, Version=2.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
@@ -19,7 +19,7 @@
     },
     {
       "FullName": "Unity.Animation.Rigging.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-04-11T15:33:27.1474268Z"
+      "LastWriteTime": "2023-04-11T16:30:55.54187Z"
     },
     {
       "FullName": "UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -27,7 +27,7 @@
     },
     {
       "FullName": "Unity.Animation.Rigging, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-04-11T15:33:27.1474268Z"
+      "LastWriteTime": "2023-04-11T16:30:55.52687Z"
     },
     {
       "FullName": "mscorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -92,6 +92,7 @@
       "AssemblyDependencyIndices": [
         3,
         6,
+        7,
         2,
         5,
         1
@@ -160,8 +161,8 @@
       "AssemblyDependencyIndices": [
         3,
         6,
-        5,
         2,
+        5,
         1
       ]
     },
@@ -228,8 +229,8 @@
       "AssemblyDependencyIndices": [
         3,
         6,
-        2,
         5,
+        2,
         1
       ]
     },
@@ -293,7 +294,6 @@
       "AssemblyDependencyIndices": [
         3,
         6,
-        7,
         2,
         5,
         1

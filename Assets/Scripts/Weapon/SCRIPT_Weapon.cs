@@ -69,10 +69,8 @@ public class SCRIPT_Weapon : MonoBehaviour
     public bool isReloading;
     public bool isFiring = false;
     public bool shotPerformed;
-
     private float lastTimeShot;
     private float fireDelay;
-
 
     private void Start()
     {

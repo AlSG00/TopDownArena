@@ -112,18 +112,56 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public void InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount)
+    public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount)
     {
-        stackableItemsTemporaryList = inventoryItemList.FindAll(
-                item => item.name == itemToStack.name
-                );
+        //stackableItemsTemporaryList = inventoryItemList.FindAll(
+        //        item => item.name == itemToStack.name
+        //        );
 
-        foreach (int item in stackableItemsTemporaryList)
+        // TODO: Проверить, что тут вернется, если FindAll не найдет ни одного совпадения
+
+
+
+        //foreach (int item in stackableItemsTemporaryList)
+        //{
+
+        //    Раскидать подбираемый объект по доступным стакам
+        //        Потом возвращать обратно целое число оставшихся предметов в стаке
+        //        Если 0 то збс, иначе проводить целиком процедуру добавления в инвентарь
+        //}
+        
+        int toStack = stackCount;
+        for (int i = 0; i < inventoryGrid.inventoryItemSlot.Length; i++)
         {
-            Раскидать подбираемый объект по доступным стакам
-                Потом возвращать обратно целое число оставшихся предметов в стаке
-                Если 0 то збс, иначе проводить целиком процедуру добавления в инвентарь
+            for (int j = 0; j < inventoryGrid.inventoryItemSlot.Length; j++)
+            {
+                if (inventoryGrid.inventoryItemSlot[i, j] != null &&
+                    inventoryGrid.inventoryItemSlot[i, j].isStackable &&
+                    inventoryGrid.inventoryItemSlot[i, j].stackCount < inventoryGrid.inventoryItemSlot[i, j].maxStackCount)
+                {
+                    // TODO: Переименовать эту переменную. Отладить и убедиться, что вычисления верные
+                    int tempVariable = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + toStack);
+
+                    if (tempVariable >= 0)
+                    {
+                        inventoryGrid.inventoryItemSlot[i, j].stackCount += toStack;
+                        return 0;
+                    }
+                    else
+                    {
+                        toStack = Mathf.Abs(tempVariable);
+                    }
+
+                    //Написать метод, в котором будет увеличиваться стак и обновляться UI - счетчик;
+
+                    //Здесь прописать какую - нибудь логику, чтобы проверять, добавился ли стак полностью
+                    //  учесть, что подбираемая пачка не может быть больше, чем максимальный размер стака.Логично, но все же
+                    //        return;
+                }
+            }
         }
+
+        return toStack;
     }
 
     private void HandleStateIconsVisibility()
