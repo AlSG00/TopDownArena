@@ -11,6 +11,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public const float _tileSizeHeight = 64;
 
     public SCRIPT_InventoryItem[,] inventoryItemSlot;
+    public InventoryController inventory;
 
     RectTransform rectTransform;
 
@@ -28,6 +29,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     internal SCRIPT_InventoryItem PickUpItem(int x, int y)
     {
+        // TODO: добавить сюда логику стаков
         SCRIPT_InventoryItem toReturn = inventoryItemSlot[x, y];
 
         if (toReturn == null)
@@ -101,7 +103,64 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
         // TODO: сюда сделать, чтобы предметы стакались. ћожет сделать именную метку?
-        //if ()
+        if (itemToInsert.isStackable == true)
+        {
+            //SCRIPT_InventoryItem itemTostack = inventory.inventoryItemList.Find(item => item.name == itemToInsert.name);
+            //if (itemTostack != null &&
+
+            //    itemTostack.stackCount < itemTostack.maxStackCount)
+            //{
+            //    Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
+            //    return;
+            //}
+
+            // TODO: продебажить, что здесь будет возвращено, если не найдетс€ ни одного стакаемого объекта
+            //inventory.stackableItemsTemporaryList = inventory.inventoryItemList.FindAll(
+            //    item => item.name == itemToInsert.name
+            //    );
+
+
+            //if (inventory.stackableItemsTemporaryList != null)
+            //{
+            //    foreach (int item in inventory.stackableItemsTemporaryList)
+            //    {
+            //        if (inventory.stackableItemsTemporaryList[item].stackCount < inventory.stackableItemsTemporaryList[item].maxStackCount)
+            //        {
+            //                Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
+            //                return;
+            //        }
+            //    }
+            //}
+
+            // TODO: ѕрописать следующую логику:
+            // если мы подбираем целый стак (например, коробку патронов)
+            // то мы набиваем доступные стаки
+            // а если стаки кончились
+            // то занимаем новую €чейку
+            // а если и €чейки кончились, то оставл€ем остаток стака лежать на земле
+
+            //if (inventory.stackableItemsTemporaryList != null)
+            //{
+            int toStack = itemToInsert.stackCount;
+                for (int i = 0; i < inventoryItemSlot.Length; i++)
+                {
+                    for (int j = 0; j < inventoryItemSlot.Length; j++)
+                    {
+                        if (inventoryItemSlot[i, j] != null &&
+                            inventoryItemSlot[i, j].isStackable &&
+                            inventoryItemSlot[i, j].stackCount < inventoryItemSlot[i, j].maxStackCount)
+                        {
+                            
+                            Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
+
+                            «десь прописать какую-нибудь логику, чтобы провер€ть, добавилс€ ли стак полностью
+                            учесть, что подбираема€ пачка не может быть больше, чем максимальный размер стака. Ћогично, но все же
+                            return;
+                        }
+                    }
+                }
+            //}
+        }
 
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;

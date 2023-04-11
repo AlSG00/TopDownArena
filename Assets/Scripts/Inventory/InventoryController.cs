@@ -14,10 +14,10 @@ public class InventoryController : MonoBehaviour
     public SCRIPT_InventoryItem pickedInventoryItem;
 
     public SCRIPT_InventoryItem selectedItem; // выбранный предмет, который уже висит на курсоре
-
+    [SerializeField] private Transform canvasTransform;
     SCRIPT_InventoryItem overlapItem;
-    RectTransform itemRectTranform;
-
+    RectTransform itemRectTransform;
+    [SerializeField] private Transform itemDropPoint;
     private bool isHoldingButton = false;
     private bool isCheckingInventory = false;
     public bool isHighlightingStateIcons = false;
@@ -26,12 +26,23 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private float timeToHold = 0.3f;
 
     public List<SCRIPT_InventoryItem> inventoryItemList = new List<SCRIPT_InventoryItem>();
+    public List<SCRIPT_InventoryItem> stackableItemsTemporaryList = new List<SCRIPT_InventoryItem>();
 
     public delegate void OpenAction();
     public static event OpenAction OnInventoryOpened;
 
     public delegate void CloseAction();
     public static event CloseAction OnInventoryClosed;
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
 
     private void Awake()
     {
@@ -101,6 +112,20 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount)
+    {
+        stackableItemsTemporaryList = inventoryItemList.FindAll(
+                item => item.name == itemToStack.name
+                );
+
+        foreach (int item in stackableItemsTemporaryList)
+        {
+            Раскидать подбираемый объект по доступным стакам
+                Потом возвращать обратно целое число оставшихся предметов в стаке
+                Если 0 то збс, иначе проводить целиком процедуру добавления в инвентарь
+        }
+    }
+
     private void HandleStateIconsVisibility()
     {
         isHoldingButton = false;
@@ -132,7 +157,7 @@ public class InventoryController : MonoBehaviour
         Vector2Int tileGridPosition = GetTileGridPosition();
         if (selectedItem == null)
         {
-            PickUpItem(tileGridPosition);
+            PickItemFromGrid(tileGridPosition);
         }
 
         if (selectedItem == null)
@@ -146,9 +171,9 @@ public class InventoryController : MonoBehaviour
         }
         selectedItem.isDropping = true;
 
-        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab, dropPoint.position, Quaternion.identity);
+        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
         inventoryItemList.Remove(pickedInventoryItem);
-        _playerCarryingWeight.TakeWeight(pickedInventoryItem.Weight);
+        _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         Destroy(selectedItem.gameObject);
         inventoryHighlight.Show(false);
     }
@@ -156,15 +181,16 @@ public class InventoryController : MonoBehaviour
     private void RightMouseButtonPress()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
+        // TODO: сделать логику для стаков
         if (selectedItem == null)
         {
-            PickUpItem(tileGridPosition);
+            PickItemFromGrid(tileGridPosition);
         }
 
         //TODO: По идее, здесь не сработает данное условие, переделать на обращение к InventoryItem
         if (selectedItem.GetComponent<SCRIPT_IItem>().isUsable == false)
         {
-            PlaceItem(tileGridPosition);
+            PlaceItemOnGrid(tileGridPosition);
             return;
         }
 
@@ -183,11 +209,163 @@ public class InventoryController : MonoBehaviour
         else
         {
             inventoryItemList.Remove(pickedInventoryItem);
-            _playerCarryingWeight.TakeWeight(pickedInventoryItem.Weight);
+            _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         }
 
         Destroy(selectedItem.gameObject);
         inventoryHighlight.Show(false);
+    }
+
+    //private void PlaceItem(Vector2Int tileGridPosition)
+    //{
+
+    //    bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
+    //    if (complete)
+    //    {
+    //        selectedItem = null;
+    //        if (overlapItem != null)
+    //        {
+    //            selectedItem = overlapItem;
+    //            overlapItem = null;
+    //            itemRectTransform = selectedItem.GetComponent<RectTransform>();
+    //            itemRectTransform.SetAsLastSibling();
+    //        }
+
+    //        HandleLists(tileGridPosition);
+            
+    //        pickedItem = null;
+    //        pickedInventoryItem = null;
+    //    }
+    //}
+
+    Vector2Int previousPosition;
+    private void PickItemFromGrid(Vector2Int tileGridPosition)
+    {
+        selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
+        pickedItem = null;
+        pickedInventoryItem = null;
+        if (selectedItem != null)
+        {
+            if (selectedItemGrid != inventoryGrid)
+            {
+                previousPosition.x = selectedItem.onGridPositionX;
+                previousPosition.y = selectedItem.onGridPositionY;
+
+                pickedItem = itemContainer.storedItemList.Find(x =>
+                x.positionOnGrid.x == previousPosition.x &&
+                x.positionOnGrid.y == previousPosition.y
+                );
+            }
+            else
+            {
+                previousPosition.x = selectedItem.onGridPositionX;
+                previousPosition.y = selectedItem.onGridPositionY;
+
+                pickedInventoryItem = inventoryItemList.Find(x =>
+                x.PositionOnGrid.x == previousPosition.x &&
+                x.PositionOnGrid.y == previousPosition.y
+                );
+            }
+            
+            itemRectTransform = selectedItem.GetComponent<RectTransform>();
+            itemRectTransform.SetAsLastSibling();
+        }
+    }
+
+    public void InsertItemIntoInventory(SCRIPT_InventoryItem item)
+    {
+        if (selectedItemGrid == null)
+        {
+            Debug.Log("Grid is not selected");
+            return;
+        }
+
+        CreateItemForUi(item);
+        SCRIPT_InventoryItem itemToInsert = selectedItem;
+        selectedItem = null;
+
+        остановился на этом методе
+        InsertItem(itemToInsert);
+
+        InventoryItem itemToPick = new InventoryItem(
+            item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab,
+            itemToInsert.onGridPositionX,
+            itemToInsert.onGridPositionY,
+            itemToInsert.isRotated,
+            itemToInsert.weight,
+            itemToInsert.Width,
+            itemToInsert.Height
+            );
+
+        itemToPick.inventoryItem = itemToInsert;
+        itemToPick.Name = itemToInsert.name;
+        itemToPick.maxStackCount = itemToInsert.maxStackCount;
+
+        inventoryItemList.Add(itemToPick);
+        _playerCarryingWeight.AddWeight(itemToPick.Weight);
+    }
+
+    //public void CreateItem(GameObject item)
+    public void CreateItemForUi(SCRIPT_InventoryItem item)
+    {
+        //_itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
+        //SCRIPT_InventoryItem inventoryItem = Instantiate(_itemPrefab).GetComponent<SCRIPT_InventoryItem>();
+
+        //selectedItem = inventoryItem;
+        //rectTransform = inventoryItem.GetComponent<RectTransform>();
+        //rectTransform.SetParent(canvasTransform);
+        //rectTransform.SetAsLastSibling();
+        //inventoryItem.Set(inventoryItem.itemData);
+
+        // _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
+        SCRIPT_InventoryItem inventoryItem = Instantiate(item);
+
+        selectedItem = inventoryItem;
+        itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+        itemRectTransform.SetParent(canvasTransform);
+        itemRectTransform.SetAsLastSibling();
+        inventoryItem.Set(inventoryItem.itemData);
+    }
+
+    private void InsertItem(SCRIPT_InventoryItem itemToInsert)
+    {
+        //if (itemToInsert.isStackable)
+        //{
+        //    попытаться простакать предмет
+        //    //SCRIPT_InventoryItem itemToStack = inventoryItemList.Find(item => item.name == itemToInsert.name);
+        //    //if (itemToStack != null)
+        //    //{
+        //    //    if (itemToStack.TryAddToStack())
+        //    //    {
+        //    //        itemToInsert.stackCounter.text = itemToStack.stackCount.ToString();
+        //    //        return;
+
+        //    //        // На память, а то кодил в полудрёме:
+        //    //        // по задумке пытаемся найти в инвентаре предмет с такой же меткой имени
+        //    //        // если нашли и его можно застакать, то стакаем
+        //    //        // если стакнется, то вернется true
+        //    //        // если не стакнется то по классике будет пытаться искать свободное место
+        //    //    }
+        //    //}
+        //}
+
+        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert); в этой функции простакается предмет
+
+        if (positionOnGrid == null)
+        {
+            return;
+        }
+
+        if (selectedItemGrid.returnRotated == false)
+        {
+            selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+        }
+        else
+        {
+            itemToInsert.Rotated();
+            selectedItemGrid.returnRotated = false;
+            selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+        }
     }
 
     private void RotateItem()
@@ -197,16 +375,22 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
+        // TODO: если смогу избавиться от InventoryItem, то здесь можно будет все упростить
         if (pickedInventoryItem != null)
         {
-            InventoryItem item = inventoryItemList.Find(x =>
-            x.PositionOnGrid.x == selectedItem.onGridPositionX &&
-            x.PositionOnGrid.y == selectedItem.onGridPositionY
+            //SCRIPT_InventoryItem item = inventoryItemList.Find(x =>
+            //x.positionOnGrid.x == selectedItem.onGridPositionX &&
+            //x.positionOnGrid.y == selectedItem.onGridPositionY
+            //);
+
+            SCRIPT_InventoryItem item = inventoryItemList.Find(x =>
+            x.positionOnGrid.x == selectedItem.positionOnGrid.x &&
+            x.positionOnGrid.y == selectedItem.positionOnGrid.y
             );
 
             if (item.isRotatable)
             {
-                item.IsRotated = !item.IsRotated;
+                item.isRotated = !item.isRotated;
             }
         }
         else if (pickedItem != null)
@@ -225,17 +409,17 @@ public class InventoryController : MonoBehaviour
         selectedItem.Rotated();
     }
 
+    Vector2Int oldPosition;
+    SCRIPT_InventoryItem itemToHighlight;
     private void HandleItemHighlight()
     {
         Vector2Int positionOnGrid = GetTileGridPosition();
-
         if (oldPosition == positionOnGrid)
         {
             return;
         }
 
         oldPosition = positionOnGrid;
-
         if (selectedItem == null)
         {
             itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
@@ -260,11 +444,9 @@ public class InventoryController : MonoBehaviour
                 selectedItem.itemData.width,
                 selectedItem.itemData.height)
                 );
-
             inventoryHighlight.SetSize(selectedItem);
             inventoryHighlight.SetParent(selectedItemGrid);
             inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
-
         }
     }
 
@@ -274,14 +456,15 @@ public class InventoryController : MonoBehaviour
 
         if (selectedItem == null)
         {
-            PickUpItem(tileGridPosition);
+            PickItemFromGrid(tileGridPosition);
         }
         else
         {
-            PlaceItem(tileGridPosition);
+            PlaceItemOnGrid(tileGridPosition);
         }
     }
 
+    // Позиция мыши, переведенная из координат экрана в координаты на сетке инвентаря
     private Vector2Int GetTileGridPosition()
     {
         Vector2 position = Input.mousePosition;
@@ -354,8 +537,8 @@ public class InventoryController : MonoBehaviour
             {
                 selectedItem = overlapItem;
                 overlapItem = null;
-                itemRectTranform = selectedItem.GetComponent<RectTransform>();
-                itemRectTranform.SetAsLastSibling();
+                itemRectTransform = selectedItem.GetComponent<RectTransform>();
+                itemRectTransform.SetAsLastSibling();
             }
 
             HandleLists(tileGridPosition);
@@ -385,7 +568,7 @@ public class InventoryController : MonoBehaviour
                 //pickedItem.item = pickedInventoryItem.item;
                 //pickedItem.isRotated = pickedInventoryItem.isRotated;
                 inventoryItemList.Remove(pickedInventoryItem);
-                _playerCarryingWeight.TakeWeight(pickedInventoryItem.Weight);
+                _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
             }
             pickedItem.positionOnGrid.x = tileGridPosition.x;
             pickedItem.positionOnGrid.y = tileGridPosition.y;
@@ -422,17 +605,17 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem != null)
         {
-            if (selectedItemGridRect.rect.Overlaps(itemRectTranform.rect) == false)
+            if (selectedItemGridRect.rect.Overlaps(itemRectTransform.rect) == false)
             {
-                itemRectTranform.SetParent(selectedItemGridRect.parent);
+                itemRectTransform.SetParent(selectedItemGridRect.parent);
             }
             else
             {
-                itemRectTranform.SetParent(selectedItemGridRect);
+                itemRectTransform.SetParent(selectedItemGridRect);
             }
 
-            itemRectTranform.SetAsLastSibling();
-            itemRectTranform.position = Input.mousePosition;
+            itemRectTransform.SetAsLastSibling();
+            itemRectTransform.position = Input.mousePosition;
         }
     }
 }

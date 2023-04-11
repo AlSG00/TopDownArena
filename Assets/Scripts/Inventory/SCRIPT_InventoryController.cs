@@ -667,7 +667,7 @@ public class SCRIPT_InventoryController : MonoBehaviour
         }
         selectedItem.isDropping = true;
 
-        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().prefab, dropPoint.position, Quaternion.identity);
+        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, dropPoint.position, Quaternion.identity);
         inventoryItemList.Remove(pickedInventoryItem);
         _playerCarryingWeight.TakeWeight(pickedInventoryItem.Weight);
         Destroy(selectedItem.gameObject);

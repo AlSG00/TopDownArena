@@ -430,6 +430,7 @@
 "Assets/Scripts/Interaction/SCRIPT_PlayerInteractionArea.cs"
 "Assets/Scripts/Inventory/InventoryController.cs"
 "Assets/Scripts/Inventory/IStoredItem.cs"
+"Assets/Scripts/Inventory/PickableObject.cs"
 "Assets/Scripts/Inventory/SCRIPT_GridInteract.cs"
 "Assets/Scripts/Inventory/SCRIPT_InventoryController.cs"
 "Assets/Scripts/Inventory/SCRIPT_InventoryHighlight.cs"
