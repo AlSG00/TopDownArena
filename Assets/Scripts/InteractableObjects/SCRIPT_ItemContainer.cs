@@ -11,41 +11,43 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     public GameObject[] loot; // Список лута, который будет расставлен по контейнеру при первом открытии
     [SerializeField] private int containerGridWidth = 5; // размеры сетки контейрена
     [SerializeField] private int containerGridHeight = 5;
-    public SCRIPT_InventoryController inventoryController;
+    public InventoryController inventoryController;
   //  public SCRIPT_InteractableObjectTrigger interactionTrigger;
 
     public SCRIPT_ItemGrid containerGrid;
     bool isInitialized = false;
 
-    public List<StoredItem> storedItemList = new List<StoredItem>();
+    //public List<StoredItem> storedItemList = new List<StoredItem>();
+    
+    public List<SCRIPT_InventoryItem> storedItemList = new List<SCRIPT_InventoryItem>();
 
     // TODO: подкласс item вынести отдельно, потому что пришлось дублировать его здесь и в InventoryController
-    public class StoredItem
-    {
-        public GameObject item;
-        public Vector2Int positionOnGrid;
-        public bool isRotated;
-        public float weight;
-        public bool isRotatable;
-        public int Width;
-        public int Height;
+    //public class StoredItem
+    //{
+    //    public GameObject item;
+    //    public Vector2Int positionOnGrid;
+    //    public bool isRotated;
+    //    public float weight;
+    //    public bool isRotatable;
+    //    public int Width;
+    //    public int Height;
 
-        public StoredItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight, int width, int height)
-        {
-            item = _item;
-            positionOnGrid.x = _positionOnGridX;
-            positionOnGrid.y = _positionOnGridY;
-            isRotated = _isRotated;
-            weight = _weight;
-            Width = width;
-            Height = height;
-        }
-    }
+    //    public StoredItem(GameObject _item, int _positionOnGridX, int _positionOnGridY, bool _isRotated, float _weight, int width, int height)
+    //    {
+    //        item = _item;
+    //        positionOnGrid.x = _positionOnGridX;
+    //        positionOnGrid.y = _positionOnGridY;
+    //        isRotated = _isRotated;
+    //        weight = _weight;
+    //        Width = width;
+    //        Height = height;
+    //    }
+    //}
 
     private void Awake()
     {
         HandleContainerGrid(false);
-        inventoryController = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
+        inventoryController = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
 
         alreadyInteracting = false;
         canInteract = false;
@@ -64,16 +66,16 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         }
 
         HandleContainerGrid(true);
-        inventoryController.HandleInventoryGrid(true);
-        GridInit();
+        inventoryController.SetInventoryVisibility(true);
+        InitializeGrid();
         canInteract = true;
     }
 
-    private void GridInit()
+    private void InitializeGrid()
     {
         if (inventoryController == null)
         {
-            inventoryController = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
+            inventoryController = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
         }
 
         if (containerGrid.transform.childCount != 0)
@@ -83,7 +85,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
         containerGrid._gridSizeWidth = containerGridWidth;
         containerGrid._gridSizeHeight = containerGridHeight;
-        containerGrid.Init(containerGridWidth, containerGridHeight);
+        containerGrid.Initialize(containerGridWidth, containerGridHeight);
         PlaceItems(isInitialized);
 
         isInitialized = true;
@@ -111,17 +113,40 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     private void PlaceItems(bool initialized)
     {
+        Нужно ли оно тут. Посмотреть, как зануляется флаг у других интерактивных объектов, я забыл
+
+
+        СОВСЕМ ЗАБЫЛ
+        Нужно хранить данные не на ItemGrid, а в самом контейнере, потом что ItemGrid Постоянно меняется, между контейнерами
+            И получается нету никакой постоянной привязки к данным
+
         inventoryController.selectedItemGrid = containerGrid;
         if (inventoryController.itemContainer != null)
         {
             inventoryController.itemContainer.alreadyInteracting = false;
         }
         inventoryController.itemContainer = this;
+
+        //if (initialized == false)
+        //{
+        //    for (int i = 0; i < loot.Length; i++)
+        //    {
+        //        inventoryController.InsertItemIntoContainer(loot[i]);
+        //    }
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < storedItemList.Count; i++)
+        //    {
+        //        inventoryController.InsertItemIntoInitializedContainer(storedItemList[i]);
+        //    } 
+        //}
+
         if (initialized == false)
         {
-            for (int i = 0; i < loot.Length; i++)
+            for (int i = 0; i < storedItemList.Count; i++)
             {
-                inventoryController.InsertItemIntoContainer(loot[i]);
+                inventoryController.InsertItemIntoContainer(storedItemList[i]);
             }
         }
         else
@@ -129,7 +154,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
             for (int i = 0; i < storedItemList.Count; i++)
             {
                 inventoryController.InsertItemIntoInitializedContainer(storedItemList[i]);
-            } 
+            }
         }
     }
 }

@@ -13,6 +13,10 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public SCRIPT_InventoryItem[,] inventoryItemSlot;
     public InventoryController inventory;
 
+    public bool isPlayerInventory;
+
+    //public List<SCRIPT_InventoryItem> testItemList = new List<SCRIPT_InventoryItem>();
+
     RectTransform rectTransform;
 
     public int _gridSizeWidth = 5;
@@ -24,7 +28,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        Init(_gridSizeWidth, _gridSizeHeight);
+        Initialize(_gridSizeWidth, _gridSizeHeight);
     }
 
     internal SCRIPT_InventoryItem PickUpItem(int x, int y)
@@ -67,7 +71,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return null;
     }
 
-    public void Init(int width, int height)
+    public void Initialize(int width, int height)
     {
         inventoryItemSlot = new SCRIPT_InventoryItem[width, height];
         Vector2 size = new Vector2(width * _tileSizeWidth, height * _tileSizeHeight);
@@ -230,8 +234,11 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             }
         }
 
-        inventoryItem.onGridPositionX = positionX;
-        inventoryItem.onGridPositionY = positionY;
+        //inventoryItem.onGridPositionX = positionX;
+        //inventoryItem.onGridPositionY = positionY;
+
+        inventoryItem.positionOnGrid.x = positionX;
+        inventoryItem.positionOnGrid.y = positionY;
         Vector2 position = CalculatePositionOnGrid(inventoryItem, positionX, positionY);
 
         rectTransform.localPosition = position;
@@ -345,5 +352,24 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         }
 
         inventoryItemSlot = null;
+    }
+
+    public void SetVisibility(bool isVisible)
+    {
+        Vector2 position = new Vector2();
+        RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
+
+        if (isVisible == true)
+        {
+            position.y = 630;
+        }
+        else
+        {
+            position.y = 3000;
+          //  alreadyInteracting = false;
+        }
+        position.x = inventoryRect.position.x;
+
+        inventoryRect.position = position;
     }
 }

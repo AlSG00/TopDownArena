@@ -8,11 +8,15 @@ public class InventoryController : MonoBehaviour
     public SCRIPT_ItemGrid inventoryGrid;
     [HideInInspector] public SCRIPT_ItemGrid selectedItemGrid;
     [HideInInspector] public RectTransform selectedItemGridRect;
+
     [SerializeField] private Player_Movement _playerMovement;
     [SerializeField] private SCRIPT_PlayerCarryingWeight _playerCarryingWeight;
     [SerializeField] private SCRIPT_InventoryHighlight inventoryHighlight;
-    public SCRIPT_InventoryItem pickedInventoryItem;
+    public SCRIPT_InventoryItem pickedInventoryItem; // Предмет с инвентаря игрока
 
+
+
+    //public SCRIPT_ItemContainer itemContainer;
     public SCRIPT_InventoryItem selectedItem; // выбранный предмет, который уже висит на курсоре
     [SerializeField] private Transform canvasTransform;
     SCRIPT_InventoryItem overlapItem;
@@ -34,15 +38,19 @@ public class InventoryController : MonoBehaviour
     public delegate void CloseAction();
     public static event CloseAction OnInventoryClosed;
 
-    private void OnEnable()
-    {
-        
-    }
+    //private void OnEnable()
+    //{
 
-    private void OnDisable()
-    {
-        
-    }
+    //}
+
+    //private void OnDisable()
+    //{
+
+    //}
+
+    public SCRIPT_InventoryItem testPickedItem;
+    public SCRIPT_ItemGrid testPickedItemsGrid;
+    public SCRIPT_ItemGrid containerItemGrid;
 
     private void Awake()
     {
@@ -130,26 +138,30 @@ public class InventoryController : MonoBehaviour
         //        Если 0 то збс, иначе проводить целиком процедуру добавления в инвентарь
         //}
         
-        int toStack = stackCount;
+        int leftToStack = stackCount;
         for (int i = 0; i < inventoryGrid.inventoryItemSlot.Length; i++)
         {
             for (int j = 0; j < inventoryGrid.inventoryItemSlot.Length; j++)
             {
                 if (inventoryGrid.inventoryItemSlot[i, j] != null &&
                     inventoryGrid.inventoryItemSlot[i, j].isStackable &&
+                    inventoryGrid.inventoryItemSlot[i, j].name == itemToStack.name &&
                     inventoryGrid.inventoryItemSlot[i, j].stackCount < inventoryGrid.inventoryItemSlot[i, j].maxStackCount)
                 {
-                    // TODO: Переименовать эту переменную. Отладить и убедиться, что вычисления верные
-                    int tempVariable = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + toStack);
+                    // TODO: Отладить и убедиться, что вычисления верные
+                    int leftToStackTemp = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + leftToStack);
 
-                    if (tempVariable >= 0)
+                    if (leftToStackTemp >= 0)
                     {
-                        inventoryGrid.inventoryItemSlot[i, j].stackCount += toStack;
+                        inventoryGrid.inventoryItemSlot[i, j].stackCount += leftToStack;
                         return 0;
                     }
                     else
                     {
-                        toStack = Mathf.Abs(tempVariable);
+                        leftToStack -= inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount;
+                        leftToStack = Mathf.Abs(leftToStack);
+                        inventoryGrid.inventoryItemSlot[i, j].stackCount = inventoryGrid.inventoryItemSlot[i, j].maxStackCount;
+                        //leftToStack = Mathf.Abs(leftToStackTemp);
                     }
 
                     //Написать метод, в котором будет увеличиваться стак и обновляться UI - счетчик;
@@ -161,7 +173,7 @@ public class InventoryController : MonoBehaviour
             }
         }
 
-        return toStack;
+        return leftToStack;
     }
 
     private void HandleStateIconsVisibility()
@@ -240,15 +252,22 @@ public class InventoryController : MonoBehaviour
 
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
-        if (selectedItemGrid != inventoryGrid)
+        //if (selectedItemGrid != inventoryGrid)
+        //{
+        //    itemContainer.storedItemList.Remove(pickedItem);
+        //}
+        //else
+        //{
+        //    inventoryItemList.Remove(pickedInventoryItem);
+        //    _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
+        //}
+
+        selectedItemGrid.testItemList.Remove(pickedInventoryItem);
+        if (selectedItemGrid.isPlayerInventory == true)
         {
-            itemContainer.storedItemList.Remove(pickedItem);
-        }
-        else
-        {
-            inventoryItemList.Remove(pickedInventoryItem);
             _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         }
+
 
         Destroy(selectedItem.gameObject);
         inventoryHighlight.Show(false);
@@ -276,35 +295,54 @@ public class InventoryController : MonoBehaviour
     //    }
     //}
 
+    // Учитывать, что в будущем этот метод используется для взятия всего стака
     Vector2Int previousPosition;
     private void PickItemFromGrid(Vector2Int tileGridPosition)
     {
         selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
-        pickedItem = null;
+        //pickedItem = null;
         pickedInventoryItem = null;
         if (selectedItem != null)
         {
-            if (selectedItemGrid != inventoryGrid)
-            {
-                previousPosition.x = selectedItem.onGridPositionX;
-                previousPosition.y = selectedItem.onGridPositionY;
+            //if (selectedItemGrid != inventoryGrid)
+            //{
+            //    previousPosition.x = selectedItem.onGridPositionX;
+            //    previousPosition.y = selectedItem.onGridPositionY;
 
-                pickedItem = itemContainer.storedItemList.Find(x =>
-                x.positionOnGrid.x == previousPosition.x &&
-                x.positionOnGrid.y == previousPosition.y
-                );
-            }
-            else
-            {
-                previousPosition.x = selectedItem.onGridPositionX;
-                previousPosition.y = selectedItem.onGridPositionY;
+            //    pickedItem = itemContainer.storedItemList.Find(x =>
+            //    x.positionOnGrid.x == previousPosition.x &&
+            //    x.positionOnGrid.y == previousPosition.y
+            //    );
+            //}
+            //else
+            //{
+            //    previousPosition.x = selectedItem.onGridPositionX;
+            //    previousPosition.y = selectedItem.onGridPositionY;
 
-                pickedInventoryItem = inventoryItemList.Find(x =>
-                x.PositionOnGrid.x == previousPosition.x &&
-                x.PositionOnGrid.y == previousPosition.y
-                );
-            }
-            
+            //    pickedInventoryItem = inventoryItemList.Find(x =>
+            //    x.PositionOnGrid.x == previousPosition.x &&
+            //    x.PositionOnGrid.y == previousPosition.y
+            //    );
+            //}
+
+            //    previousPosition.x = selectedItem.onGridPositionX;
+            //    previousPosition.y = selectedItem.onGridPositionY;
+
+            //    pickedItem = itemContainer.storedItemList.Find(x =>
+            //    x.positionOnGrid.x == previousPosition.x &&
+            //    x.positionOnGrid.y == previousPosition.y
+            //    );
+
+            previousPosition.x = selectedItem.positionOnGrid.x;
+            previousPosition.y = selectedItem.positionOnGrid.y;
+            testPickedItem = selectedItemGrid.testItemList.Find(x =>
+            x.positionOnGrid.x == previousPosition.x &&
+            x.positionOnGrid.y == previousPosition.y
+            );
+
+            //НОВОЕ
+            selectedItemGrid.testItemList.Remove(testPickedItem);
+
             itemRectTransform = selectedItem.GetComponent<RectTransform>();
             itemRectTransform.SetAsLastSibling();
         }
@@ -322,25 +360,30 @@ public class InventoryController : MonoBehaviour
         SCRIPT_InventoryItem itemToInsert = selectedItem;
         selectedItem = null;
 
-        остановился на этом методе
         InsertItem(itemToInsert);
 
-        InventoryItem itemToPick = new InventoryItem(
-            item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab,
-            itemToInsert.onGridPositionX,
-            itemToInsert.onGridPositionY,
-            itemToInsert.isRotated,
-            itemToInsert.weight,
-            itemToInsert.Width,
-            itemToInsert.Height
-            );
+        //InventoryItem itemToPick = new InventoryItem(
+        //    item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab,
+        //    itemToInsert.onGridPositionX,
+        //    itemToInsert.onGridPositionY,
+        //    itemToInsert.isRotated,
+        //    itemToInsert.weight,
+        //    itemToInsert.Width,
+        //    itemToInsert.Height
+        //    );
 
-        itemToPick.inventoryItem = itemToInsert;
-        itemToPick.Name = itemToInsert.name;
-        itemToPick.maxStackCount = itemToInsert.maxStackCount;
+        //itemToPick.inventoryItem = itemToInsert;
+        //itemToPick.Name = itemToInsert.name;
+        //itemToPick.maxStackCount = itemToInsert.maxStackCount;
 
-        inventoryItemList.Add(itemToPick);
-        _playerCarryingWeight.AddWeight(itemToPick.Weight);
+        //inventoryItemList.Add(itemToPick);
+        //_playerCarryingWeight.AddWeight(itemToPick.Weight);
+
+
+        //inventoryItemList.Add(itemToInsert);
+        // TODO: Продумать здесь логику на случай, если в инвентаре будет несколько разных сеток
+        inventoryGrid.testItemList.Add(itemToInsert);
+        _playerCarryingWeight.AddWeight(itemToInsert.weight);
     }
 
     //public void CreateItem(GameObject item)
@@ -365,6 +408,39 @@ public class InventoryController : MonoBehaviour
         inventoryItem.Set(inventoryItem.itemData);
     }
 
+    public void InsertItemIntoContainer(SCRIPT_InventoryItem item)
+    {
+        //CreateContainerItem(item);
+
+        CreateItemForUi(item);
+
+        SCRIPT_InventoryItem itemToInsert = selectedItem;
+        selectedItem = null;
+
+        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+
+        if (positionOnGrid == null)
+        {
+            return;
+        }
+        selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+
+        //SCRIPT_ItemContainer.StoredItem itemTostore = new SCRIPT_ItemContainer.StoredItem(
+        //    item,
+        //    positionOnGrid.Value.x,
+        //    positionOnGrid.Value.y,
+        //    itemToInsert.isRotated,
+        //    itemToInsert.weight,
+        //    itemToInsert.Width,
+        //    itemToInsert.Height
+        //    );
+
+        //itemTostore.item = item;
+        //itemTostore.positionOnGrid.x = positionOnGrid.Value.x;
+        //itemTostore.positionOnGrid.y = positionOnGrid.Value.y;
+        selectedItemGrid.testItemList.Add(itemToInsert);
+    }
+
     private void InsertItem(SCRIPT_InventoryItem itemToInsert)
     {
         //if (itemToInsert.isStackable)
@@ -387,7 +463,7 @@ public class InventoryController : MonoBehaviour
         //    //}
         //}
 
-        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert); в этой функции простакается предмет
+        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert); 
 
         if (positionOnGrid == null)
         {
@@ -414,28 +490,41 @@ public class InventoryController : MonoBehaviour
         }
 
         // TODO: если смогу избавиться от InventoryItem, то здесь можно будет все упростить
-        if (pickedInventoryItem != null)
-        {
-            //SCRIPT_InventoryItem item = inventoryItemList.Find(x =>
-            //x.positionOnGrid.x == selectedItem.onGridPositionX &&
-            //x.positionOnGrid.y == selectedItem.onGridPositionY
-            //);
+        //if (pickedInventoryItem != null)
+        //{
+        //    //SCRIPT_InventoryItem item = inventoryItemList.Find(x =>
+        //    //x.positionOnGrid.x == selectedItem.onGridPositionX &&
+        //    //x.positionOnGrid.y == selectedItem.onGridPositionY
+        //    //);
 
-            SCRIPT_InventoryItem item = inventoryItemList.Find(x =>
+        //    SCRIPT_InventoryItem item = inventoryItemList.Find(x =>
+        //    x.positionOnGrid.x == selectedItem.positionOnGrid.x &&
+        //    x.positionOnGrid.y == selectedItem.positionOnGrid.y
+        //    );
+
+        //    if (item.isRotatable)
+        //    {
+        //        item.isRotated = !item.isRotated;
+        //    }
+        //}
+        //else if (pickedItem != null)
+        //{
+        //    SCRIPT_ItemContainer.StoredItem item = itemContainer.storedItemList.Find(x =>
+        //    x.positionOnGrid.x == selectedItem.onGridPositionX &&
+        //    x.positionOnGrid.y == selectedItem.onGridPositionY
+        //    );
+
+        //    if (item.isRotatable)
+        //    {
+        //        item.isRotated = !item.isRotated;
+        //    }
+        //}
+
+        if (testPickedItem != null)
+        {
+            SCRIPT_InventoryItem item = testPickedItemsGrid.testItemList.Find(x =>
             x.positionOnGrid.x == selectedItem.positionOnGrid.x &&
             x.positionOnGrid.y == selectedItem.positionOnGrid.y
-            );
-
-            if (item.isRotatable)
-            {
-                item.isRotated = !item.isRotated;
-            }
-        }
-        else if (pickedItem != null)
-        {
-            SCRIPT_ItemContainer.StoredItem item = itemContainer.storedItemList.Find(x =>
-            x.positionOnGrid.x == selectedItem.onGridPositionX &&
-            x.positionOnGrid.y == selectedItem.onGridPositionY
             );
 
             if (item.isRotatable)
@@ -446,6 +535,8 @@ public class InventoryController : MonoBehaviour
 
         selectedItem.Rotated();
     }
+
+    Возникнет путаница между SelectedItem и testPickedItem.Уже сам запутался :D. Разобраться;
 
     Vector2Int oldPosition;
     SCRIPT_InventoryItem itemToHighlight;
@@ -458,6 +549,7 @@ public class InventoryController : MonoBehaviour
         }
 
         oldPosition = positionOnGrid;
+
         if (selectedItem == null)
         {
             itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
@@ -476,11 +568,18 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
+            //inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
+            //    positionOnGrid.x,
+            //    positionOnGrid.y,
+            //    selectedItem.itemData.width,
+            //    selectedItem.itemData.height)
+            //    );
+
             inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
                 positionOnGrid.x,
                 positionOnGrid.y,
-                selectedItem.itemData.width,
-                selectedItem.itemData.height)
+                selectedItem.Height,
+                selectedItem.Width)
                 );
             inventoryHighlight.SetSize(selectedItem);
             inventoryHighlight.SetParent(selectedItemGrid);
@@ -498,6 +597,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
+            // TODO: Добавить логику для стаков
             PlaceItemOnGrid(tileGridPosition);
         }
     }
@@ -533,9 +633,10 @@ public class InventoryController : MonoBehaviour
             GetItemBack();
             position.y = 3000;
 
-            if (itemContainer != null)
+            if (containerItemGrid != null)
             {
-                itemContainer.HandleContainerGrid(false);
+                //containerItemGrid.HandleContainerGrid(false);
+                containerItemGrid.SetVisibility(false);
             }
 
             OnInventoryClosed?.Invoke();
@@ -552,19 +653,24 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        Vector2Int lastPosition = new Vector2Int(selectedItem.onGridPositionX, selectedItem.onGridPositionY);
+        //Vector2Int lastPosition = new Vector2Int(selectedItem.onGridPositionX, selectedItem.onGridPositionY);
+        Vector2Int lastPosition = new Vector2Int(selectedItem.positionOnGrid.x, selectedItem.positionOnGrid.y);
 
-        if (pickedItem != null)
-        {
-            selectedItemGrid = itemContainer.containerGrid;
-        }
-        else if (pickedInventoryItem != null)
-        {
-            selectedItemGrid = inventoryGrid;
-        }
+        //if (pickedItem != null)
+        //{
+        //    selectedItemGrid = itemContainer.containerGrid;
+        //}
+        //else if (pickedInventoryItem != null)
+        //{
+        //    selectedItemGrid = inventoryGrid;
+        //}
+
+        selectedItemGrid = testPickedItemsGrid;
+
         PlaceItemOnGrid(lastPosition);
     }
 
+    Протестить функцию
     private void PlaceItemOnGrid(Vector2Int tileGridPosition)
     {
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
@@ -579,65 +685,71 @@ public class InventoryController : MonoBehaviour
                 itemRectTransform.SetAsLastSibling();
             }
 
-            HandleLists(tileGridPosition);
-            pickedItem = null;
+            //HandleLists(tileGridPosition);
+
+            Нужно переделать код так, чтобы предметы удалялись из списка в момент поднятия, а не перемещения
+            // НОВОЕ
+            selectedItemGrid.testItemList.Add(testPickedItem);
+            testPickedItem.positionOnGrid.x = tileGridPosition.x;
+            testPickedItem.positionOnGrid.y = tileGridPosition.y;
+            //pickedItem = null;
             pickedInventoryItem = null;
         }
     }
 
     // TODO: переименовать метод.
     // Определяет, добавить новый предмет в сетку инвентаря игрока или контейнера
-    private void HandleLists(Vector2Int tileGridPosition)
-    {
-        if (selectedItemGrid != inventoryGrid)
-        {
-            if (pickedItem == null)
-            {
-                pickedItem = new SCRIPT_ItemContainer.StoredItem(
-                    pickedInventoryItem.Item,
-                    0,
-                    0,
-                    pickedInventoryItem.IsRotated,
-                    pickedInventoryItem.Weight,
-                    pickedInventoryItem.Width,
-                    pickedInventoryItem.Height
-                    );
-                itemContainer.storedItemList.Add(pickedItem);
-                //pickedItem.item = pickedInventoryItem.item;
-                //pickedItem.isRotated = pickedInventoryItem.isRotated;
-                inventoryItemList.Remove(pickedInventoryItem);
-                _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
-            }
-            pickedItem.positionOnGrid.x = tileGridPosition.x;
-            pickedItem.positionOnGrid.y = tileGridPosition.y;
+    //private void HandleLists(Vector2Int tileGridPosition)
+    //{
+    //    if (selectedItemGrid != inventoryGrid)
+    //    {
+    //        if (pickedItem == null)
+    //        {
+    //            pickedItem = new SCRIPT_ItemContainer.StoredItem(
+    //                pickedInventoryItem.Item,
+    //                0,
+    //                0,
+    //                pickedInventoryItem.IsRotated,
+    //                pickedInventoryItem.Weight,
+    //                pickedInventoryItem.Width,
+    //                pickedInventoryItem.Height
+    //                );
+    //            itemContainer.storedItemList.Add(pickedItem);
+    //            //pickedItem.item = pickedInventoryItem.item;
+    //            //pickedItem.isRotated = pickedInventoryItem.isRotated;
+    //            inventoryItemList.Remove(pickedInventoryItem);
+    //            _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
+    //        }
+    //        pickedItem.positionOnGrid.x = tileGridPosition.x;
+    //        pickedItem.positionOnGrid.y = tileGridPosition.y;
 
-        }
-        else
-        {
-            if (pickedInventoryItem == null)
-            {
-                Debug.Log(pickedItem);
-                pickedInventoryItem = new InventoryItem(
-                    pickedItem.item,
-                    0,
-                    0,
-                    pickedItem.isRotated,
-                    pickedItem.weight,
-                    pickedItem.Width,
-                    pickedItem.Height
-                    );
+    //    }
+    //    else
+    //    {
+    //        if (pickedInventoryItem == null)
+    //        {
+    //            Debug.Log(pickedItem);
+    //            pickedInventoryItem = new InventoryItem(
+    //                pickedItem.item,
+    //                0,
+    //                0,
+    //                pickedItem.isRotated,
+    //                pickedItem.weight,
+    //                pickedItem.Width,
+    //                pickedItem.Height
+    //                );
 
-                inventoryItemList.Add(pickedInventoryItem);
-                //pickedInventoryItem.item = pickedItem.item;
-                //pickedInventoryItem.isRotated = pickedItem.isRotated;
-                itemContainer.storedItemList.Remove(pickedItem);
-                _playerCarryingWeight.AddWeight(pickedItem.weight);
-            }
+    //            inventoryItemList.Add(pickedInventoryItem);
+    //            //pickedInventoryItem.item = pickedItem.item;
+    //            //pickedInventoryItem.isRotated = pickedItem.isRotated;
+    //            itemContainer.storedItemList.Remove(pickedItem);
+    //            _playerCarryingWeight.AddWeight(pickedItem.weight);
+    //        }
 
-            pickedInventoryItem.PositionOnGrid.x = tileGridPosition.x;
-            pickedInventoryItem.PositionOnGrid.y = tileGridPosition.y;
-        }
-    }
+    //        pickedInventoryItem.PositionOnGrid.x = tileGridPosition.x;
+    //        pickedInventoryItem.PositionOnGrid.y = tileGridPosition.y;
+    //    }
+    //}
 
     private void ItemIconDrag()
     {
