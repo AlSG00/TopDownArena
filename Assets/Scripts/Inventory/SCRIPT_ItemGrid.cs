@@ -16,7 +16,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public bool isPlayerInventory;
 
     //public List<SCRIPT_InventoryItem> testItemList = new List<SCRIPT_InventoryItem>();
-
+    // public ItemCollection itemCollection;
+    public List<SCRIPT_InventoryItem> testList = new List<SCRIPT_InventoryItem>();
     RectTransform rectTransform;
 
     public int _gridSizeWidth = 5;
@@ -29,6 +30,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         Initialize(_gridSizeWidth, _gridSizeHeight);
+       // itemCollection.itemList = new List<SCRIPT_InventoryItem>();
     }
 
     internal SCRIPT_InventoryItem PickUpItem(int x, int y)
@@ -53,7 +55,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         {
             for (int j = 0; j < item.Height; j++)
             {
-                inventoryItemSlot[item.onGridPositionX + i, item.onGridPositionY + j] = null;
+                //inventoryItemSlot[item.onGridPositionX + i, item.onGridPositionY + j] = null;
+                inventoryItemSlot[item.positionOnGrid.x + i, item.positionOnGrid.y + j] = null;
             }
         }
     }

@@ -59,14 +59,20 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        SCRIPT_InventoryController.OnInventoryOpened += ShowForInventory;
-        SCRIPT_InventoryController.OnInventoryClosed += HideOnInventoryClosed;
+        //SCRIPT_InventoryController.OnInventoryOpened += ShowForInventory;
+        //SCRIPT_InventoryController.OnInventoryClosed += HideOnInventoryClosed;
+
+        InventoryController.OnInventoryOpened += ShowForInventory;
+        InventoryController.OnInventoryClosed += HideOnInventoryClosed;
     }
 
     private void OnDisable()
     {
-        SCRIPT_InventoryController.OnInventoryOpened -= ShowForInventory;
-        SCRIPT_InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
+        //SCRIPT_InventoryController.OnInventoryOpened -= ShowForInventory;
+        //SCRIPT_InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
+
+        InventoryController.OnInventoryOpened -= ShowForInventory;
+        InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
     }
 
     public bool isInInventory = false;

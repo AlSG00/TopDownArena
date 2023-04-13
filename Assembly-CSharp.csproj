@@ -66,7 +66,6 @@
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerStamina.cs" />
     <Compile Include="Assets\Scripts\Implants\EyeAccessImplant.cs" />
     <Compile Include="Assets\Scripts\SceneSwap\nextSpawn.cs" />
-    <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableObject.cs" />
     <Compile Include="Assets\Scripts\SCRIPT_DoubleColorMeshLightningHandler.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Test_PlayOST.cs" />
@@ -204,10 +203,10 @@
     <Compile Include="Assets\Scripts\IgnoreCollision.cs" />
     <Compile Include="Assets\Scripts\Player\SCRIPT_PlayerResources.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\AINPC.cs" />
-    <Compile Include="Assets\Scripts\Inventory\SCRIPT_InventoryController.cs" />
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ItemCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

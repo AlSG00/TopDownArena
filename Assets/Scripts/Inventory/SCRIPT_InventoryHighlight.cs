@@ -26,10 +26,16 @@ public class SCRIPT_InventoryHighlight : MonoBehaviour
 
     public void SetPosition(SCRIPT_ItemGrid targetGrid, SCRIPT_InventoryItem targetItem)
     {
+        //Vector2 position = targetGrid.CalculatePositionOnGrid(
+        //    targetItem,
+        //    targetItem.onGridPositionX,
+        //    targetItem.onGridPositionY
+        //    );
+
         Vector2 position = targetGrid.CalculatePositionOnGrid(
             targetItem,
-            targetItem.onGridPositionX,
-            targetItem.onGridPositionY
+            targetItem.positionOnGrid.x,
+            targetItem.positionOnGrid.y
             );
 
         highlighter.localPosition = position;

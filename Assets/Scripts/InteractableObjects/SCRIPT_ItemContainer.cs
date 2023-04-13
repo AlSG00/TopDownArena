@@ -8,7 +8,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     public bool canInteract { get; set; }
     public bool inInteractionArea { get; set; }
 
-    public GameObject[] loot; // Список лута, который будет расставлен по контейнеру при первом открытии
+    //public GameObject[] loot; // Список лута, который будет расставлен по контейнеру при первом открытии
     [SerializeField] private int containerGridWidth = 5; // размеры сетки контейрена
     [SerializeField] private int containerGridHeight = 5;
     public InventoryController inventoryController;
@@ -86,6 +86,11 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         containerGrid._gridSizeWidth = containerGridWidth;
         containerGrid._gridSizeHeight = containerGridHeight;
         containerGrid.Initialize(containerGridWidth, containerGridHeight);
+
+        //НОВОЕ
+        containerGrid.testList = storedItemList;
+
+
         PlaceItems(isInitialized);
 
         isInitialized = true;
@@ -113,12 +118,12 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     private void PlaceItems(bool initialized)
     {
-        Нужно ли оно тут. Посмотреть, как зануляется флаг у других интерактивных объектов, я забыл
+       // Нужно ли оно тут. Посмотреть, как зануляется флаг у других интерактивных объектов, я забыл
 
 
-        СОВСЕМ ЗАБЫЛ
-        Нужно хранить данные не на ItemGrid, а в самом контейнере, потом что ItemGrid Постоянно меняется, между контейнерами
-            И получается нету никакой постоянной привязки к данным
+        //СОВСЕМ ЗАБЫЛ
+        //Нужно хранить данные не на ItemGrid, а в самом контейнере, потом что ItemGrid Постоянно меняется, между контейнерами
+        //    И получается нету никакой постоянной привязки к данным
 
         inventoryController.selectedItemGrid = containerGrid;
         if (inventoryController.itemContainer != null)

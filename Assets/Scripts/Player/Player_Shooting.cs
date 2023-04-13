@@ -38,11 +38,11 @@ public class Player_Shooting : MonoBehaviour
     private GameObject magazineHand;
 
     // Этой штуке нечего здесь делать. Переместить!
-    private SCRIPT_InventoryController inventory;
+    private InventoryController inventory;
 
     private void Start()
     {
-        inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
+        inventory = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
         //HandleInventory(false);
         TryGetComponent<SCRIPT_ActiveWeapon>(out activeWeapon);
         isShooting = false;
