@@ -31,6 +31,10 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
         {
             stackCount = inventoryItem.maxStackCount;
         }
+        else if (stackCount == 0)
+        {
+            stackCount = 1;
+        }
     }
 
     private void Start()
