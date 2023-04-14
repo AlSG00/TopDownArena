@@ -6,7 +6,7 @@ public class InventoryController : MonoBehaviour
 {
     [Header("References")]
     public SCRIPT_ItemGrid inventoryGrid;
-    [HideInInspector] public SCRIPT_ItemGrid selectedItemGrid;
+    /*[HideInInspector]*/ public SCRIPT_ItemGrid selectedItemGrid;
     [HideInInspector] public RectTransform selectedItemGridRect;
 
     [SerializeField] private Player_Movement _playerMovement;
@@ -66,19 +66,23 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
+        
         ItemIconDrag();
 
+        Debug.Log("Biba_1");
         if (Input.GetKeyDown(KeyCode.R))
         {
             RotateItem();
         }
 
+        Debug.Log("Biba_2");
         if (selectedItemGrid == null)
         {
             inventoryHighlight.Show(false);
             return;
         }
 
+        Debug.Log("Biba_3");
         HandleItemHighlight();
 
         if (Input.GetMouseButtonDown(0))
@@ -111,6 +115,7 @@ public class InventoryController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
+            Debug.Log("Govno");
             HandleStateIconsVisibility();
         }
 
@@ -146,15 +151,20 @@ public class InventoryController : MonoBehaviour
         //}
         
         int leftToStack = stackCount;
-        for (int i = 0; i < inventoryGrid.inventoryItemSlot.Length; i++)
+        //for (int i = 0; i < inventoryGrid.inventoryItemSlot.Length; i++)
+        //{
+        //    for (int j = 0; j < inventoryGrid.inventoryItemSlot; j++)
+        //    {
+        for (int i = 0; i < inventoryGrid._gridSizeHeight; i++)
         {
-            for (int j = 0; j < inventoryGrid.inventoryItemSlot.Length; j++)
+            for (int j = 0; j < inventoryGrid._gridSizeWidth; j++)
             {
                 if (inventoryGrid.inventoryItemSlot[i, j] != null &&
                     inventoryGrid.inventoryItemSlot[i, j].isStackable &&
                     inventoryGrid.inventoryItemSlot[i, j].name == itemToStack.name &&
                     inventoryGrid.inventoryItemSlot[i, j].stackCount < inventoryGrid.inventoryItemSlot[i, j].maxStackCount)
                 {
+                    я остановился вчера здесь
                     // TODO: Отладить и убедиться, что вычисления верные
                     int leftToStackTemp = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + leftToStack);
 

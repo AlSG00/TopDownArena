@@ -13,7 +13,7 @@ public class SCRIPT_GridInteract : MonoBehaviour, IPointerEnterHandler//S, //IPo
     {
         inventoryController = FindObjectOfType(typeof(InventoryController)) as InventoryController;
         itemGrid = GetComponent<SCRIPT_ItemGrid>();
-        inventoryController.selectedItemGridRect = inventoryController.selectedItemGrid.GetComponent<RectTransform>();
+        inventoryController.selectedItemGridRect = inventoryController.inventoryGrid.GetComponent<RectTransform>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
