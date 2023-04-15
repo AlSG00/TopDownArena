@@ -6,7 +6,7 @@ using UnityEngine;
 public class SCRIPT_ItemGrid : MonoBehaviour
 {
     // Хранение данных об инвентаре
-
+    // TODO: Сделать динамически???
     public const float _tileSizeWidth = 64;
     public const float _tileSizeHeight = 64;
 
@@ -17,7 +17,9 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     //public List<SCRIPT_InventoryItem> testItemList = new List<SCRIPT_InventoryItem>();
     // public ItemCollection itemCollection;
-    public List<SCRIPT_InventoryItem> testList = new List<SCRIPT_InventoryItem>();
+    public List<SCRIPT_InventoryItem> testList = new List<SCRIPT_InventoryItem>(); // 
+
+
     RectTransform rectTransform;
 
     public int _gridSizeWidth = 5;
@@ -109,6 +111,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     public bool returnRotated = false;
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
+        /*
         // TODO: сюда сделать, чтобы предметы стакались. Может сделать именную метку?
         //if (itemToInsert.isStackable == true)
         //{
@@ -168,6 +171,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             //    }
             //}
         //}
+        */
 
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;
@@ -224,8 +228,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public void PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY)
     {
-
-
         RectTransform rectTransform = inventoryItem.GetComponent<RectTransform>();
         rectTransform.SetParent(this.rectTransform);
 
@@ -245,6 +247,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         Vector2 position = CalculatePositionOnGrid(inventoryItem, positionX, positionY);
 
         rectTransform.localPosition = position;
+        testList.Add(inventoryItem);
     }
 
     public Vector2 CalculatePositionOnGrid(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY)

@@ -83,13 +83,19 @@ public class SCRIPT_InventoryItem : MonoBehaviour
             Debug.Log("Not rotatable");
             return;
         }
+
         isRotated = !isRotated;
+
+        Debug.Log(isRotated);
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.rotation = Quaternion.Euler(0, 0, isRotated == true ? 90f : 0f);
     }
 
-    public void UpdateCounter(int count)
+    public void UpdateCounter(/*int count*/)
     {
-        stackCounter.text = count.ToString();
+        if (stackCounter != null)
+        {
+            stackCounter.text = stackCount.ToString();
+        }
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263f03cdc99108e4683b1bacf1e6cb74, type: 3}
   m_Name: orange_1
   m_EditorClassIdentifier: 
+  name: Orange_1
+  icon: {fileID: 21300000, guid: e9814baf63818f349adce43de096a0cd, type: 3}
   width: 1
   height: 1
-  itemIcon: {fileID: 21300000, guid: e9814baf63818f349adce43de096a0cd, type: 3}

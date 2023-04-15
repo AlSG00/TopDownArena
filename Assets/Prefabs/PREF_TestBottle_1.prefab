@@ -154,10 +154,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7034253510274962957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65dfbd2eedc5bbe459ef82c9c047095e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d5f574afb875744dbec94aea5db6712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpAudio: {fileID: 8300000, guid: 4ab4a3e88f9814a40917106cb6a8472c, type: 3}
-  pickUpAudioSource: {fileID: 0}
-  inventoryPrefab: {fileID: 3847044455456163715, guid: 7086c75d860015a40a398a7073b5ad66,
+  stackCount: 0
+  inventoryItem: {fileID: 1765722264743598902, guid: 98dee053b85ea8d4dabb998c8a3fcd07,
     type: 3}
+  pickUpAudio: {fileID: 0}
+  pickUpAudioSource: {fileID: 0}

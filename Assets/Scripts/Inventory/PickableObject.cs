@@ -50,27 +50,35 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
     public void Interact()
     {
         canInteract = false;
-        Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryItem);
-        if (positionOnGrid == null)
-        {
-            alreadyInteracting = false;
-            return;
-        }
-
         inventory.selectedItemGrid = inventory.inventoryGrid;
         int stackCountRemaining = inventory.InsertIntoAvailableStacks(inventoryItem, stackCount);
         if (stackCountRemaining > 0)
         {
+            Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryItem);
+            if (positionOnGrid == null)
+            {
+                alreadyInteracting = false;
+                return;
+            }
+
             inventoryItem.stackCount = stackCountRemaining;
             inventory.InsertItemIntoInventory(inventoryItem);
-
-            if (pickUpAudioSource != null &&
-                pickUpAudio != null)
-            {
-                pickUpAudioSource.PlayOneShot(pickUpAudio);
-            }
+            PlayPickUpAudio();
+            Destroy(gameObject);
         }
+        else
+        {
+            PlayPickUpAudio();
+            Destroy(gameObject);
+        }
+    }
 
-        Destroy(gameObject);
+    private void PlayPickUpAudio()
+    {
+        if (pickUpAudioSource != null &&
+            pickUpAudio != null)
+        {
+            pickUpAudioSource.PlayOneShot(pickUpAudio);
+        }
     }
 }

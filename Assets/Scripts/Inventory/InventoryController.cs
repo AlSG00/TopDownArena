@@ -12,14 +12,16 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private Player_Movement _playerMovement;
     [SerializeField] private SCRIPT_PlayerCarryingWeight _playerCarryingWeight;
     [SerializeField] private SCRIPT_InventoryHighlight inventoryHighlight;
-    public SCRIPT_InventoryItem pickedInventoryItem; // Предмет с инвентаря игрока
+
+
+    
 
     public SCRIPT_ItemContainer itemContainer;
 
     //public SCRIPT_ItemContainer itemContainer;
-    public SCRIPT_InventoryItem selectedItem; // выбранный предмет, который уже висит на курсоре
+    
     [SerializeField] private Transform canvasTransform;
-    SCRIPT_InventoryItem overlapItem;
+    
     RectTransform itemRectTransform;
     [SerializeField] private Transform itemDropPoint;
     private bool isHoldingButton = false;
@@ -30,7 +32,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private float timeToHold = 0.3f;
 
     public List<SCRIPT_InventoryItem> inventoryItemList = new List<SCRIPT_InventoryItem>();
-    public List<SCRIPT_InventoryItem> stackableItemsTemporaryList = new List<SCRIPT_InventoryItem>();
+    //public List<SCRIPT_InventoryItem> stackableItemsTemporaryList = new List<SCRIPT_InventoryItem>();
 
     public delegate void OpenAction();
     public static event OpenAction OnInventoryOpened;
@@ -48,8 +50,13 @@ public class InventoryController : MonoBehaviour
 
     //}
 
-    public SCRIPT_InventoryItem testPickedItem;
-    public SCRIPT_ItemGrid testPickedItemsGrid;
+    //public SCRIPT_InventoryItem testPickedItem;
+    //public SCRIPT_InventoryItem pickedInventoryItem; // Предмет с инвентаря игрока
+    public SCRIPT_InventoryItem selectedItem; // выбранный предмет, который уже висит на курсоре
+    SCRIPT_InventoryItem overlapItem; // TODO: вспомнить, зачем это
+
+
+    public SCRIPT_ItemGrid testPickedItemsGrid; // Сетка, с которой был взят текущий предмет
     public SCRIPT_ItemGrid containerItemGrid;
 
     //public ItemCollection itemCollection;
@@ -62,6 +69,34 @@ public class InventoryController : MonoBehaviour
     private void Start()
     {
         inventoryGrid.testList = inventoryItemList;
+        //if (inventoryGrid.testList != null &&
+        //    inventoryGrid.testList.Count > 0)
+        //{
+        //    //foreach (SCRIPT_InventoryItem item in inventoryGrid.testList)
+        //    //{
+        //    //    Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(item);
+        //    //    if (positionOnGrid == null)
+        //    //    {
+        //    //        return;
+        //    //    }
+
+        //    //    InsertItemIntoInventory(item);
+        //    //}
+        //    for (int i = 0; i < inventoryGrid.testList.Count; i++)
+        //    {
+        //        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(inventoryGrid.testList[i]);
+        //        if (positionOnGrid == null)
+        //        {
+        //            return;
+        //        }
+
+        //        InsertItemIntoInventory(inventoryGrid.testList[i]);
+        //    }
+        //}
+
+        //inventoryGrid.testList.Remove(inventoryGrid.testList[0]);
+        //inventoryItemList.Remove(inventoryItemList[0]);
+        //inventoryGrid.testList = null;
     }
 
     private void Update()
@@ -69,20 +104,17 @@ public class InventoryController : MonoBehaviour
         
         ItemIconDrag();
 
-        Debug.Log("Biba_1");
         if (Input.GetKeyDown(KeyCode.R))
         {
             RotateItem();
         }
 
-        Debug.Log("Biba_2");
         if (selectedItemGrid == null)
         {
             inventoryHighlight.Show(false);
             return;
         }
 
-        Debug.Log("Biba_3");
         HandleItemHighlight();
 
         if (Input.GetMouseButtonDown(0))
@@ -119,6 +151,7 @@ public class InventoryController : MonoBehaviour
             HandleStateIconsVisibility();
         }
 
+        // TODO: Как нибудь переделать эту страшную штуку
         if (isHoldingButton &&
             isCheckingInventory == false)
         {
@@ -134,27 +167,8 @@ public class InventoryController : MonoBehaviour
 
     public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount)
     {
-        //stackableItemsTemporaryList = inventoryItemList.FindAll(
-        //        item => item.name == itemToStack.name
-        //        );
-
-        // TODO: Проверить, что тут вернется, если FindAll не найдет ни одного совпадения
-
-
-
-        //foreach (int item in stackableItemsTemporaryList)
-        //{
-
-        //    Раскидать подбираемый объект по доступным стакам
-        //        Потом возвращать обратно целое число оставшихся предметов в стаке
-        //        Если 0 то збс, иначе проводить целиком процедуру добавления в инвентарь
-        //}
-        
         int leftToStack = stackCount;
-        //for (int i = 0; i < inventoryGrid.inventoryItemSlot.Length; i++)
-        //{
-        //    for (int j = 0; j < inventoryGrid.inventoryItemSlot; j++)
-        //    {
+
         for (int i = 0; i < inventoryGrid._gridSizeHeight; i++)
         {
             for (int j = 0; j < inventoryGrid._gridSizeWidth; j++)
@@ -164,13 +178,15 @@ public class InventoryController : MonoBehaviour
                     inventoryGrid.inventoryItemSlot[i, j].name == itemToStack.name &&
                     inventoryGrid.inventoryItemSlot[i, j].stackCount < inventoryGrid.inventoryItemSlot[i, j].maxStackCount)
                 {
-                    я остановился вчера здесь
                     // TODO: Отладить и убедиться, что вычисления верные
                     int leftToStackTemp = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + leftToStack);
+
+                    тут неверное считаются стаки. Отладить
 
                     if (leftToStackTemp >= 0)
                     {
                         inventoryGrid.inventoryItemSlot[i, j].stackCount += leftToStack;
+                        inventoryGrid.inventoryItemSlot[i, j].UpdateCounter();
                         return 0;
                     }
                     else
@@ -178,14 +194,9 @@ public class InventoryController : MonoBehaviour
                         leftToStack -= inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount;
                         leftToStack = Mathf.Abs(leftToStack);
                         inventoryGrid.inventoryItemSlot[i, j].stackCount = inventoryGrid.inventoryItemSlot[i, j].maxStackCount;
-                        //leftToStack = Mathf.Abs(leftToStackTemp);
                     }
 
-                    //Написать метод, в котором будет увеличиваться стак и обновляться UI - счетчик;
-
-                    //Здесь прописать какую - нибудь логику, чтобы проверять, добавился ли стак полностью
-                    //  учесть, что подбираемая пачка не может быть больше, чем максимальный размер стака.Логично, но все же
-                    //        return;
+                    inventoryGrid.inventoryItemSlot[i, j].UpdateCounter();
                 }
             }
         }
@@ -239,8 +250,9 @@ public class InventoryController : MonoBehaviour
         selectedItem.isDropping = true;
 
         Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-        inventoryItemList.Remove(pickedInventoryItem);
-        _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
+        // inventoryItemList.Remove(pickedInventoryItem);
+        // _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
+        _playerCarryingWeight.TakeWeight(selectedItem.weight);
         Destroy(selectedItem.gameObject);
         inventoryHighlight.Show(false);
     }
@@ -280,10 +292,16 @@ public class InventoryController : MonoBehaviour
         //}
 
         //selectedItemGrid.testItemList.Remove(pickedInventoryItem);
-        selectedItemGrid.testList.Remove(pickedInventoryItem);
+        //selectedItemGrid.testList.Remove(pickedInventoryItem);
+        //if (selectedItemGrid.isPlayerInventory == true)
+        //{
+        //    _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
+        //}
+
+        selectedItemGrid.testList.Remove(selectedItem);
         if (selectedItemGrid.isPlayerInventory == true)
         {
-            _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
+            _playerCarryingWeight.TakeWeight(selectedItem.weight);
         }
 
 
@@ -319,7 +337,7 @@ public class InventoryController : MonoBehaviour
     {
         selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
         //pickedItem = null;
-        pickedInventoryItem = null;
+        //pickedInventoryItem = null;
         if (selectedItem != null)
         {
             //if (selectedItemGrid != inventoryGrid)
@@ -351,15 +369,16 @@ public class InventoryController : MonoBehaviour
             //    x.positionOnGrid.y == previousPosition.y
             //    );
 
-            previousPosition.x = selectedItem.positionOnGrid.x;
-            previousPosition.y = selectedItem.positionOnGrid.y;
-            testPickedItem = selectedItemGrid.testList.Find(x =>
-            x.positionOnGrid.x == previousPosition.x &&
-            x.positionOnGrid.y == previousPosition.y
-            );
+            //previousPosition.x = selectedItem.positionOnGrid.x;
+            //previousPosition.y = selectedItem.positionOnGrid.y;
+            //testPickedItem = selectedItemGrid.testList.Find(x =>
+            //x.positionOnGrid.x == previousPosition.x &&
+            //x.positionOnGrid.y == previousPosition.y
+            //);
 
             //НОВОЕ
-            selectedItemGrid.testList.Remove(testPickedItem);
+            //selectedItemGrid.testList.Remove(testPickedItem);
+            selectedItemGrid.testList.Remove(selectedItem);
 
             itemRectTransform = selectedItem.GetComponent<RectTransform>();
             itemRectTransform.SetAsLastSibling();
@@ -375,48 +394,19 @@ public class InventoryController : MonoBehaviour
         }
 
         CreateItemForUi(item);
-        SCRIPT_InventoryItem itemToInsert = selectedItem;
+        SCRIPT_InventoryItem itemToInsert = selectedItem; // TODO: Может лучше избавиться от глобально переменной Selected Item???
         selectedItem = null;
 
         InsertItem(itemToInsert);
 
-        //InventoryItem itemToPick = new InventoryItem(
-        //    item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab,
-        //    itemToInsert.onGridPositionX,
-        //    itemToInsert.onGridPositionY,
-        //    itemToInsert.isRotated,
-        //    itemToInsert.weight,
-        //    itemToInsert.Width,
-        //    itemToInsert.Height
-        //    );
-
-        //itemToPick.inventoryItem = itemToInsert;
-        //itemToPick.Name = itemToInsert.name;
-        //itemToPick.maxStackCount = itemToInsert.maxStackCount;
-
-        //inventoryItemList.Add(itemToPick);
-        //_playerCarryingWeight.AddWeight(itemToPick.Weight);
-
-
-        //inventoryItemList.Add(itemToInsert);
         // TODO: Продумать здесь логику на случай, если в инвентаре будет несколько разных сеток
-        inventoryGrid.testList.Add(itemToInsert);
+        //inventoryGrid.testList.Add(itemToInsert);
         _playerCarryingWeight.AddWeight(itemToInsert.weight);
     }
 
     //public void CreateItem(GameObject item)
     public void CreateItemForUi(SCRIPT_InventoryItem item)
     {
-        //_itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
-        //SCRIPT_InventoryItem inventoryItem = Instantiate(_itemPrefab).GetComponent<SCRIPT_InventoryItem>();
-
-        //selectedItem = inventoryItem;
-        //rectTransform = inventoryItem.GetComponent<RectTransform>();
-        //rectTransform.SetParent(canvasTransform);
-        //rectTransform.SetAsLastSibling();
-        //inventoryItem.Set(inventoryItem.itemData);
-
-        // _itemPrefab = item.GetComponent<SCRIPT_PickableObject>().inventoryPrefab;
         SCRIPT_InventoryItem inventoryItem = Instantiate(item);
 
         selectedItem = inventoryItem;
@@ -428,8 +418,6 @@ public class InventoryController : MonoBehaviour
 
     public void InsertItemIntoContainer(SCRIPT_InventoryItem item)
     {
-        //CreateContainerItem(item);
-
         CreateItemForUi(item);
 
         SCRIPT_InventoryItem itemToInsert = selectedItem;
@@ -507,6 +495,18 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
+        //SCRIPT_InventoryItem item = testPickedItemsGrid.testList.Find(x =>
+        //x.positionOnGrid.x == selectedItem.positionOnGrid.x &&
+        //x.positionOnGrid.y == selectedItem.positionOnGrid.y
+        //);
+
+        if (selectedItem.isRotatable)
+        {
+            //selectedItem.isRotated = !selectedItem.isRotated;
+            selectedItem.Rotated();
+        }
+
+        
         // TODO: если смогу избавиться от InventoryItem, то здесь можно будет все упростить
         //if (pickedInventoryItem != null)
         //{
@@ -538,23 +538,21 @@ public class InventoryController : MonoBehaviour
         //    }
         //}
 
-        if (testPickedItem != null)
-        {
-            SCRIPT_InventoryItem item = testPickedItemsGrid.testList.Find(x =>
-            x.positionOnGrid.x == selectedItem.positionOnGrid.x &&
-            x.positionOnGrid.y == selectedItem.positionOnGrid.y
-            );
+        //if (testPickedItem != null)
+        //{
+        //    SCRIPT_InventoryItem item = testPickedItemsGrid.testList.Find(x =>
+        //    x.positionOnGrid.x == selectedItem.positionOnGrid.x &&
+        //    x.positionOnGrid.y == selectedItem.positionOnGrid.y
+        //    );
 
-            if (item.isRotatable)
-            {
-                item.isRotated = !item.isRotated;
-            }
-        }
+        //    if (item.isRotatable)
+        //    {
+        //        item.isRotated = !item.isRotated;
+        //    }
+        //}
 
-        selectedItem.Rotated();
+        //selectedItem.Rotated();
     }
-
-    //Возникнет путаница между SelectedItem и testPickedItem.Уже сам запутался :D. Разобраться;
 
     Vector2Int oldPosition;
     SCRIPT_InventoryItem itemToHighlight;
@@ -607,6 +605,11 @@ public class InventoryController : MonoBehaviour
 
     private void LeftMouseButtonPress()
     {
+        if (isCheckingInventory == false)
+        {
+            return;
+        }
+
         Vector2Int tileGridPosition = GetTileGridPosition();
 
         if (selectedItem == null)
@@ -691,7 +694,7 @@ public class InventoryController : MonoBehaviour
     //Протестить функцию
     private void PlaceItemOnGrid(Vector2Int tileGridPosition)
     {
-        bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem);
+        bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
         if (complete)
         {
             selectedItem = null;
@@ -701,17 +704,18 @@ public class InventoryController : MonoBehaviour
                 overlapItem = null;
                 itemRectTransform = selectedItem.GetComponent<RectTransform>();
                 itemRectTransform.SetAsLastSibling();
+                selectedItemGrid.testList.Remove(selectedItem);
             }
 
             //HandleLists(tileGridPosition);
 
             //Нужно переделать код так, чтобы предметы удалялись из списка в момент поднятия, а не перемещения
             // НОВОЕ
-            selectedItemGrid.testList.Add(testPickedItem);
-            testPickedItem.positionOnGrid.x = tileGridPosition.x;
-            testPickedItem.positionOnGrid.y = tileGridPosition.y;
+            //selectedItemGrid.testList.Add(testPickedItem);
+            //testPickedItem.positionOnGrid.x = tileGridPosition.x;
+            //testPickedItem.positionOnGrid.y = tileGridPosition.y;
             //pickedItem = null;
-            pickedInventoryItem = null;
+            //pickedInventoryItem = null;
         }
     }
 

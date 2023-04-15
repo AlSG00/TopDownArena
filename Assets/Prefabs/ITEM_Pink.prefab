@@ -92,7 +92,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: test_pink_1
   itemData: {fileID: 11400000, guid: 9e911267786f48b42a6502e28cf22045, type: 2}
-  objectPrefab: {fileID: 3847044455456163715}
+  objectPrefab: {fileID: 3868300638631363618, guid: 9032ba33769953441b2fdac0c2e53682,
+    type: 3}
   weight: 2
   isRotatable: 1
   isUsable: 1
@@ -104,7 +105,7 @@ MonoBehaviour:
   stackCounter: {fileID: 0}
   isDropping: 0
   isRotated: 0
-  positionOnGrid: {x: 0, y: 0}
+  positionOnGrid: {x: 1, y: 1}
 --- !u!114 &2346497512983539580
 MonoBehaviour:
   m_ObjectHideFlags: 0

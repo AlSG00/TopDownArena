@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3164541755769597329}
   - component: {fileID: 4335594612689452812}
   - component: {fileID: 4335594612689452808}
-  - component: {fileID: 4335594612689452813}
-  - component: {fileID: 4335594612689452802}
   - component: {fileID: 4335594612689452803}
+  - component: {fileID: 4335594612689452802}
+  - component: {fileID: 8304223519415226026}
   m_Layer: 18
   m_Name: PREF_TestBottle_4
   m_TagString: Interactable
@@ -118,34 +118,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1041292729156527536, guid: c620f42da96608443ae8a37c9486f560, type: 3}
---- !u!114 &4335594612689452813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6144842087952304027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65dfbd2eedc5bbe459ef82c9c047095e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpAudio: {fileID: 8300000, guid: 4ab4a3e88f9814a40917106cb6a8472c, type: 3}
-  pickUpAudioSource: {fileID: 0}
-  inventoryPrefab: {fileID: 3847044455456163715, guid: 7086c75d860015a40a398a7073b5ad66,
-    type: 3}
---- !u!114 &4335594612689452802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6144842087952304027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6b334c0935829642b595f043fde9963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4335594612689452803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +133,32 @@ MonoBehaviour:
   m_RaycastLayerMask:
     serializedVersion: 2
     m_Bits: 1975
+--- !u!114 &4335594612689452802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144842087952304027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b334c0935829642b595f043fde9963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8304223519415226026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144842087952304027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5f574afb875744dbec94aea5db6712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stackCount: 0
+  inventoryItem: {fileID: 1765722264743598902, guid: 98dee053b85ea8d4dabb998c8a3fcd07,
+    type: 3}
+  pickUpAudio: {fileID: 0}
+  pickUpAudioSource: {fileID: 0}
