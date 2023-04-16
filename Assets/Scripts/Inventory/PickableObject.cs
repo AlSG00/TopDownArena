@@ -71,6 +71,7 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
             PlayPickUpAudio();
             Destroy(gameObject);
         }
+
     }
 
     private void PlayPickUpAudio()

@@ -390,6 +390,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Destructible.cs"
+"Assets/InventoryDebugWindow.cs"
 "Assets/Scripts/AttackPlayer.cs"
 "Assets/Scripts/Audio/AudioManager.cs"
 "Assets/Scripts/Audio/SCRIPT_MusicLoop.cs"

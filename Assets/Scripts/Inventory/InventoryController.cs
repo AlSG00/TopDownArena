@@ -181,7 +181,7 @@ public class InventoryController : MonoBehaviour
                     // TODO: Отладить и убедиться, что вычисления верные
                     int leftToStackTemp = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + leftToStack);
 
-                    тут неверное считаются стаки. Отладить
+                   // тут неверное считаются стаки. Отладить
 
                     if (leftToStackTemp >= 0)
                     {
@@ -191,7 +191,7 @@ public class InventoryController : MonoBehaviour
                     }
                     else
                     {
-                        leftToStack -= inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount;
+                        leftToStack = leftToStack - (inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount);
                         leftToStack = Mathf.Abs(leftToStack);
                         inventoryGrid.inventoryItemSlot[i, j].stackCount = inventoryGrid.inventoryItemSlot[i, j].maxStackCount;
                     }

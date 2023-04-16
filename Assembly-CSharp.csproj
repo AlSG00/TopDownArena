@@ -177,6 +177,7 @@
     <Compile Include="Assets\Scripts\Camera\SCRIPT_CameraShake.cs" />
     <Compile Include="Assets\Scripts\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Weapon\Gun.cs" />
+    <Compile Include="Assets\InventoryDebugWindow.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSCuller.cs" />
     <Compile Include="Assets\Thirdparty\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Interaction\SCRIPT_PlayerInteractionArea.cs" />
@@ -207,7 +208,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\InventoryDebugWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

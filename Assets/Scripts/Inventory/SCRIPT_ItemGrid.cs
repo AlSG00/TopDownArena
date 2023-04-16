@@ -248,6 +248,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
         rectTransform.localPosition = position;
         testList.Add(inventoryItem);
+        inventoryItem.UpdateCounter();
     }
 
     public Vector2 CalculatePositionOnGrid(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY)
