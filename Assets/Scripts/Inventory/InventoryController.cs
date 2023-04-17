@@ -263,7 +263,9 @@ public class InventoryController : MonoBehaviour
         // TODO: сделать логику дл€ стаков
         if (selectedItem == null)
         {
+            ѕодправить здесь, чтобы предмет не бралс€ в курсор, когда используешь его
             PickItemFromGrid(tileGridPosition);
+            
         }
 
         //TODO: ѕо идее, здесь не сработает данное условие, переделать на обращение к InventoryItem
@@ -279,6 +281,8 @@ public class InventoryController : MonoBehaviour
             selectedItem.useItemAudioSource.PlayOneShot(selectedItem.useItemAudio);
         }
 
+
+        ѕроверить здесь, чтобы вес предметов мен€лс€ правильно, когда исользуешь их из стака
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
         //if (selectedItemGrid != inventoryGrid)
@@ -290,13 +294,15 @@ public class InventoryController : MonoBehaviour
         //    inventoryItemList.Remove(pickedInventoryItem);
         //    _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         //}
-
+        —делать, чтобы вес предмета добавл€лс€, когда подбираешь и он стакаетс€
+            „то делать со стаком патронов
         //selectedItemGrid.testItemList.Remove(pickedInventoryItem);
         //selectedItemGrid.testList.Remove(pickedInventoryItem);
         //if (selectedItemGrid.isPlayerInventory == true)
         //{
         //    _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         //}
+        —делать, чтобы можно было выбрасывать стак и он сохран€л свои значени€
 
         selectedItemGrid.testList.Remove(selectedItem);
         if (selectedItemGrid.isPlayerInventory == true)
@@ -304,9 +310,17 @@ public class InventoryController : MonoBehaviour
             _playerCarryingWeight.TakeWeight(selectedItem.weight);
         }
 
-
-        Destroy(selectedItem.gameObject);
-        inventoryHighlight.Show(false);
+        // TODO: —делать, чтобы вес уменьшалс€
+        if (selectedItem.stackCount > 1)
+        {
+            selectedItem.stackCount--;
+            selectedItem.UpdateCounter();
+        }
+        else
+        {
+            Destroy(selectedItem.gameObject);
+            inventoryHighlight.Show(false);
+        }
     }
 
     //private void PlaceItem(Vector2Int tileGridPosition)

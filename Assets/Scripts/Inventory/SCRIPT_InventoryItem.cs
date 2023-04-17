@@ -91,6 +91,8 @@ public class SCRIPT_InventoryItem : MonoBehaviour
         rectTransform.rotation = Quaternion.Euler(0, 0, isRotated == true ? 90f : 0f);
     }
 
+   
+
     public void UpdateCounter(/*int count*/)
     {
         if (stackCounter != null)

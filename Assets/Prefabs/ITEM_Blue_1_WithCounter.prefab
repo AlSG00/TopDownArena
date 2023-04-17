@@ -305,7 +305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Blue_1
   itemData: {fileID: 11400000, guid: 6b0fa27cdad009442ac7bf6c946fa9dd, type: 2}
-  objectPrefab: {fileID: 3847044455456163715}
+  objectPrefab: {fileID: 7034253510274962957, guid: 669b3a7a316dbc24ca5fb4ee9a1f18e8,
+    type: 3}
   weight: 1
   isRotatable: 0
   isUsable: 1
