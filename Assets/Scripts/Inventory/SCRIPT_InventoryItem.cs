@@ -55,7 +55,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     
     [HideInInspector] public bool isDropping; //TODO: Возможно могу избавиться. Флаг, чтобы при выкидывании не спавнилось несколько предметов сразу
     [HideInInspector] public bool isRotated = false; // вращался ли предмет
-    
+    [HideInInspector] public bool isOnCursor = false;
     
     //public int onGridPositionX; // TODO: Наверное, от этих двух int'ов можно избавиться, раз уж тут есть PositionOnGrid
     //public int onGridPositionY;

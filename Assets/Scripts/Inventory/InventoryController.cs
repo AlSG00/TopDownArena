@@ -179,24 +179,45 @@ public class InventoryController : MonoBehaviour
                     inventoryGrid.inventoryItemSlot[i, j].stackCount < inventoryGrid.inventoryItemSlot[i, j].maxStackCount)
                 {
                     // TODO: ќтладить и убедитьс€, что вычислени€ верные
-                    int leftToStackTemp = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + leftToStack);
+                    // int leftToStackTemp = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - (inventoryGrid.inventoryItemSlot[i, j].stackCount + leftToStack);
 
-                   // тут неверное считаютс€ стаки. ќтладить
+                    //// тут неверное считаютс€ стаки. ќтладить
 
-                    if (leftToStackTemp >= 0)
+                    // if (leftToStackTemp >= 0)
+                    // {
+                    //     inventoryGrid.inventoryItemSlot[i, j].stackCount += leftToStack;
+                    //     inventoryGrid.inventoryItemSlot[i, j].UpdateCounter();
+                    //     _playerCarryingWeight.AddWeight(leftToStack * inventoryGrid.inventoryItemSlot[i, j].weight);
+                    //     return 0;
+                    // }
+                    // else
+                    // {
+
+                    //     leftToStack = leftToStack - (inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount);
+                    //     leftToStack = Mathf.Abs(leftToStack);
+                    //     float weightToAdd = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount + leftToStack;
+                    //     _playerCarryingWeight.AddWeight(weightToAdd);
+                    //     inventoryGrid.inventoryItemSlot[i, j].stackCount = inventoryGrid.inventoryItemSlot[i, j].maxStackCount;
+                    //     //_playerCarryingWeight.AddWeight(weightToAdd);
+
+
+                    // }
+
+                    int temp = leftToStack + inventoryGrid.inventoryItemSlot[i, j].stackCount;
+
+                    if (temp < inventoryGrid.inventoryItemSlot[i, j].maxStackCount)
                     {
+                        _playerCarryingWeight.AddWeight(leftToStack * inventoryGrid.inventoryItemSlot[i, j].weight);
                         inventoryGrid.inventoryItemSlot[i, j].stackCount += leftToStack;
                         inventoryGrid.inventoryItemSlot[i, j].UpdateCounter();
-                        _playerCarryingWeight.AddWeight(leftToStack * inventoryGrid.inventoryItemSlot[i, j].weight);
                         return 0;
                     }
                     else
                     {
-                        float weightToAdd = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - leftToStack;
-                        leftToStack = leftToStack - (inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount);
-                        leftToStack = Mathf.Abs(leftToStack);
-                        inventoryGrid.inventoryItemSlot[i, j].stackCount = inventoryGrid.inventoryItemSlot[i, j].maxStackCount;
-                        _playerCarryingWeight.AddWeight(weightToAdd);
+                        int valueToFillStack = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount;
+                        leftToStack -= valueToFillStack;
+                        inventoryGrid.inventoryItemSlot[i, j].stackCount += valueToFillStack;
+                        _playerCarryingWeight.AddWeight(valueToFillStack * inventoryGrid.inventoryItemSlot[i, j].weight);
                     }
 
                     inventoryGrid.inventoryItemSlot[i, j].UpdateCounter();
@@ -254,13 +275,14 @@ public class InventoryController : MonoBehaviour
         selectedItem.isDropping = true;
 
         GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-        SCRIPT_InventoryItem droppedItemData = droppedItem.GetComponent<SCRIPT_InventoryItem>();
-        if (droppedItemData.isSingleDropping == false)
+        PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
+        if (droppedItemData.inventoryItem.isSingleDropping == false)
         {
             droppedItemData.stackCount = selectedItem.stackCount;
             selectedItemGrid.testList.Remove(selectedItem);
             Destroy(selectedItem.gameObject);
             inventoryHighlight.Show(false);
+            _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
         }
         else
         {
@@ -272,16 +294,13 @@ public class InventoryController : MonoBehaviour
             }
             else
             {
+                selectedItem.isDropping = false;
                 selectedItem.stackCount--;
+                selectedItem.UpdateCounter();
             }
-        }
 
-        // inventoryItemList.Remove(pickedInventoryItem);
-        // _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
-        
-        
-        
-        
+            _playerCarryingWeight.TakeWeight(selectedItem.weight);
+        }
 
         droppedItem = null;
         droppedItemData = null;
@@ -298,6 +317,11 @@ public class InventoryController : MonoBehaviour
             //PickItemFromGrid(tileGridPosition);
             selectedItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
             
+        }
+
+        if (selectedItem.isOnCursor)
+        {
+            return;
         }
 
         //TODO: ѕо идее, здесь не сработает данное условие, переделать на обращение к InventoryItem
@@ -390,6 +414,7 @@ public class InventoryController : MonoBehaviour
         //pickedInventoryItem = null;
         if (selectedItem != null)
         {
+            selectedItem.isOnCursor = true;
             //if (selectedItemGrid != inventoryGrid)
             //{
             //    previousPosition.x = selectedItem.onGridPositionX;
@@ -747,6 +772,7 @@ public class InventoryController : MonoBehaviour
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: –азобратьс€, как это работает
         if (complete)
         {
+            selectedItem.isOnCursor = false;
             selectedItem = null;
             if (overlapItem != null)
             {

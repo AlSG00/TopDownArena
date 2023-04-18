@@ -16,7 +16,7 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
     [Header("References")]
     //private SCRIPT_InventoryController inventory;
     private InventoryController inventory; // TODO: Наверное, заменить на Ивент
-    [SerializeField] SCRIPT_InventoryItem inventoryItem;
+    public SCRIPT_InventoryItem inventoryItem;
 
     [Header("Audio")]
     [SerializeField] private AudioClip pickUpAudio;
