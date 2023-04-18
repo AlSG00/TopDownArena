@@ -42,6 +42,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour
 
     [Header("Stacking properties")]
     public bool isStackable = false; // можно ли стакать предмет
+    public bool isSingleDropping = false; // ћожно ли выбросить один предмет, а не весь стак
     [Range(0, 999)] public int stackCount = 0; // текущий размер стака
     [Range(0, 999)] public int maxStackCount = 0; // максимальный размер стака
 

@@ -187,13 +187,16 @@ public class InventoryController : MonoBehaviour
                     {
                         inventoryGrid.inventoryItemSlot[i, j].stackCount += leftToStack;
                         inventoryGrid.inventoryItemSlot[i, j].UpdateCounter();
+                        _playerCarryingWeight.AddWeight(leftToStack * inventoryGrid.inventoryItemSlot[i, j].weight);
                         return 0;
                     }
                     else
                     {
+                        float weightToAdd = inventoryGrid.inventoryItemSlot[i, j].maxStackCount - leftToStack;
                         leftToStack = leftToStack - (inventoryGrid.inventoryItemSlot[i, j].maxStackCount - inventoryGrid.inventoryItemSlot[i, j].stackCount);
                         leftToStack = Mathf.Abs(leftToStack);
                         inventoryGrid.inventoryItemSlot[i, j].stackCount = inventoryGrid.inventoryItemSlot[i, j].maxStackCount;
+                        _playerCarryingWeight.AddWeight(weightToAdd);
                     }
 
                     inventoryGrid.inventoryItemSlot[i, j].UpdateCounter();
@@ -235,7 +238,8 @@ public class InventoryController : MonoBehaviour
         Vector2Int tileGridPosition = GetTileGridPosition();
         if (selectedItem == null)
         {
-            PickItemFromGrid(tileGridPosition);
+            //PickItemFromGrid(tileGridPosition);
+            selectedItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
         }
 
         if (selectedItem == null)
@@ -249,12 +253,39 @@ public class InventoryController : MonoBehaviour
         }
         selectedItem.isDropping = true;
 
-        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+        GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+        SCRIPT_InventoryItem droppedItemData = droppedItem.GetComponent<SCRIPT_InventoryItem>();
+        if (droppedItemData.isSingleDropping == false)
+        {
+            droppedItemData.stackCount = selectedItem.stackCount;
+            selectedItemGrid.testList.Remove(selectedItem);
+            Destroy(selectedItem.gameObject);
+            inventoryHighlight.Show(false);
+        }
+        else
+        {
+            if (selectedItem.stackCount == 1)
+            {
+                selectedItemGrid.testList.Remove(selectedItem);
+                Destroy(selectedItem.gameObject);
+                inventoryHighlight.Show(false);
+            }
+            else
+            {
+                selectedItem.stackCount--;
+            }
+        }
+
         // inventoryItemList.Remove(pickedInventoryItem);
         // _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
-        _playerCarryingWeight.TakeWeight(selectedItem.weight);
-        Destroy(selectedItem.gameObject);
-        inventoryHighlight.Show(false);
+        
+        
+        
+        
+
+        droppedItem = null;
+        droppedItemData = null;
+        selectedItem = null;
     }
 
     private void RightMouseButtonPress()
@@ -263,8 +294,9 @@ public class InventoryController : MonoBehaviour
         // TODO: сделать логику для стаков
         if (selectedItem == null)
         {
-            Подправить здесь, чтобы предмет не брался в курсор, когда используешь его
-            PickItemFromGrid(tileGridPosition);
+            //Подправить здесь, чтобы предмет не брался в курсор, когда используешь его
+            //PickItemFromGrid(tileGridPosition);
+            selectedItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
             
         }
 
@@ -282,7 +314,7 @@ public class InventoryController : MonoBehaviour
         }
 
 
-        Проверить здесь, чтобы вес предметов менялся правильно, когда исользуешь их из стака
+        //Проверить здесь, чтобы вес предметов менялся правильно, когда исользуешь их из стака
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
         //if (selectedItemGrid != inventoryGrid)
@@ -294,17 +326,18 @@ public class InventoryController : MonoBehaviour
         //    inventoryItemList.Remove(pickedInventoryItem);
         //    _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         //}
-        Сделать, чтобы вес предмета добавлялся, когда подбираешь и он стакается
-            Что делать со стаком патронов
+        //Сделать, чтобы вес предмета добавлялся, когда подбираешь и он стакается
+        //    Что делать со стаком патронов
         //selectedItemGrid.testItemList.Remove(pickedInventoryItem);
         //selectedItemGrid.testList.Remove(pickedInventoryItem);
         //if (selectedItemGrid.isPlayerInventory == true)
         //{
         //    _playerCarryingWeight.TakeWeight(pickedInventoryItem.weight);
         //}
-        Сделать, чтобы можно было выбрасывать стак и он сохранял свои значения
 
-        selectedItemGrid.testList.Remove(selectedItem);
+      //  TODO: Сделать, чтобы можно было выбрасывать стак и он сохранял свои значения
+
+        //selectedItemGrid.testList.Remove(selectedItem);
         if (selectedItemGrid.isPlayerInventory == true)
         {
             _playerCarryingWeight.TakeWeight(selectedItem.weight);
@@ -318,9 +351,12 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
+            selectedItemGrid.testList.Remove(selectedItem); // НОВОЕ
             Destroy(selectedItem.gameObject);
             inventoryHighlight.Show(false);
         }
+
+        selectedItem = null;
     }
 
     //private void PlaceItem(Vector2Int tileGridPosition)
@@ -415,7 +451,7 @@ public class InventoryController : MonoBehaviour
 
         // TODO: Продумать здесь логику на случай, если в инвентаре будет несколько разных сеток
         //inventoryGrid.testList.Add(itemToInsert);
-        _playerCarryingWeight.AddWeight(itemToInsert.weight);
+        _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
     }
 
     //public void CreateItem(GameObject item)
