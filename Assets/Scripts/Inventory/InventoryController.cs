@@ -25,7 +25,7 @@ public class InventoryController : MonoBehaviour
     RectTransform itemRectTransform;
     [SerializeField] private Transform itemDropPoint;
     private bool isHoldingButton = false;
-    private bool isCheckingInventory = false;
+    public bool isCheckingInventory = false;
     public bool isHighlightingStateIcons = false;
 
     private float buttonHoldTime = 0f;
@@ -147,7 +147,6 @@ public class InventoryController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
-            Debug.Log("Govno");
             HandleStateIconsVisibility();
         }
 
@@ -251,15 +250,14 @@ public class InventoryController : MonoBehaviour
 
     private void DropItem()
     {
-        if (selectedItemGrid != inventoryGrid)
-        {
-            return;
-        }
+        //if (selectedItemGrid != inventoryGrid)
+        //{
+        //    return;
+        //}
 
         Vector2Int tileGridPosition = GetTileGridPosition();
         if (selectedItem == null)
         {
-            //PickItemFromGrid(tileGridPosition);
             selectedItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
         }
 
@@ -274,36 +272,107 @@ public class InventoryController : MonoBehaviour
         }
         selectedItem.isDropping = true;
 
-        GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-        PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
-        if (droppedItemData.inventoryItem.isSingleDropping == false)
+        if (selectedItem.isOnCursor)
         {
-            droppedItemData.stackCount = selectedItem.stackCount;
-            selectedItemGrid.testList.Remove(selectedItem);
-            Destroy(selectedItem.gameObject);
-            inventoryHighlight.Show(false);
-            _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
-        }
-        else
-        {
-            if (selectedItem.stackCount == 1)
+            if (selectedItem.isSingleDropping)
             {
+                // если предмет дропаетс€ по одному, то спвним пачку предметов
+                for (int i = 0; i < selectedItem.stackCount; i++)
+                {
+                    Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+                }
                 selectedItemGrid.testList.Remove(selectedItem);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
             else
             {
-                selectedItem.isDropping = false;
-                selectedItem.stackCount--;
-                selectedItem.UpdateCounter();
+                //иначе мы спавним один объект и присваиваем ему стак
+                GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+                PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
+                droppedItemData.stackCount = selectedItem.stackCount;
+                selectedItemGrid.testList.Remove(selectedItem);
+                Destroy(selectedItem.gameObject);
+                inventoryHighlight.Show(false);
+                _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
             }
 
-            _playerCarryingWeight.TakeWeight(selectedItem.weight);
+        }
+        else
+        {
+            //если предмет не на курсоре
+            if (selectedItem.isSingleDropping)
+            {
+                //если дропаетс€ по одному
+
+                // TODO: —делать условие, если зажать кнопку выброски, то выбрасываетс€ весь стак
+                //if (Holded)
+                //{
+                //если «јжали, то дропаем весь стак
+                //}
+                //else
+                //{
+                //если Ќјжали, то дропаем по одному
+                //}
+                if (selectedItem.stackCount == 1)
+                {
+                    selectedItemGrid.testList.Remove(selectedItem);
+                    Destroy(selectedItem.gameObject);
+                    inventoryHighlight.Show(false);
+                }
+                else
+                {
+                    selectedItem.isDropping = false;
+                    selectedItem.stackCount--;
+                    selectedItem.UpdateCounter();
+                }
+                Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+                _playerCarryingWeight.TakeWeight(selectedItem.weight);
+            }
+            else
+            {
+                //иначе запрещаем выбрасывать и предупреждаем, что можно выбрасывать только стаком
+                // TODO: или лучше просто выбрасывать стак
+                GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+                PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
+                droppedItemData.stackCount = selectedItem.stackCount;
+                selectedItemGrid.testList.Remove(selectedItem);
+                Destroy(selectedItem.gameObject);
+                inventoryHighlight.Show(false);
+                _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+            }
         }
 
-        droppedItem = null;
-        droppedItemData = null;
+        //GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+        //PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
+        //if (droppedItemData.inventoryItem.isSingleDropping == false)
+        //{
+        //    droppedItemData.stackCount = selectedItem.stackCount;
+        //    selectedItemGrid.testList.Remove(selectedItem);
+        //    Destroy(selectedItem.gameObject);
+        //    inventoryHighlight.Show(false);
+        //    _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+        //}
+        //else
+        //{
+        //    if (selectedItem.stackCount == 1)
+        //    {
+        //        selectedItemGrid.testList.Remove(selectedItem);
+        //        Destroy(selectedItem.gameObject);
+        //        inventoryHighlight.Show(false);
+        //    }
+        //    else
+        //    {
+        //        selectedItem.isDropping = false;
+        //        selectedItem.stackCount--;
+        //        selectedItem.UpdateCounter();
+        //    }
+
+        //    _playerCarryingWeight.TakeWeight(selectedItem.weight);
+        //}
+
+       // droppedItem = null;
+       // droppedItemData = null;
         selectedItem = null;
     }
 

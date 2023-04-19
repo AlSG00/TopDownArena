@@ -312,13 +312,14 @@ MonoBehaviour:
   isUsable: 1
   isStackable: 1
   isSingleDropping: 1
-  stackCount: 3
+  stackCount: 1
   maxStackCount: 5
   useItemAudio: {fileID: 8300000, guid: 4c970b6d0db5c194a8ecb5be17e6dda5, type: 3}
   useItemAudioSource: {fileID: 0}
   stackCounter: {fileID: 2136076231}
   isDropping: 0
   isRotated: 0
+  isOnCursor: 0
   positionOnGrid: {x: 0, y: 0}
 --- !u!114 &2702102103260729258
 MonoBehaviour:

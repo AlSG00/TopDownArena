@@ -46,7 +46,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     private void Awake()
     {
-        HandleContainerGrid(false);
+        SetContainerGridVisibility(false);
         inventoryController = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
 
         alreadyInteracting = false;
@@ -65,7 +65,8 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
             return;
         }
 
-        HandleContainerGrid(true);
+        SetContainerGridVisibility(true);
+        inventoryController.isCheckingInventory = !inventoryController.isCheckingInventory;
         inventoryController.SetInventoryVisibility(true);
         InitializeGrid();
         canInteract = true;
@@ -97,7 +98,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         alreadyInteracting = false;
     }
 
-    public void HandleContainerGrid(bool isActive)
+    public void SetContainerGridVisibility(bool isActive)
     {
         Vector2 position = new Vector2();
         RectTransform inventoryRect = containerGrid.GetComponent<RectTransform>();
