@@ -62,8 +62,10 @@ public class StateIconVisibilityHandler : MonoBehaviour
         //SCRIPT_InventoryController.OnInventoryOpened += ShowForInventory;
         //SCRIPT_InventoryController.OnInventoryClosed += HideOnInventoryClosed;
 
-        InventoryController.OnInventoryOpened += ShowForInventory;
-        InventoryController.OnInventoryClosed += HideOnInventoryClosed;
+        //InventoryController.OnInventoryOpened += ShowForInventory;
+        //InventoryController.OnInventoryClosed += HideOnInventoryClosed;
+
+        InventoryController.OnInventoryOpened -= SetVisibility;
     }
 
     private void OnDisable()
@@ -71,24 +73,44 @@ public class StateIconVisibilityHandler : MonoBehaviour
         //SCRIPT_InventoryController.OnInventoryOpened -= ShowForInventory;
         //SCRIPT_InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
 
-        InventoryController.OnInventoryOpened -= ShowForInventory;
-        InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
+        //InventoryController.OnInventoryOpened -= ShowForInventory;
+        //InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
+
+        InventoryController.OnInventoryOpened -= SetVisibility;
     }
 
     public bool isInInventory = false;
-    private void ShowForInventory()
-    {
-        isInInventory = true;
-        StopAllCoroutines();
-        StartCoroutine(SmoothAppearRoutine());
-    }
+    //private void ShowForInventory()
+    //{
+    //    isInInventory = true;
+    //    StopAllCoroutines();
+    //    StartCoroutine(SmoothAppearRoutine());
+    //}
 
-    private void HideOnInventoryClosed()
+    //private void HideOnInventoryClosed()
+    //{
+    //    //Debug.Log("HideForInventory");
+    //    isInInventory = false;
+    //    StopAllCoroutines();
+    //    StartCoroutine(SmoothDisappearRoutine());
+    //}
+
+    private void SetVisibility(bool isInventoryOpened, bool containerOpened)
     {
-        //Debug.Log("HideForInventory");
-        isInInventory = false;
-        StopAllCoroutines();
-        StartCoroutine(SmoothDisappearRoutine());
+        isInInventory = isInventoryOpened;
+
+        if (isInventoryOpened)
+        {
+            isInInventory = true;
+            StopAllCoroutines();
+            StartCoroutine(SmoothAppearRoutine());
+        }
+        else
+        {
+            isInInventory = false;
+            StopAllCoroutines();
+            StartCoroutine(SmoothDisappearRoutine());
+        }
     }
 
     private IEnumerator SmoothAppearRoutine()

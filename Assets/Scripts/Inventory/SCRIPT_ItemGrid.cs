@@ -28,10 +28,20 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     Vector2 positionOnTheGrid = new Vector2();
     Vector2Int tileGridPosition;
 
-    private void Start()
+    private void OnEnable()
+    {
+        InventoryController.OnInventoryOpened += SetVisibility;
+    }
+    private void OnDisable()
+    {
+        InventoryController.OnInventoryOpened -= SetVisibility;
+    }
+
+    private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         Initialize(_gridSizeWidth, _gridSizeHeight);
+        SetVisibility(false, false);
        // itemCollection.itemList = new List<SCRIPT_InventoryItem>();
     }
 
@@ -361,9 +371,16 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         inventoryItemSlot = null;
     }
 
-    public void SetVisibility(bool isVisible)
+    public void SetVisibility(bool isVisible, bool openingContainer)
     {
         Vector2 position = new Vector2();
+        if (isPlayerInventory == false &&
+            openingContainer == false)
+        {
+            position.y = 3000;
+            return;
+        }
+
         RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
 
         if (isVisible == true)

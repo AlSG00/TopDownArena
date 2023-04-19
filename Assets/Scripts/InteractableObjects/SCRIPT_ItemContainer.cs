@@ -65,9 +65,10 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
             return;
         }
 
-        SetContainerGridVisibility(true);
-        inventoryController.isCheckingInventory = !inventoryController.isCheckingInventory;
-        inventoryController.SetInventoryVisibility(true);
+        //SetContainerGridVisibility(true);
+        //inventoryController.isCheckingInventory = !inventoryController.isCheckingInventory;
+        //inventoryController.SetInventoryVisibility(true);
+        inventoryController.ShowContainerGrid(true);
         InitializeGrid();
         canInteract = true;
     }
@@ -100,21 +101,26 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     public void SetContainerGridVisibility(bool isActive)
     {
-        Vector2 position = new Vector2();
-        RectTransform inventoryRect = containerGrid.GetComponent<RectTransform>();
 
-        if (isActive)
-        {
-            position.y = 630;
-        }
-        else
-        {
-            position.y = 3000;
-            alreadyInteracting = false;
-        }
-        position.x = inventoryRect.position.x;
+        inventoryController.ShowContainerGrid(isActive);
 
-        inventoryRect.position = position;
+        //Vector2 position = new Vector2();
+        //RectTransform inventoryRect = containerGrid.GetComponent<RectTransform>();
+
+        //if (isActive)
+        //{
+        //    position.y = 630;
+        //}
+        //else
+        //{
+        //    position.y = 3000;
+        //    alreadyInteracting = false;
+        //}
+        //position.x = inventoryRect.position.x;
+
+        //inventoryRect.position = position;
+
+        //InventoryController.OnInventoryOpened?.Invoke(true, true);
     }
 
     private void PlaceItems(bool initialized)

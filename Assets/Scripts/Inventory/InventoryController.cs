@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,11 +35,11 @@ public class InventoryController : MonoBehaviour
     public List<SCRIPT_InventoryItem> inventoryItemList = new List<SCRIPT_InventoryItem>();
     //public List<SCRIPT_InventoryItem> stackableItemsTemporaryList = new List<SCRIPT_InventoryItem>();
 
-    public delegate void OpenAction();
+    public delegate void OpenAction(bool isOpened, bool openingContainer);
     public static event OpenAction OnInventoryOpened;
 
-    public delegate void CloseAction();
-    public static event CloseAction OnInventoryClosed;
+    //public delegate void CloseAction();
+    //public static event CloseAction OnInventoryClosed;
 
     //private void OnEnable()
     //{
@@ -159,9 +160,14 @@ public class InventoryController : MonoBehaviour
                 && isHighlightingStateIcons == false)
             {
                 isHighlightingStateIcons = true;
-                OnInventoryOpened?.Invoke();
+                OnInventoryOpened?.Invoke(true, false);
             }
         }
+    }
+
+    public void ShowContainerGrid(bool isActive)
+    {
+        OnInventoryOpened?.Invoke(true, isActive);peqwoia
     }
 
     public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount)
@@ -241,7 +247,8 @@ public class InventoryController : MonoBehaviour
         {
             if (isCheckingInventory == false)
             {
-                OnInventoryClosed?.Invoke();
+                //OnInventoryClosed?.Invoke();
+                OnInventoryOpened?.Invoke(false, false); // NEW;
             }
         }
 
@@ -784,31 +791,35 @@ public class InventoryController : MonoBehaviour
     // TODO: Переделать метод. Он не учитывает другие размеры экрана кроме фулл хд
     public void SetInventoryVisibility(bool isInventoryOpened)
     {
-        Vector2 position = new Vector2();
-        RectTransform inventoryRect = inventoryGrid.GetComponent<RectTransform>(); // TODO: убрать GetComponent
+        //Vector2 position = new Vector2();
+        //RectTransform inventoryRect = inventoryGrid.GetComponent<RectTransform>(); // TODO: убрать GetComponent
 
-        if (isInventoryOpened)
-        {
-            _playerMovement.enabled = false;
-            position.y = 630;
-            OnInventoryOpened?.Invoke();
-        }
-        else
-        {
-            GetItemBack();
-            position.y = 3000;
+        //if (isInventoryOpened)
+        //{
+        //    _playerMovement.enabled = false;
+        //    position.y = 630;
+        //    OnInventoryOpened?.Invoke(true, false);
+        //}
+        //else
+        //{
+        //    GetItemBack();
+        //    position.y = 3000;
 
-            if (containerItemGrid != null)
-            {
-                //containerItemGrid.HandleContainerGrid(false);
-                containerItemGrid.SetVisibility(false);
-            }
+        //    if (containerItemGrid != null)
+        //    {
+        //        //containerItemGrid.HandleContainerGrid(false);
+        //        containerItemGrid.SetVisibility(false, false);
+        //    }
 
-            OnInventoryClosed?.Invoke();
-            _playerMovement.enabled = true;
-        }
-        position.x = inventoryRect.position.x;
-        inventoryRect.position = position;
+        //    //OnInventoryClosed?.Invoke();
+        //    OnInventoryOpened?.Invoke(false, false);
+        //    _playerMovement.enabled = true;
+        //}
+        //position.x = inventoryRect.position.x;
+        //inventoryRect.position = position;
+
+        OnInventoryOpened?.Invoke(isInventoryOpened, false);
+        _playerMovement.enabled = isInventoryOpened;
     }
 
     public void GetItemBack()
