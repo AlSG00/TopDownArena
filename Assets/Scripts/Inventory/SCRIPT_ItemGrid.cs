@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SCRIPT_ItemGrid : MonoBehaviour
@@ -232,6 +233,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         }
 
         PlaceItem(inventoryItem, positionX, positionY);
+        testList.Add(inventoryItem);
 
         return true;
     }
@@ -257,7 +259,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         Vector2 position = CalculatePositionOnGrid(inventoryItem, positionX, positionY);
 
         rectTransform.localPosition = position;
-        testList.Add(inventoryItem);
+        //testList.Add(inventoryItem);
         inventoryItem.UpdateCounter();
     }
 
@@ -373,15 +375,16 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public void SetVisibility(bool isVisible/*, bool openingContainer*/)
     {
+        RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
+
         Vector2 position = new Vector2();
-        //if (isPlayerInventory == false &&
+        if (isPlayerInventory == false && isVisible)
         //    openingContainer == false)
         {
             position.y = 3000;
+            inventoryRect.position = position;
             return;
         }
-
-        RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
 
         if (isVisible == true)
         {
@@ -390,10 +393,28 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         else
         {
             position.y = 3000;
-          //  alreadyInteracting = false;
         }
-        position.x = inventoryRect.position.x;
 
+        position.x = inventoryRect.position.x;
+        inventoryRect.position = position;
+    }
+
+    public void SetContainerGridVisibility(bool isVisible/*, bool openingContainer*/)
+    {
+        RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
+        Vector2 position = new Vector2();
+
+        if (isVisible == true)
+        {
+            position.y = 630;
+        }
+        else
+        {
+            position.y = 3000;
+            //  alreadyInteracting = false;
+        }
+
+        position.x = inventoryRect.position.x;
         inventoryRect.position = position;
     }
 }

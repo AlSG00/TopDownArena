@@ -65,7 +65,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
         //InventoryController.OnInventoryOpened += ShowForInventory;
         //InventoryController.OnInventoryClosed += HideOnInventoryClosed;
 
-        InventoryController.OnInventoryOpened -= SetVisibility;
+        InventoryController.OnStateIconShow += SetVisibility;
+        InventoryController.OnInventoryOpened += SetVisibility;
     }
 
     private void OnDisable()
@@ -76,7 +77,8 @@ public class StateIconVisibilityHandler : MonoBehaviour
         //InventoryController.OnInventoryOpened -= ShowForInventory;
         //InventoryController.OnInventoryClosed -= HideOnInventoryClosed;
 
-        InventoryController.OnInventoryOpened -= SetVisibility;
+        InventoryController.OnStateIconShow -= SetVisibility;
+        InventoryController.OnInventoryOpened += SetVisibility;
     }
 
     public bool isInInventory = false;
@@ -101,12 +103,14 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
         if (isInventoryOpened)
         {
+            Debug.Log("Show icons");
             isInInventory = true;
             StopAllCoroutines();
             StartCoroutine(SmoothAppearRoutine());
         }
         else
         {
+            Debug.Log("Hide icons");
             isInInventory = false;
             StopAllCoroutines();
             StartCoroutine(SmoothDisappearRoutine());
