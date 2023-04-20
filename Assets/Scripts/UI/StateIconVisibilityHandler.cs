@@ -95,7 +95,7 @@ public class StateIconVisibilityHandler : MonoBehaviour
     //    StartCoroutine(SmoothDisappearRoutine());
     //}
 
-    private void SetVisibility(bool isInventoryOpened, bool containerOpened)
+    private void SetVisibility(bool isInventoryOpened/*, bool containerOpened*/)
     {
         isInInventory = isInventoryOpened;
 

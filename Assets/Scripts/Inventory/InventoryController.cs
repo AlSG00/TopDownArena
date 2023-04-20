@@ -18,8 +18,6 @@ public class InventoryController : MonoBehaviour
     
 
     public SCRIPT_ItemContainer itemContainer;
-
-    //public SCRIPT_ItemContainer itemContainer;
     
     [SerializeField] private Transform canvasTransform;
     
@@ -35,7 +33,7 @@ public class InventoryController : MonoBehaviour
     public List<SCRIPT_InventoryItem> inventoryItemList = new List<SCRIPT_InventoryItem>();
     //public List<SCRIPT_InventoryItem> stackableItemsTemporaryList = new List<SCRIPT_InventoryItem>();
 
-    public delegate void OpenAction(bool isOpened, bool openingContainer);
+    public delegate void OpenAction(bool isOpened/*, bool openingContainer*/);
     public static event OpenAction OnInventoryOpened;
 
     //public delegate void CloseAction();
@@ -160,15 +158,15 @@ public class InventoryController : MonoBehaviour
                 && isHighlightingStateIcons == false)
             {
                 isHighlightingStateIcons = true;
-                OnInventoryOpened?.Invoke(true, false);
+                OnInventoryOpened?.Invoke(true/*, false*/);
             }
         }
     }
 
-    public void ShowContainerGrid(bool isActive)
-    {
-        OnInventoryOpened?.Invoke(true, isActive);peqwoia
-    }
+    //public void ShowContainerGrid(bool isActive)
+    //{
+    //    OnInventoryOpened?.Invoke(true, isActive);
+    //}
 
     public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount)
     {
@@ -248,7 +246,7 @@ public class InventoryController : MonoBehaviour
             if (isCheckingInventory == false)
             {
                 //OnInventoryClosed?.Invoke();
-                OnInventoryOpened?.Invoke(false, false); // NEW;
+                OnInventoryOpened?.Invoke(false/*, false*/); // NEW;
             }
         }
 
@@ -818,7 +816,7 @@ public class InventoryController : MonoBehaviour
         //position.x = inventoryRect.position.x;
         //inventoryRect.position = position;
 
-        OnInventoryOpened?.Invoke(isInventoryOpened, false);
+        OnInventoryOpened?.Invoke(isInventoryOpened/*, false*/);
         _playerMovement.enabled = isInventoryOpened;
     }
 

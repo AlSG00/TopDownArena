@@ -41,7 +41,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         Initialize(_gridSizeWidth, _gridSizeHeight);
-        SetVisibility(false, false);
+        SetVisibility(false/*, false*/);
        // itemCollection.itemList = new List<SCRIPT_InventoryItem>();
     }
 
@@ -371,11 +371,11 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         inventoryItemSlot = null;
     }
 
-    public void SetVisibility(bool isVisible, bool openingContainer)
+    public void SetVisibility(bool isVisible/*, bool openingContainer*/)
     {
         Vector2 position = new Vector2();
-        if (isPlayerInventory == false &&
-            openingContainer == false)
+        //if (isPlayerInventory == false &&
+        //    openingContainer == false)
         {
             position.y = 3000;
             return;

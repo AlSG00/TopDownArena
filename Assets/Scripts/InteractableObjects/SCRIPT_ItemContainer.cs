@@ -11,7 +11,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     //public GameObject[] loot; // Список лута, который будет расставлен по контейнеру при первом открытии
     [SerializeField] private int containerGridWidth = 5; // размеры сетки контейрена
     [SerializeField] private int containerGridHeight = 5;
-    public InventoryController inventoryController;
+   // public InventoryController inventoryController;
   //  public SCRIPT_InteractableObjectTrigger interactionTrigger;
 
     public SCRIPT_ItemGrid containerGrid;
@@ -21,6 +21,8 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     
     public List<SCRIPT_InventoryItem> storedItemList = new List<SCRIPT_InventoryItem>();
 
+    public delegate void ContainerOpenAction(isInitialized);
+    public static event ContainerOpenAction OnContainerOpen; 
     // TODO: подкласс item вынести отдельно, потому что пришлось дублировать его здесь и в InventoryController
     //public class StoredItem
     //{
@@ -68,7 +70,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         //SetContainerGridVisibility(true);
         //inventoryController.isCheckingInventory = !inventoryController.isCheckingInventory;
         //inventoryController.SetInventoryVisibility(true);
-        inventoryController.ShowContainerGrid(true);
+        //inventoryController.ShowContainerGrid(true);
         InitializeGrid();
         canInteract = true;
     }
@@ -102,8 +104,9 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     public void SetContainerGridVisibility(bool isActive)
     {
 
-        inventoryController.ShowContainerGrid(isActive);
+        //inventoryController.ShowContainerGrid(isActive);
 
+        containerGrid.SetVisibility(isActive);
         //Vector2 position = new Vector2();
         //RectTransform inventoryRect = containerGrid.GetComponent<RectTransform>();
 
@@ -131,6 +134,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         //СОВСЕМ ЗАБЫЛ
         //Нужно хранить данные не на ItemGrid, а в самом контейнере, потом что ItemGrid Постоянно меняется, между контейнерами
         //    И получается нету никакой постоянной привязки к данным
+
 
         inventoryController.selectedItemGrid = containerGrid;
         if (inventoryController.itemContainer != null)
