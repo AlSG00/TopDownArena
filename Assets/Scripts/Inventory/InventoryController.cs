@@ -838,6 +838,7 @@ public class InventoryController : MonoBehaviour
 
     private void LeftMouseButtonPress()
     {
+        Начать отладку отсюда. Нажать на предмет из контейнера и посмотреть, что будет
         if (isCheckingInventory == false)
         {
             return;

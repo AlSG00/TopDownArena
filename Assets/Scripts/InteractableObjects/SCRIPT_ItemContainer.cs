@@ -52,7 +52,7 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     private void Awake()
     {
-        SetContainerGridVisibility(false);
+        containerGrid.SetContainerGridVisibility(false);
         //inventoryController = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
 
         alreadyInteracting = false;
@@ -77,12 +77,12 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
             return;
         }
 
-        SetContainerGridVisibility(true);
+        
         //inventoryController.isCheckingInventory = !inventoryController.isCheckingInventory;
         //inventoryController.SetInventoryVisibility(true);
         //inventoryController.ShowContainerGrid(true);
         InitializeGrid();
-
+        containerGrid.SetContainerGridVisibility(true);
         canInteract = true;
         alreadyInteracting = false;
     }
@@ -117,29 +117,29 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         alreadyInteracting = false;
     }
 
-    public void SetContainerGridVisibility(bool isActive)
-    {
+    //public void SetContainerGridVisibility(bool isActive)
+    //{
 
-        //inventoryController.ShowContainerGrid(isActive);
+    //    //inventoryController.ShowContainerGrid(isActive);
 
-        containerGrid.SetContainerGridVisibility(isActive);
-        //Vector2 position = new Vector2();
-        //RectTransform inventoryRect = containerGrid.GetComponent<RectTransform>();
+    //    containerGrid.SetContainerGridVisibility(isActive);
+    //    //Vector2 position = new Vector2();
+    //    //RectTransform inventoryRect = containerGrid.GetComponent<RectTransform>();
 
-        //if (isActive)
-        //{
-        //    position.y = 630;
-        //}
-        //else
-        //{
-        //    position.y = 3000;
-        //    alreadyInteracting = false;
-        //}
-        //position.x = inventoryRect.position.x;
+    //    //if (isActive)
+    //    //{
+    //    //    position.y = 630;
+    //    //}
+    //    //else
+    //    //{
+    //    //    position.y = 3000;
+    //    //    alreadyInteracting = false;
+    //    //}
+    //    //position.x = inventoryRect.position.x;
 
-        //inventoryRect.position = position;
+    //    //inventoryRect.position = position;
 
-    }
+    //}
 
     private void PlaceItems(bool isInitialized)
     {

@@ -103,14 +103,14 @@ public class StateIconVisibilityHandler : MonoBehaviour
 
         if (isInventoryOpened)
         {
-            Debug.Log("Show icons");
+           // Debug.Log("Show icons");
             isInInventory = true;
             StopAllCoroutines();
             StartCoroutine(SmoothAppearRoutine());
         }
         else
         {
-            Debug.Log("Hide icons");
+           // Debug.Log("Hide icons");
             isInInventory = false;
             StopAllCoroutines();
             StartCoroutine(SmoothDisappearRoutine());

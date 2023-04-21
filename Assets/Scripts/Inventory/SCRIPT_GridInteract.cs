@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(SCRIPT_ItemGrid))]
 public class SCRIPT_GridInteract : MonoBehaviour, IPointerEnterHandler//S, //IPointerExitHandler*/
 {
-    InventoryController inventoryController;
-    SCRIPT_ItemGrid itemGrid;
+    public InventoryController inventoryController;
+    public SCRIPT_ItemGrid itemGrid;
 
     private void Awake()
     {
@@ -18,6 +18,7 @@ public class SCRIPT_GridInteract : MonoBehaviour, IPointerEnterHandler//S, //IPo
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Pointer entered");
         inventoryController.selectedItemGrid = itemGrid;
         inventoryController.selectedItemGridRect = inventoryController.selectedItemGrid.GetComponent<RectTransform>();
     }

@@ -7,7 +7,7 @@
     },
     {
       "FullName": "Unity.Animation.Rigging, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-04-20T13:42:56.9908597Z"
+      "LastWriteTime": "2023-04-21T15:26:40.8472128Z"
     },
     {
       "FullName": "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -23,15 +23,15 @@
     },
     {
       "FullName": "Unity.Animation.Rigging.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-04-20T13:42:56.9878598Z"
+      "LastWriteTime": "2023-04-21T15:26:40.898213Z"
+    },
+    {
+      "FullName": "Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "LastWriteTime": "2023-04-21T15:26:40.9432131Z"
     },
     {
       "FullName": "mscorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "LastWriteTime": "2022-06-30T02:10:04Z"
-    },
-    {
-      "FullName": "Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-04-20T13:42:57.0198597Z"
     }
   ],
   "Functions": [
@@ -148,7 +148,6 @@
       "AssemblyDependencyIndices": [
         0,
         1,
-        6,
         2,
         3,
         4
@@ -162,8 +161,8 @@
       "AssemblyDependencyIndices": [
         0,
         5,
-        2,
         3,
+        2,
         1,
         4
       ]
@@ -187,7 +186,7 @@
       "ModuleHash": "2ab7b1fa227f408a3517aaab3bd4525d",
       "LinkName": "801E9A000BB37B05",
       "AssemblyDependencyIndices": [
-        7,
+        6,
         4,
         2
       ]
@@ -212,7 +211,7 @@
       "ModuleHash": "25652ddb5896522ed06df896b22a9f5d",
       "LinkName": "CDCA4A5193BE5947",
       "AssemblyDependencyIndices": [
-        7,
+        6,
         4,
         2
       ]
@@ -253,6 +252,7 @@
       "AssemblyDependencyIndices": [
         0,
         5,
+        7,
         2,
         3,
         1,
@@ -319,8 +319,8 @@
       "AssemblyDependencyIndices": [
         0,
         5,
-        3,
         2,
+        3,
         1,
         4
       ]
