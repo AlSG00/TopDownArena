@@ -98,8 +98,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     {
         positionOnTheGrid.x = mousePosition.x - rectTransform.position.x;
         positionOnTheGrid.y = rectTransform.position.y - mousePosition.y;
-       // Debug.Log($"Position on the grid: {positionOnTheGrid.x} : {positionOnTheGrid.y}");
-
 
         // ¬ычисление положени€ €чеек на сетке
         tileGridPosition.x = (int)(positionOnTheGrid.x / _tileSizeWidth);
@@ -115,75 +113,12 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             tileGridPosition.y -= 1;
         }
 
-       // Debug.Log($"Position: {tileGridPosition.x} : {tileGridPosition.y}");
         return tileGridPosition;
     }
 
     public bool returnRotated = false;
     public Vector2Int? FindSpaceForObject(SCRIPT_InventoryItem itemToInsert)
     {
-        /*
-        // TODO: сюда сделать, чтобы предметы стакались. ћожет сделать именную метку?
-        //if (itemToInsert.isStackable == true)
-        //{
-            //SCRIPT_InventoryItem itemTostack = inventory.inventoryItemList.Find(item => item.name == itemToInsert.name);
-            //if (itemTostack != null &&
-
-            //    itemTostack.stackCount < itemTostack.maxStackCount)
-            //{
-            //    Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
-            //    return;
-            //}
-
-            // TODO: продебажить, что здесь будет возвращено, если не найдетс€ ни одного стакаемого объекта
-            //inventory.stackableItemsTemporaryList = inventory.inventoryItemList.FindAll(
-            //    item => item.name == itemToInsert.name
-            //    );
-
-
-            //if (inventory.stackableItemsTemporaryList != null)
-            //{
-            //    foreach (int item in inventory.stackableItemsTemporaryList)
-            //    {
-            //        if (inventory.stackableItemsTemporaryList[item].stackCount < inventory.stackableItemsTemporaryList[item].maxStackCount)
-            //        {
-            //                Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
-            //                return;
-            //        }
-            //    }
-            //}
-
-            // TODO: ѕрописать следующую логику:
-            // если мы подбираем целый стак (например, коробку патронов)
-            // то мы набиваем доступные стаки
-            // а если стаки кончились
-            // то занимаем новую €чейку
-            // а если и €чейки кончились, то оставл€ем остаток стака лежать на земле
-
-            //if (inventory.stackableItemsTemporaryList != null)
-            //{
-            //int toStack = itemToInsert.stackCount;
-            //    for (int i = 0; i < inventoryItemSlot.Length; i++)
-            //    {
-            //        for (int j = 0; j < inventoryItemSlot.Length; j++)
-            //        {
-            //            if (inventoryItemSlot[i, j] != null &&
-            //                inventoryItemSlot[i, j].isStackable &&
-            //                inventoryItemSlot[i, j].stackCount < inventoryItemSlot[i, j].maxStackCount)
-            //            {
-                            
-            //                Ќаписать метод, в котором будет увеличиватьс€ стак и обновл€тьс€ UI - счетчик;
-
-            //                «десь прописать какую-нибудь логику, чтобы провер€ть, добавилс€ ли стак полностью
-            //                учесть, что подбираема€ пачка не может быть больше, чем максимальный размер стака. Ћогично, но все же
-            //                return;
-            //            }
-            //        }
-            //    }
-            //}
-        //}
-        */
-
         int height = _gridSizeHeight - itemToInsert.Height + 1;
         int width = _gridSizeWidth - itemToInsert.Width + 1;
 
@@ -251,15 +186,12 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             }
         }
 
-        //inventoryItem.onGridPositionX = positionX;
-        //inventoryItem.onGridPositionY = positionY;
-
         inventoryItem.positionOnGrid.x = positionX;
         inventoryItem.positionOnGrid.y = positionY;
         Vector2 position = CalculatePositionOnGrid(inventoryItem, positionX, positionY);
 
         rectTransform.localPosition = position;
-        //testList.Add(inventoryItem);
+       // testList.Add(inventoryItem);
         inventoryItem.UpdateCounter();
     }
 
@@ -347,16 +279,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return true;
     }
 
-    //public void ClearGrid()
-    //{
-    //    int childrenCount = transform.childCount;
-    //    for (int i = childrenCount - 1; i >= 0; i--)
-    //    {
-    //        //Destroy(transform.GetChild(i).gameObject);
-    //        DestroyImmediate(transform.GetChild(i).gameObject);
-    //    }
-    //}
-
     public void ClearGrid()
     {
         GameObject highlighter = GameObject.Find("Highlighter");
@@ -369,7 +291,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-
+        testList.Clear(); при повторном открытии контейнера он чиститс€ из-за того, что список предметов из
+            контейнера передан по ссылке в список сетки и они зависимы
         inventoryItemSlot = null;
     }
 
