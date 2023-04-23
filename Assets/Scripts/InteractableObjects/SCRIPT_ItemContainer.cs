@@ -116,9 +116,9 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
         if (isInitialized)
         {
-            storedContainerItemList = new List<ContainerItem>();
-            containerGrid.testList = new List<SCRIPT_InventoryItem>(storedItemList);
-            OnContainerOpen?.Invoke(isInitialized, containerGrid.testList, containerGrid);
+            //storedContainerItemList = new List<ContainerItem>();
+            //containerGrid.testList = new List<SCRIPT_InventoryItem>(storedItemList);
+            OnContainerOpen?.Invoke(isInitialized, storedItemList, containerGrid);
         }
         else
         {
@@ -159,20 +159,20 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
         //isOpened = false;
         
-        List<SCRIPT_InventoryItem> temporaryItemList = new List<SCRIPT_InventoryItem>(containerGrid.testList);
-        storedItemList = new List<SCRIPT_InventoryItem>();
-        foreach (var item in temporaryItemList)
-        {
-            storedItemList.Add(item.objectPrefab.GetComponent<PickableObject>().inventoryItem);
-        }
+        //List<SCRIPT_InventoryItem> temporaryItemList = new List<SCRIPT_InventoryItem>(containerGrid.testList);
+        storedItemList = new List<SCRIPT_InventoryItem>(containerGrid.testList);
+        //foreach (var item in temporaryItemList)
+        //{
+        //    storedItemList.Add(item.uiPrefab.GetComponent<SCRIPT_InventoryItem>());
+        //}
         containerGrid.ClearGrid();
-
+        isOpened = false;
         //foreach (var item in storedContainerItemList)
         //{
         //    storedItemList.Add(item.Item);
         //}
-        
-        storedItemList = new List<SCRIPT_InventoryItem>(temporaryItemList);
+
+        // storedItemList = new List<SCRIPT_InventoryItem>(temporaryItemList);
     }
 }
 

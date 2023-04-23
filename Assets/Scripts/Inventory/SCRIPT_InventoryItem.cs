@@ -127,10 +127,12 @@ public class SCRIPT_InventoryItem : MonoBehaviour
         if (stackCounter == null)
         {
             GetComponentInChildren<TextMeshProUGUI>();
-            if (stackCounter != null)
+            if (stackCounter == null)
             {
-                stackCounter.text = stackCount.ToString();
+                return;
             }
         }
+
+        stackCounter.text = stackCount.ToString();
     }
 }

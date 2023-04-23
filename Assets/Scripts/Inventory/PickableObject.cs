@@ -61,8 +61,8 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
                 return;
             }
 
-            inventoryItem.stackCount = stackCountRemaining;
-            inventory.InsertItemIntoInventory(inventoryItem);
+            //inventoryItem.stackCount = stackCountRemaining;
+            inventory.InsertItemIntoInventory(inventoryItem, stackCountRemaining);
             PlayPickUpAudio();
             Destroy(gameObject);
         }

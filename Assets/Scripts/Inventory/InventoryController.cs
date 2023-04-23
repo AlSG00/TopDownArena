@@ -353,7 +353,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public void InsertItemIntoInventory(SCRIPT_InventoryItem item)
+    public void InsertItemIntoInventory(SCRIPT_InventoryItem item, int stackCount)
     {
         if (selectedItemGrid == null)
         {
@@ -364,7 +364,7 @@ public class InventoryController : MonoBehaviour
         CreateItemForUi(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem; // TODO: Может лучше избавиться от глобально переменной Selected Item???
         selectedItem = null;
-
+        itemToInsert.stackCount = stackCount;
         InsertItem(itemToInsert);
 
         // TODO: Продумать здесь логику на случай, если в инвентаре будет несколько разных сеток
@@ -375,6 +375,7 @@ public class InventoryController : MonoBehaviour
     public void CreateItemForUi(SCRIPT_InventoryItem item)
     {
         SCRIPT_InventoryItem inventoryItem = Instantiate(item.uiPrefab.GetComponent<SCRIPT_InventoryItem>());
+        //Destroy(item.gameObject);
         selectedItem = inventoryItem;
         itemRectTransform = inventoryItem.GetComponent<RectTransform>();
         itemRectTransform.SetParent(canvasTransform);
@@ -422,7 +423,6 @@ public class InventoryController : MonoBehaviour
 
     public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
     {
-        // sdf
         selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
         foreach (var item in storedItemList)
         {
@@ -444,17 +444,19 @@ public class InventoryController : MonoBehaviour
 
     public void InsertItemIntoInitializedContainer(List<SCRIPT_InventoryItem> storedItemList)
     {
-        //sdf
-        foreach (var item in storedItemList)
+        selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
+        foreach (SCRIPT_InventoryItem item in storedItemList)
         {
-            CreateItemForUi(item);
+            //CreateItemForUi(item);
+            item.gameObject.SetActive(true);
             if (item.isRotated)
             {
                 RotateItem();
             }
-            SCRIPT_InventoryItem itemToInsert = selectedItem;
+            SCRIPT_InventoryItem itemToInsert = item;
             selectedItem = null;
             selectedItemGrid.PlaceItem(itemToInsert, item.positionOnGrid.x, item.positionOnGrid.y);
+            selectedItemGrid.testList.Add(itemToInsert);
         }
     }
 

@@ -281,21 +281,31 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public void ClearGrid()
     {
+        //GameObject highlighter = GameObject.Find("Highlighter");
+
+        //int childrenCount = transform.childCount;
+        //for (int i = childrenCount - 1; i >= 0; i--)
+        //{
+        //    if (transform.GetChild(i).name != "Highlighter")
+        //    {
+        //        Destroy(transform.GetChild(i).gameObject);
+        //    }
+        //}
+        //testList = new List<SCRIPT_InventoryItem>();
+        //inventoryItemSlot = null;
+
         GameObject highlighter = GameObject.Find("Highlighter");
-        
+
         int childrenCount = transform.childCount;
         for (int i = childrenCount - 1; i >= 0; i--)
         {
             if (transform.GetChild(i).name != "Highlighter")
             {
-                //testList.Add(transform.GetChild(i).gameObject.GetComponent<SCRIPT_InventoryItem>();
-                Destroy(transform.GetChild(i).gameObject);
+                //Destroy(transform.GetChild(i).gameObject);
+                transform.GetChild(i).gameObject.SetActive(false);
             }
         }
-        // List<SCRIPT_InventoryItem> temporaryItemList = new List<SCRIPT_InventoryItem>(testList);
-        testList = new List<SCRIPT_InventoryItem>();
-        //при повторном открытии контейнера он чистится из - за того, что список предметов из
-        //    контейнера передан по ссылке в список сетки и они зависимы
+        testList = null;
         inventoryItemSlot = null;
     }
 
