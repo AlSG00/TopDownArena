@@ -34,6 +34,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public string name; // метка имени
     [SerializeField] public SCRIPT_ItemData itemData; // общая инфа (размер в инвентаре, имя, иконка)
     public GameObject objectPrefab; // 3д-объект, который заспавнится, когда предмет будет выброшен
+    public GameObject uiPrefab; // Объъект, который будет висеть в инвентаре
 
     [Header("Properties")]
     [Range(0, 999)] public float weight; // вес предмета, добавляется игроку
@@ -60,6 +61,33 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     //public int onGridPositionX; // TODO: Наверное, от этих двух int'ов можно избавиться, раз уж тут есть PositionOnGrid
     //public int onGridPositionY;
     public Vector2Int positionOnGrid; // позиция предмета на сетке инвентаря
+
+    public SCRIPT_InventoryItem(/*SCRIPT_InventoryItem inventoryItem*/)
+    {
+        //itemData = inventoryItem.itemData;
+        //objectPrefab = inventoryItem.objectPrefab;
+        //uiPrefab = inventoryItem.uiPrefab;
+        //weight = inventoryItem.weight;
+        //isRotatable = inventoryItem.isRotatable;
+        //isUsable = inventoryItem.isUsable;
+        //isStackable = inventoryItem.isStackable;
+        //isSingleDropping = inventoryItem.isSingleDropping;
+        //stackCount = inventoryItem.stackCount;
+        //maxStackCount = inventoryItem.maxStackCount;
+        //useItemAudio = inventoryItem.useItemAudio;
+        //useItemAudioSource = inventoryItem.useItemAudioSource;
+        //positionOnGrid = inventoryItem.positionOnGrid;
+
+        //objectPrefab.GetComponent<SCRIPT_InventoryItem>();
+    }
+
+    private void Awake()
+    {
+        if (uiPrefab == null)
+        {
+            uiPrefab = gameObject;
+        }
+    }
 
     private void Start()
     {
@@ -96,9 +124,13 @@ public class SCRIPT_InventoryItem : MonoBehaviour
 
     public void UpdateCounter(/*int count*/)
     {
-        if (stackCounter != null)
+        if (stackCounter == null)
         {
-            stackCounter.text = stackCount.ToString();
+            GetComponentInChildren<TextMeshProUGUI>();
+            if (stackCounter != null)
+            {
+                stackCounter.text = stackCount.ToString();
+            }
         }
     }
 }

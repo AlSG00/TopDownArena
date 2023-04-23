@@ -288,11 +288,14 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         {
             if (transform.GetChild(i).name != "Highlighter")
             {
+                //testList.Add(transform.GetChild(i).gameObject.GetComponent<SCRIPT_InventoryItem>();
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-        testList.Clear(); при повторном открытии контейнера он чистится из-за того, что список предметов из
-            контейнера передан по ссылке в список сетки и они зависимы
+        // List<SCRIPT_InventoryItem> temporaryItemList = new List<SCRIPT_InventoryItem>(testList);
+        testList = new List<SCRIPT_InventoryItem>();
+        //при повторном открытии контейнера он чистится из - за того, что список предметов из
+        //    контейнера передан по ссылке в список сетки и они зависимы
         inventoryItemSlot = null;
     }
 
@@ -301,6 +304,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
 
         Vector2 position = new Vector2();
+        position.x = inventoryRect.position.x;
         if (isPlayerInventory == false && isVisible)
         //    openingContainer == false)
         {
@@ -318,7 +322,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             position.y = 3000;
         }
 
-        position.x = inventoryRect.position.x;
         inventoryRect.position = position;
     }
 

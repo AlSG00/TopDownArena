@@ -95,6 +95,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 30e70269319f24942b0c268283757cfd, type: 2}
   objectPrefab: {fileID: 2105167668809384956, guid: b30a6f220f81bee4fb8808439c61b119,
     type: 3}
+  uiPrefab: {fileID: 3847044455456163715}
   weight: 1
   isRotatable: 0
   isUsable: 1

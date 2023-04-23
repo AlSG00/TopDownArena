@@ -90,14 +90,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a0ff9da7f9ea048adce079d9d22e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: 
   itemData: {fileID: 11400000, guid: 30e70269319f24942b0c268283757cfd, type: 2}
-  prefab: {fileID: 2105167668809384956, guid: b30a6f220f81bee4fb8808439c61b119, type: 3}
-  isDropping: 0
+  objectPrefab: {fileID: 0}
+  uiPrefab: {fileID: 3847044455456163715}
   weight: 1
-  onGridPositionX: 0
-  onGridPositionY: 0
-  isRotated: 0
+  isRotatable: 0
   isUsable: 1
+  isStackable: 0
+  isSingleDropping: 0
+  stackCount: 0
+  maxStackCount: 0
+  useItemAudio: {fileID: 0}
+  useItemAudioSource: {fileID: 0}
+  stackCounter: {fileID: 0}
+  isDropping: 0
+  isRotated: 0
+  isOnCursor: 0
+  positionOnGrid: {x: 0, y: 0}
 --- !u!114 &2346497512983539580
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,10 +29,16 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private float timeToHold = 0.3f;
 
     public List<SCRIPT_InventoryItem> inventoryItemList = new List<SCRIPT_InventoryItem>();
-    public delegate void OpenAction(bool isOpened/*, bool openingContainer*/);
+
+
+    public delegate void OpenAction(bool isOpened);
     public static event OpenAction OnInventoryOpened;
+    //public static event OpenAction OnInventoryClosed;
+
     public delegate void ShowStateAction();
     public static event OpenAction OnStateIconShow;
+
+
     public SCRIPT_InventoryItem selectedItem; // выбранный предмет, который уже висит на курсоре
     SCRIPT_InventoryItem overlapItem; // TODO: вспомнить, зачем это
 
@@ -368,8 +374,7 @@ public class InventoryController : MonoBehaviour
 
     public void CreateItemForUi(SCRIPT_InventoryItem item)
     {
-        SCRIPT_InventoryItem inventoryItem = Instantiate(item);
-
+        SCRIPT_InventoryItem inventoryItem = Instantiate(item.uiPrefab.GetComponent<SCRIPT_InventoryItem>());
         selectedItem = inventoryItem;
         itemRectTransform = inventoryItem.GetComponent<RectTransform>();
         itemRectTransform.SetParent(canvasTransform);
@@ -377,26 +382,48 @@ public class InventoryController : MonoBehaviour
         inventoryItem.Set(inventoryItem.itemData);
     }
 
-    private void FillContainerGrid(bool isInitialized, ref List<SCRIPT_InventoryItem> storedItemList, SCRIPT_ItemGrid containerGrid)
+    private void FillContainerGrid(bool isInitialized, List<SCRIPT_InventoryItem> storedItemList, SCRIPT_ItemGrid containerGrid)
     {
         selectedItemGrid = containerGrid;
 
         if (isInitialized)
         {
-            InsertItemIntoInitializedContainer(ref selectedItemGrid.testList);
+            InsertItemIntoInitializedContainer(storedItemList);
         }
         else
         {
-            InsertItemIntoContainer(ref selectedItemGrid.testList);
+            InsertItemIntoContainer(storedItemList);
         }
 
         isCheckingInventory = true;
         SetInventoryVisibility(isCheckingInventory);
     }
 
-    public void InsertItemIntoContainer(ref List<SCRIPT_InventoryItem> storedItemList)
+    //public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
+    //{
+    //   // sdf
+    //    //selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
+    //    foreach (var item in storedItemList)
+    //    {
+    //        CreateItemForUi(item);
+    //        SCRIPT_InventoryItem itemToInsert = selectedItem;
+    //        selectedItem = null;
+    //        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+    //        if (positionOnGrid == null)
+    //        {
+    //            return;
+    //        }
+    //        selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+    //        item.positionOnGrid.x = positionOnGrid.Value.x;
+    //        item.positionOnGrid.y = positionOnGrid.Value.y;
+    //        selectedItemGrid.testList.Add(item);
+    //    }
+    //}
+
+    public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
     {
-        //selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
+        // sdf
+        selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
         foreach (var item in storedItemList)
         {
             CreateItemForUi(item);
@@ -408,13 +435,16 @@ public class InventoryController : MonoBehaviour
                 return;
             }
             selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-            item.positionOnGrid.x = positionOnGrid.Value.x;
-            item.positionOnGrid.y = positionOnGrid.Value.y;
+            itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
+            itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
+            item.positionOnGrid = itemToInsert.positionOnGrid;
+            selectedItemGrid.testList.Add(itemToInsert);
         }
     }
 
-    public void InsertItemIntoInitializedContainer(ref List<SCRIPT_InventoryItem> storedItemList)
+    public void InsertItemIntoInitializedContainer(List<SCRIPT_InventoryItem> storedItemList)
     {
+        //sdf
         foreach (var item in storedItemList)
         {
             CreateItemForUi(item);
