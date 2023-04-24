@@ -239,7 +239,7 @@ public class InventoryController : MonoBehaviour
                     Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
                 }
                 selectedItemGrid.testList.Remove(selectedItem);
-                //_playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+                UpdateCarryingWeight(selectedItem);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
@@ -249,7 +249,7 @@ public class InventoryController : MonoBehaviour
                 PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
                 droppedItemData.stackCount = selectedItem.stackCount;
                 selectedItemGrid.testList.Remove(selectedItem);
-                //_playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+                UpdateCarryingWeight(selectedItem);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
@@ -261,6 +261,7 @@ public class InventoryController : MonoBehaviour
                 if (selectedItem.stackCount == 1)
                 {
                     selectedItemGrid.testList.Remove(selectedItem);
+                    UpdateCarryingWeight(selectedItem);
                     Destroy(selectedItem.gameObject);
                     inventoryHighlight.Show(false);
                 }
@@ -269,9 +270,9 @@ public class InventoryController : MonoBehaviour
                     selectedItem.isDropping = false;
                     selectedItem.stackCount--;
                     selectedItem.UpdateCounter();
+                    UpdateCarryingWeight(selectedItem);
                 }
                 Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-                //_playerCarryingWeight.TakeWeight(selectedItem.weight);
             }
             else
             {
@@ -279,18 +280,28 @@ public class InventoryController : MonoBehaviour
                 PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
                 droppedItemData.stackCount = selectedItem.stackCount;
                 selectedItemGrid.testList.Remove(selectedItem);
+                UpdateCarryingWeight(selectedItem);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
-                //_playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
             }
         }
 
-        if (selectedItem.lastGrid.isPlayerInventory)
-        {
-            _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
-        }
-
         selectedItem = null;
+    }
+
+    private void UpdateCarryingWeight(SCRIPT_InventoryItem item)
+    {
+        if (item.lastGrid.isPlayerInventory)
+        {
+            if (item.isSingleDropping)
+            {
+                _playerCarryingWeight.TakeWeight(item.weight);
+            }
+            else
+            {
+                _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
+            }
+        }
     }
 
     private void RightMouseButtonPress()
@@ -372,7 +383,7 @@ public class InventoryController : MonoBehaviour
         SCRIPT_InventoryItem itemToInsert = selectedItem; // TODO: Может лучше избавиться от глобально переменной Selected Item???
         selectedItem = null;
         itemToInsert.stackCount = stackCount;
-         
+        itemToInsert.lastGrid = selectedItemGrid;
         InsertItem(itemToInsert);
 
         // TODO: Продумать здесь логику на случай, если в инвентаре будет несколько разных сеток
@@ -609,6 +620,7 @@ public class InventoryController : MonoBehaviour
     //Протестить функцию
     private void PlaceItemOnGrid(Vector2Int tileGridPosition)
     {
+        overlapItem = null;
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
         if (complete)
         {
@@ -623,15 +635,49 @@ public class InventoryController : MonoBehaviour
                 _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
             }
 
+            selectedItem.lastGrid = selectedItemGrid;
             selectedItem.isOnCursor = false;
-            selectedItem = null;
+            //selectedItem = null;
             if (overlapItem != null)
             {
-                selectedItem = overlapItem;
-                overlapItem = null;
-                itemRectTransform = selectedItem.GetComponent<RectTransform>();
-                itemRectTransform.SetAsLastSibling();
+                if (overlapItem.name == selectedItem.name)
+                {
+                    int requiredItemsCount = overlapItem.maxStackCount - overlapItem.stackCount;
+                    if (requiredItemsCount != 0)
+                    {
+                        if (requiredItemsCount < selectedItem.stackCount)
+                        {
+                            selectedItem.isOnCursor = true;
+                            overlapItem.stackCount = overlapItem.maxStackCount;
+                            selectedItem.stackCount -= requiredItemsCount;
+                            overlapItem.UpdateCounter();
+                            selectedItem.UpdateCounter();
+                        }
+                        else
+                        {
+                            overlapItem.stackCount += selectedItem.stackCount;
+                            overlapItem.UpdateCounter();
+                            Destroy(selectedItem.gameObject);
+                            selectedItem = null;
+                        }
+                    }
+                }
+                else
+                {
+
+
+
+                    selectedItem = overlapItem;
+                    overlapItem = null;
+                    itemRectTransform = selectedItem.GetComponent<RectTransform>();
+                    itemRectTransform.SetAsLastSibling();
+                    
+                }
                 selectedItemGrid.testList.Remove(selectedItem);
+            }
+            else
+            {
+                selectedItem = null;
             }
         }
     }

@@ -68,7 +68,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         {
             for (int j = 0; j < item.Height; j++)
             {
-                //inventoryItemSlot[item.onGridPositionX + i, item.onGridPositionY + j] = null;
                 inventoryItemSlot[item.positionOnGrid.x + i, item.positionOnGrid.y + j] = null;
             }
         }
@@ -191,7 +190,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         Vector2 position = CalculatePositionOnGrid(inventoryItem, positionX, positionY);
 
         rectTransform.localPosition = position;
-       // testList.Add(inventoryItem);
         inventoryItem.UpdateCounter();
     }
 
@@ -214,7 +212,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
                     if (overlapItem == null)
                     {
                         overlapItem = inventoryItemSlot[positionX + i, positionY + j];
-
                     }
                     else
                     {
