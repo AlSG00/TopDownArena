@@ -294,8 +294,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         //testList = new List<SCRIPT_InventoryItem>();
         //inventoryItemSlot = null;
 
-        GameObject highlighter = GameObject.Find("Highlighter");
-
+        //GameObject highlighter = GameObject.Find("Highlighter");
         int childrenCount = transform.childCount;
         for (int i = childrenCount - 1; i >= 0; i--)
         {

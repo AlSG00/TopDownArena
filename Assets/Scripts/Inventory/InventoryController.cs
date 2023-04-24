@@ -197,6 +197,7 @@ public class InventoryController : MonoBehaviour
         if (buttonHoldTime < timeToHold)
         {
             isCheckingInventory = !isCheckingInventory;
+            GetItemBack();
             SetInventoryVisibility(isCheckingInventory);
         }
         else
@@ -238,6 +239,7 @@ public class InventoryController : MonoBehaviour
                     Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
                 }
                 selectedItemGrid.testList.Remove(selectedItem);
+                //_playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
@@ -247,9 +249,9 @@ public class InventoryController : MonoBehaviour
                 PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
                 droppedItemData.stackCount = selectedItem.stackCount;
                 selectedItemGrid.testList.Remove(selectedItem);
+                //_playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
-                _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
             }
         }
         else
@@ -269,7 +271,7 @@ public class InventoryController : MonoBehaviour
                     selectedItem.UpdateCounter();
                 }
                 Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-                _playerCarryingWeight.TakeWeight(selectedItem.weight);
+                //_playerCarryingWeight.TakeWeight(selectedItem.weight);
             }
             else
             {
@@ -279,8 +281,13 @@ public class InventoryController : MonoBehaviour
                 selectedItemGrid.testList.Remove(selectedItem);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
-                _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+                //_playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
             }
+        }
+
+        if (selectedItem.lastGrid.isPlayerInventory)
+        {
+            _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
         }
 
         selectedItem = null;
@@ -312,7 +319,6 @@ public class InventoryController : MonoBehaviour
         {
             selectedItem.useItemAudioSource.PlayOneShot(selectedItem.useItemAudio);
         }
-
 
         //Проверить здесь, чтобы вес предметов менялся правильно, когда исользуешь их из стака
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
@@ -347,6 +353,7 @@ public class InventoryController : MonoBehaviour
         if (selectedItem != null)
         {
             selectedItem.isOnCursor = true;
+            selectedItem.lastGrid = selectedItemGrid;
             selectedItemGrid.testList.Remove(selectedItem);
             itemRectTransform = selectedItem.GetComponent<RectTransform>();
             itemRectTransform.SetAsLastSibling();
@@ -365,6 +372,7 @@ public class InventoryController : MonoBehaviour
         SCRIPT_InventoryItem itemToInsert = selectedItem; // TODO: Может лучше избавиться от глобально переменной Selected Item???
         selectedItem = null;
         itemToInsert.stackCount = stackCount;
+         
         InsertItem(itemToInsert);
 
         // TODO: Продумать здесь логику на случай, если в инвентаре будет несколько разных сеток
@@ -374,7 +382,7 @@ public class InventoryController : MonoBehaviour
 
     public void CreateItemForUi(SCRIPT_InventoryItem item)
     {
-        SCRIPT_InventoryItem inventoryItem = Instantiate(item.uiPrefab.GetComponent<SCRIPT_InventoryItem>());
+        SCRIPT_InventoryItem inventoryItem = Instantiate(item/*.uiPrefab.GetComponent<SCRIPT_InventoryItem>()*/);
         //Destroy(item.gameObject);
         selectedItem = inventoryItem;
         itemRectTransform = inventoryItem.GetComponent<RectTransform>();
@@ -435,6 +443,7 @@ public class InventoryController : MonoBehaviour
                 return;
             }
             selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+            itemToInsert.lastGrid = selectedItemGrid;
             itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
             itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
             item.positionOnGrid = itemToInsert.positionOnGrid;
@@ -588,9 +597,13 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        Vector2Int lastPosition = new Vector2Int(selectedItem.positionOnGrid.x, selectedItem.positionOnGrid.y);
-        selectedItemGrid = testPickedItemsGrid;
-        PlaceItemOnGrid(lastPosition);
+        if (selectedItem.isOnCursor)
+        {
+            //Vector2Int lastPosition = new Vector2Int(selectedItem.positionOnGrid.x, selectedItem.positionOnGrid.y);
+            selectedItemGrid = selectedItem.lastGrid;
+           // selectedItemGrid.testList.Add(selectedItem);
+            PlaceItemOnGrid(selectedItem.positionOnGrid);
+        }
     }
 
     //Протестить функцию
@@ -599,6 +612,17 @@ public class InventoryController : MonoBehaviour
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
         if (complete)
         {
+            if (selectedItem.lastGrid.isPlayerInventory &&
+                selectedItemGrid.isPlayerInventory == false)
+            {
+                _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+            }
+            else if (selectedItem.lastGrid.isPlayerInventory == false &&
+                selectedItemGrid.isPlayerInventory)
+            {
+                _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
+            }
+
             selectedItem.isOnCursor = false;
             selectedItem = null;
             if (overlapItem != null)
