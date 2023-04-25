@@ -62,7 +62,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     }
 
     // Чистим инвентарь от ссылок на предмет, когда пертаскиваем или выкидываем предмет
-    private void CleanGridReference(SCRIPT_InventoryItem item)
+    public void CleanGridReference(SCRIPT_InventoryItem item)
     {
         for (int i = 0; i < item.Width; i++)
         {
@@ -148,6 +148,30 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return null;
     }
 
+    //public bool PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY, ref SCRIPT_InventoryItem overlapItem)
+    //{
+    //    if (BoundaryCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height) == false)
+    //    {
+    //        return false;
+    //    }
+
+    //    if (OverlapCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height, ref overlapItem) == false)
+    //    {
+    //        overlapItem = null;
+    //        return false;
+    //    }
+
+    //    if (overlapItem != null)
+    //    {
+    //        CleanGridReference(overlapItem);
+    //    }
+
+    //    PlaceItem(inventoryItem, positionX, positionY);
+    //    testList.Add(inventoryItem);
+
+    //    return true;
+    //}
+
     public bool PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY, ref SCRIPT_InventoryItem overlapItem)
     {
         if (BoundaryCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height) == false)
@@ -161,13 +185,56 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             return false;
         }
 
-        if (overlapItem != null)
-        {
-            CleanGridReference(overlapItem);
-        }
+        //if (overlapItem != null)
+        //{
+        //    CleanGridReference(overlapItem);
+        //}
 
-        PlaceItem(inventoryItem, positionX, positionY);
-        testList.Add(inventoryItem);
+        //if (overlapItem == null)
+        //{
+        //    PlaceItem(inventoryItem, positionX, positionY);
+        //    testList.Add(inventoryItem);
+        //}
+        //else
+        //{
+        //    if (overlapItem.name == inventoryItem.name)
+        //    {
+        //        int requiredItemsCount = overlapItem.maxStackCount - overlapItem.stackCount;
+        //        if (requiredItemsCount != 0)
+        //        {
+        //            if (requiredItemsCount < inventoryItem.stackCount)
+        //            {
+        //                inventoryItem.isOnCursor = true;
+        //                overlapItem.stackCount = overlapItem.maxStackCount;
+        //                inventoryItem.stackCount -= requiredItemsCount;
+        //                overlapItem.UpdateCounter();
+        //                inventoryItem.UpdateCounter();
+        //            }
+        //            else
+        //            {
+        //                overlapItem.stackCount += inventoryItem.stackCount;
+        //                overlapItem.UpdateCounter();
+        //                Destroy(inventoryItem.gameObject);
+        //                inventoryItem = null;
+        //            }
+        //        }
+        //        else
+        //        {
+
+        //        }
+        //    }
+        //    else
+        //    {
+        //        CleanGridReference(overlapItem);
+        //        PlaceItem(inventoryItem, positionX, positionY);
+        //        testList.Add(inventoryItem);
+
+        //        selectedItem = overlapItem;
+        //        overlapItem = null;
+        //        itemRectTransform = selectedItem.GetComponent<RectTransform>();
+        //        itemRectTransform.SetAsLastSibling();
+        //    }
+        //}
 
         return true;
     }

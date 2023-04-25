@@ -637,8 +637,14 @@ public class InventoryController : MonoBehaviour
 
             selectedItem.lastGrid = selectedItemGrid;
             selectedItem.isOnCursor = false;
-            //selectedItem = null;
-            if (overlapItem != null)
+
+            if (overlapItem == null)
+            {
+                selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+                selectedItemGrid.testList.Add(selectedItem);
+                selectedItem = null;
+            } 
+            else
             {
                 if (overlapItem.name == selectedItem.name)
                 {
@@ -661,26 +667,62 @@ public class InventoryController : MonoBehaviour
                             selectedItem = null;
                         }
                     }
+                    else
+                    {
+                        selectedItemGrid.CleanGridReference(overlapItem);
+                        selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+                        selectedItemGrid.testList.Add(selectedItem);
+                        selectedItemGrid.testList.Remove(overlapItem);
+                        selectedItem = overlapItem;
+                        overlapItem = null;
+                        itemRectTransform = selectedItem.GetComponent<RectTransform>();
+                        itemRectTransform.SetAsLastSibling();
+                    }
                 }
                 else
                 {
-
-
-
+                    selectedItemGrid.CleanGridReference(overlapItem);
+                    selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+                    selectedItemGrid.testList.Add(selectedItem);
+                    selectedItemGrid.testList.Remove(overlapItem);
                     selectedItem = overlapItem;
                     overlapItem = null;
                     itemRectTransform = selectedItem.GetComponent<RectTransform>();
                     itemRectTransform.SetAsLastSibling();
-                    
                 }
-                selectedItemGrid.testList.Remove(selectedItem);
-            }
-            else
-            {
-                selectedItem = null;
             }
         }
     }
+
+    //private void PlaceItemOnGrid(Vector2Int tileGridPosition)
+    //{
+    //    overlapItem = null;
+    //    bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
+    //    if (complete)
+    //    {
+    //        if (selectedItem.lastGrid.isPlayerInventory &&
+    //            selectedItemGrid.isPlayerInventory == false)
+    //        {
+    //            _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+    //        }
+    //        else if (selectedItem.lastGrid.isPlayerInventory == false &&
+    //            selectedItemGrid.isPlayerInventory)
+    //        {
+    //            _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
+    //        }
+
+    //        selectedItem.lastGrid = selectedItemGrid;
+    //        selectedItem.isOnCursor = false;
+    //        selectedItem = null;
+    //        if (overlapItem != null)
+    //        {
+    //            selectedItem = overlapItem;
+    //            overlapItem = null;
+    //            itemRectTransform = selectedItem.GetComponent<RectTransform>();
+    //            itemRectTransform.SetAsLastSibling();
+    //        }
+    //    }
+    //}
 
     private void ItemIconDrag()
     {

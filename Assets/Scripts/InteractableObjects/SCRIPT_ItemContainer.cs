@@ -36,7 +36,6 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
     public static event ContainerOpenAction OnContainerOpen;
 
     private bool isOpened = false;
-    /////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void Awake()
     {
@@ -101,45 +100,14 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
 
     private void PlaceItems(bool isInitialized)
     {
-        //if (isInitialized)
-        //{
-        //    containerGrid.testList = new List<SCRIPT_InventoryItem>(storedItemList);
-        //    OnContainerOpen?.Invoke(isInitialized, containerGrid.testList, containerGrid);
-        //}
-        //else
-        //{
-        //    //storedItemList = new List<SCRIPT_InventoryItem>(itemsToGenerate);
-        //    //containerGrid.testList = storedItemList;
-        //    containerGrid.testList = new List<SCRIPT_InventoryItem>(storedItemList);
-        //    OnContainerOpen?.Invoke(isInitialized, itemsToGenerate, containerGrid);
-        //}
-
         if (isInitialized)
         {
-            //storedContainerItemList = new List<ContainerItem>();
-            //containerGrid.testList = new List<SCRIPT_InventoryItem>(storedItemList);
             OnContainerOpen?.Invoke(isInitialized, storedItemList, containerGrid);
         }
         else
         {
-            //storedItemList = new List<SCRIPT_InventoryItem>(itemsToGenerate);
-            //containerGrid.testList = storedItemList;
-            //containerGrid.testList = new List<SCRIPT_InventoryItem>(storedItemList);
             OnContainerOpen?.Invoke(isInitialized, itemsToGenerate, containerGrid);
         }
-
-        //if (isInitialized)
-        //{
-
-        //}
-        //else
-        //{
-        //    foreach (SCRIPT_InventoryItem item in itemsToGenerate)
-        //    {
-        //        ContainerItem newItem = new ContainerItem(item, item.stackCount);
-        //    }
-        //    OnContainerOpen?.Invoke(isInitialized, itemsToGenerate, containerGrid);
-        //}
     }
 
     private void CloseContainer(bool isInventoryOpened)
@@ -149,30 +117,10 @@ public class SCRIPT_ItemContainer : MonoBehaviour, SCRIPT_IInteractable
         {
             return;
         }
-        //storedContainerItemList = new List<ContainerItem>();
-        //foreach (SCRIPT_InventoryItem item in containerGrid.testList)
-        //{
-        //    //SCRIPT_InventoryItem itemToStore = Instantiate(item.uiPrefab.GetComponent<SCRIPT_InventoryItem>());
-        //    ContainerItem itemToStore = new ContainerItem(item);
-        //    storedContainerItemList.Add(itemToStore);
-        //}
 
-        //isOpened = false;
-        
-        //List<SCRIPT_InventoryItem> temporaryItemList = new List<SCRIPT_InventoryItem>(containerGrid.testList);
         storedItemList = new List<SCRIPT_InventoryItem>(containerGrid.testList);
-        //foreach (var item in temporaryItemList)
-        //{
-        //    storedItemList.Add(item.uiPrefab.GetComponent<SCRIPT_InventoryItem>());
-        //}
         containerGrid.ClearGrid();
         isOpened = false;
-        //foreach (var item in storedContainerItemList)
-        //{
-        //    storedItemList.Add(item.Item);
-        //}
-
-        // storedItemList = new List<SCRIPT_InventoryItem>(temporaryItemList);
     }
 }
 
