@@ -62,33 +62,6 @@ public class SCRIPT_InventoryItem : MonoBehaviour
 
     public SCRIPT_ItemGrid lastGrid;
 
-    //public SCRIPT_InventoryItem(/*SCRIPT_InventoryItem inventoryItem*/)
-    //{
-    //    //itemData = inventoryItem.itemData;
-    //    //objectPrefab = inventoryItem.objectPrefab;
-    //    //uiPrefab = inventoryItem.uiPrefab;
-    //    //weight = inventoryItem.weight;
-    //    //isRotatable = inventoryItem.isRotatable;
-    //    //isUsable = inventoryItem.isUsable;
-    //    //isStackable = inventoryItem.isStackable;
-    //    //isSingleDropping = inventoryItem.isSingleDropping;
-    //    //stackCount = inventoryItem.stackCount;
-    //    //maxStackCount = inventoryItem.maxStackCount;
-    //    //useItemAudio = inventoryItem.useItemAudio;
-    //    //useItemAudioSource = inventoryItem.useItemAudioSource;
-    //    //positionOnGrid = inventoryItem.positionOnGrid;
-
-    //    //objectPrefab.GetComponent<SCRIPT_InventoryItem>();
-    //}
-
-    private void Awake()
-    {
-        //if (uiPrefab == null)
-        //{
-        //    uiPrefab = gameObject;
-        //}
-    }
-
     private void Start()
     {
         useItemAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();

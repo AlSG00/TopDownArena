@@ -22,6 +22,7 @@ public class InventoryController : MonoBehaviour
     RectTransform itemRectTransform;
     [SerializeField] private Transform itemDropPoint;
     private bool isHoldingButton = false;
+    private bool isHoldingShiftButton = false;
     public bool isCheckingInventory = false;
     public bool isHighlightingStateIcons = false;
 
@@ -64,8 +65,17 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        
         ItemIconDrag();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isHoldingShiftButton = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isHoldingShiftButton = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -82,7 +92,7 @@ public class InventoryController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (isHoldingShiftButton)
             {
                 Debug.Log("Work in progress");
             }
@@ -311,15 +321,75 @@ public class InventoryController : MonoBehaviour
         if (selectedItem == null)
         {
             selectedItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
+            if (selectedItem == null)
+            {
+                return;
+            }
         }
 
         if (selectedItem.isOnCursor)
         {
+            SCRIPT_InventoryItem secondItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
+            if (secondItem != null)
+            {
+                if (secondItem.name == selectedItem.name &&
+                    selectedItem.isStackable)
+                {
+                    if (secondItem.stackCount < secondItem.maxStackCount)
+                    {
+                        secondItem.stackCount++;
+                        selectedItem.stackCount--;
+                        secondItem.UpdateCounter();
+                        selectedItem.UpdateCounter();
+
+                        if (selectedItem.stackCount == 0)
+                        {
+                            Destroy(selectedItem.gameObject);
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (selectedItem.stackCount > 1)
+                {
+                    SCRIPT_InventoryItem itemOnCursor = selectedItem;
+                    CreateItemForUi(itemOnCursor);
+                    selectedItem.stackCount = 1;
+                    selectedItem.UpdateCounter();
+                    PlaceItemOnGrid(tileGridPosition);
+
+                    selectedItem = itemOnCursor;
+                    itemRectTransform = itemOnCursor.GetComponent<RectTransform>();
+                    itemRectTransform.SetParent(canvasTransform);
+                    itemRectTransform.SetAsLastSibling();
+
+                    selectedItem.stackCount--;
+                    selectedItem.UpdateCounter();
+
+                    if (selectedItem.stackCount == 0)
+                    {
+                        Destroy(selectedItem.gameObject);
+                    }
+                }
+                else
+                {
+                    PlaceItemOnGrid(tileGridPosition);
+                }
+            }
+
             return;
         }
 
-        //TODO: По идее, здесь не сработает данное условие, переделать на обращение к InventoryItem
-        if (selectedItem.GetComponent<SCRIPT_IItem>().isUsable == false)
+        if (selectedItem.isUsable == false)
         {
             PlaceItemOnGrid(tileGridPosition);
             return;
@@ -331,16 +401,13 @@ public class InventoryController : MonoBehaviour
             selectedItem.useItemAudioSource.PlayOneShot(selectedItem.useItemAudio);
         }
 
-        //Проверить здесь, чтобы вес предметов менялся правильно, когда исользуешь их из стака
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
-        //selectedItemGrid.testList.Remove(selectedItem);
         if (selectedItemGrid.isPlayerInventory == true)
         {
             _playerCarryingWeight.TakeWeight(selectedItem.weight);
         }
 
-        // TODO: Сделать, чтобы вес уменьшался
         if (selectedItem.stackCount > 1)
         {
             selectedItem.stackCount--;
@@ -348,7 +415,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            selectedItemGrid.testList.Remove(selectedItem); // НОВОЕ
+            selectedItemGrid.testList.Remove(selectedItem);
             Destroy(selectedItem.gameObject);
             inventoryHighlight.Show(false);
         }
@@ -649,7 +716,9 @@ public class InventoryController : MonoBehaviour
                 if (overlapItem.name == selectedItem.name)
                 {
                     int requiredItemsCount = overlapItem.maxStackCount - overlapItem.stackCount;
-                    if (requiredItemsCount != 0)
+                    if (requiredItemsCount != 0 &&
+                        overlapItem.isStackable &&
+                        selectedItem.isStackable)
                     {
                         if (requiredItemsCount < selectedItem.stackCount)
                         {
