@@ -51,12 +51,13 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
     {
         canInteract = false;
         inventory.selectedItemGrid = inventory.inventoryGrid;
-        int stackCountRemaining = inventory.InsertIntoAvailableStacks(inventoryItem, stackCount);
+        int stackCountRemaining = inventory.InsertIntoAvailableStacks(inventoryItem, stackCount, true);
         if (stackCountRemaining > 0)
         {
             Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryItem);
             if (positionOnGrid == null)
             {
+                stackCount = stackCountRemaining;
                 alreadyInteracting = false;
                 return;
             }
