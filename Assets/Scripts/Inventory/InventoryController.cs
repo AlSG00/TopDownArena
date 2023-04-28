@@ -697,21 +697,47 @@ public class InventoryController : MonoBehaviour
                     int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
                     if (stackCountRemaining > 0)
                     {
-                        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(selectedItem);
+                        Vector2Int? positionOnGrid = containerItemGrid.FindSpaceForObject(selectedItem);
                         if (positionOnGrid == null)
                         {
                             return;
                         }
-
-                        //inventoryItem.stackCount = stackCountRemaining;
+                        selectedItemGrid = inventoryGrid;
+                        PickItemFromGrid(selectedItem.positionOnGrid);
+                        selectedItemGrid = containerItemGrid;
+                        selectedItem.stackCount = stackCountRemaining;
                         //InsertItemIntoInventory(inventoryItem, stackCountRemaining);
                         //Destroy(gameObject);
+
+
+                        //CreateItemForUi(item);
+                        SCRIPT_InventoryItem itemToInsert = selectedItem;
+                        selectedItem = null;
+
+                        selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+                        itemToInsert.lastGrid = selectedItemGrid;
+                        itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
+                        itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
+                        //item.positionOnGrid = itemToInsert.positionOnGrid;
+                        selectedItemGrid.testList.Add(itemToInsert); // TODO: Вспомнить, почему я не поставил этот метод в PlaceItem();
+
+                    }
+                    else
+                    {
+                        selectedItemGrid = inventoryGrid;
+                        if (selectedItem.isOnCursor == false)
+                        {
+                            PickItemFromGrid(selectedItem.positionOnGrid);
+                        }
+
+                        Destroy(selectedItem.gameObject);
+                        selectedItem = null;
                     }
 
                 }
                 else
                 {
-                    selectedItemGrid = containerItemGrid;
+                    selectedItemGrid = inventoryGrid;
                     int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
                     if (stackCountRemaining > 0)
                     {
@@ -722,22 +748,29 @@ public class InventoryController : MonoBehaviour
                         }
 
                         //inventoryItem.stackCount = stackCountRemaining;
-                        InsertItemIntoInventory(inventoryItem, stackCountRemaining);
+                        //InsertItemIntoInventory(inventoryItem, stackCountRemaining);
                         Destroy(gameObject);
                     }
                 }
             }
             else
             {
-                if (selectedItemGrid.isPlayerInventory)
+                if (selectedItem.isStackable)
                 {
-                    if (containerItemGrid == null)
+                    if (selectedItemGrid.isPlayerInventory)
                     {
-                        selectedItem = null;
-                        return;
+                        if (containerItemGrid == null)
+                        {
+                            selectedItem = null;
+                            return;
+                        }
+
+
                     }
+                    else
+                    {
 
-
+                    }
                 }
                 else
                 {
@@ -745,9 +778,9 @@ public class InventoryController : MonoBehaviour
                 }
             }
         }
-        else
+        else //  Если на курсоре висит предмет
         {
-            если же предмет выбран, то в зависимости от активной сетки перебрасываем его в ротивоположную сетку
+            //если же предмет выбран, то в зависимости от активной сетки перебрасываем его в ротивоположную сетку
             PlaceItemOnGrid(tileGridPosition);
 
             if (selectedItem.isStackable)
@@ -778,7 +811,11 @@ public class InventoryController : MonoBehaviour
     // TODO: Переделать метод. Он не учитывает другие размеры экрана кроме фулл хд
     public void SetInventoryVisibility(bool isInventoryOpened)
     {
-        containerItemGrid = null;
+        if (isInventoryOpened == false)
+        {
+            containerItemGrid = null;
+        }
+        
         OnInventoryOpened?.Invoke(isInventoryOpened);
         OnStateIconShow?.Invoke(isInventoryOpened);
         _playerMovement.enabled = !isInventoryOpened;
