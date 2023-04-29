@@ -254,6 +254,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
         inventoryItem.positionOnGrid.x = positionX;
         inventoryItem.positionOnGrid.y = positionY;
+        inventoryItem.lastGrid = this;
         Vector2 position = CalculatePositionOnGrid(inventoryItem, positionX, positionY);
 
         rectTransform.localPosition = position;

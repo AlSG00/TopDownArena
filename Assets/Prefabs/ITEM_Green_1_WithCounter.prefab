@@ -97,7 +97,7 @@ MonoBehaviour:
     type: 3}
   weight: 1
   isRotatable: 0
-  isUsable: 0
+  isUsable: 1
   isStackable: 1
   isSingleDropping: 0
   stackCount: 1
