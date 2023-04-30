@@ -182,7 +182,7 @@ public class InventoryController : MonoBehaviour
 
                     if (temp < selectedItemGrid.inventoryItemSlot[j, i].maxStackCount)
                     {
-                        if (addToInventory)
+                        if (addToInventory && selectedItemGrid != itemToStack.lastGrid)
                         {
                             _playerCarryingWeight.AddWeight(leftToStack * selectedItemGrid.inventoryItemSlot[j, i].weight);
                         }
@@ -195,7 +195,7 @@ public class InventoryController : MonoBehaviour
                         int valueToFillStack = selectedItemGrid.inventoryItemSlot[j, i].maxStackCount - selectedItemGrid.inventoryItemSlot[j, i].stackCount;
                         leftToStack -= valueToFillStack;
                         selectedItemGrid.inventoryItemSlot[j, i].stackCount += valueToFillStack;
-                        if (addToInventory)
+                        if (addToInventory && selectedItemGrid != itemToStack.lastGrid)
                         {
                             _playerCarryingWeight.AddWeight(valueToFillStack * selectedItemGrid.inventoryItemSlot[j, i].weight);
                         }
@@ -400,6 +400,18 @@ public class InventoryController : MonoBehaviour
                         selectedItem.stackCount--;
                         secondItem.UpdateCounter();
                         selectedItem.UpdateCounter();
+                        
+                        if (selectedItemGrid != selectedItem.lastGrid)
+                        {
+                            if (selectedItemGrid.isPlayerInventory)
+                            {
+                                _playerCarryingWeight.AddWeight(selectedItem.weight);
+                            }
+                            else
+                            {
+                                _playerCarryingWeight.TakeWeight(selectedItem.weight);
+                            }
+                        }
 
                         if (selectedItem.stackCount == 0)
                         {
@@ -418,7 +430,8 @@ public class InventoryController : MonoBehaviour
             }
             else
             {
-                if (selectedItem.stackCount > 1)
+                if (selectedItem.stackCount > 1 &&
+                    selectedItem.isSingleDropping)
                 {
                     SCRIPT_InventoryItem itemOnCursor = selectedItem;
                     CreateItemForUi(itemOnCursor);
@@ -462,7 +475,7 @@ public class InventoryController : MonoBehaviour
 
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
-        if (selectedItemGrid.isPlayerInventory == true)
+        if (selectedItemGrid.isPlayerInventory)
         {
             _playerCarryingWeight.TakeWeight(selectedItem.weight);
         }
@@ -731,7 +744,10 @@ public class InventoryController : MonoBehaviour
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
                 if (stackCountRemaining > 0)
                 {
-                    _playerCarryingWeight.TakeWeight(selectedItem.weight * (selectedItem.stackCount - stackCountRemaining));
+                    if (selectedItemGrid != selectedItem.lastGrid)
+                    {
+                        _playerCarryingWeight.TakeWeight(selectedItem.weight * (selectedItem.stackCount - stackCountRemaining));
+                    }
                     selectedItem.stackCount = stackCountRemaining;
                     Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(selectedItem);
                     if (positionOnGrid == null)
@@ -743,12 +759,15 @@ public class InventoryController : MonoBehaviour
                     }
 
                     SCRIPT_InventoryItem itemToInsert = selectedItem;
+                    if (itemToInsert.lastGrid != selectedItemGrid)
+                    {
+                        _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
+                    }
                     selectedItem.isOnCursor = false;
                     selectedItem = null;
 
                     InsertItem(itemToInsert);
-                    if (itemToInsert.lastGrid == selectedItemGrid)
-                        _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
+
                     //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
                     //itemToInsert.lastGrid = selectedItemGrid;
                     //itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
@@ -763,7 +782,10 @@ public class InventoryController : MonoBehaviour
                     //{
                     //    PickItemFromGrid(selectedItem.positionOnGrid);
                     //}
-                    _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+                    if (selectedItem.lastGrid != selectedItemGrid)
+                    {
+                        _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+                    }
                     Destroy(selectedItem.gameObject);
                     selectedItem = null;
                     selectedItemGrid = inventoryGrid;
@@ -775,7 +797,10 @@ public class InventoryController : MonoBehaviour
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, true);
                 if (stackCountRemaining > 0)
                 {
-                    //_playerCarryingWeight.AddWeight(selectedItem.weight * (selectedItem.stackCount - stackCountRemaining));
+                    //if (selectedItemGrid != selectedItem.lastGrid)
+                    //{
+                    //    _playerCarryingWeight.AddWeight(selectedItem.weight * (selectedItem.stackCount - stackCountRemaining));
+                    //}
                     selectedItem.stackCount = stackCountRemaining;
                     Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(selectedItem);
                     if (positionOnGrid == null)
@@ -787,6 +812,10 @@ public class InventoryController : MonoBehaviour
                     }
 
                     SCRIPT_InventoryItem itemToInsert = selectedItem;
+                    if (itemToInsert.lastGrid != selectedItemGrid)
+                    {
+                        _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
+                    }
                     selectedItem.isOnCursor = false;
                     selectedItem = null;
                     //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
@@ -795,12 +824,15 @@ public class InventoryController : MonoBehaviour
                     //itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
                     //selectedItemGrid.testList.Add(itemToInsert);
                     InsertItem(itemToInsert);
-                    _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
+
                     selectedItemGrid = containerItemGrid;
                 }
                 else
                 {
-                    //_playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
+                    //if (selectedItemGrid != selectedItem.lastGrid)
+                    //{
+                    //    _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
+                    //}
                     Destroy(selectedItem.gameObject);
                     selectedItem = null;
                     selectedItemGrid = containerItemGrid;
@@ -839,17 +871,23 @@ public class InventoryController : MonoBehaviour
             //itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
             //itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
             //selectedItemGrid.testList.Add(itemToInsert); 
-            InsertItem(itemToInsert);
-            selectedItemGrid = previousGrid;
+            
+            
 
-            if (selectedItemGrid.isPlayerInventory)
+            if (selectedItemGrid != itemToInsert.lastGrid)
             {
-                _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
+                if (selectedItemGrid.isPlayerInventory)
+                {
+                    _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
+                }
+                else
+                {
+                    _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
+                }
             }
-            else
-            {
-                _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
-            }
+            InsertItem(itemToInsert);
+
+            selectedItemGrid = previousGrid;
         }
     }
 
