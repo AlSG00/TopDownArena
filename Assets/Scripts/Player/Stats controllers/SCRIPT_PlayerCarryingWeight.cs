@@ -81,6 +81,11 @@ public class SCRIPT_PlayerCarryingWeight : MonoBehaviour
         if (_isOvercarried)
         {
             _movement.walkSpeedDebuff = (currentCarryingWeight - maxCarryingWeight) * 0.1f;
+            
+            if (_movement.walkSpeedDebuff >= _movement.walkSpeed)
+            {
+                _movement.walkSpeedDebuff = _movement.walkSpeed;
+            }
         }
         else
         {

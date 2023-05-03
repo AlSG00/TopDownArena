@@ -92,6 +92,7 @@ public class InventoryController : MonoBehaviour
             {
                 LeftMouseButtonPress();
             }
+            Debug.Log("Down LMB");
         }
         
         if (Input.GetMouseButtonDown(1))
@@ -103,22 +104,21 @@ public class InventoryController : MonoBehaviour
         {
             isHoldingDropItemButton = true;
             buttonHoldTime = 0;
+            Debug.Log("Down Q");
         }
 
         if (Input.GetKeyUp(KeyCode.Q))
         {
             isHoldingDropItemButton = false;
-            //buttonHoldTime = 0;
             if (isDroppingStack)
             {
-                //DropStack();
                 isDroppingStack = false;
             }
             else
             {
                 DropItem();
             }
-            
+            Debug.Log("Up Q");
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -129,7 +129,6 @@ public class InventoryController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
-            //buttonHoldTime = 0;
             HandleStateIconsVisibility();
         }
 
@@ -273,6 +272,7 @@ public class InventoryController : MonoBehaviour
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
+            Debug.Log("Down Q onCursor finished");
         }
         else
         {
@@ -305,8 +305,9 @@ public class InventoryController : MonoBehaviour
                 inventoryHighlight.Show(false);
             }
         }
-
-        selectedItem = null;
+        Посмотреть, что тут можно сделать с багом, описанным в Асане
+        //selectedItem = null;
+        Debug.Log("Down Q Finished");
     }
 
     private void DropStack()
@@ -526,14 +527,12 @@ public class InventoryController : MonoBehaviour
         InsertItem(itemToInsert);
 
         // TODO: Продумать здесь логику на случай, если в инвентаре будет несколько разных сеток
-        //inventoryGrid.testList.Add(itemToInsert);
         _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
     }
 
     public void CreateItemForUi(SCRIPT_InventoryItem item)
     {
-        SCRIPT_InventoryItem inventoryItem = Instantiate(item/*.uiPrefab.GetComponent<SCRIPT_InventoryItem>()*/);
-        //Destroy(item.gameObject);
+        SCRIPT_InventoryItem inventoryItem = Instantiate(item);
         selectedItem = inventoryItem;
         itemRectTransform = inventoryItem.GetComponent<RectTransform>();
         itemRectTransform.SetParent(canvasTransform);
@@ -558,27 +557,6 @@ public class InventoryController : MonoBehaviour
         isCheckingInventory = true;
         SetInventoryVisibility(isCheckingInventory);
     }
-
-    //public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
-    //{
-    //   // sdf
-    //    //selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
-    //    foreach (var item in storedItemList)
-    //    {
-    //        CreateItemForUi(item);
-    //        SCRIPT_InventoryItem itemToInsert = selectedItem;
-    //        selectedItem = null;
-    //        Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
-    //        if (positionOnGrid == null)
-    //        {
-    //            return;
-    //        }
-    //        selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-    //        item.positionOnGrid.x = positionOnGrid.Value.x;
-    //        item.positionOnGrid.y = positionOnGrid.Value.y;
-    //        selectedItemGrid.testList.Add(item);
-    //    }
-    //}
 
     public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
     {
@@ -709,11 +687,14 @@ public class InventoryController : MonoBehaviour
         if (selectedItem == null)
         {
             PickItemFromGrid(tileGridPosition);
+            Debug.Log("Down LMB PickedItem");
         }
         else
         {
             PlaceItemOnGrid(tileGridPosition);
+            Debug.Log("Down LMB PlacedItem");
         }
+        Debug.Log("Down LMB Finished");
     }
 
     private void MoveItemFast()
@@ -845,14 +826,11 @@ public class InventoryController : MonoBehaviour
             if (selectedItemGrid.isPlayerInventory)
             {
                 selectedItemGrid = containerItemGrid;
-                //int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
             }
             else
             {
                 selectedItemGrid = inventoryGrid;
-                //int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
             }
-
 
             Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(selectedItem);
             if (positionOnGrid == null)
@@ -866,13 +844,6 @@ public class InventoryController : MonoBehaviour
             SCRIPT_InventoryItem itemToInsert = selectedItem;
             selectedItem.isOnCursor = false;
             selectedItem = null;
-            //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-            //itemToInsert.lastGrid = selectedItemGrid;
-            //itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
-            //itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
-            //selectedItemGrid.testList.Add(itemToInsert); 
-            
-            
 
             if (selectedItemGrid != itemToInsert.lastGrid)
             {
@@ -937,6 +908,7 @@ public class InventoryController : MonoBehaviour
     {
         overlapItem = null;
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
+        Debug.Log("Down LMB bool complete ready");
         if (complete)
         {
             if (selectedItem.lastGrid.isPlayerInventory &&
@@ -949,7 +921,7 @@ public class InventoryController : MonoBehaviour
             {
                 _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
             }
-
+            Debug.Log("Down LMB weight changed");
             selectedItem.lastGrid = selectedItemGrid;
             selectedItem.isOnCursor = false;
 
@@ -1007,6 +979,7 @@ public class InventoryController : MonoBehaviour
                     itemRectTransform = selectedItem.GetComponent<RectTransform>();
                     itemRectTransform.SetAsLastSibling();
                 }
+                Debug.Log("Down LMB overlapped");
             }
         }
     }
