@@ -92,7 +92,6 @@ public class InventoryController : MonoBehaviour
             {
                 LeftMouseButtonPress();
             }
-            Debug.Log("Down LMB");
         }
         
         if (Input.GetMouseButtonDown(1))
@@ -104,7 +103,6 @@ public class InventoryController : MonoBehaviour
         {
             isHoldingDropItemButton = true;
             buttonHoldTime = 0;
-            Debug.Log("Down Q");
         }
 
         if (Input.GetKeyUp(KeyCode.Q))
@@ -118,7 +116,6 @@ public class InventoryController : MonoBehaviour
             {
                 DropItem();
             }
-            Debug.Log("Up Q");
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -272,7 +269,6 @@ public class InventoryController : MonoBehaviour
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
-            Debug.Log("Down Q onCursor finished");
         }
         else
         {
@@ -305,9 +301,8 @@ public class InventoryController : MonoBehaviour
                 inventoryHighlight.Show(false);
             }
         }
-        Посмотреть, что тут можно сделать с багом, описанным в Асане
-        //selectedItem = null;
-        Debug.Log("Down Q Finished");
+
+        selectedItem = null;
     }
 
     private void DropStack()
@@ -687,14 +682,11 @@ public class InventoryController : MonoBehaviour
         if (selectedItem == null)
         {
             PickItemFromGrid(tileGridPosition);
-            Debug.Log("Down LMB PickedItem");
         }
         else
         {
             PlaceItemOnGrid(tileGridPosition);
-            Debug.Log("Down LMB PlacedItem");
         }
-        Debug.Log("Down LMB Finished");
     }
 
     private void MoveItemFast()
@@ -962,6 +954,7 @@ public class InventoryController : MonoBehaviour
                         selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
                         selectedItemGrid.testList.Add(selectedItem);
                         selectedItemGrid.testList.Remove(overlapItem);
+                        overlapItem.isOnCursor = true;
                         selectedItem = overlapItem;
                         overlapItem = null;
                         itemRectTransform = selectedItem.GetComponent<RectTransform>();
@@ -974,12 +967,12 @@ public class InventoryController : MonoBehaviour
                     selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
                     selectedItemGrid.testList.Add(selectedItem);
                     selectedItemGrid.testList.Remove(overlapItem);
+                    overlapItem.isOnCursor = true;
                     selectedItem = overlapItem;
                     overlapItem = null;
                     itemRectTransform = selectedItem.GetComponent<RectTransform>();
                     itemRectTransform.SetAsLastSibling();
                 }
-                Debug.Log("Down LMB overlapped");
             }
         }
     }
