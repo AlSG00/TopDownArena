@@ -7,6 +7,7 @@ using TMPro;
 public class SCRIPT_CarryingWeightText : MonoBehaviour
 {
     public TextMeshProUGUI carryingWeightInfo;
+    public TextMeshProUGUI carryingWeightInventory;
 
     public Image backgroundImage;
 
@@ -24,6 +25,7 @@ public class SCRIPT_CarryingWeightText : MonoBehaviour
     public void SetWeightText(float currentWeight, float maxWeight)
     {
         carryingWeightInfo.text = ($"{currentWeight}/{maxWeight}");
+        carryingWeightInventory.text = carryingWeightInfo.text;
     }
 
     public void ShowUI()
@@ -50,13 +52,6 @@ public class SCRIPT_CarryingWeightText : MonoBehaviour
                 carryingWeightInfo.color.b,
                 carryingWeightInfo.color.a - uiDissapearingSpeed
                 );
-
-            //yield return backgroundImage.color = new Color(
-            //    backgroundImage.color.r,
-            //    backgroundImage.color.g,
-            //    backgroundImage.color.b,
-            //    backgroundImage.color.a - uiDissapearingSpeed
-            //    );
         }
 
         yield return carryingWeightInfo.color = new Color(
@@ -65,13 +60,6 @@ public class SCRIPT_CarryingWeightText : MonoBehaviour
                 carryingWeightInfo.color.b,
                 0f
                 );
-
-        //yield return backgroundImage.color = new Color(
-        //        backgroundImage.color.r,
-        //        backgroundImage.color.g,
-        //        backgroundImage.color.b,
-        //        0f
-        //        );
 
         isVisible = false;
     }
@@ -106,13 +94,6 @@ public class SCRIPT_CarryingWeightText : MonoBehaviour
                 carryingWeightInfo.color.b,
                 carryingWeightInfo.color.a + uiAppearingSpeed
                 );
-
-            //yield return backgroundImage.color = new Color(
-            //    backgroundImage.color.r,
-            //    backgroundImage.color.g,
-            //    backgroundImage.color.b,
-            //    backgroundImage.color.a + uiAppearingSpeed
-            //    );
         }
 
         yield return carryingWeightInfo.color = new Color(
@@ -121,13 +102,6 @@ public class SCRIPT_CarryingWeightText : MonoBehaviour
                 carryingWeightInfo.color.b,
                 1f
                 );
-
-        //yield return backgroundImage.color = new Color(
-        //        backgroundImage.color.r,
-        //        backgroundImage.color.g,
-        //        backgroundImage.color.b,
-        //        1f
-        //        );
 
         isVisible = true;
     }
