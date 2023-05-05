@@ -20,7 +20,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     // public ItemCollection itemCollection;
     public List<SCRIPT_InventoryItem> testList = new List<SCRIPT_InventoryItem>(); // 
 
-
+    public Canvas hudCanvas;
     RectTransform rectTransform;
 
     public int _gridSizeWidth = 5;
@@ -42,15 +42,13 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         Initialize(_gridSizeWidth, _gridSizeHeight);
-        SetVisibility(false/*, false*/);
+        SetVisibility(false);
        // itemCollection.itemList = new List<SCRIPT_InventoryItem>();
     }
 
     internal SCRIPT_InventoryItem PickUpItem(int x, int y)
     {
-        // TODO: добавить сюда логику стаков
         SCRIPT_InventoryItem toReturn = inventoryItemSlot[x, y];
-
         if (toReturn == null)
         {
             return null;
@@ -148,30 +146,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         return null;
     }
 
-    //public bool PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY, ref SCRIPT_InventoryItem overlapItem)
-    //{
-    //    if (BoundaryCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height) == false)
-    //    {
-    //        return false;
-    //    }
-
-    //    if (OverlapCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height, ref overlapItem) == false)
-    //    {
-    //        overlapItem = null;
-    //        return false;
-    //    }
-
-    //    if (overlapItem != null)
-    //    {
-    //        CleanGridReference(overlapItem);
-    //    }
-
-    //    PlaceItem(inventoryItem, positionX, positionY);
-    //    testList.Add(inventoryItem);
-
-    //    return true;
-    //}
-
     public bool PlaceItem(SCRIPT_InventoryItem inventoryItem, int positionX, int positionY, ref SCRIPT_InventoryItem overlapItem)
     {
         if (BoundaryCheck(positionX, positionY, inventoryItem.Width, inventoryItem.Height) == false)
@@ -184,57 +158,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
             overlapItem = null;
             return false;
         }
-
-        //if (overlapItem != null)
-        //{
-        //    CleanGridReference(overlapItem);
-        //}
-
-        //if (overlapItem == null)
-        //{
-        //    PlaceItem(inventoryItem, positionX, positionY);
-        //    testList.Add(inventoryItem);
-        //}
-        //else
-        //{
-        //    if (overlapItem.name == inventoryItem.name)
-        //    {
-        //        int requiredItemsCount = overlapItem.maxStackCount - overlapItem.stackCount;
-        //        if (requiredItemsCount != 0)
-        //        {
-        //            if (requiredItemsCount < inventoryItem.stackCount)
-        //            {
-        //                inventoryItem.isOnCursor = true;
-        //                overlapItem.stackCount = overlapItem.maxStackCount;
-        //                inventoryItem.stackCount -= requiredItemsCount;
-        //                overlapItem.UpdateCounter();
-        //                inventoryItem.UpdateCounter();
-        //            }
-        //            else
-        //            {
-        //                overlapItem.stackCount += inventoryItem.stackCount;
-        //                overlapItem.UpdateCounter();
-        //                Destroy(inventoryItem.gameObject);
-        //                inventoryItem = null;
-        //            }
-        //        }
-        //        else
-        //        {
-
-        //        }
-        //    }
-        //    else
-        //    {
-        //        CleanGridReference(overlapItem);
-        //        PlaceItem(inventoryItem, positionX, positionY);
-        //        testList.Add(inventoryItem);
-
-        //        selectedItem = overlapItem;
-        //        overlapItem = null;
-        //        itemRectTransform = selectedItem.GetComponent<RectTransform>();
-        //        itemRectTransform.SetAsLastSibling();
-        //    }
-        //}
 
         return true;
     }
@@ -346,26 +269,11 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public void ClearGrid()
     {
-        //GameObject highlighter = GameObject.Find("Highlighter");
-
-        //int childrenCount = transform.childCount;
-        //for (int i = childrenCount - 1; i >= 0; i--)
-        //{
-        //    if (transform.GetChild(i).name != "Highlighter")
-        //    {
-        //        Destroy(transform.GetChild(i).gameObject);
-        //    }
-        //}
-        //testList = new List<SCRIPT_InventoryItem>();
-        //inventoryItemSlot = null;
-
-        //GameObject highlighter = GameObject.Find("Highlighter");
         int childrenCount = transform.childCount;
         for (int i = childrenCount - 1; i >= 0; i--)
         {
             if (transform.GetChild(i).name != "Highlighter")
             {
-                //Destroy(transform.GetChild(i).gameObject);
                 transform.GetChild(i).gameObject.SetActive(false);
             }
         }
@@ -373,32 +281,32 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         inventoryItemSlot = null;
     }
 
-    public void SetVisibility(bool isVisible/*, bool openingContainer*/)
+    public void SetVisibility(bool isVisible)
     {
         RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
 
         Vector2 position = new Vector2();
         position.x = inventoryRect.position.x;
         if (isPlayerInventory == false && isVisible)
-        //    openingContainer == false)
         {
-            position.y = 3000;
+            position.y = hudCanvas.pixelRect.height * 2;
             inventoryRect.position = position;
             return;
         }
 
         if (isVisible == true)
         {
-            position.y = 630;
+            position.y = hudCanvas.pixelRect.height / 2 + inventoryRect.rect.height / 2;
         }
         else
         {
-            position.y = 3000;
+            position.y = hudCanvas.pixelRect.height * 2;
         }
 
         inventoryRect.position = position;
     }
 
+    //TODO: По идее, от этой функции можно избавиться, поскольку она дублирует функцию выше
     public void SetContainerGridVisibility(bool isVisible/*, bool openingContainer*/)
     {
         RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
@@ -406,12 +314,11 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
         if (isVisible == true)
         {
-            position.y = 630;
+            position.y = hudCanvas.pixelRect.height / 2 + inventoryRect.rect.height / 2; ;
         }
         else
         {
-            position.y = 3000;
-            //  alreadyInteracting = false;
+            position.y = hudCanvas.pixelRect.height * 2;
         }
 
         position.x = inventoryRect.position.x;
