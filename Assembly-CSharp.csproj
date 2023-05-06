@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\Inventory\InventoryController.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSHelper.cs" />
     <Compile Include="Assets\Thirdparty\Shared\Scripts\AdjustTimeScale.cs" />
+    <Compile Include="Assets\MouseMovementTracker.cs" />
     <Compile Include="Assets\Scripts\Interaction\SCRIPT_ObjectInteraction.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad.cs" />
@@ -208,7 +209,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\MouseMovementTracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

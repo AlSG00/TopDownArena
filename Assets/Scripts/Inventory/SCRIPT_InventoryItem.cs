@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class SCRIPT_InventoryItem : MonoBehaviour
+public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public int Height
     {
@@ -31,10 +32,12 @@ public class SCRIPT_InventoryItem : MonoBehaviour
         }
     }
 
+    public delegate void showAction(bool showInfo);
+    public static showAction OnShowItemInfo;
+
     public string name; // метка имени
     [SerializeField] public SCRIPT_ItemData itemData; // общая инфа (размер в инвентаре, имя, иконка)
     public GameObject objectPrefab; // 3д-объект, который заспавнится, когда предмет будет выброшен
-    //public GameObject uiPrefab; // Объъект, который будет висеть в инвентаре
 
     [Header("Properties")]
     [Range(0, 999)] public float weight; // вес предмета, добавляется игроку
@@ -61,10 +64,30 @@ public class SCRIPT_InventoryItem : MonoBehaviour
     public Vector2Int positionOnGrid; // позиция предмета на сетке инвентаря
 
     public SCRIPT_ItemGrid lastGrid;
+    private bool isMouseOverItem = false;
+    [SerializeField] private float timeToShowInfo = 0f;
+    private float cursorHoldingTime = 0f;
+
+    private void Awake()
+    {
+        cursorHoldingTime = 0f;
+    }
 
     private void Start()
     {
         useItemAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (isMouseOverItem)
+        {
+            Продумать мезанизм подсказок, как они должны отобрадаться и как подвязать сюда скрипт отслеживания активности курсора, используя ивенты, а не прямые ссылки
+        }
+        else
+        {
+            cursorHoldingTime = 0f;
+        }
     }
 
     internal void Set(SCRIPT_ItemData itemData)
@@ -93,9 +116,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour
         rectTransform.rotation = Quaternion.Euler(0, 0, isRotated == true ? 90f : 0f);
     }
 
-   
-
-    public void UpdateCounter(/*int count*/)
+    public void UpdateCounter()
     {
         if (stackCounter == null)
         {
@@ -107,5 +128,17 @@ public class SCRIPT_InventoryItem : MonoBehaviour
         }
 
         stackCounter.text = stackCount.ToString();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //Debug.Log("Entered");
+        isMouseOverItem = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //Debug.Log("Leaved");
+        isMouseOverItem = false;
     }
 }

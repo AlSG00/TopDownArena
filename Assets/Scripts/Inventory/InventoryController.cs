@@ -900,7 +900,7 @@ public class InventoryController : MonoBehaviour
     {
         overlapItem = null;
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
-        Debug.Log("Down LMB bool complete ready");
+        //Debug.Log("Down LMB bool complete ready");
         if (complete)
         {
             if (selectedItem.lastGrid.isPlayerInventory &&
@@ -913,7 +913,7 @@ public class InventoryController : MonoBehaviour
             {
                 _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
             }
-            Debug.Log("Down LMB weight changed");
+            //Debug.Log("Down LMB weight changed");
             selectedItem.lastGrid = selectedItemGrid;
             selectedItem.isOnCursor = false;
 

@@ -15,8 +15,6 @@ public class MouseMovementTracker : MonoBehaviour
     {
         isMoving = false;
         isActive = false;
-        notMovingTimer = 0f;
-        inactivityTime = 0f;
     }
 
     private void Start()
@@ -39,7 +37,16 @@ public class MouseMovementTracker : MonoBehaviour
 
         if (isMoving == false)
         {
-            aksdfhaisdfugh
+            inactivityTime += Time.deltaTime;
+            if (inactivityTime >= notMovingTimer)
+            {
+                isActive = false;
+            }
+        }
+        else
+        {
+            inactivityTime = 0f;
+            isActive = true;
         }
     }
 }
