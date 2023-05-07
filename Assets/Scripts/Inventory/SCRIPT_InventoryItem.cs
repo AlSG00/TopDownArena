@@ -32,8 +32,10 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         }
     }
 
-    public delegate void showAction(bool showInfo);
+    public delegate void showAction(bool showInfo, SCRIPT_ItemData itemData);
     public static showAction OnShowItemInfo;
+
+    public SCRIPT_ItemGrid lastGrid;
 
     public string name; // метка имени
     [SerializeField] public SCRIPT_ItemData itemData; // общая инфа (размер в инвентаре, имя, иконка)
@@ -63,14 +65,25 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public Vector2Int positionOnGrid; // позиция предмета на сетке инвентаря
 
-    public SCRIPT_ItemGrid lastGrid;
+    
     private bool isMouseOverItem = false;
+    private bool isCursorActive = true;
     [SerializeField] private float timeToShowInfo = 0f;
     private float cursorHoldingTime = 0f;
 
     private void Awake()
     {
         cursorHoldingTime = 0f;
+    }
+
+    private void OnEnable()
+    {
+        MouseMovementTracker.OnCursorInactive += SetCursorActivityFlag;
+    }
+
+    private void OnDisable()
+    {
+        MouseMovementTracker.OnCursorInactive -= SetCursorActivityFlag;
     }
 
     private void Start()
@@ -80,13 +93,22 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private void Update()
     {
-        if (isMouseOverItem)
+        Debug.Log($"{isMouseOverItem} : {isCursorActive} : {isOnCursor}");
+        if (isMouseOverItem &&
+            isCursorActive == false &&
+            isOnCursor == false)
         {
-            Продумать мезанизм подсказок, как они должны отобрадаться и как подвязать сюда скрипт отслеживания активности курсора, используя ивенты, а не прямые ссылки
+            OnShowItemInfo?.Invoke(true, itemData);
         }
         else
         {
             cursorHoldingTime = 0f;
+
+            if (isMouseOverItem == false ||
+                isOnCursor)
+            {
+                OnShowItemInfo?.Invoke(false, itemData);
+            }
         }
     }
 
@@ -130,15 +152,21 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         stackCounter.text = stackCount.ToString();
     }
 
+    private void SetCursorActivityFlag(bool isActive)
+    {
+        isCursorActive = isActive;
+        Debug.Log($"isCursorActiveFlag: {isActive}");
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //Debug.Log("Entered");
         isMouseOverItem = true;
+        Debug.Log($"Entered {gameObject.name}");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //Debug.Log("Leaved");
         isMouseOverItem = false;
+        Debug.Log($"Leaved {gameObject.name}");
     }
 }

@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -303,11 +303,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a0ff9da7f9ea048adce079d9d22e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastGrid: {fileID: 0}
   name: Blue_1
   itemData: {fileID: 11400000, guid: 6b0fa27cdad009442ac7bf6c946fa9dd, type: 2}
   objectPrefab: {fileID: 7034253510274962957, guid: 669b3a7a316dbc24ca5fb4ee9a1f18e8,
     type: 3}
-  uiPrefab: {fileID: 3847044455456163715}
   weight: 1
   isRotatable: 0
   isUsable: 1
@@ -322,6 +322,7 @@ MonoBehaviour:
   isRotated: 0
   isOnCursor: 0
   positionOnGrid: {x: 1, y: 0}
+  timeToShowInfo: 0
 --- !u!114 &2702102103260729258
 MonoBehaviour:
   m_ObjectHideFlags: 0

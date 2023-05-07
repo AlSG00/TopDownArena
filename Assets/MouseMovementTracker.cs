@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MouseMovementTracker : MonoBehaviour
 {
+    public delegate void inactiveMode(bool isActive);
+    public static inactiveMode OnCursorInactive;
+
+    [SerializeField] InventoryController playerInventory;
+
     public bool isMoving = false;
     public bool isActive = false;
     public float notMovingTimer = 0f;
@@ -24,6 +29,43 @@ public class MouseMovementTracker : MonoBehaviour
 
     private void Update()
     {
+        SetMouseMovementFlag();
+        SetMouseActivityFlag();
+    }
+
+    private void SetMouseActivityFlag()
+    {
+        if (isMoving == false)
+        {
+            inactivityTime += Time.deltaTime;
+            if (inactivityTime >= notMovingTimer)
+            {
+                if (isActive)
+                {
+                    isActive = false;
+                    //if (playerInventory.isCheckingInventory)
+                    //{
+                        OnCursorInactive?.Invoke(isActive);
+                    //}
+                }
+            }
+        }
+        else
+        {
+            inactivityTime = 0f;
+            if (isActive == false)
+            {
+                isActive = true;
+                //if (playerInventory.isCheckingInventory)
+                //{
+                    OnCursorInactive?.Invoke(isActive);
+                //}
+            }
+        }
+    }
+
+    private void SetMouseMovementFlag()
+    {
         positionDelta = lastMousePosition - Input.mousePosition;
         if (positionDelta.magnitude > 0)
         {
@@ -34,19 +76,5 @@ public class MouseMovementTracker : MonoBehaviour
             isMoving = false;
         }
         lastMousePosition = Input.mousePosition;
-
-        if (isMoving == false)
-        {
-            inactivityTime += Time.deltaTime;
-            if (inactivityTime >= notMovingTimer)
-            {
-                isActive = false;
-            }
-        }
-        else
-        {
-            inactivityTime = 0f;
-            isActive = true;
-        }
     }
 }
