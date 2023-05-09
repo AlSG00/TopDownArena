@@ -83,26 +83,6 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         useItemAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
     }
 
-    private void Update()
-    {
-        //if (isMouseOverItem &&
-        //    isCursorActive == false &&
-        //    isOnCursor == false)
-        //{
-        //    Debug.Log("Calling Show");
-        //    OnShowItemInfo?.Invoke(true, this);
-        //}
-        //else
-        //{
-        //    if (isMouseOverItem == false ||
-        //        isOnCursor)
-        //    {
-        //        Debug.Log("Calling ");
-        //        OnShowItemInfo?.Invoke(false, this);
-        //    }
-        //}
-    }
-
     internal void Set(SCRIPT_ItemData itemData)
     {
         this.itemData = itemData;
@@ -156,7 +136,14 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     public void SetOnCursorFlag(bool onCursor)
     {
         isOnCursor = onCursor;
-        OnShowItemInfo?.Invoke(false, this);
+        if (isOnCursor)
+        {
+            OnShowItemInfo?.Invoke(false, this);
+        }
+        else
+        {
+            OnShowItemInfo?.Invoke(true, this);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

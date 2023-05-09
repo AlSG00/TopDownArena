@@ -99,6 +99,20 @@ public class InventoryController : MonoBehaviour
         {
             RightMouseButtonPress();
         }
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            if (itemInfoWindow.isShowingDetails)
+            {
+                itemInfoWindow.ShowDetails(false);
+            }
+            else
+            {
+                itemInfoWindow.ShowDetails(true);
+            }
+
+            
+        }
         
         if (Input.GetKeyDown(KeyCode.Q))
         {

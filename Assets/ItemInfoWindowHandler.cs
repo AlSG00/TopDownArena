@@ -9,11 +9,13 @@ public class ItemInfoWindowHandler : MonoBehaviour
 {
     [SerializeField] private Image[] ItemInfoWindows;
     [SerializeField] private TextMeshProUGUI[] ItemInfoText;
+    private string itemDetails = "";
 
     [SerializeField] private float appearingSpeed = 1f;
     [SerializeField] private float dissapearingSpeed = 1f;
 
     private bool _isVisible = false;
+    public bool isShowingDetails = false;
 
     private void OnEnable()
     {
@@ -40,7 +42,8 @@ public class ItemInfoWindowHandler : MonoBehaviour
         string[] parsedUiInfo = item.itemData.uiInfo.text.Split('#');
         ItemInfoText[0].text = parsedUiInfo[0];
         ItemInfoText[1].text = parsedUiInfo[1];
-        ItemInfoText[2].text = parsedUiInfo[2];
+        ItemInfoText[2].text = "";
+        itemDetails = parsedUiInfo[2];
 
         PlaceWindow(item);
         
@@ -50,8 +53,24 @@ public class ItemInfoWindowHandler : MonoBehaviour
         }
         else
         {
+            //_isShowingDetails = false;
             HideUI();
+            //ShowDetails(false);
         }
+    }
+
+    public void ShowDetails(bool show)
+    {
+        if (show)
+        {
+            ItemInfoText[2].text = itemDetails;
+        }
+        else
+        {
+            ItemInfoText[2].text = "";
+        }
+
+        isShowingDetails = !isShowingDetails;
     }
 
     private void PlaceWindow(SCRIPT_InventoryItem item)
@@ -142,7 +161,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
                 text.color.b,
                 0f
                 );
-
+        ShowDetails(false);
         text.enabled = false;
     }
 
