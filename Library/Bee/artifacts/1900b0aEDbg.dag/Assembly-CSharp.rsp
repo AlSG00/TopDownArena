@@ -391,6 +391,7 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 "Assets/Destructible.cs"
 "Assets/InventoryDebugWindow.cs"
+"Assets/ItemInfoWindowHandler.cs"
 "Assets/MouseMovementTracker.cs"
 "Assets/Scripts/AttackPlayer.cs"
 "Assets/Scripts/Audio/AudioManager.cs"

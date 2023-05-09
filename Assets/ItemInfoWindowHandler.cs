@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ItemInfoWindowHandler : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
     [SerializeField] private float appearingSpeed = 1f;
     [SerializeField] private float dissapearingSpeed = 1f;
 
-    private bool isVisible = false;
+    private bool _isVisible = false;
 
     private void OnEnable()
     {
@@ -29,8 +30,20 @@ public class ItemInfoWindowHandler : MonoBehaviour
         HideUI();
     }
 
-    private void SetVisibility(bool isVisible, SCRIPT_ItemData itemData)
+    public void SetVisibility(bool isVisible, SCRIPT_InventoryItem item)
     {
+        if (isVisible == _isVisible)
+        {
+            return;
+        }
+
+        string[] parsedUiInfo = item.itemData.uiInfo.text.Split('#');
+        ItemInfoText[0].text = parsedUiInfo[0];
+        ItemInfoText[1].text = parsedUiInfo[1];
+        ItemInfoText[2].text = parsedUiInfo[2];
+
+        PlaceWindow(item);
+        
         if (isVisible)
         {
             ShowUI();
@@ -39,6 +52,25 @@ public class ItemInfoWindowHandler : MonoBehaviour
         {
             HideUI();
         }
+    }
+
+    private void PlaceWindow(SCRIPT_InventoryItem item)
+    {
+        if (item.isRotated)
+        {
+            ItemInfoWindows[0].rectTransform.position = new Vector2(
+            item.itemRectTransform.position.x + item.itemRectTransform.sizeDelta.y / 2,
+            item.itemRectTransform.position.y + item.itemRectTransform.sizeDelta.x / 2
+            );
+        }
+        else
+        {
+            ItemInfoWindows[0].rectTransform.position = new Vector2(
+            item.itemRectTransform.position.x + item.itemRectTransform.sizeDelta.x / 2,
+            item.itemRectTransform.position.y + item.itemRectTransform.sizeDelta.y / 2
+            );
+        }
+
     }
 
     private void DisableOnStart()
@@ -53,7 +85,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
             window.enabled = false;
         }
 
-        isVisible = false;
+        _isVisible = false;
     }
 
     private void ShowUI()
@@ -70,7 +102,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
             StartCoroutine(ShowWindow(window));
         }
 
-        isVisible = true;
+        _isVisible = true;
     }
 
     private void HideUI()
@@ -87,7 +119,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
             StartCoroutine(HideWindow(window));
         }
 
-        isVisible = false;
+        _isVisible = false;
     }
 
     private IEnumerator HideText(TextMeshProUGUI text)

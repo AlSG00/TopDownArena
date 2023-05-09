@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a0ff9da7f9ea048adce079d9d22e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemRectTransform: {fileID: 1765722264743598897}
+  lastGrid: {fileID: 0}
   name: Green_1_C
   itemData: {fileID: 11400000, guid: 30e70269319f24942b0c268283757cfd, type: 2}
   objectPrefab: {fileID: 2105167668809384956, guid: b30a6f220f81bee4fb8808439c61b119,
@@ -109,8 +111,6 @@ MonoBehaviour:
   isRotated: 0
   isOnCursor: 0
   positionOnGrid: {x: 0, y: 0}
-  lastGrid: {fileID: 0}
-  isMouseOverItem: 0
 --- !u!114 &2346497512983539580
 MonoBehaviour:
   m_ObjectHideFlags: 0

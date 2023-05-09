@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263f03cdc99108e4683b1bacf1e6cb74, type: 3}
   m_Name: pink_big
   m_EditorClassIdentifier: 
+  uiInfo: {fileID: 4900000, guid: 3cbc08bfedff52e4892dcbdfdcee4cef, type: 3}
   name: Pink_1
   icon: {fileID: 21300000, guid: 2dc2f99cfd9e56b4fa4dd4660229ee8a, type: 3}
   width: 2

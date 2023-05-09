@@ -32,9 +32,9 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         }
     }
 
-    public delegate void showAction(bool showInfo, SCRIPT_ItemData itemData);
+    public delegate void showAction(bool showInfo, SCRIPT_InventoryItem item);
     public static showAction OnShowItemInfo;
-
+    public RectTransform itemRectTransform;
     public SCRIPT_ItemGrid lastGrid;
 
     public string name; // метка имени
@@ -65,16 +65,8 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public Vector2Int positionOnGrid; // позиция предмета на сетке инвентаря
 
-    
-    private bool isMouseOverItem = false;
+    bool isMouseOverItem = false;
     private bool isCursorActive = true;
-    [SerializeField] private float timeToShowInfo = 0f;
-    private float cursorHoldingTime = 0f;
-
-    private void Awake()
-    {
-        cursorHoldingTime = 0f;
-    }
 
     private void OnEnable()
     {
@@ -93,23 +85,22 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private void Update()
     {
-        Debug.Log($"{isMouseOverItem} : {isCursorActive} : {isOnCursor}");
-        if (isMouseOverItem &&
-            isCursorActive == false &&
-            isOnCursor == false)
-        {
-            OnShowItemInfo?.Invoke(true, itemData);
-        }
-        else
-        {
-            cursorHoldingTime = 0f;
-
-            if (isMouseOverItem == false ||
-                isOnCursor)
-            {
-                OnShowItemInfo?.Invoke(false, itemData);
-            }
-        }
+        //if (isMouseOverItem &&
+        //    isCursorActive == false &&
+        //    isOnCursor == false)
+        //{
+        //    Debug.Log("Calling Show");
+        //    OnShowItemInfo?.Invoke(true, this);
+        //}
+        //else
+        //{
+        //    if (isMouseOverItem == false ||
+        //        isOnCursor)
+        //    {
+        //        Debug.Log("Calling ");
+        //        OnShowItemInfo?.Invoke(false, this);
+        //    }
+        //}
     }
 
     internal void Set(SCRIPT_ItemData itemData)
@@ -120,7 +111,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         Vector2 size = new Vector2();
         size.x = itemData.width * SCRIPT_ItemGrid._tileSizeWidth;
         size.y = itemData.height * SCRIPT_ItemGrid._tileSizeHeight;
-        GetComponent<RectTransform>().sizeDelta = size;
+        itemRectTransform.sizeDelta = size;
     }
 
     internal void Rotated()
@@ -134,8 +125,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         isRotated = !isRotated;
 
         Debug.Log(isRotated);
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.rotation = Quaternion.Euler(0, 0, isRotated == true ? 90f : 0f);
+        itemRectTransform.rotation = Quaternion.Euler(0, 0, isRotated == true ? 90f : 0f);
     }
 
     public void UpdateCounter()
@@ -155,18 +145,29 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     private void SetCursorActivityFlag(bool isActive)
     {
         isCursorActive = isActive;
-        Debug.Log($"isCursorActiveFlag: {isActive}");
+        //if (isMouseOverItem &&
+        //    isCursorActive == false &&
+        //    isOnCursor == false)
+        //{
+        //    OnShowItemInfo?.Invoke(true, this);
+        //}
+    }
+
+    public void SetOnCursorFlag(bool onCursor)
+    {
+        isOnCursor = onCursor;
+        OnShowItemInfo?.Invoke(false, this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         isMouseOverItem = true;
-        Debug.Log($"Entered {gameObject.name}");
+        OnShowItemInfo?.Invoke(true, this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isMouseOverItem = false;
-        Debug.Log($"Leaved {gameObject.name}");
+        OnShowItemInfo?.Invoke(false, this);
     }
 }

@@ -19,7 +19,17 @@ public class MouseMovementTracker : MonoBehaviour
     private void Awake()
     {
         isMoving = false;
-        isActive = false;
+        isActive = true;
+    }
+
+    private void OnEnable()
+    {
+        InventoryController.OnInventoryOpened += ResetFlags;
+    }
+
+    private void OnDisable()
+    {
+        InventoryController.OnInventoryOpened -= ResetFlags;
     }
 
     private void Start()
@@ -31,6 +41,13 @@ public class MouseMovementTracker : MonoBehaviour
     {
         SetMouseMovementFlag();
         SetMouseActivityFlag();
+    }
+
+    private void ResetFlags(bool isOpened)
+    {
+        isMoving = false;
+        isActive = true;
+        inactivityTime = 0f;
     }
 
     private void SetMouseActivityFlag()
@@ -45,7 +62,7 @@ public class MouseMovementTracker : MonoBehaviour
                     isActive = false;
                     //if (playerInventory.isCheckingInventory)
                     //{
-                        OnCursorInactive?.Invoke(isActive);
+                    OnCursorInactive?.Invoke(isActive);
                     //}
                 }
             }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263f03cdc99108e4683b1bacf1e6cb74, type: 3}
   m_Name: blue_1
   m_EditorClassIdentifier: 
+  uiInfo: {fileID: 4900000, guid: 3cbc08bfedff52e4892dcbdfdcee4cef, type: 3}
   name: Blue_1
   icon: {fileID: 21300000, guid: f394aa5f4ef367e419094e8568f3bb97, type: 3}
   width: 1

@@ -90,10 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a0ff9da7f9ea048adce079d9d22e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemRectTransform: {fileID: 1765722264743598897}
+  lastGrid: {fileID: 0}
   name: 
   itemData: {fileID: 11400000, guid: 30e70269319f24942b0c268283757cfd, type: 2}
   objectPrefab: {fileID: 0}
-  uiPrefab: {fileID: 3847044455456163715}
   weight: 1
   isRotatable: 0
   isUsable: 1

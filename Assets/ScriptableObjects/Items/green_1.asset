@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263f03cdc99108e4683b1bacf1e6cb74, type: 3}
   m_Name: green_1
   m_EditorClassIdentifier: 
+  uiInfo: {fileID: 4900000, guid: 3cbc08bfedff52e4892dcbdfdcee4cef, type: 3}
   name: Green_1_C
   icon: {fileID: 21300000, guid: bd9b5a5c3d358cb4b807d4a28d68e939, type: 3}
   width: 1

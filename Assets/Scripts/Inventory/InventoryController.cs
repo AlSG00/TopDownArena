@@ -14,6 +14,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private Player_Movement _playerMovement;
     [SerializeField] private SCRIPT_PlayerCarryingWeight _playerCarryingWeight;
     [SerializeField] private SCRIPT_InventoryHighlight inventoryHighlight;
+    [SerializeField] private ItemInfoWindowHandler itemInfoWindow;
 
     [Header("Item")]
     public SCRIPT_InventoryItem selectedItem;
@@ -36,7 +37,7 @@ public class InventoryController : MonoBehaviour
     public bool isDroppingStack = false;
     public delegate void OpenAction(bool isOpened);
     public static event OpenAction OnInventoryOpened;
-    public static event OpenAction OnStateIconShow;    
+    public static event OpenAction OnStateIconShow;  
 
     private void OnEnable()
     {
@@ -278,6 +279,7 @@ public class InventoryController : MonoBehaviour
                 {
                     selectedItemGrid.testList.Remove(selectedItem);
                     UpdateCarryingWeight(selectedItem, false);
+                    itemInfoWindow.SetVisibility(false, selectedItem);
                     Destroy(selectedItem.gameObject);
                     inventoryHighlight.Show(false);
                 }
@@ -297,6 +299,7 @@ public class InventoryController : MonoBehaviour
                 droppedItemData.stackCount = selectedItem.stackCount;
                 selectedItemGrid.testList.Remove(selectedItem);
                 UpdateCarryingWeight(selectedItem, true);
+                itemInfoWindow.SetVisibility(false, selectedItem);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
@@ -322,6 +325,7 @@ public class InventoryController : MonoBehaviour
         {
             return;
         }
+        itemInfoWindow.SetVisibility(false, selectedItem);
         selectedItem.isDropping = true;
         selectedItemGrid.PickUpItem(selectedItem.positionOnGrid.x, selectedItem.positionOnGrid.y);
         if (selectedItem.isSingleDropping)
@@ -484,6 +488,7 @@ public class InventoryController : MonoBehaviour
         else
         {
             selectedItemGrid.testList.Remove(selectedItem);
+            itemInfoWindow.SetVisibility(false, selectedItem);
             Destroy(selectedItem.gameObject);
             inventoryHighlight.Show(false);
         }
@@ -498,7 +503,7 @@ public class InventoryController : MonoBehaviour
         selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
         if (selectedItem != null)
         {
-            selectedItem.isOnCursor = true;
+            selectedItem.SetOnCursorFlag(true);
             selectedItem.lastGrid = selectedItemGrid;
             selectedItemGrid.testList.Remove(selectedItem);
             itemRectTransform = selectedItem.GetComponent<RectTransform>();
@@ -736,7 +741,7 @@ public class InventoryController : MonoBehaviour
                     {
                         _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
                     }
-                    selectedItem.isOnCursor = false;
+                    selectedItem.SetOnCursorFlag(false);
                     selectedItem = null;
 
                     InsertItem(itemToInsert);
@@ -789,7 +794,7 @@ public class InventoryController : MonoBehaviour
                     {
                         _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
                     }
-                    selectedItem.isOnCursor = false;
+                    selectedItem.SetOnCursorFlag(false);
                     selectedItem = null;
                     //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
                     //itemToInsert.lastGrid = selectedItemGrid;
@@ -834,7 +839,7 @@ public class InventoryController : MonoBehaviour
             }
 
             SCRIPT_InventoryItem itemToInsert = selectedItem;
-            selectedItem.isOnCursor = false;
+            selectedItem.SetOnCursorFlag(false);
             selectedItem = null;
 
             if (selectedItemGrid != itemToInsert.lastGrid)
@@ -915,7 +920,7 @@ public class InventoryController : MonoBehaviour
             }
             //Debug.Log("Down LMB weight changed");
             selectedItem.lastGrid = selectedItemGrid;
-            selectedItem.isOnCursor = false;
+            selectedItem.SetOnCursorFlag(false);
 
             if (overlapItem == null)
             {
@@ -934,7 +939,7 @@ public class InventoryController : MonoBehaviour
                     {
                         if (requiredItemsCount < selectedItem.stackCount)
                         {
-                            selectedItem.isOnCursor = true;
+                            selectedItem.SetOnCursorFlag(true);
                             overlapItem.stackCount = overlapItem.maxStackCount;
                             selectedItem.stackCount -= requiredItemsCount;
                             overlapItem.UpdateCounter();
@@ -954,7 +959,7 @@ public class InventoryController : MonoBehaviour
                         selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
                         selectedItemGrid.testList.Add(selectedItem);
                         selectedItemGrid.testList.Remove(overlapItem);
-                        overlapItem.isOnCursor = true;
+                        overlapItem.SetOnCursorFlag(true);
                         selectedItem = overlapItem;
                         overlapItem = null;
                         itemRectTransform = selectedItem.GetComponent<RectTransform>();
@@ -967,7 +972,7 @@ public class InventoryController : MonoBehaviour
                     selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
                     selectedItemGrid.testList.Add(selectedItem);
                     selectedItemGrid.testList.Remove(overlapItem);
-                    overlapItem.isOnCursor = true;
+                    overlapItem.SetOnCursorFlag(true);
                     selectedItem = overlapItem;
                     overlapItem = null;
                     itemRectTransform = selectedItem.GetComponent<RectTransform>();

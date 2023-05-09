@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class SCRIPT_ItemData : ScriptableObject
 {
-    public TextAsset UiInfo;
+    public TextAsset uiInfo;
     public string name;
     public Sprite icon;
     public int width = 1;
