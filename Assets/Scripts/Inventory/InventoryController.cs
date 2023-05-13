@@ -715,7 +715,7 @@ public class InventoryController : MonoBehaviour
 
     private void MoveItemFast()
     {
-        itemInfoWindow.Disable();
+        //itemInfoWindow.Disable();
         SCRIPT_ItemGrid previousGrid = null;
         if (isCheckingInventory == false ||
             containerItemGrid == null)
@@ -738,6 +738,7 @@ public class InventoryController : MonoBehaviour
         {
             if (selectedItemGrid.isPlayerInventory)
             {
+                //itemInfoWindow.Disable();
                 selectedItemGrid = containerItemGrid;
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
                 if (stackCountRemaining > 0)
@@ -761,23 +762,27 @@ public class InventoryController : MonoBehaviour
                     {
                         _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
                     }
-                    itemInfoWindow.Disable();
+                    
                     //itemInfoWindow.SetVisibility(false, selectedItem);
-                    selectedItem.SetOnCursorFlag(false);
+                    //selectedItem.SetOnCursorFlag(false);
+                    selectedItem.isOnCursor = false;
+                    itemInfoWindow.SetVisibility(false, selectedItem);
+
                     selectedItem = null;
 
                     InsertItem(itemToInsert);
-
+                    itemToInsert.GetComponent<Image>().raycastTarget = true;
                     selectedItemGrid = inventoryGrid;
                 }
                 else
                 {
-                    itemInfoWindow.Disable();
-                   // itemInfoWindow.SetVisibility(false, selectedItem);
+                    //itemInfoWindow.Disable();
+                    itemInfoWindow.SetVisibility(false, selectedItem);
                     if (selectedItem.lastGrid != selectedItemGrid)
                     {
                         _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
                     }
+                    selectedItem.GetComponent<Image>().raycastTarget = true;
                     Destroy(selectedItem.gameObject);
                     selectedItem = null;
                     selectedItemGrid = inventoryGrid;
@@ -785,6 +790,7 @@ public class InventoryController : MonoBehaviour
             }
             else
             {
+               //itemInfoWindow.Disable();
                 selectedItemGrid = inventoryGrid;
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, true);
                 if (stackCountRemaining > 0)
@@ -804,19 +810,22 @@ public class InventoryController : MonoBehaviour
                     {
                         _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
                     }
-                    itemInfoWindow.Disable();
+                    
                     //itemInfoWindow.SetVisibility(false, selectedItem);
-                    selectedItem.SetOnCursorFlag(false);
+                    //selectedItem.SetOnCursorFlag(false);
+                    selectedItem.isOnCursor = false;
+                    itemInfoWindow.SetVisibility(false, selectedItem);
                     selectedItem = null;
 
                     InsertItem(itemToInsert);
-
+                    itemToInsert.GetComponent<Image>().raycastTarget = true;
                     selectedItemGrid = containerItemGrid;
                 }
                 else
                 {
-                    //itemInfoWindow.SetVisibility(false, selectedItem);
-                    itemInfoWindow.Disable();
+                    itemInfoWindow.SetVisibility(false, selectedItem);
+                    // itemInfoWindow.Disable();
+                    selectedItem.GetComponent<Image>().raycastTarget = true;
                     Destroy(selectedItem.gameObject);
                     selectedItem = null;
                     selectedItemGrid = containerItemGrid;
@@ -845,8 +854,10 @@ public class InventoryController : MonoBehaviour
             }
 
             SCRIPT_InventoryItem itemToInsert = selectedItem;
-            selectedItem.SetOnCursorFlag(false);
-            itemInfoWindow.Disable();
+            //selectedItem.SetOnCursorFlag(false);
+            selectedItem.isOnCursor = false;
+            itemInfoWindow.SetVisibility(false, selectedItem);
+            //  itemInfoWindow.Disable();
             //itemInfoWindow.SetVisibility(false, selectedItem);
             selectedItem = null;
 
@@ -862,7 +873,7 @@ public class InventoryController : MonoBehaviour
                 }
             }
             InsertItem(itemToInsert);
-
+            itemToInsert.GetComponent<Image>().raycastTarget = true;
             selectedItemGrid = previousGrid;
         }
     }
