@@ -148,13 +148,21 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        isMouseOverItem = true;
-        OnShowItemInfo?.Invoke(true, this);
+        if (isOnCursor == false)
+        {
+            Debug.Log("OnPointerEnter");
+            isMouseOverItem = true;
+            OnShowItemInfo?.Invoke(true, this);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        isMouseOverItem = false;
-        OnShowItemInfo?.Invoke(false, this);
+        if (isOnCursor == false)
+        {
+            Debug.Log("OnPointerExit");
+            isMouseOverItem = false;
+            OnShowItemInfo?.Invoke(false, this);
+        }
     }
 }

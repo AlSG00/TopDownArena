@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -701,15 +702,20 @@ public class InventoryController : MonoBehaviour
         if (selectedItem == null)
         {
             PickItemFromGrid(tileGridPosition);
+
+            //NEW
+            selectedItem.GetComponent<Image>().raycastTarget = false;
         }
         else
         {
             PlaceItemOnGrid(tileGridPosition);
+            
         }
     }
 
     private void MoveItemFast()
     {
+        itemInfoWindow.Disable();
         SCRIPT_ItemGrid previousGrid = null;
         if (isCheckingInventory == false ||
             containerItemGrid == null)
@@ -727,7 +733,7 @@ public class InventoryController : MonoBehaviour
                 return;
             }
         }
-
+        
         if (selectedItem.isStackable)
         {
             if (selectedItemGrid.isPlayerInventory)
@@ -755,25 +761,19 @@ public class InventoryController : MonoBehaviour
                     {
                         _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
                     }
+                    itemInfoWindow.Disable();
+                    //itemInfoWindow.SetVisibility(false, selectedItem);
                     selectedItem.SetOnCursorFlag(false);
                     selectedItem = null;
 
                     InsertItem(itemToInsert);
 
-                    //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-                    //itemToInsert.lastGrid = selectedItemGrid;
-                    //itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
-                    //itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
-                    //selectedItemGrid.testList.Add(itemToInsert); // TODO: Вспомнить, почему я не поставил этот метод в PlaceItem();
                     selectedItemGrid = inventoryGrid;
                 }
                 else
                 {
-                    //selectedItemGrid = inventoryGrid;
-                    //if (selectedItem.isOnCursor == false)
-                    //{
-                    //    PickItemFromGrid(selectedItem.positionOnGrid);
-                    //}
+                    itemInfoWindow.Disable();
+                   // itemInfoWindow.SetVisibility(false, selectedItem);
                     if (selectedItem.lastGrid != selectedItemGrid)
                     {
                         _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
@@ -789,10 +789,6 @@ public class InventoryController : MonoBehaviour
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, true);
                 if (stackCountRemaining > 0)
                 {
-                    //if (selectedItemGrid != selectedItem.lastGrid)
-                    //{
-                    //    _playerCarryingWeight.AddWeight(selectedItem.weight * (selectedItem.stackCount - stackCountRemaining));
-                    //}
                     selectedItem.stackCount = stackCountRemaining;
                     Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(selectedItem);
                     if (positionOnGrid == null)
@@ -808,23 +804,19 @@ public class InventoryController : MonoBehaviour
                     {
                         _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
                     }
+                    itemInfoWindow.Disable();
+                    //itemInfoWindow.SetVisibility(false, selectedItem);
                     selectedItem.SetOnCursorFlag(false);
                     selectedItem = null;
-                    //selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-                    //itemToInsert.lastGrid = selectedItemGrid;
-                    //itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
-                    //itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
-                    //selectedItemGrid.testList.Add(itemToInsert);
+
                     InsertItem(itemToInsert);
 
                     selectedItemGrid = containerItemGrid;
                 }
                 else
                 {
-                    //if (selectedItemGrid != selectedItem.lastGrid)
-                    //{
-                    //    _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
-                    //}
+                    //itemInfoWindow.SetVisibility(false, selectedItem);
+                    itemInfoWindow.Disable();
                     Destroy(selectedItem.gameObject);
                     selectedItem = null;
                     selectedItemGrid = containerItemGrid;
@@ -854,6 +846,8 @@ public class InventoryController : MonoBehaviour
 
             SCRIPT_InventoryItem itemToInsert = selectedItem;
             selectedItem.SetOnCursorFlag(false);
+            itemInfoWindow.Disable();
+            //itemInfoWindow.SetVisibility(false, selectedItem);
             selectedItem = null;
 
             if (selectedItemGrid != itemToInsert.lastGrid)
@@ -919,7 +913,6 @@ public class InventoryController : MonoBehaviour
     {
         overlapItem = null;
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
-        //Debug.Log("Down LMB bool complete ready");
         if (complete)
         {
             if (selectedItem.lastGrid.isPlayerInventory &&
@@ -932,9 +925,12 @@ public class InventoryController : MonoBehaviour
             {
                 _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
             }
-            //Debug.Log("Down LMB weight changed");
             selectedItem.lastGrid = selectedItemGrid;
             selectedItem.SetOnCursorFlag(false);
+
+            //NEW
+            selectedItem.GetComponent<Image>().raycastTarget = true;
+
 
             if (overlapItem == null)
             {

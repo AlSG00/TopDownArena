@@ -92,7 +92,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
 
     }
 
-    private void DisableOnStart()
+    public void Disable()
     {
         foreach (var textObject in ItemInfoText)
         {
@@ -105,6 +105,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
         }
 
         _isVisible = false;
+        Debug.Log("Disabled");
     }
 
     private void ShowUI()

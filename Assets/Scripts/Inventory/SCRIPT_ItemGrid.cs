@@ -16,9 +16,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
 
     public bool isPlayerInventory;
 
-    //public List<SCRIPT_InventoryItem> testItemList = new List<SCRIPT_InventoryItem>();
-    // public ItemCollection itemCollection;
-    public List<SCRIPT_InventoryItem> testList = new List<SCRIPT_InventoryItem>(); // 
+    public List<SCRIPT_InventoryItem> testList = new List<SCRIPT_InventoryItem>();
 
     public Canvas hudCanvas;
     RectTransform rectTransform;
@@ -307,7 +305,7 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     }
 
     //TODO: По идее, от этой функции можно избавиться, поскольку она дублирует функцию выше
-    public void SetContainerGridVisibility(bool isVisible/*, bool openingContainer*/)
+    public void SetContainerGridVisibility(bool isVisible)
     {
         RectTransform inventoryRect = rectTransform.GetComponent<RectTransform>();
         Vector2 position = new Vector2();
