@@ -32,6 +32,9 @@ public class InventoryController : MonoBehaviour
     private bool isHoldingShiftButton = false;
     private bool isHoldingDropItemButton = false;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource inventoryAudioSource;
+
     [Header("States")]
     public bool isCheckingInventory = false;
     public bool isHighlightingStateIcons = false;
@@ -532,7 +535,10 @@ public class InventoryController : MonoBehaviour
         {
             Debug.Log("Grid is not selected");
             return;
-        } 
+        }
+
+        //NEW
+        //inventoryAudioSource.PlayOneShot(item.pickFromGroundAudio);
 
         CreateItemForUi(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem; // TODO: Может лучше избавиться от глобально переменной Selected Item???
@@ -702,8 +708,10 @@ public class InventoryController : MonoBehaviour
         if (selectedItem == null)
         {
             PickItemFromGrid(tileGridPosition);
-
+            //itemRectTransform.SetParent(canvasTransform);
+            //itemRectTransform.SetAsLastSibling();
             //NEW
+
             selectedItem.GetComponent<Image>().raycastTarget = false;
         }
         else

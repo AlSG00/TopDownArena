@@ -64,23 +64,28 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
 
             //inventoryItem.stackCount = stackCountRemaining;
             inventory.InsertItemIntoInventory(inventoryItem, stackCountRemaining);
-            PlayPickUpAudio();
-            Destroy(gameObject);
+            //PlayPickUpAudio();
+            //Destroy(gameObject);
         }
-        else
-        {
-            PlayPickUpAudio();
-            Destroy(gameObject);
-        }
+        Сделать ивент, чтобы проигрывался звук подбора предметов в инвентаре.
+        Проигрываться будет через (2 варианта):
+            - аудио в инвентаре (здесь ивент, в инвентаре подписка на ивент)
+            - аудио в отдельном компоненте для обработки звука персонажа, мол, инвентарь, фонарик, пожрать и т.д. (здесь ивент, в компоненте подписка на ивент)
 
+        Destroy(gameObject);
+        //else
+        //{
+        //    //PlayPickUpAudio();
+        //    Destroy(gameObject);
+        //}
     }
 
-    private void PlayPickUpAudio()
-    {
-        if (pickUpAudioSource != null &&
-            pickUpAudio != null)
-        {
-            pickUpAudioSource.PlayOneShot(pickUpAudio);
-        }
-    }
+    //private void PlayPickUpAudio()
+    //{
+    //    if (pickUpAudioSource != null &&
+    //        inventoryItem.pickFromGroundAudio != null)
+    //    {
+    //        pickUpAudioSource.PlayOneShot(inventoryItem.pickFromGroundAudio);
+    //    }
+    //}
 }

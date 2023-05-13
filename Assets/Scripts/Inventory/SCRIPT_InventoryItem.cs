@@ -53,8 +53,11 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     [Range(0, 999)] public int maxStackCount = 0; // максимальный размер стака
 
     [Header("Audio")]
-    public AudioClip useItemAudio; // TODO: Переименовать. Звук, воспроизводимый, когда предмет используется
     public AudioSource useItemAudioSource; // источник звука использования предмета
+    public AudioClip useItemAudio;
+    public AudioClip pickFromGroundAudio;
+    public AudioClip pickFromGridAudio;
+    public AudioClip placeOnGridAudio;
 
     [Header("UI")]
     public TextMeshProUGUI stackCounter; // UI счетчик предметов в стаке
