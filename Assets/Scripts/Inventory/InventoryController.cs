@@ -125,8 +125,6 @@ public class InventoryController : MonoBehaviour
             {
                 itemInfoWindow.ShowDetails(true);
             }
-
-            
         }
         
         if (Input.GetKeyDown(KeyCode.Q))
@@ -420,7 +418,7 @@ public class InventoryController : MonoBehaviour
                 return;
             }
         }
-
+        
         if (selectedItem.isOnCursor)
         {
             SCRIPT_InventoryItem secondItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
@@ -436,7 +434,7 @@ public class InventoryController : MonoBehaviour
                         selectedItem.stackCount--;
                         secondItem.UpdateCounter();
                         selectedItem.UpdateCounter();
-                        
+                        PlayItemAudio(selectedItem, AudioPlayMode.PlaceOnGrid);
                         if (selectedItemGrid != selectedItem.lastGrid)
                         {
                             if (selectedItemGrid.isPlayerInventory)
@@ -492,6 +490,8 @@ public class InventoryController : MonoBehaviour
                 {
                     PlaceItemOnGrid(tileGridPosition);
                 }
+
+                PlayItemAudio(selectedItem, AudioPlayMode.PlaceOnGrid);
             }
 
             return;
@@ -758,22 +758,19 @@ public class InventoryController : MonoBehaviour
         if (selectedItem == null)
         {
             PickItemFromGrid(tileGridPosition);
-            //itemRectTransform.SetParent(canvasTransform);
-            //itemRectTransform.SetAsLastSibling();
-            //NEW
-
             selectedItem.GetComponent<Image>().raycastTarget = false;
+            PlayItemAudio(selectedItem, AudioPlayMode.PickFromGrid);
         }
         else
         {
+            SCRIPT_InventoryItem itemToPlace = selectedItem;
             PlaceItemOnGrid(tileGridPosition);
-            
+            PlayItemAudio(itemToPlace, AudioPlayMode.PlaceOnGrid);
         }
     }
 
     private void MoveItemFast()
     {
-        //itemInfoWindow.Disable();
         SCRIPT_ItemGrid previousGrid = null;
         if (isCheckingInventory == false ||
             containerItemGrid == null)
@@ -796,7 +793,6 @@ public class InventoryController : MonoBehaviour
         {
             if (selectedItemGrid.isPlayerInventory)
             {
-                //itemInfoWindow.Disable();
                 selectedItemGrid = containerItemGrid;
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
                 if (stackCountRemaining > 0)
@@ -825,7 +821,7 @@ public class InventoryController : MonoBehaviour
                     //selectedItem.SetOnCursorFlag(false);
                     selectedItem.isOnCursor = false;
                     itemInfoWindow.SetVisibility(false, selectedItem);
-
+                    PlayItemAudio(selectedItem, AudioPlayMode.PickFromGrid);
                     selectedItem = null;
 
                     InsertItem(itemToInsert);
@@ -834,13 +830,13 @@ public class InventoryController : MonoBehaviour
                 }
                 else
                 {
-                    //itemInfoWindow.Disable();
                     itemInfoWindow.SetVisibility(false, selectedItem);
                     if (selectedItem.lastGrid != selectedItemGrid)
                     {
                         _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
                     }
                     selectedItem.GetComponent<Image>().raycastTarget = true;
+                    PlayItemAudio(selectedItem, AudioPlayMode.PickFromGrid);
                     Destroy(selectedItem.gameObject);
                     selectedItem = null;
                     selectedItemGrid = inventoryGrid;
@@ -848,7 +844,6 @@ public class InventoryController : MonoBehaviour
             }
             else
             {
-               //itemInfoWindow.Disable();
                 selectedItemGrid = inventoryGrid;
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, true);
                 if (stackCountRemaining > 0)
@@ -873,8 +868,8 @@ public class InventoryController : MonoBehaviour
                     //selectedItem.SetOnCursorFlag(false);
                     selectedItem.isOnCursor = false;
                     itemInfoWindow.SetVisibility(false, selectedItem);
+                    PlayItemAudio(selectedItem, AudioPlayMode.PickFromGrid);
                     selectedItem = null;
-
                     InsertItem(itemToInsert);
                     itemToInsert.GetComponent<Image>().raycastTarget = true;
                     selectedItemGrid = containerItemGrid;
@@ -884,6 +879,7 @@ public class InventoryController : MonoBehaviour
                     itemInfoWindow.SetVisibility(false, selectedItem);
                     // itemInfoWindow.Disable();
                     selectedItem.GetComponent<Image>().raycastTarget = true;
+                    PlayItemAudio(selectedItem, AudioPlayMode.PickFromGrid);
                     Destroy(selectedItem.gameObject);
                     selectedItem = null;
                     selectedItemGrid = containerItemGrid;
@@ -917,6 +913,7 @@ public class InventoryController : MonoBehaviour
             itemInfoWindow.SetVisibility(false, selectedItem);
             //  itemInfoWindow.Disable();
             //itemInfoWindow.SetVisibility(false, selectedItem);
+            PlayItemAudio(selectedItem, AudioPlayMode.PickFromGrid);
             selectedItem = null;
 
             if (selectedItemGrid != itemToInsert.lastGrid)

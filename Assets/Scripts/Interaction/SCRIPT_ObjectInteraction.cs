@@ -91,7 +91,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
             _interactableObject.alreadyInteracting == true)
         {
             PlayAudio();
-            Debug.Log($"{_interactableObject}:{_interactableObject.inInteractionArea}:{_interactableObject.canInteract}:{_interactableObject.alreadyInteracting}");
+            //Debug.Log($"{_interactableObject}:{_interactableObject.inInteractionArea}:{_interactableObject.canInteract}:{_interactableObject.alreadyInteracting}");
             return;
         }
 
