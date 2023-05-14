@@ -6,23 +6,34 @@ using System;
 
 public class SCRIPT_ObjectInteraction : MonoBehaviour
 { 
+    [Header("Cursor raycast settings")]
+    [SerializeField] private LayerMask _cursorLayer;
     private Ray _ray;
     private RaycastHit _hit;
-    [SerializeField] private LayerMask _cursorLayer;
-    public float interactionDistance = 1f;
-    float currentDistance;
-    private SCRIPT_IInteractable _interactableObject;
-    //public float distanceToObject;
-    [SerializeField] private Collider _playerInteractionArea;
+    
+    private SCRIPT_IInteractable _interactableObject; // —тоит ли убрать это
+    //[SerializeField] private Collider _playerInteractionArea;
 
+    [Header("Cursor settings")]
     public Texture2D defaultCursor;
 
-    public AudioSource cantInteractAudio; // ѕроигрывать звук, когда наводишьс€ на предмет, с которым можно взаимодействовать
-    public AudioClip cantInteracClip;
+    [Header("Audio")]
+    public AudioSource cantInteractAudioSource; // ѕроигрывать звук, когда наводишьс€ на предмет, с которым можно взаимодействовать
+    public AudioClip cantInteractAudio;
 
     private void Awake()
     {
         SetCursor(defaultCursor);
+    }
+
+    private void OnEnable()
+    {
+        InventoryController.OnUnablePickItem += PlayAudio;
+    }
+
+    private void OnDisable()
+    {
+        InventoryController.OnUnablePickItem -= PlayAudio;
     }
 
     private void Update()
@@ -79,7 +90,8 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
             _interactableObject.canInteract == false ||
             _interactableObject.alreadyInteracting == true)
         {
-            cantInteractAudio.PlayOneShot(cantInteracClip);
+            PlayAudio();
+            Debug.Log($"{_interactableObject}:{_interactableObject.inInteractionArea}:{_interactableObject.canInteract}:{_interactableObject.alreadyInteracting}");
             return;
         }
 
@@ -90,5 +102,10 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     private void SetCursor(Texture2D texture)
     {
         Cursor.SetCursor(texture, Vector2.zero, CursorMode.ForceSoftware);
+    }
+
+    private void PlayAudio()
+    {
+        cantInteractAudioSource.PlayOneShot(cantInteractAudio);
     }
 }

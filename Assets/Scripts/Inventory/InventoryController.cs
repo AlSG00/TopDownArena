@@ -6,6 +6,14 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
+    private enum AudioPlayMode
+    {
+        PickFromGround,
+        PickFromGrid,
+        PlaceOnGrid,
+        Use
+    }
+
     [Header("References")]
     public SCRIPT_ItemGrid inventoryGrid;
     public SCRIPT_ItemGrid containerItemGrid;
@@ -41,16 +49,19 @@ public class InventoryController : MonoBehaviour
     public bool isDroppingStack = false;
     public delegate void OpenAction(bool isOpened);
     public static event OpenAction OnInventoryOpened;
-    public static event OpenAction OnStateIconShow;  
+    public static event OpenAction OnStateIconShow;
+    public static event Action OnUnablePickItem;
 
     private void OnEnable()
     {
         SCRIPT_ItemContainer.OnContainerOpen += FillContainerGrid;
+        PickableObject.OnItemPick += PickItemFromGround;
     }
 
     private void OnDisable()
     {
         SCRIPT_ItemContainer.OnContainerOpen -= FillContainerGrid;
+        PickableObject.OnItemPick -= PickItemFromGround;
     }
 
     private void Start()
@@ -177,6 +188,13 @@ public class InventoryController : MonoBehaviour
 
     public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount, bool addToInventory)
     {
+        //NEW
+        if (itemToStack.isStackable == false)
+        {
+            return stackCount;
+        }
+        //
+
         if (addToInventory)
         {
             selectedItemGrid = inventoryGrid;
@@ -485,11 +503,13 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        if (selectedItem.useItemAudioSource != null &&
-            selectedItem.useItemAudio != null)
-        {
-            selectedItem.useItemAudioSource.PlayOneShot(selectedItem.useItemAudio);
-        }
+
+        //if (selectedItem.useItemAudioSource != null &&
+        //    selectedItem.useItemAudio != null)
+        //{
+        //    selectedItem.useItemAudioSource.PlayOneShot(selectedItem.useItemAudio);
+        //}
+        PlayItemAudio(selectedItem, AudioPlayMode.Use);
 
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
@@ -528,6 +548,36 @@ public class InventoryController : MonoBehaviour
             itemRectTransform.SetAsLastSibling();
         }
     }
+
+    //NEW
+    private int PickItemFromGround(SCRIPT_InventoryItem item, int stackCount)
+    {
+        selectedItemGrid = inventoryGrid;
+        int stackCountRemaining = InsertIntoAvailableStacks(item, stackCount, true);
+        if (stackCountRemaining > 0)
+        {
+            Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(item);
+            if (positionOnGrid == null)
+            {
+                if (stackCount == stackCountRemaining)
+                {
+                    OnUnablePickItem?.Invoke();
+                }
+                else
+                {
+                    PlayItemAudio(item, AudioPlayMode.PickFromGround);
+                }
+
+                //stackCount = stackCountRemaining;
+                return stackCount;
+            }
+            
+            InsertItemIntoInventory(item, stackCountRemaining);
+        }
+        PlayItemAudio(item, AudioPlayMode.PickFromGround);
+        return 0;
+    }
+    //
 
     public void InsertItemIntoInventory(SCRIPT_InventoryItem item, int stackCount)
     {
@@ -1026,6 +1076,45 @@ public class InventoryController : MonoBehaviour
 
             itemRectTransform.SetAsLastSibling();
             itemRectTransform.position = Input.mousePosition;
+        }
+    }
+
+    private void PlayItemAudio(SCRIPT_InventoryItem item, AudioPlayMode audioMode)
+    {
+        if (inventoryAudioSource == null)
+        {
+            return;
+        }
+        
+        switch(audioMode)
+        {
+            case AudioPlayMode.PickFromGround:
+                if (item.pickFromGroundAudio != null)
+                {
+                    inventoryAudioSource.PlayOneShot(item.pickFromGroundAudio);
+                }
+                break;
+
+            case AudioPlayMode.PickFromGrid:
+                if (item.pickFromGridAudio != null)
+                {
+                    inventoryAudioSource.PlayOneShot(item.pickFromGridAudio);
+                }
+                break;
+
+            case AudioPlayMode.PlaceOnGrid:
+                if (item.placeOnGridAudio != null)
+                {
+                    inventoryAudioSource.PlayOneShot(item.placeOnGridAudio);
+                }
+                break;
+
+            case AudioPlayMode.Use:
+                if (item.useItemAudio != null)
+                {
+                    inventoryAudioSource.PlayOneShot(item.useItemAudio);
+                }
+                break;
         }
     }
 }

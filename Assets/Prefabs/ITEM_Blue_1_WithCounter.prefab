@@ -316,8 +316,11 @@ MonoBehaviour:
   isSingleDropping: 1
   stackCount: 1
   maxStackCount: 5
-  useItemAudio: {fileID: 8300000, guid: 4c970b6d0db5c194a8ecb5be17e6dda5, type: 3}
   useItemAudioSource: {fileID: 0}
+  useItemAudio: {fileID: 8300000, guid: 4c970b6d0db5c194a8ecb5be17e6dda5, type: 3}
+  pickFromGroundAudio: {fileID: 8300000, guid: 4ab4a3e88f9814a40917106cb6a8472c, type: 3}
+  pickFromGridAudio: {fileID: 8300000, guid: 4ab4a3e88f9814a40917106cb6a8472c, type: 3}
+  placeOnGridAudio: {fileID: 8300000, guid: 4ab4a3e88f9814a40917106cb6a8472c, type: 3}
   stackCounter: {fileID: 2136076231}
   isDropping: 0
   isRotated: 0

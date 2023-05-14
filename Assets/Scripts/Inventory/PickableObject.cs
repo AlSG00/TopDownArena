@@ -9,21 +9,18 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
     public bool alreadyInteracting { get; set; }
     public bool inInteractionArea { get; set; }
 
-    //public GameObject inventoryPrefab;
     [Range(1, 999)] public int stackCount;
-    
 
     [Header("References")]
-    //private SCRIPT_InventoryController inventory;
-    private InventoryController inventory; // TODO: Наверное, заменить на Ивент
+    //private InventoryController inventory; // TODO: Наверное, заменить на Ивент
     public SCRIPT_InventoryItem inventoryItem;
 
-    [Header("Audio")]
-    [SerializeField] private AudioClip pickUpAudio;
-    [SerializeField] private AudioSource pickUpAudioSource;
+    //[Header("Audio")]
+    //[SerializeField] private AudioClip pickUpAudio;
+    //[SerializeField] private AudioSource pickUpAudioSource;
 
-    //public delegate void PickAction();
-    //public static event PickAction OnItemPick;
+    public delegate int PickAction(SCRIPT_InventoryItem item, int stackCount);
+    public static event PickAction OnItemPick;
 
     private void Awake()
     {
@@ -43,36 +40,49 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
         canInteract = false;
         inInteractionArea = false;
         //inventory = GameObject.Find("_PlayerCamera").GetComponent<SCRIPT_InventoryController>();
-        inventory = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
-        pickUpAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
+        //inventory = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
+        //pickUpAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
     }
 
     public void Interact()
     {
-        canInteract = false;
-        inventory.selectedItemGrid = inventory.inventoryGrid;
-        int stackCountRemaining = inventory.InsertIntoAvailableStacks(inventoryItem, stackCount, true);
-        if (stackCountRemaining > 0)
+        //canInteract = false;
+        if (OnItemPick != null)
         {
-            Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryItem);
-            if (positionOnGrid == null)
+            stackCount = OnItemPick.Invoke(inventoryItem, stackCount);
+
+            if (stackCount == 0)
             {
-                stackCount = stackCountRemaining;
-                alreadyInteracting = false;
-                return;
+                Destroy(gameObject);
             }
-
-            //inventoryItem.stackCount = stackCountRemaining;
-            inventory.InsertItemIntoInventory(inventoryItem, stackCountRemaining);
-            //PlayPickUpAudio();
-            //Destroy(gameObject);
         }
-        Сделать ивент, чтобы проигрывался звук подбора предметов в инвентаре.
-        Проигрываться будет через (2 варианта):
-            - аудио в инвентаре (здесь ивент, в инвентаре подписка на ивент)
-            - аудио в отдельном компоненте для обработки звука персонажа, мол, инвентарь, фонарик, пожрать и т.д. (здесь ивент, в компоненте подписка на ивент)
+        
+        
+        
 
-        Destroy(gameObject);
+        //inventory.selectedItemGrid = inventory.inventoryGrid;
+        //int stackCountRemaining = inventory.InsertIntoAvailableStacks(inventoryItem, stackCount, true);
+        //if (stackCountRemaining > 0)
+        //{
+        //    Vector2Int? positionOnGrid = inventory.selectedItemGrid.FindSpaceForObject(inventoryItem);
+        //    if (positionOnGrid == null)
+        //    {
+        //        stackCount = stackCountRemaining;
+        //        alreadyInteracting = false;
+        //        return;
+        //    }
+
+        //    //inventoryItem.stackCount = stackCountRemaining;
+        //    inventory.InsertItemIntoInventory(inventoryItem, stackCountRemaining);
+        //    //PlayPickUpAudio();
+        //    //Destroy(gameObject);
+        //}
+        ////Сделать ивент, чтобы проигрывался звук подбора предметов в инвентаре.
+        ////Проигрываться будет через (2 варианта):
+        ////    - аудио в инвентаре (здесь ивент, в инвентаре подписка на ивент)
+        ////    - аудио в отдельном компоненте для обработки звука персонажа, мол, инвентарь, фонарик, пожрать и т.д. (здесь ивент, в компоненте подписка на ивент)
+
+        //Destroy(gameObject);
         //else
         //{
         //    //PlayPickUpAudio();

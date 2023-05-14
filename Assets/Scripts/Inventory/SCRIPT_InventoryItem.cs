@@ -53,7 +53,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     [Range(0, 999)] public int maxStackCount = 0; // максимальный размер стака
 
     [Header("Audio")]
-    public AudioSource useItemAudioSource; // источник звука использования предмета
+    //public AudioSource useItemAudioSource; // источник звука использования предмета
     public AudioClip useItemAudio;
     public AudioClip pickFromGroundAudio;
     public AudioClip pickFromGridAudio;
@@ -81,10 +81,10 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         MouseMovementTracker.OnCursorInactive -= SetCursorActivityFlag;
     }
 
-    private void Start()
-    {
-        useItemAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
-    }
+    //private void Start()
+    //{
+    //    useItemAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
+    //}
 
     internal void Set(SCRIPT_ItemData itemData)
     {
