@@ -105,12 +105,14 @@ MonoBehaviour:
   stackCount: 1
   maxStackCount: 5
   useItemAudio: {fileID: 0}
-  useItemAudioSource: {fileID: 0}
+  pickFromGroundAudio: {fileID: 0}
+  pickFromGridAudio: {fileID: 0}
+  placeOnGridAudio: {fileID: 0}
   stackCounter: {fileID: 2633873719824993099}
   isDropping: 0
   isRotated: 0
   isOnCursor: 0
-  positionOnGrid: {x: 0, y: 0}
+  positionOnGrid: {x: 2, y: 0}
 --- !u!114 &2346497512983539580
 MonoBehaviour:
   m_ObjectHideFlags: 0
