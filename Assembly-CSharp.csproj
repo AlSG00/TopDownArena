@@ -225,6 +225,7 @@
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSCombine.shader" />
     <None Include="Assets\Scripts\Doors\DoorsFAQ.txt" />
     <None Include="Assets\Scripts\Player\FootstepsSoundController\Readme.txt" />
+    <None Include="Assets\[STENCIL]\StencilTest_2.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Image Effects\_Sources\NewImageEffectShader.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
@@ -238,6 +239,7 @@
     <None Include="Assets\Thirdparty\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Image Effects\_Sources\Desaturate.shader" />
     <None Include="Assets\ScriptableObjects\Items\[TEST_ITEM_INFO].txt" />
+    <None Include="Assets\[STENCIL]\NewUnlitShader.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Image Effects\_Sources\transparency.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSDebug.shader" />
@@ -247,6 +249,7 @@
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Image Effects\_Sources\testread.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\[STENCIL]\StencilTest_1.shader" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Materials\Foliage Flat.shader" />
     <None Include="Assets\NewSurfaceShader.shader" />

@@ -108,8 +108,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _Wind_density: 0.22
-    - _Wind_strength: 0.16
+    - _Wind_density: 1.93
+    - _Wind_strength: 0.02
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
