@@ -1,0 +1,415 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.6f1 (7da38d85baf6) revision 8233869'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'ru' Physical Memory: 65304 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+E:\Programs\Unity\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+E:/Unity projects/Project_TopDown/TopDownArena
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+54067
+Successfully changed project path to: E:/Unity projects/Project_TopDown/TopDownArena
+E:/Unity projects/Project_TopDown/TopDownArena
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 125.06 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.6f1 (7da38d85baf6)
+[Subsystems] Discovering subsystems at path E:/Programs/Unity/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/Unity projects/Project_TopDown/TopDownArena/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4090 (ID=0x2684)
+    Vendor:   NVIDIA
+    VRAM:     24156 MB
+    Driver:   31.0.15.3141
+Initialize mono
+Mono path[0] = 'E:/Programs/Unity/Editor/Data/Managed'
+Mono path[1] = 'E:/Programs/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'E:/Programs/Unity/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56368
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: E:/Programs/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: E:/Programs/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: E:/Programs/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002534 seconds.
+Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 122.43 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.566 seconds
+Domain Reload Profiling:
+	ReloadAssembly (566ms)
+		BeginReloadAssembly (53ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (430ms)
+			LoadAssemblies (53ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (86ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (23ms)
+			SetupLoadedEditorAssemblies (281ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (44ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (123ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (78ms)
+				ProcessInitializeOnLoadMethodAttributes (35ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004247 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 119.08 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00043] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:31 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x00525] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00009] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00034] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x0002c] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x00032] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:48 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.607 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1607ms)
+		BeginReloadAssembly (67ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (15ms)
+		EndReloadAssembly (1451ms)
+			LoadAssemblies (60ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (263ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (77ms)
+			SetupLoadedEditorAssemblies (997ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (16ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (119ms)
+				BeforeProcessingInitializeOnLoad (125ms)
+				ProcessInitializeOnLoadAttributes (685ms)
+				ProcessInitializeOnLoadMethodAttributes (49ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 1.23 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6329 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 71 unused Assets / (2.9 MB). Loaded Objects now: 6818.
+Memory consumption went from 336.0 MB to 333.2 MB.
+Total: 13.623400 ms (FindLiveObjects: 0.465700 ms CreateObjectMapping: 0.158100 ms MarkObjects: 12.333200 ms  DeleteObjects: 0.665400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 322077.914373 seconds.
+  path: Assets/[STENCIL]
+  artifactKey: Guid(d444a56f2587c644ebf7a3303291ba46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL] using Guid(d444a56f2587c644ebf7a3303291ba46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17a11a839f1a9ea0ebbba37dbee73c15') in 0.015339 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 42.614687 seconds.
+  path: Assets/[STENCIL]/StencilTest_1.shader
+  artifactKey: Guid(9eb2ff6eae7e358448c3c092aa398693) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/StencilTest_1.shader using Guid(9eb2ff6eae7e358448c3c092aa398693) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55d7c0a02882da7b21a164e0ad7b90b6') in 0.028742 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.302268 seconds.
+  path: Assets/[STENCIL]/StencilTest_2.shader
+  artifactKey: Guid(772a147444ffe394581a065f8dabeda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/StencilTest_2.shader using Guid(772a147444ffe394581a065f8dabeda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41b601ba582ca2aa01bc865f4545f863') in 0.005850 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 131.211696 seconds.
+  path: Assets/[STENCIL]/Stencil_1.mat
+  artifactKey: Guid(23fcebdb028083f42a24112c4f515647) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_1.mat using Guid(23fcebdb028083f42a24112c4f515647) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '582321880931250b77f7df084f0fdef1') in 0.073979 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 9.844187 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8461729128c38f7a00ea7b5b7133664') in 0.010087 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 30.705421 seconds.
+  path: Assets/[STENCIL]/StencilTest_2.shader
+  artifactKey: Guid(772a147444ffe394581a065f8dabeda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/StencilTest_2.shader using Guid(772a147444ffe394581a065f8dabeda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3c3c24f39add959e57240ca092af20f') in 0.005638 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 206.896809 seconds.
+  path: Assets/[STENCIL]/New Material.mat
+  artifactKey: Guid(d2fc214ef3439c54ead7baa9f6be71a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/New Material.mat using Guid(d2fc214ef3439c54ead7baa9f6be71a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b20cd353cd8326f57ab37b3f647f149') in 0.010214 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004288 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.92 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00043] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:31 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x00525] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00009] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00034] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x0002c] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x0000d] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:33 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x00000] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+System.IO.IOException: Sharing violation on path E:\Unity projects\Project_TopDown\TopDownArena\.erp
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode)
+  at ERP.ERPSettings.GetSettings () [0x0001b] in E:\Unity projects\Project_TopDown\TopDownArena\Assets\ERP\Editor\ERPSettings.cs:44 
+  at ERP.ERP..cctor () [0x00032] in E:\Unity projects\Project_TopDown\TopDownArena\Assets\ERP\Editor\ERP.cs:40 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.411 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1412ms)
+		BeginReloadAssembly (129ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (45ms)
+		EndReloadAssembly (1208ms)
+			LoadAssemblies (72ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (254ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (59ms)
+			SetupLoadedEditorAssemblies (610ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (22ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (90ms)
+				ProcessInitializeOnLoadAttributes (446ms)
+				ProcessInitializeOnLoadMethodAttributes (48ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.83 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6231 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 51 unused Assets / (2.9 MB). Loaded Objects now: 6874.
+Memory consumption went from 331.9 MB to 328.9 MB.
+Total: 12.766100 ms (FindLiveObjects: 0.396400 ms CreateObjectMapping: 0.149200 ms MarkObjects: 11.549600 ms  DeleteObjects: 0.669700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 2918.613179 seconds.
+  path: Assets/[STENCIL]/NewUnlitShader.shader
+  artifactKey: Guid(8cdb7fb5059efce47af0e6c4827aa5a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/NewUnlitShader.shader using Guid(8cdb7fb5059efce47af0e6c4827aa5a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4fc08daa7942e723f120515b1d17b20') in 0.031601 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 91.045557 seconds.
+  path: Assets/[STENCIL]/NewUnlitShader.shader
+  artifactKey: Guid(8cdb7fb5059efce47af0e6c4827aa5a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/NewUnlitShader.shader using Guid(8cdb7fb5059efce47af0e6c4827aa5a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c7f565386dd47f75424ac955983750a') in 0.002206 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 674.354808 seconds.
+  path: Assets/[STENCIL]/StencilTest_2.shader
+  artifactKey: Guid(772a147444ffe394581a065f8dabeda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/StencilTest_2.shader using Guid(772a147444ffe394581a065f8dabeda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8c59186679ba5092b4ae28bb87596dd') in 0.005712 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 515.104207 seconds.
+  path: Assets/[STENCIL]/New Material.mat
+  artifactKey: Guid(d2fc214ef3439c54ead7baa9f6be71a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/New Material.mat using Guid(d2fc214ef3439c54ead7baa9f6be71a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94b1b02125a4853ef04628a92bb71e92') in 0.069570 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9341294dd08ee4ddb6685e74f9c3d0e0') in 0.111096 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.437314 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edca8ef96d76fdc18173ec1d64132f29') in 0.104553 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 23.288765 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2580837284ef37ce82eb6f82df58191a') in 0.121594 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 28.825525 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faa3eeea8964d8015a0a2fa42ca7d7b5') in 0.107965 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 28.575823 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27e1c1e275dbda821a314d18096ced29') in 0.104098 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.833843 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8fb5395ce1e3ef1a285e76100d88928') in 0.164252 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.078276 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab3395327d4045ddd77a6820cedaf42a') in 0.118429 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.574613 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07ebcd6b5e378ac9a92218b6a6cacf83') in 0.111574 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 19.316548 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31ebbeae7601c9e671c85779a028cc33') in 0.115304 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 14.173908 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7b887a9cd092bf664264cfe34014933') in 0.105420 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.555895 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9020185e1a97934781e24e1703414c4b') in 0.106527 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.216776 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f24b5b3f7fbf3043ab877b22feb740b8') in 0.111479 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 17.534220 seconds.
+  path: Assets/[STENCIL]/Stencil_2.mat
+  artifactKey: Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/Stencil_2.mat using Guid(cab40dbe17b4ddf4eb6924a1a8cdedd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f90a4df242bf42eb89eb50f094981c2') in 0.113604 seconds 
