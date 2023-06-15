@@ -1,25 +1,24 @@
-Shader "Unlit/NewUnlitShader"
+Shader "Unlit/Stencil_2"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _ExampleName("Example color", Color) = (.25, .5, .5, 1)
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue" = "Geometry-1"}
+        Tags { "RenderType"="Opaque" "Queue" = "Geometry"}
         LOD 100
 
-        Blend Zero One
-        ZWrite off
+        Stencil
+        {
+            Ref 1
+            Comp notequal
+            Pass keep
+        }
 
         Pass
         {
-            Stencil
-        {
-            Ref 1
-            Comp always
-            Pass replace
-}
 
             CGPROGRAM
             #pragma vertex vert
@@ -54,13 +53,16 @@ Shader "Unlit/NewUnlitShader"
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
-            {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+            //fixed4 frag (v2f i) : SV_Target
+            //{
+            //    // sample the texture
+            //    fixed4 col = tex2D(_MainTex, i.uv);
+            //    // apply fog
+            //    UNITY_APPLY_FOG(i.fogCoord, col);
+            //    return col;
+            //}
+            half4 frag(v2f i) : SV_Target{
+                return half4(1,1,1,1);
             }
             ENDCG
         }
