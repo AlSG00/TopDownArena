@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Stencil_2
-  m_Shader: {fileID: 4800000, guid: e3633b27c685d4643a66fb2078e0d67b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 772a147444ffe394581a065f8dabeda5, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -77,5 +77,4 @@ Material:
     m_Colors:
     - _Color: {r: 0.6320754, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ExampleName: {r: 0.54187435, g: 0.9339623, b: 0.9339623, a: 1}
   m_BuildTextureStacks: []
