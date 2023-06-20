@@ -15,7 +15,7 @@ E:/Unity projects/Project_TopDown/TopDownArena
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-53161
+63070
 Successfully changed project path to: E:/Unity projects/Project_TopDown/TopDownArena
 E:/Unity projects/Project_TopDown/TopDownArena
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ E:/Unity projects/Project_TopDown/TopDownArena
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 271.50 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 120.45 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.6f1 (7da38d85baf6)
 [Subsystems] Discovering subsystems at path E:/Programs/Unity/Editor/Data/Resources/UnitySubsystems
@@ -63,58 +63,58 @@ Initialize mono
 Mono path[0] = 'E:/Programs/Unity/Editor/Data/Managed'
 Mono path[1] = 'E:/Programs/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'E:/Programs/Unity/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56328
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56632
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Programs/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: E:/Programs/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
 Register platform support module: E:/Programs/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.227931 seconds.
+Registered in 0.003079 seconds.
 Native extension for WindowsStandalone target not found
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 119.13 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 117.82 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.949 seconds
+- Completed reload, in  0.563 seconds
 Domain Reload Profiling:
-	ReloadAssembly (3950ms)
-		BeginReloadAssembly (2434ms)
+	ReloadAssembly (563ms)
+		BeginReloadAssembly (53ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (1051ms)
-			LoadAssemblies (2438ms)
+		EndReloadAssembly (427ms)
+			LoadAssemblies (53ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (634ms)
+			SetupTypeCache (87ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (22ms)
-			SetupLoadedEditorAssemblies (351ms)
+			SetupLoadedEditorAssemblies (277ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (113ms)
+				InitializePlatformSupportModulesInManaged (44ms)
 				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (120ms)
+				RefreshPlugins (118ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (76ms)
-				ProcessInitializeOnLoadMethodAttributes (41ms)
+				ProcessInitializeOnLoadAttributes (78ms)
+				ProcessInitializeOnLoadMethodAttributes (36ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.801806 seconds.
+Registered in 0.005956 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
 Native extension for iOS target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 123.76 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 119.12 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 System.Exception: Error! Visual Scripting: couldn't find visual scripting package
   at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00043] in E:\Unity projects\Project_TopDown\TopDownArena\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:31 
@@ -133,42 +133,30 @@ UnityEngine.Logger:Log (UnityEngine.LogType,object)
 UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 
-System.IO.IOException: Sharing violation on path E:\Unity projects\Project_TopDown\TopDownArena\.erp
-  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
-  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0 
-  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode)
-  at ERP.ERPSettings.GetSettings () [0x0001b] in E:\Unity projects\Project_TopDown\TopDownArena\Assets\ERP\Editor\ERPSettings.cs:44 
-  at ERP.ERP..cctor () [0x00032] in E:\Unity projects\Project_TopDown\TopDownArena\Assets\ERP\Editor\ERP.cs:40 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
 Mono: successfully reloaded assembly
-- Completed reload, in  7.506 seconds
+- Completed reload, in  1.688 seconds
 Domain Reload Profiling:
-	ReloadAssembly (7507ms)
+	ReloadAssembly (1689ms)
 		BeginReloadAssembly (73ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (18ms)
-		EndReloadAssembly (7304ms)
-			LoadAssemblies (3774ms)
+		EndReloadAssembly (1525ms)
+			LoadAssemblies (62ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (664ms)
+			SetupTypeCache (275ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (85ms)
-			SetupLoadedEditorAssemblies (2724ms)
+			RebuildScriptCaches (82ms)
+			SetupLoadedEditorAssemblies (1055ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (20ms)
+				InitializePlatformSupportModulesInManaged (19ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (124ms)
-				BeforeProcessingInitializeOnLoad (130ms)
-				ProcessInitializeOnLoadAttributes (1868ms)
-				ProcessInitializeOnLoadMethodAttributes (579ms)
+				RefreshPlugins (119ms)
+				BeforeProcessingInitializeOnLoad (129ms)
+				ProcessInitializeOnLoadAttributes (731ms)
+				ProcessInitializeOnLoadMethodAttributes (54ms)
 				AfterProcessingInitializeOnLoad (3ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -176,13 +164,13 @@ Domain Reload Profiling:
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 0.99 ms, found 4 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.26 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 6332 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 71 unused Assets / (2.9 MB). Loaded Objects now: 6821.
-Memory consumption went from 337.1 MB to 334.2 MB.
-Total: 12.369300 ms (FindLiveObjects: 0.405300 ms CreateObjectMapping: 0.142200 ms MarkObjects: 11.180100 ms  DeleteObjects: 0.641000 ms)
+Memory consumption went from 337.1 MB to 334.3 MB.
+Total: 20.620100 ms (FindLiveObjects: 0.454900 ms CreateObjectMapping: 0.169500 ms MarkObjects: 19.334400 ms  DeleteObjects: 0.660200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -194,6 +182,90 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 431234.761029 seconds.
+  path: Assets/Materials/New Material 1 - Copy.mat
+  artifactKey: Guid(a1fdac4c53105f74196407f757e7583a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/New Material 1 - Copy.mat using Guid(a1fdac4c53105f74196407f757e7583a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c878ff0d27868773043f1897f79e6937') in 0.121077 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Materials/Grass_005.mat
+  artifactKey: Guid(c3802726d0481134c82431ffbf881bc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Grass_005.mat using Guid(c3802726d0481134c82431ffbf881bc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2fe403a0a752b4467318d0ca75cfd9a') in 0.093786 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Materials/MTR_TEST_Cup1.mat
+  artifactKey: Guid(0c4a2f8a543b3c144962ae89b18e2bbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/MTR_TEST_Cup1.mat using Guid(0c4a2f8a543b3c144962ae89b18e2bbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aca5ac38ae1252dbeba54c927ee54f6f') in 0.022547 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/[STENCIL]/New Material.mat
+  artifactKey: Guid(d2fc214ef3439c54ead7baa9f6be71a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/[STENCIL]/New Material.mat using Guid(d2fc214ef3439c54ead7baa9f6be71a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '058c9f511c071b60d7f2e5e17fed0802') in 0.014311 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Models/grass_4.fbx
+  artifactKey: Guid(a73cad0b4ef97fe47a6828aa3fb231c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/grass_4.fbx using Guid(a73cad0b4ef97fe47a6828aa3fb231c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2131cb9b8ebc0fc925369409375ec377') in 0.110360 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Thirdparty/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+  artifactKey: Guid(2e498d1c8094910479dc3e1b768306a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Thirdparty/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset using Guid(2e498d1c8094910479dc3e1b768306a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66aa035f5724fc9fa4a14acb51a6c165') in 0.059070 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Materials/New Material 2 - Copy.mat
+  artifactKey: Guid(d5ccd0e6602f5f847889d5ed020baded) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/New Material 2 - Copy.mat using Guid(d5ccd0e6602f5f847889d5ed020baded) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5330499b93a624fb314ded86eae31c43') in 0.011548 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Thirdparty/RTP Vol.1/Materials/Material_002.mat
+  artifactKey: Guid(a56fe6e4fa8c84149bff66bda55b7465) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Thirdparty/RTP Vol.1/Materials/Material_002.mat using Guid(a56fe6e4fa8c84149bff66bda55b7465) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '273769013597d42d2941ff8bfc73136e') in 0.059242 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Editor/GameObjectBrush/Materials/Yellow.mat
+  artifactKey: Guid(45093d1d13162fb4e8d2e9e00a5dce62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/GameObjectBrush/Materials/Yellow.mat using Guid(45093d1d13162fb4e8d2e9e00a5dce62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd67ce14fb99788f4d1aaee3dc3cd7b71') in 0.059609 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Models/anotherTestGrass2.fbx
+  artifactKey: Guid(4b636db4c6cc0794a87e15f2fb8bb083) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/anotherTestGrass2.fbx using Guid(4b636db4c6cc0794a87e15f2fb8bb083) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8741a385defa28fcea788c62a89d92ca') in 0.040123 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Editor/GameObjectBrush/Materials/Blue.mat
+  artifactKey: Guid(45358b95c1a785a44893239a4bf676f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/GameObjectBrush/Materials/Blue.mat using Guid(45358b95c1a785a44893239a4bf676f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aef40859c511d22133fcb8bde250a5d4') in 0.021432 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Editor/GameObjectBrush/Materials/Green.mat
+  artifactKey: Guid(3d3de853d1467bf43b1f831ef0e3d286) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/GameObjectBrush/Materials/Green.mat using Guid(3d3de853d1467bf43b1f831ef0e3d286) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57edf7349fc7cb3e5f03b04c71180be7') in 0.017918 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Models/TestGrass2.fbx
+  artifactKey: Guid(8e7fe3801fd3cb648b5c9f6eb8f1db21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/TestGrass2.fbx using Guid(8e7fe3801fd3cb648b5c9f6eb8f1db21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '165a4488463f6bf8bdd54f1323ff11ca') in 0.061511 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Editor/GameObjectBrush/Materials/Red.mat
+  artifactKey: Guid(bfff51de6e904b548ad2dd11518b4a3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Editor/GameObjectBrush/Materials/Red.mat using Guid(bfff51de6e904b548ad2dd11518b4a3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68d26a0e886120758969f11a26c30b67') in 0.014201 seconds 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
 Process exiting
