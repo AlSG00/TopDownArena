@@ -24,8 +24,8 @@ MonoBehaviour:
   paintDeltaDistance: 0.1
   maxPaintDeltaDistance: 3
   minPaintDeltaDistance: 0.1
-  prefabsPerStroke: 20
-  maxprefabsPerStroke: 20
+  prefabsPerStroke: 1
+  maxprefabsPerStroke: 100
   minprefabsPerStroke: 1
   spawnHeight: 10
   addRigidbodyToPaintedPrefab: 1
