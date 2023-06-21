@@ -14,18 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabList: []
   prefabData:
-  - prefab: {fileID: 5626188151490925616, guid: 6337e46a4d8b8dd448dc3caae9a97e17,
-      type: 3}
+  - prefab: {fileID: 100002, guid: ee6765da7db992e42a63c23f4e2c42e0, type: 3}
     selected: 1
   paintType: 0
-  brushSize: 4.63
+  brushSize: 2.77
   minBrushSize: 0.1
   maxBrushSize: 20
   paintDeltaDistance: 0.1
   maxPaintDeltaDistance: 3
   minPaintDeltaDistance: 0.1
-  prefabsPerStroke: 20
-  maxprefabsPerStroke: 20
+  prefabsPerStroke: 10
+  maxprefabsPerStroke: 100
   minprefabsPerStroke: 1
   spawnHeight: 10
   addRigidbodyToPaintedPrefab: 1
@@ -60,7 +59,7 @@ MonoBehaviour:
   scaleType: 1
   scaleApplicationType: 0
   minScale: 0.2
-  maxScale: 2
+  maxScale: 1
   minXScale: 1
   maxXScale: 1
   minYScale: 1
