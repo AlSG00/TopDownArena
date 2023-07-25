@@ -17,7 +17,7 @@ sceneSetups:
   isSubScene: 0
 - path: Assets/Scenes/Polygon.unity
   isLoaded: 1
-  isActive: 0
+  isActive: 1
   isSubScene: 0
 - path: Assets/Scenes/EntryGroup_Administration.unity
   isLoaded: 0
@@ -28,6 +28,6 @@ sceneSetups:
   isActive: 0
   isSubScene: 0
 - path: Assets/Entry_Garage.unity
-  isLoaded: 1
-  isActive: 1
+  isLoaded: 0
+  isActive: 0
   isSubScene: 0
