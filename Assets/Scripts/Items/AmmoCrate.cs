@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AmmoCrate : MonoBehaviour
 {
+    //TODO: Obsolete
     [SerializeField] private int _ammo;
     private bool _isMouseOver;
 

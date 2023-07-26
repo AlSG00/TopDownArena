@@ -42,6 +42,16 @@ public class SCRIPT_PlayerAmmunition : MonoBehaviour
                 return toReturn;
             }
         }
+
+        private bool CheckCapacity()
+        {
+            // Check current ammo type capacity when trying to get ammo
+        }
+
+        private bool CheckRemaining()
+        {
+            // Check remaining ammo when trying to reload
+        }
     }
 
     public Ammo pistolAmmo = new Ammo();

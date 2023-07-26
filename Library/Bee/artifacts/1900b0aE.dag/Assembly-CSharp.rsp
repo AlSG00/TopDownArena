@@ -457,7 +457,6 @@
 "Assets/Scripts/Player/Player_Movement.cs"
 "Assets/Scripts/Player/Player_Shooting.cs"
 "Assets/Scripts/Player/SCRIPT_AreaScanner.cs"
-"Assets/Scripts/Player/SCRIPT_PlayerAmmunition.cs"
 "Assets/Scripts/Player/SCRIPT_PlayerFlashlight.cs"
 "Assets/Scripts/Player/SCRIPT_PlayerInput.cs"
 "Assets/Scripts/Player/SCRIPT_PlayerResources.cs"
@@ -543,6 +542,8 @@
 "Assets/Thirdparty/Shared/Scripts/SimpleCameraController.cs"
 "Assets/Thirdparty/Shared/Scripts/SimpleCharacterMotor.cs"
 "Assets/Thirdparty/TutorialInfo/Scripts/Readme.cs"
+"Assets/[AmmunitionSystem]/AmmunitionUiHandler.cs"
+"Assets/[AmmunitionSystem]/SCRIPT_PlayerAmmunition.cs"
 -langversion:9.0
 
 /deterministic
