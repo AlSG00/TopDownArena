@@ -109,7 +109,7 @@ public class Weapon : MonoBehaviour
             && !isReloading)
         {
             lastTimeShot = Time.time;
-            audioSource.PlayOneShot(shotSound);
+            //audioSource.PlayOneShot(shotSound);
 
             for (int i = 0; i < projectilesPerShot; i++)
             {

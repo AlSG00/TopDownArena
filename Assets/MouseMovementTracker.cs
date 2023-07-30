@@ -7,8 +7,6 @@ public class MouseMovementTracker : MonoBehaviour
     public delegate void inactiveMode(bool isActive);
     public static inactiveMode OnCursorInactive;
 
-    //[SerializeField] InventoryController playerInventory;
-
     public bool isMoving = false;
     public bool isActive = false;
     public float notMovingTimer = 0f;
