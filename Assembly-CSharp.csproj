@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Implants\SCRIPT_ImplantShopMenuController.cs" />
     <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableWeapon.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
+    <Compile Include="Assets\GroundedItemInfoHandler.cs" />
     <Compile Include="Assets\Thirdparty\Shared\Scripts\SimpleCharacterMotor.cs" />
     <Compile Include="Assets\Scripts\Weapon\RayProjectile.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\HealtBarScript.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Test_PlayAnimation.cs" />
     <Compile Include="Assets\Scripts\Doors\ProtectedDoor.cs" />
+    <Compile Include="Assets\GroundedItemInfoWindow.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\UIInfo.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerSanity.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_SliderBarController.cs" />
@@ -211,8 +213,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\GroundedItemInfoHandler.cs" />
-    <Compile Include="Assets\GroundedItemInfoWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

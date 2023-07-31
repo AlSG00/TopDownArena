@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GroundedItemInfoWindow : MonoBehaviour
 {
     [SerializeField] private Vector3 _windowOffset;
     [SerializeField] private Image _window;
+    [SerializeField] private TextMeshProUGUI itemNameText;
 
     private Vector3? _lastPosition;
 
@@ -30,7 +32,7 @@ public class GroundedItemInfoWindow : MonoBehaviour
         }
     }
 
-    private void Show(Vector3 position)
+    private void Show(Vector3 position, string itemName)
     {
         position = new Vector3(
             position.x + _windowOffset.x,
@@ -39,14 +41,23 @@ public class GroundedItemInfoWindow : MonoBehaviour
             );
         _lastPosition = position;
         _window.rectTransform.position = Camera.main.WorldToScreenPoint(position);
-        _window.enabled = true;
-        Debug.Log("Enabled");
+        Enable(true);
+        itemNameText.text = itemName;
     }
 
-    private void Hide(Vector3 position)
+    private void Hide()
     {
-        Debug.Log("Disabled");
         _lastPosition = null;
-        _window.enabled = false;
+        Enable(false);
+    }
+
+    private void Enable(bool toEnable)
+    {
+        _window.enabled = toEnable;
+        for (int i = 0; i < _window.transform.childCount; i++)
+        {
+            var child = _window.transform.GetChild(i);
+            child.gameObject.SetActive(toEnable);
+        }
     }
 }

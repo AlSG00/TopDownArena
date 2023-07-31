@@ -6,30 +6,21 @@ using UnityEngine.EventSystems;
 public class GroundedItemInfoHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     /*When player holding cursor on item lied on the ground, he'll se it's description */
-    string itemName;
+    [SerializeField] private string _itemName;
     TextAsset itemDescription;
 
-    public delegate void showAction(Vector3 position);
+    public delegate void showAction(Vector3 position, string itemName);
+    public delegate void hideAction();
     public static event showAction OnShow;
-    public static event showAction OnHide;
-
-    //private void OnMouseEnter()
-    //{
-    //    OnShow?.Invoke(transform.position);
-    //}
-
-    //private void OnMouseExit()
-    //{
-    //    OnHide?.Invoke(transform.position);
-    //}
+    public static event hideAction OnHide;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnShow?.Invoke(transform.position);
+        OnShow?.Invoke(transform.position, _itemName);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        OnHide?.Invoke(transform.position);
+        OnHide?.Invoke();
     }
 }
