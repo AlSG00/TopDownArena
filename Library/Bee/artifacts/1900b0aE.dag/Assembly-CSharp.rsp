@@ -544,6 +544,7 @@
 "Assets/Thirdparty/Shared/Scripts/SimpleCharacterMotor.cs"
 "Assets/Thirdparty/TutorialInfo/Scripts/Readme.cs"
 "Assets/[Ammunition and weapon systems]/AmmunitionUiHandler.cs"
+"Assets/[Ammunition and weapon systems]/PlayerWeaponControl.cs"
 "Assets/[Ammunition and weapon systems]/SCRIPT_PlayerAmmunition.cs"
 "Assets/[Ammunition and weapon systems]/Weapon.cs"
 -langversion:9.0

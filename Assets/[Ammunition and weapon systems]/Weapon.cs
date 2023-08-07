@@ -10,7 +10,36 @@ public class Weapon : MonoBehaviour
         public Vector3 initialPosition;
         public Vector3 initialVelocity;
         public TrailRenderer tracer;
+
+        public Bullet (Vector3 position, Vector3 velocity, TrailRenderer bulletTracer)
+        {
+            initialPosition = position;
+            initialVelocity = velocity;
+            lifeTime = 0.0f;
+            tracer = Instantiate(bulletTracer, position, Quaternion.identity);
+            tracer.AddPosition(position);
+        }
+
+        public Vector3 GetPosition()
+        {
+            return initialPosition + initialVelocity * lifeTime;
+        }
     }
+
+    [System.Serializable]
+    private class HitEffect
+    {
+        // TODO:
+        // - Create some static class to store tags collection
+        // - inherit created class and make selectable parameter to pick required tag
+        [SerializeField] private string tag;
+        [SerializeField] private ParticleSystem effect;
+        asdfasdf
+    }
+
+    #region PARAMETERS
+
+    [SerializeField] private HitEffect[] hitEffects;
 
     [Header("References")]
     public SCRIPT_MuzzleFlame muzzleFlame;
@@ -21,6 +50,14 @@ public class Weapon : MonoBehaviour
 
     // ѕрикрутить ссылку на скрипт, в котором будет AnimationEvents дл€ перезар€дки каждой отдельной пушки
     // —ейчас перезар€дка захардкожена под автомат
+
+    // Muzzle effects
+    // Ammo shels generator
+    // Available ammo in storage handler
+    // Available ammo in magazine handler
+    // Weapon parameters
+    // Weapon audio
+    // 
 
     [Header("Weapon parameters")]
     public string weaponName;
@@ -48,17 +85,17 @@ public class Weapon : MonoBehaviour
     public GameObject magazine;
     public Transform muzzle;
 
-    // TODO: move to separated component
-    //[Header("Audio")]
-    //public AudioClip reloadSound;
-    //public AudioClip shotSound;
-    //public AudioSource audioSource;
+     //TODO: move to separated component
+    [Header("Audio")]
+    public AudioClip reloadSound;
+    public AudioClip shotSound;
+    public AudioSource audioSource;
 
-    //[Header("[Temp rifle reload audio]")]
-    //public AudioClip ejectMagSound;
-    //public AudioClip putMagSound;
-    //public AudioClip pullOutMagSound;
-    //public AudioClip InsertMagSound;
+    [Header("[Temp rifle reload audio]")]
+    public AudioClip ejectMagSound;
+    public AudioClip putMagSound;
+    public AudioClip pullOutMagSound;
+    public AudioClip InsertMagSound;
 
     // Other
     private Ray ray;
@@ -72,6 +109,8 @@ public class Weapon : MonoBehaviour
     public bool shotPerformed;
     private float lastTimeShot;
     private float fireDelay;
+
+    #endregion
 
     private void Start()
     {
@@ -96,7 +135,7 @@ public class Weapon : MonoBehaviour
     public void StartFiring()
     {
         isFiring = true;
-        fireDelay = (float)60 / fireRate;
+        fireDelay = 60f / fireRate;
         accumulatedTime = 0.0f;
 
         FireBullet();
@@ -114,7 +153,8 @@ public class Weapon : MonoBehaviour
             for (int i = 0; i < projectilesPerShot; i++)
             {
                 Vector3 velocity = GetSpreadDirection() * bulletSpeed;
-                var bullet = CreateBullet(muzzle.position, velocity);
+                //var bullet = CreateBullet(muzzle.position, velocity);
+                var bullet = new Bullet(muzzle.position, velocity, tracerEffect);
                 bullets.Add(bullet);
             }
 
@@ -124,18 +164,6 @@ public class Weapon : MonoBehaviour
             currentAmmoInMag--;
             ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
         }
-    }
-
-    Bullet CreateBullet(Vector3 position, Vector3 velocity)
-    {
-        Bullet bullet = new Bullet();
-        bullet.initialPosition = position;
-        bullet.initialVelocity = velocity;
-        bullet.lifeTime = 0.0f;
-        bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
-        bullet.tracer.AddPosition(position);
-
-        return bullet;
     }
 
     // «адержка между выстрелами
@@ -162,17 +190,11 @@ public class Weapon : MonoBehaviour
     {
         bullets.ForEach(bullet =>
         {
-            Vector3 p0 = GetPosition(bullet);
+            Vector3 p0 = bullet.GetPosition();
             bullet.lifeTime += deltaTime;
-            Vector3 p1 = GetPosition(bullet);
+            Vector3 p1 = bullet.GetPosition();
             RaycastSegment(p0, p1, bullet);
         });
-    }
-
-    // ¬ычисление следующей позиции пули с учетом времени после выстрела
-    Vector3 GetPosition(Bullet bullet)
-    {
-        return bullet.initialPosition + bullet.initialVelocity * bullet.lifeTime;
     }
 
     // –ассчет отрезка вектора перемещени€ пули
@@ -182,36 +204,35 @@ public class Weapon : MonoBehaviour
         float distance = direction.magnitude;
         ray.origin = start;
         ray.direction = direction;
+        GameObject impactTarget = null;
 
         if (Physics.Raycast(ray, out hitInfo, distance, activeLayers))
         {
-            GameObject impactObj = null;
-
-            Target target = hitInfo.transform.GetComponent<Target>();
-            if (target != null)
-            {
-                target.TakeDamage(damage);
-            }
+            TryAssignDamage(hitInfo);
 
             if (hitInfo.rigidbody != null)
             {
                 hitInfo.rigidbody.AddForce(-hitInfo.normal * impactForce);
             }
 
+            TryGenerateHitEffect(hitInfo.transform.tag);
+            // TODO: Get rid of this if-else-if construction
+            // Wrote new class for that. Need to write a method that will take tag from hitInfo and find list item with required tag.
+            asdgasdf
             if (hitInfo.transform.CompareTag("Concrete"))
             {
-                impactObj = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                impactTarget = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
             else if (hitInfo.transform.CompareTag("Metal"))
             {
-                impactObj = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                impactTarget = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
             else if (hitInfo.transform.CompareTag("Flesh"))
             {
-                impactObj = Instantiate(hitEffectFlesh, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                impactTarget = Instantiate(hitEffectFlesh, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
 
-            Destroy(impactObj, 1200f);
+            Destroy(impactTarget, 1200f);
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.lifeTime = _maxBulletLifetime;
@@ -219,6 +240,20 @@ public class Weapon : MonoBehaviour
         else
         {
             bullet.tracer.transform.position = end;
+        }
+    }
+
+    private void TryGenerateHitEffect(string impactTargetTag)
+    {
+        
+    }
+
+    public void TryAssignDamage(RaycastHit hitInfo)
+    {
+        Target target = hitInfo.transform.GetComponent<Target>();
+        if (target != null)
+        {
+            target.TakeDamage(damage);
         }
     }
 
@@ -242,6 +277,8 @@ public class Weapon : MonoBehaviour
         //bullets.RemoveAll(bullet => bullet.lifeTime >= _maxBulletLifetime);
     }
 
+
+    // TODO: Rework
     public void Reload()
     {
         int toFill = magCapacity - currentAmmoInMag; // считаем, сколько не хватает
@@ -257,6 +294,14 @@ public class Weapon : MonoBehaviour
         {
             Debug.Log("Can't reload");
         }
+
+        // PSEUDOCODE for method reworking:
+        // - Check remaining ammo in the ammunition component
+        // - If it has required ammo available, reload:
+        //      - add ammo
+        //      - play animation
+        //      - play sound
+        //      - reduce remaining ammo count in the ammunition component
     }
 
     public Vector3 GetSpreadDirection()
