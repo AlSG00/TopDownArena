@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
         // - inherit created class and make selectable parameter to pick required tag
         [SerializeField] private string tag;
         [SerializeField] private ParticleSystem effect;
-        asdfasdf
+        //asdfasdf
     }
 
     #region PARAMETERS
@@ -218,7 +218,7 @@ public class Weapon : MonoBehaviour
             TryGenerateHitEffect(hitInfo.transform.tag);
             // TODO: Get rid of this if-else-if construction
             // Wrote new class for that. Need to write a method that will take tag from hitInfo and find list item with required tag.
-            asdgasdf
+            //asdgasdf
             if (hitInfo.transform.CompareTag("Concrete"))
             {
                 impactTarget = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
