@@ -1,9 +1,20 @@
 using System.Collections;
+//using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    ~Weapon()
+    {
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            Destroy(bullets[i].tracer.gameObject, 1000f);
+            bullets.Remove(bullets[i]);
+            i--;
+        }
+    }
+
     class Bullet
     {
         public float lifeTime;          // По истечении указанного времени пуля удалится, если ни с чем не столкнется
@@ -32,14 +43,14 @@ public class Weapon : MonoBehaviour
         // TODO:
         // - Create some static class to store tags collection
         // - inherit created class and make selectable parameter to pick required tag
-        [SerializeField] private string tag;
-        [SerializeField] private ParticleSystem effect;
-        //asdfasdf
+        public string tag;
+        public ParticleSystem effect;
     }
 
     #region PARAMETERS
 
-    [SerializeField] private HitEffect[] hitEffects;
+    [SerializeField] private List<HitEffect> hitEffects = new();
+    [SerializeField] private float hitEffectLifetime = 1200f;
 
     [Header("References")]
     public SCRIPT_MuzzleFlame muzzleFlame;
@@ -132,6 +143,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        UpdateBullet(Time.deltaTime);
+    }
+
     public void StartFiring()
     {
         isFiring = true;
@@ -215,24 +231,24 @@ public class Weapon : MonoBehaviour
                 hitInfo.rigidbody.AddForce(-hitInfo.normal * impactForce);
             }
 
-            TryGenerateHitEffect(hitInfo.transform.tag);
+            TryGenerateHitEffect(hitInfo);
             // TODO: Get rid of this if-else-if construction
             // Wrote new class for that. Need to write a method that will take tag from hitInfo and find list item with required tag.
             //asdgasdf
-            if (hitInfo.transform.CompareTag("Concrete"))
-            {
-                impactTarget = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            }
-            else if (hitInfo.transform.CompareTag("Metal"))
-            {
-                impactTarget = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            }
-            else if (hitInfo.transform.CompareTag("Flesh"))
-            {
-                impactTarget = Instantiate(hitEffectFlesh, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            }
+            //if (hitInfo.transform.CompareTag("Concrete"))
+            //{
+            //    impactTarget = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            //}
+            //else if (hitInfo.transform.CompareTag("Metal"))
+            //{
+            //    impactTarget = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            //}
+            //else if (hitInfo.transform.CompareTag("Flesh"))
+            //{
+            //    impactTarget = Instantiate(hitEffectFlesh, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            //}
 
-            Destroy(impactTarget, 1200f);
+            //Destroy(impactTarget, 1200f);
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.lifeTime = _maxBulletLifetime;
@@ -243,9 +259,23 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void TryGenerateHitEffect(string impactTargetTag)
+    private void TryGenerateHitEffect(RaycastHit hit)
     {
-        
+        HitEffect requiredEffect = hitEffects.Find(effect => effect.tag == hit.transform.tag);
+        ParticleSystem effectToCreate = Instantiate(requiredEffect.effect, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(effectToCreate, 1200f);
+        //if (hitInfo.transform.CompareTag("Concrete"))
+        //{
+        //    impactTarget = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+        //}
+        //else if (hitInfo.transform.CompareTag("Metal"))
+        //{
+        //    impactTarget = Instantiate(hitEffectMetal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+        //}
+        //else if (hitInfo.transform.CompareTag("Flesh"))
+        //{
+        //    impactTarget = Instantiate(hitEffectFlesh, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+        //}
     }
 
     public void TryAssignDamage(RaycastHit hitInfo)
