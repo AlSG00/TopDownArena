@@ -145,7 +145,10 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        UpdateBullet(Time.deltaTime);
+        if (bullets.Count != 0)
+        {
+            UpdateBullet(Time.deltaTime);
+        }
     }
 
     public void StartFiring()
@@ -346,5 +349,18 @@ public class Weapon : MonoBehaviour
         direction.Normalize();
 
         return direction;
+    }
+
+
+
+    private float _lastTimeSingleShot;
+    public bool NextShotReadyCheck()
+    {
+        if (shotPerformed = false && _lastTimeSingleShot + singleShotDelay <= Time.time)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

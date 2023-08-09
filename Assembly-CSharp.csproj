@@ -101,7 +101,7 @@
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_Medkit_Small.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
-    <Compile Include="Assets\[Ammunition and weapon systems]\PlayerWeaponControl.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\PlayerCombatControl.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
     <Compile Include="Assets\Scripts\Lightning\SCRIPT_StandartLightningHandler.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSDebugView.cs" />

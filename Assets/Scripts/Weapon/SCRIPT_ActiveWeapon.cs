@@ -64,25 +64,6 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     {
         GetComponent<Player_Shooting>().Equip(weaponToEquip);
         int weaponSlotIndex = (int)weaponToEquip.WeaponSlot;
-        //if (sdfsdf[weaponSlotIndex])
-        //{
-        //    Destroy(equippedWeapon[weaponSlotIndex].gameObject);
-        //}
-
-
-
-        //var weapon = GetWeapon(weaponSlotIndex);
-
-        //if (allWeapons[weaponSlotIndex] &&
-        //    allWeapons[weaponSlotIndex].weaponName == weaponToEquip.weaponName)
-        //{
-        //    //    Destroy(allWeapons[weaponSlotIndex].gameObject);
-        //    Debug.Log("Already have this weapon");
-        //    return;
-        //}
-        //allWeapons[weaponSlotIndex] = weaponToEquip;
-
-
 
         var weapon = GetWeapon(weaponSlotIndex);
 
@@ -96,41 +77,9 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
 
-
-
-        //else if (rigController.GetBool("isHolstering") == false)
-        //{
-        //    rigController.SetBool("isHolstering", true);
-        //}
-        //equippedWeapon[weaponSlotIndex] = weaponToEquip;
-        ////  handIk.weight = 1.0f;
-        ////     playerAnimator.SetLayerWeight(1, 1.0f);
-        ////weapon.transform.parent = weaponSlots[weaponSlotIndex];
-        //equippedWeapon[weaponSlotIndex].transform.parent = weaponParent;
-        //equippedWeapon[weaponSlotIndex].transform.localPosition = Vector3.zero;
-        //equippedWeapon[weaponSlotIndex].transform.localRotation = Quaternion.identity;
-
-        // equippedWeapon[weaponSlotIndex] = weaponToEquip;
-        //  handIk.weight = 1.0f;
-        //     playerAnimator.SetLayerWeight(1, 1.0f);
-        //weapon.transform.parent = weaponSlots[weaponSlotIndex];
-
-
-
-        //weaponToEquip.transform.parent = weaponParent;
-        //weaponToEquip.transform.localPosition = Vector3.zero;
-        //weaponToEquip.transform.localRotation = Quaternion.identity;
-
-
-
-        // StartCoroutine("PlayAnimTest", equippedWeapon[weaponSlotIndex]);
-        //rigController.Play($"ANIM_Equip_{weapon.weaponName}");
-        // rigController.SetTrigger("equip");
-        //SetActiveWeapon(weaponSlotIndex);
         equippedWeapons[weaponSlotIndex] = weapon;
 
         SetActiveWeapon(weaponToEquip.WeaponSlot);
-        //activeWeaponIndex = weaponSlotIndex;
     }
 
     public void SetActiveWeapon(WeaponSlot weaponSlot)

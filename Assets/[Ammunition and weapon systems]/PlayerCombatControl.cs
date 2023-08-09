@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeaponControl : MonoBehaviour
+public class PlayerCombatControl : MonoBehaviour
 {
-    public float aimingDuration = 0.1f;
+    //public float aimingDuration = 0.1f;
     // TODO: REWORK THIS SCRIPT
     public bool isShooting = false;
 
     public bool isAiming = false;
 
-    public bool isCheckingStats = false;
+    //public bool isCheckingStats = false;
 
     //public bool isCheckingInventory = false;
 
     //public GameObject inventory;
 
-    public WeaponAnimationEvents animationEvents;
+    //public WeaponAnimationEvents animationEvents;
 
     // Новое
     
@@ -49,7 +49,7 @@ public class PlayerWeaponControl : MonoBehaviour
         //animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);
     }
 
-    void LateUpdate()
+    void Update()
     {
         CombatInput();                       // Проверка, нажата ли кнопка выстрела
         //SwitchWeapon();
@@ -59,13 +59,15 @@ public class PlayerWeaponControl : MonoBehaviour
 
 
 
+
+
+    
     /// <summary>
-    /// ////////
+    public Weapon weapon;
     /// </summary>
-    public SCRIPT_Weapon weapon;
+
     void CombatInput()
     {
-        
         if (weapon)
         {
             if (Input.GetKeyDown(KeyCode.R) && isAiming && !activeWeapon.isReloading)
@@ -89,24 +91,25 @@ public class PlayerWeaponControl : MonoBehaviour
             if (Input.GetButton("Fire1"))
             {
                 isHolstered = animationController.GetBool("isHolstered");
-                if (isAiming && !isHolstered && !activeWeapon.isReloading)
+
+                if (isHolstered || activeWeapon.isReloading)
                 {
-                    // animationController.SetBool("isShooting", true);
-                    if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
-                    {
-                        lastTimeSingleShot = Time.time;
-                        weapon.StartFiring();
-                        if (weapon.singleShots)
-                        {
-                            weapon.shotPerformed = true;
-                        }
-                    }
-                }
-                else
-                {
-                    // TODO: Рукопашная
+                    return;
                 }
 
+                if (isAiming == false)
+                {
+                    // Melee
+                }
+                else if (weapon.NextShotReadyCheck())
+                {
+                    lastTimeSingleShot = Time.time;
+                    weapon.StartFiring();
+                    if (weapon.singleShots)
+                    {
+                        weapon.shotPerformed = true;
+                    }
+                }
             }
             else
             {
@@ -115,10 +118,6 @@ public class PlayerWeaponControl : MonoBehaviour
             }
         }
 
-        if (weapon)
-        {
-            weapon.UpdateBullet(Time.deltaTime);
-        }
 
         if (Input.GetKeyDown(KeyCode.X) && !isAiming)
         {
@@ -127,7 +126,9 @@ public class PlayerWeaponControl : MonoBehaviour
         }
     }
 
-    public void Equip(SCRIPT_Weapon weaponToEquip)
+
+    // TODO: Remember, how this works
+    public void Equip(Weapon weaponToEquip)
     {
         isHolstered = false;
         weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
