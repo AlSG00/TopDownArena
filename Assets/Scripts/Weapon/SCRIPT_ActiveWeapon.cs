@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 //using UnityEditor.Animations;
 
+// TODO: Rework it... With heist!
 public class SCRIPT_ActiveWeapon : MonoBehaviour
 {
     //public Rig handIk;

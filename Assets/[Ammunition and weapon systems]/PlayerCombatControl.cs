@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// TODO: Probably rename this script to something like "PlayerCombatInput"
 public class PlayerCombatControl : MonoBehaviour
 {
     //public float aimingDuration = 0.1f;
@@ -20,8 +22,8 @@ public class PlayerCombatControl : MonoBehaviour
 
     // Новое
     
-    [HideInInspector] public SCRIPT_MuzzleFlame muzzleFlame;
-    public SCRIPT_AmmoShells ammoShells;
+    //[HideInInspector] public SCRIPT_MuzzleFlame muzzleFlame;
+    //public SCRIPT_AmmoShells ammoShells;
 
     private float lastTimeSingleShot; // Задержка перед выстрелом в одиночном режиме стрельбы
     private float tempSpread;         // Запомнить разброс от выстрела, чтобы вернуть его при выходе из прицеливания  
@@ -32,7 +34,7 @@ public class PlayerCombatControl : MonoBehaviour
     public bool isHolstered;
 
     public SCRIPT_ActiveWeapon activeWeapon;
-    public Transform leftHand;
+    //public Transform leftHand;
 
     private GameObject magazineHand;
 
@@ -59,9 +61,6 @@ public class PlayerCombatControl : MonoBehaviour
 
 
 
-
-
-    
     /// <summary>
     public Weapon weapon;
     /// </summary>
@@ -132,7 +131,7 @@ public class PlayerCombatControl : MonoBehaviour
     {
         isHolstered = false;
         weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
-        muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
-        ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
+        //muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
+        //ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
     }
 }

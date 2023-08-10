@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Check and rename all the methods here
 public class Weapon : MonoBehaviour
 {
     ~Weapon()
@@ -15,7 +16,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    class Bullet
+    private class Bullet
     {
         public float lifeTime;          // По истечении указанного времени пуля удалится, если ни с чем не столкнется
         public Vector3 initialPosition;
@@ -37,6 +38,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    // TODO: Probably should incapsulate this to separate file?
     [System.Serializable]
     private class HitEffect
     {
@@ -55,9 +57,10 @@ public class Weapon : MonoBehaviour
     [Header("References")]
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
-    public SCRIPT_PlayerAmmunition ammoInStock;
-    public AmmoCounterTest ammoCounter;
+    //public SCRIPT_PlayerAmmunition ammoInStock;
+    //public AmmoCounterTest ammoCounter;
     public SCRIPT_PlayerAmmunition.Ammo currentWeaponStock;
+    public WeaponAudio weaponAudio;
 
     // Прикрутить ссылку на скрипт, в котором будет AnimationEvents для перезарядки каждой отдельной пушки
     // Сейчас перезарядка захардкожена под автомат
@@ -76,7 +79,7 @@ public class Weapon : MonoBehaviour
     public float fireRate = 25;
     public float bulletSpeed = 1000f;
     public int projectilesPerShot = 1;
-    public LayerMask activeLayers;
+    public LayerMask activeLayers; // TODO: What is it?
     public float singleShotDelay = 0.3f;
     public float impactForce;
     public float damage;
@@ -99,8 +102,8 @@ public class Weapon : MonoBehaviour
      //TODO: move to separated component
     [Header("Audio")]
     public AudioClip reloadSound;
-    public AudioClip shotSound;
-    public AudioSource audioSource;
+    //public AudioClip shotSound;
+    //public AudioSource audioSource;
 
     [Header("[Temp rifle reload audio]")]
     public AudioClip ejectMagSound;
@@ -126,21 +129,25 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         isReloading = false;
-        muzzleFlame = GetComponent<SCRIPT_MuzzleFlame>();
-        ammoShells = GetComponent<SCRIPT_AmmoShells>();
-        ammoCounter = GameObject.Find("HUD").GetComponentInChildren<AmmoCounterTest>();
-        ammoInStock = GameObject.Find("Player").GetComponentInChildren<SCRIPT_PlayerAmmunition>();
+        TryGetComponent<SCRIPT_MuzzleFlame>(out muzzleFlame);
+        TryGetComponent<SCRIPT_AmmoShells>(out ammoShells);
 
-        if (weaponName == "Rifle")
-        {
-            currentWeaponStock = ammoInStock.rifleAmmo;
-            Debug.LogWarning(currentWeaponStock);
-        }
-        else if (weaponName == "Shotgun")
-        {
-            currentWeaponStock = ammoInStock.shotgunAmmo;
-            Debug.LogWarning(currentWeaponStock);
-        }
+        // TODO: Find another way to connect HUD to a newly picked weapon
+        //ammoCounter = GameObject.Find("HUD").GetComponentInChildren<AmmoCounterTest>();
+
+
+        //ammoInStock = GameObject.Find("Player").GetComponentInChildren<SCRIPT_PlayerAmmunition>();
+
+        //if (weaponName == "Rifle")
+        //{
+        //    currentWeaponStock = ammoInStock.rifleAmmo;
+        //    Debug.LogWarning(currentWeaponStock);
+        //}
+        //else if (weaponName == "Shotgun")
+        //{
+        //    currentWeaponStock = ammoInStock.shotgunAmmo;
+        //    Debug.LogWarning(currentWeaponStock);
+        //}
     }
 
     private void Update()
@@ -162,27 +169,35 @@ public class Weapon : MonoBehaviour
 
     private void FireBullet()
     {
-        if ((lastTimeShot + fireDelay <= Time.time)
-            && (currentAmmoInMag > 0)
-            && !isReloading)
+        if ((lastTimeShot + fireDelay >= Time.time) || (currentAmmoInMag <= 0) || isReloading)
         {
-            lastTimeShot = Time.time;
-            //audioSource.PlayOneShot(shotSound);
-
-            for (int i = 0; i < projectilesPerShot; i++)
-            {
-                Vector3 velocity = GetSpreadDirection() * bulletSpeed;
-                //var bullet = CreateBullet(muzzle.position, velocity);
-                var bullet = new Bullet(muzzle.position, velocity, tracerEffect);
-                bullets.Add(bullet);
-            }
-
-            muzzleFlame.LightFlame();
-            ammoShells.EjectShell();
-
-            currentAmmoInMag--;
-            ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
+            Debug.Log("<color=red>Can't shoot</color>");
+            return;
         }
+
+        lastTimeShot = Time.time;
+
+        GenerateShot();
+
+        // TODO: Get it out of this script somehow
+        if (muzzleFlame)
+        {
+            muzzleFlame.LightFlame();
+        }
+
+        // TODO: Get it out of this script somehow x2
+        if (ammoShells)
+        {
+            ammoShells.EjectShell();
+        }
+
+        if (weaponAudio)
+        {
+            weaponAudio.PlayShotSound();
+        }
+
+        currentAmmoInMag--;
+        //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
     }
 
     // Задержка между выстрелами
@@ -194,6 +209,16 @@ public class Weapon : MonoBehaviour
         {
             FireBullet();
             accumulatedTime -= fireInterval;
+        }
+    }
+
+    private void GenerateShot()
+    {
+        for (int i = 0; i < projectilesPerShot; i++)
+        {
+            Vector3 velocity = GetSpreadDirection() * bulletSpeed;
+            var bullet = new Bullet(muzzle.position, velocity, tracerEffect);
+            bullets.Add(bullet);
         }
     }
 
@@ -320,7 +345,7 @@ public class Weapon : MonoBehaviour
 
         if (toFill > 0 && currentWeaponStock.left > 0)
         {
-            ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
+            //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
             Debug.Log($"Left {currentWeaponStock.left}");
         }
         else

@@ -216,6 +216,7 @@
     <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableWeapon.cs" />
     <Compile Include="Assets\[Ammunition and weapon systems]\PickableWeapon.cs" />
     <Compile Include="Assets\[Ammunition and weapon systems]\ActiveWeapon.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\WeaponAudio.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />
