@@ -33,9 +33,9 @@ public class Player_Shooting : MonoBehaviour
     public bool isHolstered;
 
     public SCRIPT_ActiveWeapon activeWeapon;
-    public Transform leftHand;
+    //public Transform leftHand;
     
-    private GameObject magazineHand;
+    //private GameObject magazineHand;
 
     // Этой штуке нечего здесь делать. Переместить!
     private InventoryController inventory;

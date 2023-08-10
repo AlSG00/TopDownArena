@@ -90,7 +90,6 @@
     <Compile Include="Assets\Scripts\Player\Player_Movement.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_ResourceItem.cs" />
     <Compile Include="Assets\Scripts\Implants\SCRIPT_ImplantShopMenuController.cs" />
-    <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableWeapon.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSUtil.cs" />
     <Compile Include="Assets\GroundedItemInfoHandler.cs" />
     <Compile Include="Assets\Thirdparty\Shared\Scripts\SimpleCharacterMotor.cs" />
@@ -214,6 +213,9 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
+    <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableWeapon.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\PickableWeapon.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\ActiveWeapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />
