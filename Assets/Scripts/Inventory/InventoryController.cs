@@ -56,12 +56,14 @@ public class InventoryController : MonoBehaviour
     {
         SCRIPT_ItemContainer.OnContainerOpen += FillContainerGrid;
         PickableObject.OnItemPick += PickItemFromGround;
+        PickableWeapon.OnWeaponPick += PickItemFromGround;
     }
 
     private void OnDisable()
     {
         SCRIPT_ItemContainer.OnContainerOpen -= FillContainerGrid;
         PickableObject.OnItemPick -= PickItemFromGround;
+        PickableWeapon.OnWeaponPick -= PickItemFromGround;
     }
 
     private void Start()

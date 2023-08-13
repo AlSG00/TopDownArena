@@ -133,7 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeeb1edec73019645b0cbb45d69cfcb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 0}
+  stackCount: 0
+  weaponPrefab: {fileID: 1048267339396752250, guid: 160f899f60942b04dbc3ab131fc8eaae,
+    type: 3}
+  inventoryItem: {fileID: 1124756174162482380, guid: 8791264e257bee74e8fddc33974ddfb8,
+    type: 3}
 --- !u!114 &-4376182083252733335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +153,7 @@ MonoBehaviour:
   pickableImagePrefab: {fileID: 1772238699815821576, guid: 46f253d413ebd894d9bc947979f8d9ea,
     type: 3}
   highlightTime: 5
-  iconPivot: {fileID: 0}
+  iconPivot: {fileID: 5439211242008044213}
 --- !u!1 &5434729158959779985
 GameObject:
   m_ObjectHideFlags: 0

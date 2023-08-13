@@ -6,6 +6,11 @@ using UnityEngine;
 // TODO: Check and rename all the methods here
 public class Weapon : MonoBehaviour
 {
+    public Weapon(int remainingAmmo)
+    {
+        currentAmmoInMag = remainingAmmo;
+    }
+
     ~Weapon()
     {
         for (int i = 0; i < bullets.Count; i++)

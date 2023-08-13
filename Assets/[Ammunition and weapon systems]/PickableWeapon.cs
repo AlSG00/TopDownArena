@@ -9,8 +9,15 @@ public class PickableWeapon : MonoBehaviour, SCRIPT_IInteractable
     public bool alreadyInteracting { get; set; }
     public bool inInteractionArea { get; set; }
 
+    [Range(1, 1)] public int stackCount;
+
     public SCRIPT_Weapon weaponPrefab;
     SCRIPT_ActiveWeapon activeWeapon;
+    public SCRIPT_InventoryItem inventoryItem;
+
+    public delegate int PickAction(SCRIPT_InventoryItem item, int stackCount);
+    public static event PickAction OnWeaponPick;
+
 
     private void Awake()
     {
@@ -25,6 +32,18 @@ public class PickableWeapon : MonoBehaviour, SCRIPT_IInteractable
     }
 
     public void Interact()
+    {
+        Debug.Log("<Color=yellow>Interact</color>");
+        OnWeaponPick?.Invoke(inventoryItem, stackCount);
+
+        if (stackCount == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // TODO: Implement input key holding to activate this method
+    public void InteractAndUse()
     {
         if (activeWeapon)
         {

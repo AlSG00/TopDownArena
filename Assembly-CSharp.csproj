@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Test_PlayOST.cs" />
     <Compile Include="Assets\Scripts\Inventory\SCRIPT_ItemData.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSStencilRenderer.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\PickableWeapon.cs" />
     <Compile Include="Assets\Scripts\Lightning\LightFlicker.cs" />
     <Compile Include="Assets\Scripts\Implants\TestLegsImplant.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_Drink.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_Medkit_Small.cs" />
+    <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableWeapon.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
     <Compile Include="Assets\[Ammunition and weapon systems]\PlayerCombatControl.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Assets\Scripts\InteractableObjects\SCRIPT_ImplantShop.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_SatietyBar.cs" />
     <Compile Include="Assets\Scripts\Implants\SCRIPT_ImplantUpgrades.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\WeaponAudio.cs" />
     <Compile Include="Assets\Scripts\TEST_LOS_Visibility.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_IItem.cs" />
     <Compile Include="Assets\Scripts\UI\UIToWorldPositionConverter.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerHydration.cs" />
     <Compile Include="Assets\Scripts\EnemyHeealth.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\ActiveWeapon.cs" />
     <Compile Include="Assets\ItemInfoWindowHandler.cs" />
     <Compile Include="Assets\Scripts\InteractableObjects\SCRIPT_Bed.cs" />
     <Compile Include="Assets\Scripts\Audio\SwapAudio.cs" />
@@ -213,10 +217,7 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableWeapon.cs" />
-    <Compile Include="Assets\[Ammunition and weapon systems]\PickableWeapon.cs" />
-    <Compile Include="Assets\[Ammunition and weapon systems]\ActiveWeapon.cs" />
-    <Compile Include="Assets\[Ammunition and weapon systems]\WeaponAudio.cs" />
+    <Compile Include="Assets\[Inventory_Rework]\InventoryInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -228,6 +229,7 @@
     <None Include="Assets\Scripts\Implants\FAQ.txt" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSStencilRenderer.shader" />
+    <None Include="Assets\[Ammunition and weapon systems]\[TEST_ITEM_INFO].txt" />
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Resources\Shaders\LOSCombine.shader" />
     <None Include="Assets\Scripts\Doors\DoorsFAQ.txt" />
