@@ -14,6 +14,8 @@ public class InventoryController : MonoBehaviour
         Use
     }
 
+    #region VARIABLES
+
     [Header("References")]
     public SCRIPT_ItemGrid inventoryGrid;
     public SCRIPT_ItemGrid containerItemGrid;
@@ -37,7 +39,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private float timeToHold = 0.3f;
     private float buttonHoldTime = 0f;
     private bool isHoldingCheckStateButton = false;
-    private bool isHoldingShiftButton = false;
+    //private bool isHoldingShiftButton = false;
     private bool isHoldingDropItemButton = false;
 
     [Header("Audio")]
@@ -51,6 +53,10 @@ public class InventoryController : MonoBehaviour
     public static event OpenAction OnInventoryOpened;
     public static event OpenAction OnStateIconShow;
     public static event Action OnUnablePickItem;
+
+    #endregion
+
+    #region START INIT
 
     private void OnEnable()
     {
@@ -73,91 +79,93 @@ public class InventoryController : MonoBehaviour
         SetInventoryVisibility(isCheckingInventory);
     }
 
+    #endregion
+
     private void Update()
     {
         ItemIconDrag();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isHoldingShiftButton = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //{
+        //    isHoldingShiftButton = true;
+        //}
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isHoldingShiftButton = false;
-        }
+        //if (Input.GetKeyUp(KeyCode.LeftShift))
+        //{
+        //    isHoldingShiftButton = false;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RotateItem();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    RotateItem();
+        //}
 
-        if (selectedItemGrid == null)
-        {
-            inventoryHighlight.Show(false);
-            return;
-        }
+        //if (selectedItemGrid == null)
+        //{
+        //    inventoryHighlight.Show(false);
+        //    return;
+        //}
 
         HandleItemHighlight();
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (isHoldingShiftButton)
-            {
-                MoveItemFast();
-            }
-            else
-            {
-                LeftMouseButtonPress();
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (isHoldingShiftButton)
+        //    {
+        //        MoveItemFast();
+        //    }
+        //    else
+        //    {
+        //        LeftMouseButtonPress();
+        //    }
+        //}
         
-        if (Input.GetMouseButtonDown(1))
-        {
-            RightMouseButtonPress();
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    RightMouseButtonPress();
+        //}
 
-        if (Input.GetMouseButtonDown(2))
-        {
-            if (itemInfoWindow.isShowingDetails)
-            {
-                itemInfoWindow.ShowDetails(false);
-            }
-            else
-            {
-                itemInfoWindow.ShowDetails(true);
-            }
-        }
+        //if (Input.GetMouseButtonDown(2))
+        //{
+        //    if (itemInfoWindow.isShowingDetails)
+        //    {
+        //        itemInfoWindow.ShowDetails(false);
+        //    }
+        //    else
+        //    {
+        //        itemInfoWindow.ShowDetails(true);
+        //    }
+        //}
         
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            isHoldingDropItemButton = true;
-            buttonHoldTime = 0;
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    isHoldingDropItemButton = true;
+        //    buttonHoldTime = 0;
+        //}
 
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            isHoldingDropItemButton = false;
-            if (isDroppingStack)
-            {
-                isDroppingStack = false;
-            }
-            else
-            {
-                DropItem();
-            }
-        }
+        //if (Input.GetKeyUp(KeyCode.Q))
+        //{
+        //    isHoldingDropItemButton = false;
+        //    if (isDroppingStack)
+        //    {
+        //        isDroppingStack = false;
+        //    }
+        //    else
+        //    {
+        //        DropItem();
+        //    }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            isHoldingCheckStateButton = true;
-            buttonHoldTime = 0;
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    isHoldingCheckStateButton = true;
+        //    buttonHoldTime = 0;
+        //}
 
-        if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            HandleStateIconsVisibility();
-        }
+        //if (Input.GetKeyUp(KeyCode.Tab))
+        //{
+        //    HandleStateIconsVisibility();
+        //}
 
         // TODO: Как нибудь переделать эту страшную штуку
         if (isHoldingCheckStateButton &&
@@ -183,6 +191,19 @@ public class InventoryController : MonoBehaviour
                 isDroppingStack = true;
                 DropStack();
             }
+        }
+    }
+
+    internal void HandleItemDrop()
+    {
+        isHoldingDropItemButton = false;
+        if (isDroppingStack)
+        {
+            isDroppingStack = false;
+        }
+        else
+        {
+            DropItem();
         }
     }
 
@@ -242,7 +263,8 @@ public class InventoryController : MonoBehaviour
         return leftToStack;
     }
 
-    private void HandleStateIconsVisibility()
+    // TODO: Move to a a separate file 
+    internal void HandleStateIconsVisibility()
     {
         isHoldingCheckStateButton = false;
         isHighlightingStateIcons = false;
@@ -264,6 +286,7 @@ public class InventoryController : MonoBehaviour
         buttonHoldTime = 0f;
     }
 
+    // TODO: Incapsulate in InventoryItem or something else
     private void DropItem()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
@@ -344,6 +367,7 @@ public class InventoryController : MonoBehaviour
         selectedItem = null;
     }
 
+    // TODO: Incapsulate in InventoryItem or something else
     private void DropStack()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
@@ -409,7 +433,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void RightMouseButtonPress()
+    internal void RightMouseButtonPress()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
         if (selectedItem == null)
@@ -505,12 +529,6 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-
-        //if (selectedItem.useItemAudioSource != null &&
-        //    selectedItem.useItemAudio != null)
-        //{
-        //    selectedItem.useItemAudioSource.PlayOneShot(selectedItem.useItemAudio);
-        //}
         PlayItemAudio(selectedItem, AudioPlayMode.Use);
 
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
@@ -558,6 +576,7 @@ public class InventoryController : MonoBehaviour
         int stackCountRemaining = InsertIntoAvailableStacks(item, stackCount, true);
         if (stackCountRemaining > 0)
         {
+            // TODO: <multigrid> - can store array of grids and check for free space on each of them 
             Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(item);
             if (positionOnGrid == null)
             {
@@ -631,6 +650,7 @@ public class InventoryController : MonoBehaviour
         SetInventoryVisibility(isCheckingInventory);
     }
 
+    // Used to fill container when first initializing it.
     public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
     {
         selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
@@ -693,7 +713,7 @@ public class InventoryController : MonoBehaviour
         selectedItemGrid.testList.Add(itemToInsert);
     }
 
-    private void RotateItem()
+    internal void RotateItem()
     {
         if (selectedItem == null)
         {
@@ -710,6 +730,12 @@ public class InventoryController : MonoBehaviour
     SCRIPT_InventoryItem itemToHighlight;
     private void HandleItemHighlight()
     {
+        if (selectedItemGrid == null)
+        {
+            inventoryHighlight.Show(false);
+            return;
+        }
+
         Vector2Int positionOnGrid = GetTileGridPosition();
         if (oldPosition == positionOnGrid)
         {
@@ -748,7 +774,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void LeftMouseButtonPress()
+    internal void LeftMouseButtonPress()
     {
         if (isCheckingInventory == false)
         {
@@ -771,7 +797,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void MoveItemFast()
+    internal void MoveItemFast()
     {
         SCRIPT_ItemGrid previousGrid = null;
         if (isCheckingInventory == false ||

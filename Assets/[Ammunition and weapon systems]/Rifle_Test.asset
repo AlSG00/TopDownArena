@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263f03cdc99108e4683b1bacf1e6cb74, type: 3}
   m_Name: Rifle_Test
   m_EditorClassIdentifier: 
-  uiInfo: {fileID: 0}
+  uiInfo: {fileID: 4900000, guid: 351530118c3a38545a90fa0674bad358, type: 3}
   name: Rifle
   icon: {fileID: 21300000, guid: ef91c602ad4130347821fdb52e5b58d3, type: 3}
   width: 3

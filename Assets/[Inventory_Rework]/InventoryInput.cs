@@ -5,8 +5,12 @@ using UnityEngine;
 public class InventoryInput : MonoBehaviour
 {
     private bool isHoldingShiftButton = false;
+    private bool isHoldingDropItemButton = false;
+    private bool isHoldingCheckStateButton = false;
+    private float buttonHoldTime = 0f;
 
 
+    [SerializeField] InventoryController inventory;
 
 
     private void Update()
@@ -25,14 +29,14 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            RotateItem();
+            inventory.RotateItem();
         }
 
-        if (selectedItemGrid == null)
-        {
-            inventoryHighlight.Show(false);
-            return;
-        }
+        //if (selectedItemGrid == null)
+        //{
+        //    inventoryHighlight.Show(false);
+        //    return;
+        //}
 
         //HandleItemHighlight();
 
@@ -40,30 +44,30 @@ public class InventoryInput : MonoBehaviour
         {
             if (isHoldingShiftButton)
             {
-                MoveItemFast();
+                inventory.MoveItemFast();
             }
             else
             {
-                LeftMouseButtonPress();
+                inventory.LeftMouseButtonPress();
             }
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            RightMouseButtonPress();
+            inventory.RightMouseButtonPress();
         }
 
-        if (Input.GetMouseButtonDown(2))
-        {
-            if (itemInfoWindow.isShowingDetails)
-            {
-                itemInfoWindow.ShowDetails(false);
-            }
-            else
-            {
-                itemInfoWindow.ShowDetails(true);
-            }
-        }
+        //if (Input.GetMouseButtonDown(2))
+        //{
+        //    if (itemInfoWindow.isShowingDetails)
+        //    {
+        //        itemInfoWindow.ShowDetails(false);
+        //    }
+        //    else
+        //    {
+        //        itemInfoWindow.ShowDetails(true);
+        //    }
+        //}
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -73,15 +77,17 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            isHoldingDropItemButton = false;
-            if (isDroppingStack)
-            {
-                isDroppingStack = false;
-            }
-            else
-            {
-                DropItem();
-            }
+            //isHoldingDropItemButton = false;
+            //if (isDroppingStack)
+            //{
+            //    isDroppingStack = false;
+            //}
+            //else
+            //{
+            //    DropItem();
+            //}
+
+            inventory.HandleItemDrop();
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -92,32 +98,32 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
-            HandleStateIconsVisibility();
+            inventory.HandleStateIconsVisibility();
         }
 
-        if (isHoldingCheckStateButton &&
-            isCheckingInventory == false)
-        {
-            buttonHoldTime += Time.deltaTime;
-            if (buttonHoldTime >= timeToHold
-                && isHighlightingStateIcons == false)
-            {
-                buttonHoldTime = 0;
-                isHighlightingStateIcons = true;
-                OnStateIconShow?.Invoke(true);
-            }
-        }
+        //if (isHoldingCheckStateButton &&
+        //    isCheckingInventory == false)
+        //{
+        //    buttonHoldTime += Time.deltaTime;
+        //    if (buttonHoldTime >= timeToHold
+        //        && isHighlightingStateIcons == false)
+        //    {
+        //        buttonHoldTime = 0;
+        //        isHighlightingStateIcons = true;
+        //        OnStateIconShow?.Invoke(true);
+        //    }
+        //}
 
-        if (isHoldingDropItemButton &&
-            isCheckingInventory)
-        {
-            buttonHoldTime += Time.deltaTime;
-            if (buttonHoldTime >= timeToHold)
-            {
-                buttonHoldTime = 0;
-                isDroppingStack = true;
-                DropStack();
-            }
-        }
+        //if (isHoldingDropItemButton &&
+        //    isCheckingInventory)
+        //{
+        //    buttonHoldTime += Time.deltaTime;
+        //    if (buttonHoldTime >= timeToHold)
+        //    {
+        //        buttonHoldTime = 0;
+        //        isDroppingStack = true;
+        //        DropStack();
+        //    }
+        //}
     }
 }
