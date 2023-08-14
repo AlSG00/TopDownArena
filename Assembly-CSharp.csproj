@@ -167,6 +167,7 @@
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\FixedRotation.cs" />
     <Compile Include="Assets\Scripts\SceneSwap\SceneTransitions.cs" />
+    <Compile Include="Assets\[Inventory_Rework]\InventoryInput.cs" />
     <Compile Include="Assets\[Ammunition and weapon systems]\AmmunitionUiHandler.cs" />
     <Compile Include="Assets\Scripts\Player\FootstepsSoundController\SurfaceType.cs" />
     <Compile Include="Assets\Scripts\Camera\SCRIPT_CameraMoving.cs" />
@@ -217,7 +218,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\[Inventory_Rework]\InventoryInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

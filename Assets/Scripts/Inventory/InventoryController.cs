@@ -35,12 +35,12 @@ public class InventoryController : MonoBehaviour
     private SCRIPT_InventoryItem overlapItem;
     private RectTransform itemRectTransform;
 
-    [Header("Button holding properties")]
-    [SerializeField] private float timeToHold = 0.3f;
-    private float buttonHoldTime = 0f;
-    private bool isHoldingCheckStateButton = false;
+    //[Header("Button holding properties")]
+    //[SerializeField] private float timeToHold = 0.3f;
+    //private float buttonHoldTime = 0f;
+    //private bool isHoldingCheckStateButton = false;
     //private bool isHoldingShiftButton = false;
-    private bool isHoldingDropItemButton = false;
+    //private bool isHoldingDropItemButton = false;
 
     [Header("Audio")]
     [SerializeField] private AudioSource inventoryAudioSource;
@@ -84,119 +84,14 @@ public class InventoryController : MonoBehaviour
     private void Update()
     {
         ItemIconDrag();
-
-        //if (Input.GetKeyDown(KeyCode.LeftShift))
-        //{
-        //    isHoldingShiftButton = true;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.LeftShift))
-        //{
-        //    isHoldingShiftButton = false;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    RotateItem();
-        //}
-
-        //if (selectedItemGrid == null)
-        //{
-        //    inventoryHighlight.Show(false);
-        //    return;
-        //}
-
         HandleItemHighlight();
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (isHoldingShiftButton)
-        //    {
-        //        MoveItemFast();
-        //    }
-        //    else
-        //    {
-        //        LeftMouseButtonPress();
-        //    }
-        //}
-        
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    RightMouseButtonPress();
-        //}
-
-        //if (Input.GetMouseButtonDown(2))
-        //{
-        //    if (itemInfoWindow.isShowingDetails)
-        //    {
-        //        itemInfoWindow.ShowDetails(false);
-        //    }
-        //    else
-        //    {
-        //        itemInfoWindow.ShowDetails(true);
-        //    }
-        //}
-        
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    isHoldingDropItemButton = true;
-        //    buttonHoldTime = 0;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.Q))
-        //{
-        //    isHoldingDropItemButton = false;
-        //    if (isDroppingStack)
-        //    {
-        //        isDroppingStack = false;
-        //    }
-        //    else
-        //    {
-        //        DropItem();
-        //    }
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Tab))
-        //{
-        //    isHoldingCheckStateButton = true;
-        //    buttonHoldTime = 0;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.Tab))
-        //{
-        //    HandleStateIconsVisibility();
-        //}
-
-        // TODO: Как нибудь переделать эту страшную штуку
-        if (isHoldingCheckStateButton &&
-            isCheckingInventory == false)
-        {
-            buttonHoldTime += Time.deltaTime;
-            if (buttonHoldTime >= timeToHold
-                && isHighlightingStateIcons == false)
-            {
-                buttonHoldTime = 0;
-                isHighlightingStateIcons = true;
-                OnStateIconShow?.Invoke(true);
-            }
-        }
-
-        if (isHoldingDropItemButton &&
-            isCheckingInventory)
-        {
-            buttonHoldTime += Time.deltaTime;
-            if (buttonHoldTime >= timeToHold)
-            {
-                buttonHoldTime = 0;
-                isDroppingStack = true;
-                DropStack();
-            }
-        }
     }
+
+    #region DROP LOGIC
 
     internal void HandleItemDrop()
     {
-        isHoldingDropItemButton = false;
+        //isHoldingDropItemButton = false;
         if (isDroppingStack)
         {
             isDroppingStack = false;
@@ -207,83 +102,15 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount, bool addToInventory)
+    internal void HandleStackDrop(ref float buttonHoldTime, float timeToHold)
     {
-        //NEW
-        if (itemToStack.isStackable == false)
+        buttonHoldTime += Time.deltaTime;
+        if (buttonHoldTime >= timeToHold)
         {
-            return stackCount;
+            buttonHoldTime = 0;
+            isDroppingStack = true;
+            DropStack();
         }
-        //
-
-        if (addToInventory)
-        {
-            selectedItemGrid = inventoryGrid;
-        }
-
-        int leftToStack = stackCount;
-
-        for (int i = 0; i < selectedItemGrid._gridSizeHeight; i++)
-        {
-            for (int j = 0; j < selectedItemGrid._gridSizeWidth; j++)
-            {
-                if (selectedItemGrid.inventoryItemSlot[j, i] != null &&
-                    selectedItemGrid.inventoryItemSlot[j, i].isStackable &&
-                    selectedItemGrid.inventoryItemSlot[j, i].name == itemToStack.name &&
-                    selectedItemGrid.inventoryItemSlot[j, i].stackCount < selectedItemGrid.inventoryItemSlot[j, i].maxStackCount)
-                {
-                    int temp = leftToStack + selectedItemGrid.inventoryItemSlot[j, i].stackCount;
-
-                    if (temp < selectedItemGrid.inventoryItemSlot[j, i].maxStackCount)
-                    {
-                        if (addToInventory && selectedItemGrid != itemToStack.lastGrid)
-                        {
-                            _playerCarryingWeight.AddWeight(leftToStack * selectedItemGrid.inventoryItemSlot[j, i].weight);
-                        }
-                        selectedItemGrid.inventoryItemSlot[j, i].stackCount += leftToStack;
-                        selectedItemGrid.inventoryItemSlot[j, i].UpdateCounter();
-                        return 0;
-                    }
-                    else
-                    {
-                        int valueToFillStack = selectedItemGrid.inventoryItemSlot[j, i].maxStackCount - selectedItemGrid.inventoryItemSlot[j, i].stackCount;
-                        leftToStack -= valueToFillStack;
-                        selectedItemGrid.inventoryItemSlot[j, i].stackCount += valueToFillStack;
-                        if (addToInventory && selectedItemGrid != itemToStack.lastGrid)
-                        {
-                            _playerCarryingWeight.AddWeight(valueToFillStack * selectedItemGrid.inventoryItemSlot[j, i].weight);
-                        }
-                    }
-
-                    selectedItemGrid.inventoryItemSlot[j, i].UpdateCounter();
-                }
-            }
-        }
-
-        return leftToStack;
-    }
-
-    // TODO: Move to a a separate file 
-    internal void HandleStateIconsVisibility()
-    {
-        isHoldingCheckStateButton = false;
-        isHighlightingStateIcons = false;
-
-        if (buttonHoldTime < timeToHold)
-        {
-            isCheckingInventory = !isCheckingInventory;
-            GetItemBack();
-            SetInventoryVisibility(isCheckingInventory);
-        }
-        else
-        {
-            if (isCheckingInventory == false)
-            {
-                OnStateIconShow?.Invoke(false); // NEW;
-            }
-        }
-
-        buttonHoldTime = 0f;
     }
 
     // TODO: Incapsulate in InventoryItem or something else
@@ -367,7 +194,6 @@ public class InventoryController : MonoBehaviour
         selectedItem = null;
     }
 
-    // TODO: Incapsulate in InventoryItem or something else
     private void DropStack()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
@@ -411,28 +237,147 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void UpdateCarryingWeight(SCRIPT_InventoryItem item, bool dropFullStack)
+    #endregion
+
+    #region STATE ICONS
+    // TODO: Move to separate file
+    internal void HandleStateIconButtonHolding(ref float buttonHoldTime, float timeToHold)
     {
-        if (item.lastGrid.isPlayerInventory)
+        buttonHoldTime += Time.deltaTime;
+        if (buttonHoldTime >= timeToHold
+            && isHighlightingStateIcons == false)
         {
-            if (item.isSingleDropping)
-            {
-                if (dropFullStack)
-                {
-                    _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
-                }
-                else
-                {
-                    _playerCarryingWeight.TakeWeight(item.weight);
-                }
-            }
-            else
-            {
-                _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
-            }
+            Debug.Log("<color=green>Show icons</color>");
+            buttonHoldTime = 0;
+            isHighlightingStateIcons = true;
+            OnStateIconShow?.Invoke(true);
         }
     }
 
+    // TODO: Move to a a separate file 
+    internal void HandleStateIconsVisibility(ref float buttonHoldTime, float timeToHold)
+    {
+        isHighlightingStateIcons = false;
+
+        if (buttonHoldTime < timeToHold)
+        {
+            isCheckingInventory = !isCheckingInventory;
+            GetItemBack();
+            SetInventoryVisibility(isCheckingInventory);
+        }
+        else
+        {
+            if (isCheckingInventory == false)
+            {
+                OnStateIconShow?.Invoke(false); // NEW;
+            }
+        }
+
+        buttonHoldTime = 0f;
+    }
+
+    #endregion
+
+    internal void HandleMoreItemInfoVisibility()
+    {
+        if (itemInfoWindow.isShowingDetails)
+        {
+            itemInfoWindow.ShowDetails(false);
+        }
+        else
+        {
+            itemInfoWindow.ShowDetails(true);
+        }
+    }
+
+    // TODO: Check if it can be refactored
+    public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount, bool addToInventory)
+    {
+        if (itemToStack.isStackable == false)
+        {
+            return stackCount;
+        }
+
+        if (addToInventory)
+        {
+            selectedItemGrid = inventoryGrid;
+        }
+
+        int leftToStack = stackCount;
+
+
+        // in this giant cycle we searching same items on grid and adding values to their stack count
+        for (int i = 0; i < selectedItemGrid._gridSizeHeight; i++)
+        {
+            for (int j = 0; j < selectedItemGrid._gridSizeWidth; j++)
+            {
+                if (selectedItemGrid.inventoryItemSlot[j, i] != null &&
+                    selectedItemGrid.inventoryItemSlot[j, i].isStackable &&
+                    selectedItemGrid.inventoryItemSlot[j, i].name == itemToStack.name &&
+                    selectedItemGrid.inventoryItemSlot[j, i].stackCount < selectedItemGrid.inventoryItemSlot[j, i].maxStackCount)
+                {
+                    int finalStackCount = leftToStack + selectedItemGrid.inventoryItemSlot[j, i].stackCount;
+
+                    if (finalStackCount < selectedItemGrid.inventoryItemSlot[j, i].maxStackCount)
+                    {
+                        // Update carrying weight if item moved from inventory to container or backwards
+                        if (addToInventory && (selectedItemGrid != itemToStack.lastGrid))
+                        {
+                            _playerCarryingWeight.AddWeight(leftToStack * selectedItemGrid.inventoryItemSlot[j, i].weight);
+                        }
+                        selectedItemGrid.inventoryItemSlot[j, i].stackCount += leftToStack;
+                        selectedItemGrid.inventoryItemSlot[j, i].UpdateCounter();
+                        return 0;
+                    }
+                    else
+                    {
+                        int valueToFillStack = selectedItemGrid.inventoryItemSlot[j, i].maxStackCount - selectedItemGrid.inventoryItemSlot[j, i].stackCount;
+                        leftToStack -= valueToFillStack;
+                        selectedItemGrid.inventoryItemSlot[j, i].stackCount += valueToFillStack;
+                        if (addToInventory && selectedItemGrid != itemToStack.lastGrid)
+                        {
+                            _playerCarryingWeight.AddWeight(valueToFillStack * selectedItemGrid.inventoryItemSlot[j, i].weight);
+                        }
+                    }
+
+                    selectedItemGrid.inventoryItemSlot[j, i].UpdateCounter();
+                }
+            }
+        }
+
+        return leftToStack;
+    }
+
+
+
+    // TODO: Incapsulate in InventoryItem or something else
+
+
+    private void UpdateCarryingWeight(SCRIPT_InventoryItem item, bool dropFullStack)
+    {
+        if (item.lastGrid.isPlayerInventory == false)
+        {
+            return;
+        }
+
+        if (item.isSingleDropping)
+        {
+            if (dropFullStack)
+            {
+                _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
+            }
+            else
+            {
+                _playerCarryingWeight.TakeWeight(item.weight);
+            }
+        }
+        else
+        {
+            _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
+        }
+    }
+
+    // TODO: Method is too big. Refactor
     internal void RightMouseButtonPress()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
@@ -454,34 +399,37 @@ public class InventoryController : MonoBehaviour
                     selectedItem.isStackable &&
                     selectedItem.isSingleDropping)
                 {
-                    if (secondItem.stackCount < secondItem.maxStackCount)
-                    {
-                        secondItem.stackCount++;
-                        selectedItem.stackCount--;
-                        secondItem.UpdateCounter();
-                        selectedItem.UpdateCounter();
-                        PlayItemAudio(selectedItem, AudioPlayMode.PlaceOnGrid);
-                        if (selectedItemGrid != selectedItem.lastGrid)
-                        {
-                            if (selectedItemGrid.isPlayerInventory)
-                            {
-                                _playerCarryingWeight.AddWeight(selectedItem.weight);
-                            }
-                            else
-                            {
-                                _playerCarryingWeight.TakeWeight(selectedItem.weight);
-                            }
-                        }
-
-                        if (selectedItem.stackCount == 0)
-                        {
-                            Destroy(selectedItem.gameObject);
-                        }
-                    }
-                    else
+                    if (secondItem.stackCount >= secondItem.maxStackCount)
                     {
                         return;
                     }
+
+                    secondItem.stackCount++;
+                    selectedItem.stackCount--;
+                    secondItem.UpdateCounter();
+                    selectedItem.UpdateCounter();
+                    PlayItemAudio(selectedItem, AudioPlayMode.PlaceOnGrid);
+                    if (selectedItemGrid != selectedItem.lastGrid)
+                    {
+                        if (selectedItemGrid.isPlayerInventory)
+                        {
+                            _playerCarryingWeight.AddWeight(selectedItem.weight);
+                        }
+                        else
+                        {
+                            _playerCarryingWeight.TakeWeight(selectedItem.weight);
+                        }
+                    }
+
+                    if (selectedItem.stackCount == 0)
+                    {
+                        Destroy(selectedItem.gameObject);
+                    }
+                    //}
+                    //else
+                    //{
+                    //    return;
+                    //}
                 }
                 else
                 {
@@ -523,13 +471,13 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        if (selectedItem.isUsable == false) //TODO: Возможно, тут вообще надо убрать метод PlaceItemOnGrid
+        if (selectedItem.isUsable == false && selectedItem.isOnCursor)
         {
             PlaceItemOnGrid(tileGridPosition);
             return;
         }
 
-        PlayItemAudio(selectedItem, AudioPlayMode.Use);
+        
 
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
@@ -551,6 +499,7 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.Show(false);
         }
 
+        PlayItemAudio(selectedItem, AudioPlayMode.Use);
         selectedItem = null;
     }
 
@@ -569,7 +518,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    //NEW
+    
     private int PickItemFromGround(SCRIPT_InventoryItem item, int stackCount)
     {
         selectedItemGrid = inventoryGrid;
@@ -598,8 +547,8 @@ public class InventoryController : MonoBehaviour
         PlayItemAudio(item, AudioPlayMode.PickFromGround);
         return 0;
     }
-    //
 
+    // Create, placeon inventory grid and add some weight
     public void InsertItemIntoInventory(SCRIPT_InventoryItem item, int stackCount)
     {
         if (selectedItemGrid == null)
@@ -607,9 +556,6 @@ public class InventoryController : MonoBehaviour
             Debug.Log("Grid is not selected");
             return;
         }
-
-        //NEW
-        //inventoryAudioSource.PlayOneShot(item.pickFromGroundAudio);
 
         CreateItemForUi(item);
         SCRIPT_InventoryItem itemToInsert = selectedItem; // TODO: Может лучше избавиться от глобально переменной Selected Item???
@@ -622,6 +568,7 @@ public class InventoryController : MonoBehaviour
         _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
     }
 
+    // Initialize size, in-hierarchy position and some data for the created sprite
     public void CreateItemForUi(SCRIPT_InventoryItem item)
     {
         SCRIPT_InventoryItem inventoryItem = Instantiate(item);
@@ -631,6 +578,8 @@ public class InventoryController : MonoBehaviour
         itemRectTransform.SetAsLastSibling();
         inventoryItem.Set(inventoryItem.itemData);
     }
+
+    #region CONTAINER LOGIC
 
     private void FillContainerGrid(bool isInitialized, List<SCRIPT_InventoryItem> storedItemList, SCRIPT_ItemGrid containerGrid)
     {
@@ -691,6 +640,9 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    // Return free grid coordinates and calculate on-screen pixel position to place sprite
     private void InsertItem(SCRIPT_InventoryItem itemToInsert)
     {
         Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert); 
@@ -728,6 +680,8 @@ public class InventoryController : MonoBehaviour
 
     Vector2Int oldPosition;
     SCRIPT_InventoryItem itemToHighlight;
+
+
     private void HandleItemHighlight()
     {
         if (selectedItemGrid == null)
@@ -773,6 +727,8 @@ public class InventoryController : MonoBehaviour
             inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
     }
+
+
 
     internal void LeftMouseButtonPress()
     {
@@ -845,8 +801,6 @@ public class InventoryController : MonoBehaviour
                         _playerCarryingWeight.TakeWeight(itemToInsert.weight * itemToInsert.stackCount);
                     }
                     
-                    //itemInfoWindow.SetVisibility(false, selectedItem);
-                    //selectedItem.SetOnCursorFlag(false);
                     selectedItem.isOnCursor = false;
                     itemInfoWindow.SetVisibility(false, selectedItem);
                     PlayItemAudio(selectedItem, AudioPlayMode.PickFromGrid);
@@ -1002,72 +956,60 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    //Протестить функцию
+    //TODO: Test
     private void PlaceItemOnGrid(Vector2Int tileGridPosition)
     {
         overlapItem = null;
         bool complete = selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y, ref overlapItem); // TODO: Разобраться, как это работает
-        if (complete)
+        if (complete == false)
         {
-            if (selectedItem.lastGrid.isPlayerInventory &&
-                selectedItemGrid.isPlayerInventory == false)
-            {
-                _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
-            }
-            else if (selectedItem.lastGrid.isPlayerInventory == false &&
-                selectedItemGrid.isPlayerInventory)
-            {
-                _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
-            }
-            selectedItem.lastGrid = selectedItemGrid;
-            selectedItem.SetOnCursorFlag(false);
+            return;
+        }
 
-            //NEW
-            selectedItem.GetComponent<Image>().raycastTarget = true;
+        if (selectedItem.lastGrid.isPlayerInventory &&
+            selectedItemGrid.isPlayerInventory == false)
+        {
+            _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
+        }
+        else if (selectedItem.lastGrid.isPlayerInventory == false &&
+            selectedItemGrid.isPlayerInventory)
+        {
+            _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
+        }
 
+        selectedItem.lastGrid = selectedItemGrid;
+        selectedItem.SetOnCursorFlag(false);
+        selectedItem.GetComponent<Image>().raycastTarget = true;
 
-            if (overlapItem == null)
+        if (overlapItem == null)
+        {
+            selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+            selectedItemGrid.testList.Add(selectedItem);
+            selectedItem = null;
+        }
+        else
+        {
+            if (overlapItem.name == selectedItem.name)
             {
-                selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
-                selectedItemGrid.testList.Add(selectedItem);
-                selectedItem = null;
-            } 
-            else
-            {
-                if (overlapItem.name == selectedItem.name)
+                int requiredItemsCount = overlapItem.maxStackCount - overlapItem.stackCount;
+                if (requiredItemsCount != 0 &&
+                    overlapItem.isStackable &&
+                    selectedItem.isStackable)
                 {
-                    int requiredItemsCount = overlapItem.maxStackCount - overlapItem.stackCount;
-                    if (requiredItemsCount != 0 &&
-                        overlapItem.isStackable &&
-                        selectedItem.isStackable)
+                    if (requiredItemsCount < selectedItem.stackCount)
                     {
-                        if (requiredItemsCount < selectedItem.stackCount)
-                        {
-                            selectedItem.SetOnCursorFlag(true);
-                            overlapItem.stackCount = overlapItem.maxStackCount;
-                            selectedItem.stackCount -= requiredItemsCount;
-                            overlapItem.UpdateCounter();
-                            selectedItem.UpdateCounter();
-                        }
-                        else
-                        {
-                            overlapItem.stackCount += selectedItem.stackCount;
-                            overlapItem.UpdateCounter();
-                            Destroy(selectedItem.gameObject);
-                            selectedItem = null;
-                        }
+                        selectedItem.SetOnCursorFlag(true);
+                        overlapItem.stackCount = overlapItem.maxStackCount;
+                        selectedItem.stackCount -= requiredItemsCount;
+                        overlapItem.UpdateCounter();
+                        selectedItem.UpdateCounter();
                     }
                     else
                     {
-                        selectedItemGrid.CleanGridReference(overlapItem);
-                        selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
-                        selectedItemGrid.testList.Add(selectedItem);
-                        selectedItemGrid.testList.Remove(overlapItem);
-                        overlapItem.SetOnCursorFlag(true);
-                        selectedItem = overlapItem;
-                        overlapItem = null;
-                        itemRectTransform = selectedItem.GetComponent<RectTransform>();
-                        itemRectTransform.SetAsLastSibling();
+                        overlapItem.stackCount += selectedItem.stackCount;
+                        overlapItem.UpdateCounter();
+                        Destroy(selectedItem.gameObject);
+                        selectedItem = null;
                     }
                 }
                 else
@@ -1083,27 +1025,43 @@ public class InventoryController : MonoBehaviour
                     itemRectTransform.SetAsLastSibling();
                 }
             }
-        }
-    }
-
-    private void ItemIconDrag()
-    {
-        if (selectedItem != null)
-        {
-            if (selectedItemGridRect.rect.Overlaps(itemRectTransform.rect) == false)
-            {
-                itemRectTransform.SetParent(selectedItemGridRect.parent);
-            }
             else
             {
-                itemRectTransform.SetParent(selectedItemGridRect);
+                selectedItemGrid.CleanGridReference(overlapItem);
+                selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+                selectedItemGrid.testList.Add(selectedItem);
+                selectedItemGrid.testList.Remove(overlapItem);
+                overlapItem.SetOnCursorFlag(true);
+                selectedItem = overlapItem;
+                overlapItem = null;
+                itemRectTransform = selectedItem.GetComponent<RectTransform>();
+                itemRectTransform.SetAsLastSibling();
             }
-
-            itemRectTransform.SetAsLastSibling();
-            itemRectTransform.position = Input.mousePosition;
         }
     }
 
+    // OK
+    private void ItemIconDrag()
+    {
+        if (selectedItem == null)
+        {
+            return;
+        }
+
+        if (selectedItemGridRect.rect.Overlaps(itemRectTransform.rect) == false)
+        {
+            itemRectTransform.SetParent(selectedItemGridRect.parent);
+        }
+        else
+        {
+            itemRectTransform.SetParent(selectedItemGridRect);
+        }
+
+        itemRectTransform.SetAsLastSibling();
+        itemRectTransform.position = Input.mousePosition;
+    }
+
+    // OK
     private void PlayItemAudio(SCRIPT_InventoryItem item, AudioPlayMode audioMode)
     {
         if (inventoryAudioSource == null)
