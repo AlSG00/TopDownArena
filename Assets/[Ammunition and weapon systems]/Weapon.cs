@@ -21,6 +21,15 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public SCRIPT_PlayerAmmunition.AmmoType ammoType;
+
+    SCRIPT_PlayerAmmunition.AmmoCollection ammoCollection;
+
+    private void bubaTest() // TODO: Test method. Redo
+    {
+        SCRIPT_PlayerAmmunition.Ammo ammo = ammoCollection.AmmoTypeCollection[ammoType];
+    }
+
     private class Bullet
     {
         public float lifeTime;          // По истечении указанного времени пуля удалится, если ни с чем не столкнется
@@ -62,9 +71,7 @@ public class Weapon : MonoBehaviour
     [Header("References")]
     public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
-    //public SCRIPT_PlayerAmmunition ammoInStock;
     //public AmmoCounterTest ammoCounter;
-    public SCRIPT_PlayerAmmunition.Ammo currentWeaponStock;
     public WeaponAudio weaponAudio;
 
     // Прикрутить ссылку на скрипт, в котором будет AnimationEvents для перезарядки каждой отдельной пушки
@@ -136,6 +143,7 @@ public class Weapon : MonoBehaviour
         isReloading = false;
         TryGetComponent<SCRIPT_MuzzleFlame>(out muzzleFlame);
         TryGetComponent<SCRIPT_AmmoShells>(out ammoShells);
+
 
         // TODO: Find another way to connect HUD to a newly picked weapon
         //ammoCounter = GameObject.Find("HUD").GetComponentInChildren<AmmoCounterTest>();
@@ -344,27 +352,29 @@ public class Weapon : MonoBehaviour
     // TODO: Rework
     public void Reload()
     {
-        int toFill = magCapacity - currentAmmoInMag; // считаем, сколько не хватает
+        //int toFill = magCapacity - currentAmmoInMag; // считаем, сколько не хватает
 
-        currentAmmoInMag += currentWeaponStock.TakeAmmo(toFill); // досыпаем
+        
 
-        if (toFill > 0 && currentWeaponStock.left > 0)
-        {
-            //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
-            Debug.Log($"Left {currentWeaponStock.left}");
-        }
-        else
-        {
-            Debug.Log("Can't reload");
-        }
+        //currentAmmoInMag += currentWeaponStock.TakeAmmo(toFill); // досыпаем
 
-        // PSEUDOCODE for method reworking:
-        // - Check remaining ammo in the ammunition component
-        // - If it has required ammo available, reload:
-        //      - add ammo
-        //      - play animation
-        //      - play sound
-        //      - reduce remaining ammo count in the ammunition component
+        //if (toFill > 0 && currentWeaponStock.left > 0)
+        //{
+        //    //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
+        //    Debug.Log($"Left {currentWeaponStock.left}");
+        //}
+        //else
+        //{
+        //    Debug.Log("Can't reload");
+        //}
+
+        //// PSEUDOCODE for method reworking:
+        //// - Check remaining ammo in the ammunition component
+        //// - If it has required ammo available, reload:
+        ////      - add ammo
+        ////      - play animation
+        ////      - play sound
+        ////      - reduce remaining ammo count in the ammunition component
     }
 
     public Vector3 GetSpreadDirection()

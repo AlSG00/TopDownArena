@@ -45,6 +45,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     [Range(0, 999)] public float weight; // вес предмета, добавляется игроку
     public bool isRotatable = false; // можно ли вращать предмет 
     public bool isUsable = true; // можно ли использовать предмет
+    public bool isConsumable = true;
 
     [Header("Stacking properties")]
     public bool isStackable = false; // можно ли стакать предмет
@@ -81,12 +82,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         MouseMovementTracker.OnCursorInactive -= SetCursorActivityFlag;
     }
 
-    //private void Start()
-    //{
-    //    useItemAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource>();
-    //}
-
-    internal void Set(SCRIPT_ItemData itemData)
+    internal void Init(SCRIPT_ItemData itemData)
     {
         this.itemData = itemData;
         name = itemData.name;

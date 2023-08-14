@@ -4,28 +4,52 @@ using UnityEngine;
 
 public class SCRIPT_PlayerAmmunition : MonoBehaviour
 {
-    public Ammo pistolAmmo = new Ammo();
-    public Ammo rifleAmmo = new Ammo();
-    public Ammo shotgunAmmo = new Ammo();
-    public Ammo energyAmmo = new Ammo();
-    public Ammo magnumAmmo = new Ammo();
 
-    //public int pistolAmmoCapacity = 90;
-    //public int rifleAmmoCapacity = 150;
-    //public int shotgunAmmoCapacity = 48;
+    AmmoCollection ammoCollection;
 
-    //private void Awake()
-    //{
-    //    pistolAmmo.capacity = pistolAmmoCapacity;
-    //    pistolAmmo.left = pistolAmmo.capacity;
+    
 
-    //    rifleAmmo.capacity = rifleAmmoCapacity;
-    //    rifleAmmo.left = rifleAmmo.capacity;
+    private void Start()
+    {
+        ammoCollection.InitializeAmmoTypeCollection();
+    }
 
-    //    shotgunAmmo.capacity = shotgunAmmoCapacity;
-    //    shotgunAmmo.left = shotgunAmmo.capacity;
-    //}
+    
+    [System.Serializable]
+    public class AmmoCollection
+    {
+        public Dictionary<AmmoType, Ammo> AmmoTypeCollection;
 
+        public Ammo pistolAmmo = new Ammo();
+        public Ammo rifleAmmo = new Ammo();
+        public Ammo shotgunAmmo = new Ammo();
+        public Ammo energyAmmo = new Ammo();
+        public Ammo magnumAmmo = new Ammo();
+
+        internal void InitializeAmmoTypeCollection()
+        {
+            AmmoTypeCollection = new()
+            {
+                { AmmoType.pistolAmmo, pistolAmmo },
+                { AmmoType.pistolAmmo, rifleAmmo },
+                { AmmoType.pistolAmmo, shotgunAmmo },
+                { AmmoType.pistolAmmo, energyAmmo },
+                { AmmoType.pistolAmmo, magnumAmmo }
+            };
+        }
+    }
+
+    public enum AmmoType
+    {
+        pistolAmmo,
+        rifleAmmo,
+        shotgunAmmo,
+        energyAmmo,
+        magnumAmmo
+    }
+
+
+    [System.Serializable]
     public class Ammo
     {
         public int capacity;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4262617913092726369}
   - component: {fileID: 6677767087683323100}
   - component: {fileID: 4028921137596768807}
+  - component: {fileID: 971542618333661483}
   - component: {fileID: 1124756174162482380}
   m_Layer: 5
   m_Name: RifleItem
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &971542618333661483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2509820691710129300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058efeb9abb4ab04db4611dde4693675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1124756174162482380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +111,7 @@ MonoBehaviour:
   weight: 5
   isRotatable: 1
   isUsable: 0
+  isConsumable: 0
   isStackable: 0
   isSingleDropping: 1
   stackCount: 1

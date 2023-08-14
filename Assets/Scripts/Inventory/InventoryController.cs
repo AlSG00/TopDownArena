@@ -349,10 +349,6 @@ public class InventoryController : MonoBehaviour
     }
 
 
-
-    // TODO: Incapsulate in InventoryItem or something else
-
-
     private void UpdateCarryingWeight(SCRIPT_InventoryItem item, bool dropFullStack)
     {
         if (item.lastGrid.isPlayerInventory == false)
@@ -377,7 +373,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    // TODO: Method is too big. Refactor
+    // TODO: Method is too big. Refactor (No(Yes))
     internal void RightMouseButtonPress()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
@@ -481,24 +477,23 @@ public class InventoryController : MonoBehaviour
 
         selectedItem.GetComponent<SCRIPT_IItem>().Use();
 
-        if (selectedItemGrid.isPlayerInventory)
+        if (selectedItemGrid.isPlayerInventory && selectedItem.isConsumable)
         {
             _playerCarryingWeight.TakeWeight(selectedItem.weight);
-        }
 
-        if (selectedItem.stackCount > 1)
-        {
-            selectedItem.stackCount--;
-            selectedItem.UpdateCounter();
+            if (selectedItem.stackCount > 1)
+            {
+                selectedItem.stackCount--;
+                selectedItem.UpdateCounter();
+            }
+            else
+            {
+                selectedItemGrid.testList.Remove(selectedItem);
+                itemInfoWindow.SetVisibility(false, selectedItem);
+                Destroy(selectedItem.gameObject);
+                inventoryHighlight.Show(false);
+            }
         }
-        else
-        {
-            selectedItemGrid.testList.Remove(selectedItem);
-            itemInfoWindow.SetVisibility(false, selectedItem);
-            Destroy(selectedItem.gameObject);
-            inventoryHighlight.Show(false);
-        }
-
         PlayItemAudio(selectedItem, AudioPlayMode.Use);
         selectedItem = null;
     }
@@ -524,8 +519,7 @@ public class InventoryController : MonoBehaviour
         selectedItemGrid = inventoryGrid;
         int stackCountRemaining = InsertIntoAvailableStacks(item, stackCount, true);
         if (stackCountRemaining > 0)
-        {
-            // TODO: <multigrid> - can store array of grids and check for free space on each of them 
+        { 
             Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(item);
             if (positionOnGrid == null)
             {
@@ -576,7 +570,7 @@ public class InventoryController : MonoBehaviour
         itemRectTransform = inventoryItem.GetComponent<RectTransform>();
         itemRectTransform.SetParent(canvasTransform);
         itemRectTransform.SetAsLastSibling();
-        inventoryItem.Set(inventoryItem.itemData);
+        inventoryItem.Init(inventoryItem.itemData);
     }
 
     #region CONTAINER LOGIC

@@ -12,12 +12,8 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
     [Range(1, 999)] public int stackCount;
 
     [Header("References")]
-    //private InventoryController inventory; // TODO: Наверное, заменить на Ивент
     public SCRIPT_InventoryItem inventoryItem;
 
-    //[Header("Audio")]
-    //[SerializeField] private AudioClip pickUpAudio;
-    //[SerializeField] private AudioSource pickUpAudioSource;
 
     public delegate int PickAction(SCRIPT_InventoryItem item, int stackCount);
     public static event PickAction OnItemPick;
@@ -56,8 +52,6 @@ public class PickableObject : MonoBehaviour, SCRIPT_IInteractable
                 Destroy(gameObject);
             }
         }
-        
-        
         
 
         //inventory.selectedItemGrid = inventory.inventoryGrid;

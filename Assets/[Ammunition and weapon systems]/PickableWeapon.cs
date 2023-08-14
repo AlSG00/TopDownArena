@@ -35,11 +35,7 @@ public class PickableWeapon : MonoBehaviour, SCRIPT_IInteractable
     {
         Debug.Log("<Color=yellow>Interact</color>");
         OnWeaponPick?.Invoke(inventoryItem, stackCount);
-
-        if (stackCount == 0)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     // TODO: Implement input key holding to activate this method
