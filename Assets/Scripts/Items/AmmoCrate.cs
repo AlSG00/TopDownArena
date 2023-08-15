@@ -12,7 +12,7 @@ public class AmmoCrate : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && _isMouseOver)
         {
-            other.gameObject.GetComponent<SCRIPT_PlayerAmmunition>().rifleAmmo.AddAmmo(_ammo);
+            //other.gameObject.GetComponent<SCRIPT_PlayerAmmunition>().rifleAmmo.AddAmmo(_ammo);
             Destroy(gameObject);
         }
     }

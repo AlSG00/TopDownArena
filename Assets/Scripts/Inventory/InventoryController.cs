@@ -35,13 +35,6 @@ public class InventoryController : MonoBehaviour
     private SCRIPT_InventoryItem overlapItem;
     private RectTransform itemRectTransform;
 
-    //[Header("Button holding properties")]
-    //[SerializeField] private float timeToHold = 0.3f;
-    //private float buttonHoldTime = 0f;
-    //private bool isHoldingCheckStateButton = false;
-    //private bool isHoldingShiftButton = false;
-    //private bool isHoldingDropItemButton = false;
-
     [Header("Audio")]
     [SerializeField] private AudioSource inventoryAudioSource;
 
@@ -131,6 +124,7 @@ public class InventoryController : MonoBehaviour
         {
             return;
         }
+
         selectedItem.isDropping = true;
 
         if (selectedItem.isOnCursor)
@@ -278,18 +272,6 @@ public class InventoryController : MonoBehaviour
 
     #endregion
 
-    internal void HandleMoreItemInfoVisibility()
-    {
-        if (itemInfoWindow.isShowingDetails)
-        {
-            itemInfoWindow.ShowDetails(false);
-        }
-        else
-        {
-            itemInfoWindow.ShowDetails(true);
-        }
-    }
-
     // TODO: Check if it can be refactored
     public int InsertIntoAvailableStacks(SCRIPT_InventoryItem itemToStack, int stackCount, bool addToInventory)
     {
@@ -347,7 +329,6 @@ public class InventoryController : MonoBehaviour
 
         return leftToStack;
     }
-
 
     private void UpdateCarryingWeight(SCRIPT_InventoryItem item, bool dropFullStack)
     {
@@ -473,9 +454,14 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        
-
-        selectedItem.GetComponent<SCRIPT_IItem>().Use();
+        if (selectedItem.isUsable)
+        {
+            selectedItem.GetComponent<SCRIPT_IItem>().Use();
+        }
+        else
+        {
+            return;
+        }
 
         if (selectedItemGrid.isPlayerInventory && selectedItem.isConsumable)
         {
@@ -498,22 +484,6 @@ public class InventoryController : MonoBehaviour
         selectedItem = null;
     }
 
-    // TODO: Учитывать, что в будущем этот метод используется для взятия всего стака
-    Vector2Int previousPosition;
-    private void PickItemFromGrid(Vector2Int tileGridPosition)
-    {
-        selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
-        if (selectedItem != null)
-        {
-            selectedItem.SetOnCursorFlag(true);
-            selectedItem.lastGrid = selectedItemGrid;
-            selectedItemGrid.testList.Remove(selectedItem);
-            itemRectTransform = selectedItem.GetComponent<RectTransform>();
-            itemRectTransform.SetAsLastSibling();
-        }
-    }
-
-    
     private int PickItemFromGround(SCRIPT_InventoryItem item, int stackCount)
     {
         selectedItemGrid = inventoryGrid;
@@ -542,7 +512,7 @@ public class InventoryController : MonoBehaviour
         return 0;
     }
 
-    // Create, placeon inventory grid and add some weight
+    // Create, place on inventory grid and add some weight
     public void InsertItemIntoInventory(SCRIPT_InventoryItem item, int stackCount)
     {
         if (selectedItemGrid == null)
@@ -562,79 +532,7 @@ public class InventoryController : MonoBehaviour
         _playerCarryingWeight.AddWeight(itemToInsert.weight * itemToInsert.stackCount);
     }
 
-    // Initialize size, in-hierarchy position and some data for the created sprite
-    public void CreateItemForUi(SCRIPT_InventoryItem item)
-    {
-        SCRIPT_InventoryItem inventoryItem = Instantiate(item);
-        selectedItem = inventoryItem;
-        itemRectTransform = inventoryItem.GetComponent<RectTransform>();
-        itemRectTransform.SetParent(canvasTransform);
-        itemRectTransform.SetAsLastSibling();
-        inventoryItem.Init(inventoryItem.itemData);
-    }
 
-    #region CONTAINER LOGIC
-
-    private void FillContainerGrid(bool isInitialized, List<SCRIPT_InventoryItem> storedItemList, SCRIPT_ItemGrid containerGrid)
-    {
-        containerItemGrid = containerGrid;
-        selectedItemGrid = containerGrid;
-
-        if (isInitialized)
-        {
-            InsertItemIntoInitializedContainer(storedItemList);
-        }
-        else
-        {
-            InsertItemIntoContainer(storedItemList);
-        }
-
-        isCheckingInventory = true;
-        SetInventoryVisibility(isCheckingInventory);
-    }
-
-    // Used to fill container when first initializing it.
-    public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
-    {
-        selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
-        foreach (var item in storedItemList)
-        {
-            CreateItemForUi(item);
-            SCRIPT_InventoryItem itemToInsert = selectedItem;
-            selectedItem = null;
-            Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
-            if (positionOnGrid == null)
-            {
-                return;
-            }
-            selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
-            itemToInsert.lastGrid = selectedItemGrid;
-            itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
-            itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
-            item.positionOnGrid = itemToInsert.positionOnGrid;
-            selectedItemGrid.testList.Add(itemToInsert);
-        }
-    }
-
-    public void InsertItemIntoInitializedContainer(List<SCRIPT_InventoryItem> storedItemList)
-    {
-        selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
-        foreach (SCRIPT_InventoryItem item in storedItemList)
-        {
-            //CreateItemForUi(item);
-            item.gameObject.SetActive(true);
-            if (item.isRotated)
-            {
-                RotateItem();
-            }
-            SCRIPT_InventoryItem itemToInsert = item;
-            selectedItem = null;
-            selectedItemGrid.PlaceItem(itemToInsert, item.positionOnGrid.x, item.positionOnGrid.y);
-            selectedItemGrid.testList.Add(itemToInsert);
-        }
-    }
-
-    #endregion
 
     // Return free grid coordinates and calculate on-screen pixel position to place sprite
     private void InsertItem(SCRIPT_InventoryItem itemToInsert)
@@ -659,68 +557,7 @@ public class InventoryController : MonoBehaviour
         selectedItemGrid.testList.Add(itemToInsert);
     }
 
-    internal void RotateItem()
-    {
-        if (selectedItem == null)
-        {
-            return;
-        }
 
-        if (selectedItem.isRotatable)
-        {
-            selectedItem.Rotated();
-        }
-    }
-
-    Vector2Int oldPosition;
-    SCRIPT_InventoryItem itemToHighlight;
-
-
-    private void HandleItemHighlight()
-    {
-        if (selectedItemGrid == null)
-        {
-            inventoryHighlight.Show(false);
-            return;
-        }
-
-        Vector2Int positionOnGrid = GetTileGridPosition();
-        if (oldPosition == positionOnGrid)
-        {
-            return;
-        }
-
-        oldPosition = positionOnGrid;
-
-        if (selectedItem == null)
-        {
-            itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
-
-            if (itemToHighlight != null)
-            {
-                inventoryHighlight.Show(true);
-                inventoryHighlight.SetSize(itemToHighlight);
-                inventoryHighlight.SetParent(selectedItemGrid);
-                inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
-            }
-            else
-            {
-                inventoryHighlight.Show(false);
-            }
-        }
-        else
-        {
-            inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
-                positionOnGrid.x,
-                positionOnGrid.y,
-                selectedItem.Height,
-                selectedItem.Width)
-                );
-            inventoryHighlight.SetSize(selectedItem);
-            inventoryHighlight.SetParent(selectedItemGrid);
-            inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
-        }
-    }
 
 
 
@@ -923,32 +760,12 @@ public class InventoryController : MonoBehaviour
         return selectedItemGrid.GetTileGridPosition(position);
     }
 
-    // TODO: Переделать метод. Он не учитывает другие размеры экрана кроме фулл хд
-    public void SetInventoryVisibility(bool isInventoryOpened)
-    {
-        if (isInventoryOpened == false)
-        {
-            containerItemGrid = null;
-        }
-        
-        OnInventoryOpened?.Invoke(isInventoryOpened);
-        OnStateIconShow?.Invoke(isInventoryOpened);
-        _playerMovement.enabled = !isInventoryOpened;
-    }
 
-    public void GetItemBack()
-    {
-        if (selectedItem == null)
-        {
-            return;
-        }
 
-        if (selectedItem.isOnCursor)
-        {
-            selectedItemGrid = selectedItem.lastGrid;
-            PlaceItemOnGrid(selectedItem.positionOnGrid);
-        }
-    }
+
+
+
+    #region PLACING ITEM ON GRID
 
     //TODO: Test
     private void PlaceItemOnGrid(Vector2Int tileGridPosition)
@@ -986,11 +803,9 @@ public class InventoryController : MonoBehaviour
             if (overlapItem.name == selectedItem.name)
             {
                 int requiredItemsCount = overlapItem.maxStackCount - overlapItem.stackCount;
-                if (requiredItemsCount != 0 &&
-                    overlapItem.isStackable &&
-                    selectedItem.isStackable)
+                if ((requiredItemsCount != 0) && overlapItem.isStackable && selectedItem.isStackable)
                 {
-                    if (requiredItemsCount < selectedItem.stackCount)
+                    if (selectedItem.stackCount > requiredItemsCount)
                     {
                         selectedItem.SetOnCursorFlag(true);
                         overlapItem.stackCount = overlapItem.maxStackCount;
@@ -1008,52 +823,63 @@ public class InventoryController : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemGrid.CleanGridReference(overlapItem);
-                    selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
-                    selectedItemGrid.testList.Add(selectedItem);
-                    selectedItemGrid.testList.Remove(overlapItem);
-                    overlapItem.SetOnCursorFlag(true);
-                    selectedItem = overlapItem;
-                    overlapItem = null;
-                    itemRectTransform = selectedItem.GetComponent<RectTransform>();
-                    itemRectTransform.SetAsLastSibling();
+                    SwapOverlappedItem(tileGridPosition);
                 }
             }
             else
             {
-                selectedItemGrid.CleanGridReference(overlapItem);
-                selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
-                selectedItemGrid.testList.Add(selectedItem);
-                selectedItemGrid.testList.Remove(overlapItem);
-                overlapItem.SetOnCursorFlag(true);
-                selectedItem = overlapItem;
-                overlapItem = null;
-                itemRectTransform = selectedItem.GetComponent<RectTransform>();
-                itemRectTransform.SetAsLastSibling();
+                SwapOverlappedItem(tileGridPosition);
             }
         }
     }
 
-    // OK
-    private void ItemIconDrag()
+    private void PickItemFromGrid(Vector2Int tileGridPosition)
+    {
+        selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
+        if (selectedItem != null)
+        {
+            selectedItem.SetOnCursorFlag(true);
+            selectedItem.lastGrid = selectedItemGrid;
+            selectedItemGrid.testList.Remove(selectedItem);
+            itemRectTransform = selectedItem.GetComponent<RectTransform>();
+            itemRectTransform.SetAsLastSibling();
+        }
+    }
+
+    public void GetItemBack()
     {
         if (selectedItem == null)
         {
             return;
         }
 
-        if (selectedItemGridRect.rect.Overlaps(itemRectTransform.rect) == false)
+        if (selectedItem.isOnCursor)
         {
-            itemRectTransform.SetParent(selectedItemGridRect.parent);
+            selectedItemGrid = selectedItem.lastGrid;
+            PlaceItemOnGrid(selectedItem.positionOnGrid);
         }
-        else
-        {
-            itemRectTransform.SetParent(selectedItemGridRect);
-        }
-
-        itemRectTransform.SetAsLastSibling();
-        itemRectTransform.position = Input.mousePosition;
     }
+
+    private void SwapOverlappedItem(Vector2Int tileGridPosition)
+    {
+        selectedItemGrid.CleanGridReference(overlapItem);
+        selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
+        selectedItemGrid.testList.Add(selectedItem);
+        selectedItemGrid.testList.Remove(overlapItem);
+        overlapItem.SetOnCursorFlag(true);
+        selectedItem = overlapItem;
+        overlapItem = null;
+        itemRectTransform = selectedItem.GetComponent<RectTransform>();
+        itemRectTransform.SetAsLastSibling();
+    }
+
+    #endregion
+
+
+
+
+
+
 
     // OK
     private void PlayItemAudio(SCRIPT_InventoryItem item, AudioPlayMode audioMode)
@@ -1094,4 +920,190 @@ public class InventoryController : MonoBehaviour
                 break;
         }
     }
+
+
+
+
+    #region INVENTORY GRAPHICS AND UI
+
+    // Initialize size, in-hierarchy position and some data for the created sprite
+    public void CreateItemForUi(SCRIPT_InventoryItem item)
+    {
+        SCRIPT_InventoryItem inventoryItem = Instantiate(item);
+        selectedItem = inventoryItem;
+        itemRectTransform = inventoryItem.GetComponent<RectTransform>();
+        itemRectTransform.SetParent(canvasTransform);
+        itemRectTransform.SetAsLastSibling();
+        inventoryItem.Init(inventoryItem.itemData);
+    }
+
+    internal void HandleMoreItemInfoVisibility()
+    {
+        if (itemInfoWindow.isShowingDetails)
+        {
+            itemInfoWindow.ShowDetails(false);
+        }
+        else
+        {
+            itemInfoWindow.ShowDetails(true);
+        }
+    }
+
+    public void SetInventoryVisibility(bool isInventoryOpened)
+    {
+        if (isInventoryOpened == false)
+        {
+            containerItemGrid = null;
+        }
+
+        OnInventoryOpened?.Invoke(isInventoryOpened);
+        OnStateIconShow?.Invoke(isInventoryOpened);
+        _playerMovement.enabled = !isInventoryOpened;
+    }
+
+    internal void RotateItem()
+    {
+        if (selectedItem == null)
+        {
+            return;
+        }
+
+        if (selectedItem.isRotatable)
+        {
+            selectedItem.Rotated();
+        }
+    }
+
+    private void ItemIconDrag()
+    {
+        if (selectedItem == null)
+        {
+            return;
+        }
+
+        if (selectedItemGridRect.rect.Overlaps(itemRectTransform.rect) == false)
+        {
+            itemRectTransform.SetParent(selectedItemGridRect.parent);
+        }
+        else
+        {
+            itemRectTransform.SetParent(selectedItemGridRect);
+        }
+
+        itemRectTransform.SetAsLastSibling();
+        itemRectTransform.position = Input.mousePosition;
+    }
+
+    Vector2Int oldPosition;
+    SCRIPT_InventoryItem itemToHighlight;
+    private void HandleItemHighlight()
+    {
+        if (selectedItemGrid == null)
+        {
+            inventoryHighlight.Show(false);
+            return;
+        }
+
+        Vector2Int positionOnGrid = GetTileGridPosition();
+        if (oldPosition == positionOnGrid)
+        {
+            return;
+        }
+
+        oldPosition = positionOnGrid;
+
+        if (selectedItem == null)
+        {
+            itemToHighlight = selectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
+
+            if (itemToHighlight != null)
+            {
+                inventoryHighlight.Show(true);
+                inventoryHighlight.SetSize(itemToHighlight);
+                inventoryHighlight.SetParent(selectedItemGrid);
+                inventoryHighlight.SetPosition(selectedItemGrid, itemToHighlight);
+            }
+            else
+            {
+                inventoryHighlight.Show(false);
+            }
+        }
+        else
+        {
+            inventoryHighlight.Show(selectedItemGrid.BoundaryCheck(
+                positionOnGrid.x,
+                positionOnGrid.y,
+                selectedItem.Height,
+                selectedItem.Width)
+                );
+            inventoryHighlight.SetSize(selectedItem);
+            inventoryHighlight.SetParent(selectedItemGrid);
+            inventoryHighlight.SetPosition(selectedItemGrid, selectedItem, positionOnGrid.x, positionOnGrid.y);
+        }
+    }
+
+    #endregion
+
+    #region CONTAINER LOGIC
+
+    private void FillContainerGrid(bool isInitialized, List<SCRIPT_InventoryItem> storedItemList, SCRIPT_ItemGrid containerGrid)
+    {
+        containerItemGrid = containerGrid;
+        selectedItemGrid = containerGrid;
+
+        if (isInitialized)
+        {
+            InsertItemIntoInitializedContainer(storedItemList);
+        }
+        else
+        {
+            InsertItemIntoContainer(storedItemList);
+        }
+
+        isCheckingInventory = true;
+        SetInventoryVisibility(isCheckingInventory);
+    }
+
+    // Used to fill container when first initializing it.
+    public void InsertItemIntoContainer(List<SCRIPT_InventoryItem> storedItemList)
+    {
+        selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
+        foreach (var item in storedItemList)
+        {
+            CreateItemForUi(item);
+            SCRIPT_InventoryItem itemToInsert = selectedItem;
+            selectedItem = null;
+            Vector2Int? positionOnGrid = selectedItemGrid.FindSpaceForObject(itemToInsert);
+            if (positionOnGrid == null)
+            {
+                return;
+            }
+            selectedItemGrid.PlaceItem(itemToInsert, positionOnGrid.Value.x, positionOnGrid.Value.y);
+            itemToInsert.lastGrid = selectedItemGrid;
+            itemToInsert.positionOnGrid.x = positionOnGrid.Value.x;
+            itemToInsert.positionOnGrid.y = positionOnGrid.Value.y;
+            item.positionOnGrid = itemToInsert.positionOnGrid;
+            selectedItemGrid.testList.Add(itemToInsert);
+        }
+    }
+
+    public void InsertItemIntoInitializedContainer(List<SCRIPT_InventoryItem> storedItemList)
+    {
+        selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();
+        foreach (SCRIPT_InventoryItem item in storedItemList)
+        {
+            //CreateItemForUi(item);
+            item.gameObject.SetActive(true);
+            if (item.isRotated)
+            {
+                RotateItem();
+            }
+            SCRIPT_InventoryItem itemToInsert = item;
+            selectedItem = null;
+            selectedItemGrid.PlaceItem(itemToInsert, item.positionOnGrid.x, item.positionOnGrid.y);
+            selectedItemGrid.testList.Add(itemToInsert);
+        }
+    }
+
+    #endregion
 }

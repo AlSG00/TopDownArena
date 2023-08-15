@@ -198,6 +198,7 @@
     <Compile Include="Assets\Scripts\Player\FootstepsSoundController\TerrainChecker.cs" />
     <Compile Include="Assets\Scripts\Interaction\SCRIPT_IInteractable.cs" />
     <Compile Include="Assets\Scripts\Implants\IImplant.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\WeaponItem.cs" />
     <Compile Include="Assets\Scripts\Player\FootstepsSoundController\FootstepSwapper.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSVisibilityInfo.cs" />
     <Compile Include="Assets\Scripts\TEST_ActivateTriggers.cs" />
@@ -218,7 +219,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\[Ammunition and weapon systems]\WeaponItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -80,16 +80,16 @@ public class SCRIPT_Weapon : MonoBehaviour
         ammoCounter = GameObject.Find("HUD").GetComponentInChildren<AmmoCounterTest>();
         ammoInStock = GameObject.Find("Player").GetComponentInChildren<SCRIPT_PlayerAmmunition>();
 
-        if (weaponName == "Rifle")
-        {
-            currentWeaponStock = ammoInStock.rifleAmmo;
-            Debug.LogWarning(currentWeaponStock);
-        }
-        else if (weaponName == "Shotgun")
-        {
-            currentWeaponStock = ammoInStock.shotgunAmmo;
-            Debug.LogWarning(currentWeaponStock);
-        }
+        //if (weaponName == "Rifle")
+        //{
+        //    currentWeaponStock = ammoInStock.rifleAmmo;
+        //    Debug.LogWarning(currentWeaponStock);
+        //}
+        //else if (weaponName == "Shotgun")
+        //{
+        //    currentWeaponStock = ammoInStock.shotgunAmmo;
+        //    Debug.LogWarning(currentWeaponStock);
+        //}
     }
 
     public void StartFiring()

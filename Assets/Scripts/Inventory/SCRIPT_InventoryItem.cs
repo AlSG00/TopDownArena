@@ -135,14 +135,15 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     public void SetOnCursorFlag(bool onCursor)
     {
         isOnCursor = onCursor;
-        if (isOnCursor)
-        {
-            OnShowItemInfo?.Invoke(false, this);
-        }
-        else
-        {
-            OnShowItemInfo?.Invoke(true, this);
-        }
+        OnShowItemInfo?.Invoke(!isOnCursor, this);
+        //if (isOnCursor)
+        //{
+        //    OnShowItemInfo?.Invoke(false, this);
+        //}
+        //else
+        //{
+        //    OnShowItemInfo?.Invoke(true, this);
+        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)
