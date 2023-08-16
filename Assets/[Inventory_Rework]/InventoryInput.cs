@@ -22,17 +22,17 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            inventory.TryBindItem();
+            inventory.TryBindItem(InventoryController.BindSlot.Slot_1);
         }
 
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            inventory.TryBindItem();
+            inventory.TryBindItem(InventoryController.BindSlot.Slot_2);
         }
 
         if (Input.GetKey(KeyCode.Alpha3))
         {
-            inventory.TryBindItem();
+            inventory.TryBindItem(InventoryController.BindSlot.Slot_3);
         }
 
         if (Input.GetKey(KeyCode.Delete))

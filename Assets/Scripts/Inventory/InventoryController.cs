@@ -15,20 +15,21 @@ public class InventoryController : MonoBehaviour
     }
 
     // TODO: Opportunity to exzpand available equippable slots
-    private enum bindKey
+    public enum BindSlot
     {
         Slot_1,
         Slot_2,
         Slot_3
     }
 
+
+
     #region VARIABLES
+    private Dictionary<BindSlot, SCRIPT_InventoryItem> _bindSlots;
 
     public SCRIPT_InventoryItem bindedItem_1;
     public SCRIPT_InventoryItem bindedItem_2;
     public SCRIPT_InventoryItem bindedItem_3;
-
-    public Dictionary<>
 
     [Header("References")]
     public SCRIPT_ItemGrid inventoryGrid;
@@ -78,6 +79,16 @@ public class InventoryController : MonoBehaviour
         SCRIPT_ItemContainer.OnContainerOpen -= FillContainerGrid;
         PickableObject.OnItemPick -= PickItemFromGround;
         PickableWeapon.OnWeaponPick -= PickItemFromGround;
+    }
+
+    private void Awake()
+    {
+        _bindSlots = new Dictionary<BindSlot, SCRIPT_InventoryItem>()
+        {
+            { BindSlot.Slot_1, bindedItem_1},
+            { BindSlot.Slot_2, bindedItem_2},
+            { BindSlot.Slot_3, bindedItem_3}
+        };
     }
 
     private void Start()
@@ -1066,7 +1077,8 @@ public class InventoryController : MonoBehaviour
         selectedItem = selectedItemGrid.PickReference(tileGridPosition.x, tileGridPosition.y);
     }
 
-    internal void TryBindItem()
+    // TODO: Test
+    internal void TryBindItem(BindSlot bindSlot)
     {
         if (selectedItem != null && selectedItem.isOnCursor)
         {
@@ -1077,15 +1089,38 @@ public class InventoryController : MonoBehaviour
         TryReceiveItem();
         if (selectedItem == null)
         {
-            Debug.Log("<color = orange>Can't bind. No item.</color>");
+            Debug.Log("<color = orange>Nothing to bind.</color>");
         }
 
-
+        if (selectedItem.isEquippable)
+        {
+            _bindSlots[bindSlot] = selectedItem;
+            selectedItem.BindKey();
+            selectedItem = null;
+        }
     }
 
+    // TODO: Test
     internal void TryUnbindItem()
     {
+        if (selectedItem != null && selectedItem.isOnCursor)
+        {
+            Debug.Log("<color = orange>Can't unbind. There is item on the cursor.</color>");
+            return;
+        }
 
+        TryReceiveItem();
+        if (selectedItem == null)
+        {
+            Debug.Log("<color = orange>Nothing to unbind.</color>");
+        }
+
+        if (selectedItem.isBinded)
+        {
+            BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value == selectedItem).Key;
+            selectedItem.UnbindKey();
+            _bindSlots[slotToUnbind] = null;
+        }
     }
 
     #region CONTAINER LOGIC

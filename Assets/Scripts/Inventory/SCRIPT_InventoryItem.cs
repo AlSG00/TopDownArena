@@ -47,6 +47,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     public bool isUsable = false; // можно ли использовать предмет
     public bool isConsumable = false;
     public bool isEquippable = false;
+    public bool isBinded = false;
 
     [Header("Stacking properties")]
     public bool isStackable = false; // можно ли стакать предмет
@@ -71,18 +72,18 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     public Vector2Int positionOnGrid; // позиция предмета на сетке инвентаря
 
     bool isMouseOverItem = false;
-    private bool isCursorActive = true;
+    private bool _isCursorActive = true;
 
     #region INIT
 
     private void OnEnable()
     {
-        MouseMovementTracker.OnCursorInactive += SetCursorActivityFlag;
+        MouseMovementTracker.OnCursorInactive += IsCursorActive;
     }
 
     private void OnDisable()
     {
-        MouseMovementTracker.OnCursorInactive -= SetCursorActivityFlag;
+        MouseMovementTracker.OnCursorInactive -= IsCursorActive;
     }
 
     internal void Init(SCRIPT_ItemData itemData)
@@ -98,6 +99,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     #endregion
 
+    // TODO: Change rotation direction
     internal void Rotated()
     {
         if (Height == 1 && Width == 1)
@@ -124,9 +126,9 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         stackCounter.text = stackCount.ToString();
     }
 
-    private void SetCursorActivityFlag(bool isActive)
+    private void IsCursorActive(bool isActive)
     {
-        isCursorActive = isActive;
+        _isCursorActive = isActive;
     }
 
     public void OnCursor(bool onCursor)
@@ -152,4 +154,22 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
             OnShowItemInfo?.Invoke(false, this);
         }
     }
+    
+    internal void BindKey()
+    {
+        isBinded = true;
+        // TODO: Enable sprite indicating that current item is binded
+        // (draw a frame around the item and put item in the GUI Slot)
+    }
+
+    internal void UnbindKey()
+    {
+        isBinded = false;
+        // TODO: Disable sprite indicating that current item bindnd
+        // (hide a frame around the item and erase item from the GUI Slot)
+    }
+
+    // TODO: Unbind item after drop
+    // TODO: Unbind item after moving to container
+    // TODO: Unbind item after fully consuming it
 }
