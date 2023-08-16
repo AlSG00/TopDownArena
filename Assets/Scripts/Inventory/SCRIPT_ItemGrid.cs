@@ -27,6 +27,8 @@ public class SCRIPT_ItemGrid : MonoBehaviour
     Vector2 positionOnTheGrid = new Vector2();
     Vector2Int tileGridPosition;
 
+    #region INIT
+
     private void OnEnable()
     {
         InventoryController.OnInventoryOpened += SetVisibility;
@@ -44,7 +46,16 @@ public class SCRIPT_ItemGrid : MonoBehaviour
        // itemCollection.itemList = new List<SCRIPT_InventoryItem>();
     }
 
-    internal SCRIPT_InventoryItem PickUpItem(int x, int y)
+    public void Initialize(int width, int height)
+    {
+        inventoryItemSlot = new SCRIPT_InventoryItem[width, height];
+        Vector2 size = new Vector2(width * _tileSizeWidth, height * _tileSizeHeight);
+        rectTransform.sizeDelta = size;
+    }
+
+    #endregion
+
+    internal SCRIPT_InventoryItem PickFromGrid(int x, int y)
     {
         SCRIPT_InventoryItem toReturn = inventoryItemSlot[x, y];
         if (toReturn == null)
@@ -53,6 +64,17 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         }
 
         CleanGridReference(toReturn);
+
+        return toReturn;
+    }
+
+    internal SCRIPT_InventoryItem PickReference(int x, int y)
+    {
+        SCRIPT_InventoryItem toReturn = inventoryItemSlot[x, y];
+        if (toReturn == null)
+        {
+            return null;
+        }
 
         return toReturn;
     }
@@ -80,13 +102,6 @@ public class SCRIPT_ItemGrid : MonoBehaviour
         }
 
         return null;
-    }
-
-    public void Initialize(int width, int height)
-    {
-        inventoryItemSlot = new SCRIPT_InventoryItem[width, height];
-        Vector2 size = new Vector2(width * _tileSizeWidth, height * _tileSizeHeight);
-        rectTransform.sizeDelta = size;
     }
 
     public Vector2Int GetTileGridPosition(Vector2 mousePosition)

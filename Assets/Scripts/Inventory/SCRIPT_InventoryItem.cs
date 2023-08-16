@@ -44,12 +44,13 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     [Header("Properties")]
     [Range(0, 999)] public float weight; // вес предмета, добавляется игроку
     public bool isRotatable = false; // можно ли вращать предмет 
-    public bool isUsable = true; // можно ли использовать предмет
-    public bool isConsumable = true;
+    public bool isUsable = false; // можно ли использовать предмет
+    public bool isConsumable = false;
+    public bool isEquippable = false;
 
     [Header("Stacking properties")]
     public bool isStackable = false; // можно ли стакать предмет
-    public bool isSingleDropping = false; // Можно ли выбросить один предмет, а не весь стак
+    public bool isDividable = false; // Можно ли выбросить один предмет, а не весь стак
     [Range(0, 999)] public int stackCount = 0; // текущий размер стака
     [Range(0, 999)] public int maxStackCount = 0; // максимальный размер стака
 
@@ -72,6 +73,8 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     bool isMouseOverItem = false;
     private bool isCursorActive = true;
 
+    #region INIT
+
     private void OnEnable()
     {
         MouseMovementTracker.OnCursorInactive += SetCursorActivityFlag;
@@ -93,6 +96,8 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         itemRectTransform.sizeDelta = size;
     }
 
+    #endregion
+
     internal void Rotated()
     {
         if (Height == 1 && Width == 1)
@@ -102,8 +107,6 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
         }
 
         isRotated = !isRotated;
-
-        Debug.Log(isRotated);
         itemRectTransform.rotation = Quaternion.Euler(0, 0, isRotated == true ? 90f : 0f);
     }
 
@@ -124,33 +127,18 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     private void SetCursorActivityFlag(bool isActive)
     {
         isCursorActive = isActive;
-        //if (isMouseOverItem &&
-        //    isCursorActive == false &&
-        //    isOnCursor == false)
-        //{
-        //    OnShowItemInfo?.Invoke(true, this);
-        //}
     }
 
-    public void SetOnCursorFlag(bool onCursor)
+    public void OnCursor(bool onCursor)
     {
         isOnCursor = onCursor;
         OnShowItemInfo?.Invoke(!isOnCursor, this);
-        //if (isOnCursor)
-        //{
-        //    OnShowItemInfo?.Invoke(false, this);
-        //}
-        //else
-        //{
-        //    OnShowItemInfo?.Invoke(true, this);
-        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isOnCursor == false)
         {
-            Debug.Log("OnPointerEnter");
             isMouseOverItem = true;
             OnShowItemInfo?.Invoke(true, this);
         }
@@ -160,7 +148,6 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         if (isOnCursor == false)
         {
-            Debug.Log("OnPointerExit");
             isMouseOverItem = false;
             OnShowItemInfo?.Invoke(false, this);
         }

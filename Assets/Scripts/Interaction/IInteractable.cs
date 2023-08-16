@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface SCRIPT_IInteractable
+public interface IInteractable
 {
     public bool canInteract { get; set; }
     public bool alreadyInteracting { get; set; }

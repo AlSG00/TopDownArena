@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PickableWeapon : MonoBehaviour, SCRIPT_IInteractable
+public class PickableWeapon : MonoBehaviour, IInteractable
 {
     public bool canInteract { get; set; }
     public bool alreadyInteracting { get; set; }

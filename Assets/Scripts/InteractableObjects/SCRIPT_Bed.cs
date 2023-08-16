@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCRIPT_Bed : MonoBehaviour, SCRIPT_IInteractable
+public class SCRIPT_Bed : MonoBehaviour, IInteractable
 {
     public bool alreadyInteracting { get; set; }
     public bool canInteract { get; set; }

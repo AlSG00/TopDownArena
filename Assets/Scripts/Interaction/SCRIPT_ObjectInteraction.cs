@@ -11,7 +11,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
     private Ray _ray;
     private RaycastHit _hit;
     
-    private SCRIPT_IInteractable _interactableObject; // Стоит ли убрать это
+    private IInteractable _interactableObject; // Стоит ли убрать это
     //[SerializeField] private Collider _playerInteractionArea;
 
     [Header("Cursor settings")]
@@ -58,7 +58,7 @@ public class SCRIPT_ObjectInteraction : MonoBehaviour
                 {
                     _interactableObject.canInteract = false;
                 }
-                _interactableObject = _hit.transform.GetComponent<SCRIPT_IInteractable>();
+                _interactableObject = _hit.transform.GetComponent<IInteractable>();
 
                 if (_interactableObject.inInteractionArea)
                 {

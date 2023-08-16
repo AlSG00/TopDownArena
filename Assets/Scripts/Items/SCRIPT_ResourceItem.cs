@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCRIPT_ResourceItem : MonoBehaviour, SCRIPT_IInteractable
+public class SCRIPT_ResourceItem : MonoBehaviour, IInteractable
 {
     public bool canInteract { get; set; }
     public bool alreadyInteracting { get; set; }

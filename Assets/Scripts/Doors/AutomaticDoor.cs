@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutomaticDoor : MonoBehaviour, SCRIPT_IInteractable
+public class AutomaticDoor : MonoBehaviour, IInteractable
 {
     public bool canInteract { get; set; }
     public bool alreadyInteracting { get; set; }

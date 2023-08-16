@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SCRIPT_PlayerInteractionArea : MonoBehaviour
 {
-    SCRIPT_IInteractable interactableObject;
+    IInteractable interactableObject;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Interactable"))
         {
-            interactableObject = other.GetComponent<SCRIPT_IInteractable>();
+            interactableObject = other.GetComponent<IInteractable>();
             interactableObject.inInteractionArea = true;
         }
     }
@@ -19,7 +19,7 @@ public class SCRIPT_PlayerInteractionArea : MonoBehaviour
     {
         if (other.CompareTag("Interactable"))
         {
-            interactableObject = other.GetComponent<SCRIPT_IInteractable>();
+            interactableObject = other.GetComponent<IInteractable>();
             interactableObject.inInteractionArea = false;
         }
     }

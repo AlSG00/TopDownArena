@@ -196,7 +196,6 @@
     <Compile Include="Assets\Scripts\Weapon\SCRIPT_AmmoShells.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Player\FootstepsSoundController\TerrainChecker.cs" />
-    <Compile Include="Assets\Scripts\Interaction\SCRIPT_IInteractable.cs" />
     <Compile Include="Assets\Scripts\Implants\IImplant.cs" />
     <Compile Include="Assets\[Ammunition and weapon systems]\WeaponItem.cs" />
     <Compile Include="Assets\Scripts\Player\FootstepsSoundController\FootstepSwapper.cs" />
@@ -207,7 +206,6 @@
     <Compile Include="Assets\[Ammunition and weapon systems]\SCRIPT_PlayerAmmunition.cs" />
     <Compile Include="Assets\Scripts\InteractableObjects\SCRIPT_TEST_ActivateShop.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerSatiety.cs" />
-    <Compile Include="Assets\Scripts\Inventory\ItemCollection.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_Food.cs" />
     <Compile Include="Assets\Scripts\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
@@ -219,6 +217,7 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
+    <Compile Include="Assets\Scripts\Interaction\IInteractable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

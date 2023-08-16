@@ -14,7 +14,21 @@ public class InventoryController : MonoBehaviour
         Use
     }
 
+    // TODO: Opportunity to exzpand available equippable slots
+    private enum bindKey
+    {
+        Slot_1,
+        Slot_2,
+        Slot_3
+    }
+
     #region VARIABLES
+
+    public SCRIPT_InventoryItem bindedItem_1;
+    public SCRIPT_InventoryItem bindedItem_2;
+    public SCRIPT_InventoryItem bindedItem_3;
+
+    public Dictionary<>
 
     [Header("References")]
     public SCRIPT_ItemGrid inventoryGrid;
@@ -22,6 +36,7 @@ public class InventoryController : MonoBehaviour
     public SCRIPT_ItemGrid selectedItemGrid;
     public SCRIPT_ItemContainer itemContainer;
     [HideInInspector] public RectTransform selectedItemGridRect;
+
     [SerializeField] private Player_Movement _playerMovement;
     [SerializeField] private SCRIPT_PlayerCarryingWeight _playerCarryingWeight;
     [SerializeField] private SCRIPT_InventoryHighlight inventoryHighlight;
@@ -129,7 +144,7 @@ public class InventoryController : MonoBehaviour
 
         if (selectedItem.isOnCursor)
         {
-            if (selectedItem.isSingleDropping)
+            if (selectedItem.isDividable)
             {
                 for (int i = 0; i < selectedItem.stackCount; i++)
                 {
@@ -153,7 +168,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            if (selectedItem.isSingleDropping)
+            if (selectedItem.isDividable)
             {
                 if (selectedItem.stackCount == 1)
                 {
@@ -207,8 +222,8 @@ public class InventoryController : MonoBehaviour
         }
         itemInfoWindow.SetVisibility(false, selectedItem);
         selectedItem.isDropping = true;
-        selectedItemGrid.PickUpItem(selectedItem.positionOnGrid.x, selectedItem.positionOnGrid.y);
-        if (selectedItem.isSingleDropping)
+        selectedItemGrid.PickFromGrid(selectedItem.positionOnGrid.x, selectedItem.positionOnGrid.y);
+        if (selectedItem.isDividable)
         {
             for (int i = 0; i < selectedItem.stackCount; i++)
             {
@@ -337,7 +352,7 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        if (item.isSingleDropping)
+        if (item.isDividable)
         {
             if (dropFullStack)
             {
@@ -374,7 +389,7 @@ public class InventoryController : MonoBehaviour
             {
                 if (secondItem.name == selectedItem.name &&
                     selectedItem.isStackable &&
-                    selectedItem.isSingleDropping)
+                    selectedItem.isDividable)
                 {
                     if (secondItem.stackCount >= secondItem.maxStackCount)
                     {
@@ -416,7 +431,7 @@ public class InventoryController : MonoBehaviour
             else
             {
                 if (selectedItem.stackCount > 1 &&
-                    selectedItem.isSingleDropping)
+                    selectedItem.isDividable)
                 {
                     SCRIPT_InventoryItem itemOnCursor = selectedItem;
                     CreateItemForUi(itemOnCursor);
@@ -789,7 +804,7 @@ public class InventoryController : MonoBehaviour
         }
 
         selectedItem.lastGrid = selectedItemGrid;
-        selectedItem.SetOnCursorFlag(false);
+        selectedItem.OnCursor(false);
         selectedItem.GetComponent<Image>().raycastTarget = true;
 
         if (overlapItem == null)
@@ -807,7 +822,7 @@ public class InventoryController : MonoBehaviour
                 {
                     if (selectedItem.stackCount > requiredItemsCount)
                     {
-                        selectedItem.SetOnCursorFlag(true);
+                        selectedItem.OnCursor(true);
                         overlapItem.stackCount = overlapItem.maxStackCount;
                         selectedItem.stackCount -= requiredItemsCount;
                         overlapItem.UpdateCounter();
@@ -835,10 +850,10 @@ public class InventoryController : MonoBehaviour
 
     private void PickItemFromGrid(Vector2Int tileGridPosition)
     {
-        selectedItem = selectedItemGrid.PickUpItem(tileGridPosition.x, tileGridPosition.y);
+        selectedItem = selectedItemGrid.PickFromGrid(tileGridPosition.x, tileGridPosition.y);
         if (selectedItem != null)
         {
-            selectedItem.SetOnCursorFlag(true);
+            selectedItem.OnCursor(true);
             selectedItem.lastGrid = selectedItemGrid;
             selectedItemGrid.testList.Remove(selectedItem);
             itemRectTransform = selectedItem.GetComponent<RectTransform>();
@@ -866,7 +881,7 @@ public class InventoryController : MonoBehaviour
         selectedItemGrid.PlaceItem(selectedItem, tileGridPosition.x, tileGridPosition.y);
         selectedItemGrid.testList.Add(selectedItem);
         selectedItemGrid.testList.Remove(overlapItem);
-        overlapItem.SetOnCursorFlag(true);
+        overlapItem.OnCursor(true);
         selectedItem = overlapItem;
         overlapItem = null;
         itemRectTransform = selectedItem.GetComponent<RectTransform>();
@@ -1043,6 +1058,35 @@ public class InventoryController : MonoBehaviour
     }
 
     #endregion
+
+    // Cache info about an item under the cursor
+    private void TryReceiveItem()
+    {
+        Vector2Int tileGridPosition = GetTileGridPosition();
+        selectedItem = selectedItemGrid.PickReference(tileGridPosition.x, tileGridPosition.y);
+    }
+
+    internal void TryBindItem()
+    {
+        if (selectedItem != null && selectedItem.isOnCursor)
+        {
+            Debug.Log("<color = orange>Can't bind. There is item on the cursor.</color>");
+            return;
+        }
+
+        TryReceiveItem();
+        if (selectedItem == null)
+        {
+            Debug.Log("<color = orange>Can't bind. No item.</color>");
+        }
+
+
+    }
+
+    internal void TryUnbindItem()
+    {
+
+    }
 
     #region CONTAINER LOGIC
 

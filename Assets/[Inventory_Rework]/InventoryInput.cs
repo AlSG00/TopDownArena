@@ -15,6 +15,31 @@ public class InventoryInput : MonoBehaviour
 
     private void Update()
     {
+        if(inventory.isCheckingInventory == false)
+        {
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            inventory.TryBindItem();
+        }
+
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            inventory.TryBindItem();
+        }
+
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            inventory.TryBindItem();
+        }
+
+        if (Input.GetKey(KeyCode.Delete))
+        {
+            inventory.TryUnbindItem();
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isHoldingShiftButton = true;
