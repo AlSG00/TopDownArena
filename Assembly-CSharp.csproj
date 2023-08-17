@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\SCRIPT_TEST_AutomaticDoor.cs" />
     <Compile Include="Assets\Scripts\Weapon\Projectile.cs" />
     <Compile Include="Assets\Thirdparty\Shared\Ramps\Runtime\RampAsset.cs" />
+    <Compile Include="Assets\Scripts\Interaction\IInteractable.cs" />
     <Compile Include="Assets\Scripts\Player\Stats controllers\SCRIPT_PlayerWakefulness.cs" />
     <Compile Include="Assets\Scripts\Player\ShoulderLightController.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestLine.cs" />
@@ -217,7 +218,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\Scripts\Interaction\IInteractable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />
