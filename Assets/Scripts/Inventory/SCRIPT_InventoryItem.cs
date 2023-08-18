@@ -33,7 +33,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     }
 
     public delegate void showAction(bool showInfo, SCRIPT_InventoryItem item);
-    public static showAction OnShowItemInfo;
+    public static event showAction OnShowItemInfo;
     public RectTransform itemRectTransform;
     public SCRIPT_ItemGrid lastGrid;
 
@@ -64,7 +64,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     [Header("UI")]
     public TextMeshProUGUI stackCounter; // UI счетчик предметов в стаке
-    
+    public Image bindIndicator;
     [HideInInspector] public bool isDropping; //TODO: Возможно могу избавиться. Флаг, чтобы при выкидывании не спавнилось несколько предметов сразу
     [HideInInspector] public bool isRotated = false; // вращался ли предмет
     [HideInInspector] public bool isOnCursor = false;
@@ -158,6 +158,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     internal void BindKey()
     {
         isBinded = true;
+        bindIndicator.enabled = true;
         // TODO: Enable sprite indicating that current item is binded
         // (draw a frame around the item and put item in the GUI Slot)
     }
@@ -165,6 +166,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     internal void UnbindKey()
     {
         isBinded = false;
+        bindIndicator.enabled = false;
         // TODO: Disable sprite indicating that current item bindnd
         // (hide a frame around the item and erase item from the GUI Slot)
     }

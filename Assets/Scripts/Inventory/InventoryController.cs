@@ -274,7 +274,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    // TODO: Move to a a separate file 
+    // TODO: Move to a a separate file. Rename method
     internal void HandleStateIconsVisibility(ref float buttonHoldTime, float timeToHold)
     {
         isHighlightingStateIcons = false;
@@ -1071,10 +1071,11 @@ public class InventoryController : MonoBehaviour
     #endregion
 
     // Cache info about an item under the cursor
-    private void TryReceiveItem()
+    private SCRIPT_InventoryItem TryReceiveItem()
     {
         Vector2Int tileGridPosition = GetTileGridPosition();
-        selectedItem = selectedItemGrid.PickReference(tileGridPosition.x, tileGridPosition.y);
+        SCRIPT_InventoryItem itemToBind = selectedItemGrid.PickReference(tileGridPosition.x, tileGridPosition.y);
+        return itemToBind;
     }
 
     // TODO: Test
@@ -1082,21 +1083,23 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem != null && selectedItem.isOnCursor)
         {
-            Debug.Log("<color = orange>Can't bind. There is item on the cursor.</color>");
+            Debug.Log("<color=orange>Can't bind. There is item on the cursor.</color>");
             return;
         }
 
-        TryReceiveItem();
-        if (selectedItem == null)
+        SCRIPT_InventoryItem itemToBind = TryReceiveItem();
+
+        if (itemToBind == null)
         {
-            Debug.Log("<color = orange>Nothing to bind.</color>");
+            Debug.Log("<color=orange>Nothing to bind.</color>");
+            return;
         }
 
-        if (selectedItem.isEquippable)
+        if (itemToBind.isEquippable)
         {
-            _bindSlots[bindSlot] = selectedItem;
-            selectedItem.BindKey();
-            selectedItem = null;
+            _bindSlots[bindSlot] = itemToBind;
+            itemToBind.BindKey();
+            itemToBind = null;
         }
     }
 
@@ -1105,20 +1108,20 @@ public class InventoryController : MonoBehaviour
     {
         if (selectedItem != null && selectedItem.isOnCursor)
         {
-            Debug.Log("<color = orange>Can't unbind. There is item on the cursor.</color>");
+            Debug.Log("<color=orange>Can't unbind. There is item on the cursor.</color>");
             return;
         }
 
-        TryReceiveItem();
-        if (selectedItem == null)
+        SCRIPT_InventoryItem itemToBind = TryReceiveItem();
+        if (itemToBind == null)
         {
-            Debug.Log("<color = orange>Nothing to unbind.</color>");
+            Debug.Log("<color=orange>Nothing to unbind.</color>");
         }
 
-        if (selectedItem.isBinded)
+        if (itemToBind.isBinded)
         {
-            BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value == selectedItem).Key;
-            selectedItem.UnbindKey();
+            BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value == itemToBind).Key;
+            itemToBind.UnbindKey();
             _bindSlots[slotToUnbind] = null;
         }
     }

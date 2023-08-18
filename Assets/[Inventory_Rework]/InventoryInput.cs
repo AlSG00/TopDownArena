@@ -10,32 +10,32 @@ public class InventoryInput : MonoBehaviour
     private float buttonHoldTime = 0f;
     private float timeToHold = 0.3f;
 
-    [SerializeField] InventoryController inventory;
+    [SerializeField] private InventoryController inventory;
 
 
     private void Update()
     {
-        if(inventory.isCheckingInventory == false)
-        {
-            return;
-        }
+        //if(inventory.isCheckingInventory)
+        //{
+        //    return;
+        //}
 
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             inventory.TryBindItem(InventoryController.BindSlot.Slot_1);
         }
 
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             inventory.TryBindItem(InventoryController.BindSlot.Slot_2);
         }
 
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             inventory.TryBindItem(InventoryController.BindSlot.Slot_3);
         }
 
-        if (Input.GetKey(KeyCode.Delete))
+        if (Input.GetKeyDown(KeyCode.Delete))
         {
             inventory.TryUnbindItem();
         }
@@ -97,6 +97,7 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
+            Debug.Log("Booba");
             isHoldingCheckStateButton = false;
             inventory.HandleStateIconsVisibility(ref buttonHoldTime, timeToHold);
         }

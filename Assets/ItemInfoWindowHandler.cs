@@ -34,7 +34,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
 
     public void SetVisibility(bool isVisible, SCRIPT_InventoryItem item)
     {
-        Debug.Log($"Set visibility {isVisible}");
+        //Debug.Log($"Set visibility {isVisible}");
         if (isVisible == _isVisible)
         {
             return;
@@ -75,7 +75,7 @@ public class ItemInfoWindowHandler : MonoBehaviour
 
     private void PlaceWindow(SCRIPT_InventoryItem item)
     {
-        Debug.Log("Placing window");
+        //Debug.Log("Placing window");
         if (item.isRotated)
         {
             ItemInfoWindows[0].rectTransform.position = new Vector2(
