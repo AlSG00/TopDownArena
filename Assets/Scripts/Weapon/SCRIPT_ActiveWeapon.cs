@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
-//using UnityEditor.Animations;
 
 // TODO: Rework it... With heist!
 public class SCRIPT_ActiveWeapon : MonoBehaviour
@@ -43,7 +40,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     {
         var weapon = GetWeapon(activeWeaponIndex);
 
-
+        // Move to InputController
         if (weapon != null && !weapon.isReloading)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -144,6 +141,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             playerShooting.isHolstered = false;
         }
     }
+
 
     private SCRIPT_Weapon GetWeapon(int index)
     {

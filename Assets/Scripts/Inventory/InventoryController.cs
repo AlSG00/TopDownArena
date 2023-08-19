@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Linq;
 public class InventoryController : MonoBehaviour
 {
+    // TODO: Move to separate file with audio method
     private enum AudioPlayMode
     {
         PickFromGround,
@@ -22,14 +23,12 @@ public class InventoryController : MonoBehaviour
         Slot_3
     }
 
-
-
     #region VARIABLES
     private Dictionary<BindSlot, SCRIPT_InventoryItem> _bindSlots;
 
-    public SCRIPT_InventoryItem bindedItem_1;
-    public SCRIPT_InventoryItem bindedItem_2;
-    public SCRIPT_InventoryItem bindedItem_3;
+    //public SCRIPT_InventoryItem bindedItem_1;
+    //public SCRIPT_InventoryItem bindedItem_2;
+    //public SCRIPT_InventoryItem bindedItem_3;
 
     [Header("References")]
     public SCRIPT_ItemGrid inventoryGrid;
@@ -85,9 +84,9 @@ public class InventoryController : MonoBehaviour
     {
         _bindSlots = new Dictionary<BindSlot, SCRIPT_InventoryItem>()
         {
-            { BindSlot.Slot_1, bindedItem_1},
-            { BindSlot.Slot_2, bindedItem_2},
-            { BindSlot.Slot_3, bindedItem_3}
+            { BindSlot.Slot_1, null},
+            { BindSlot.Slot_2, null},
+            { BindSlot.Slot_3, null}
         };
     }
 
@@ -1078,7 +1077,7 @@ public class InventoryController : MonoBehaviour
         return itemToBind;
     }
 
-    // TODO: Test
+    // TODO: Add logic for equip weapon when binded
     internal void TryBindItem(BindSlot bindSlot)
     {
         if (selectedItem != null && selectedItem.isOnCursor)
@@ -1098,9 +1097,21 @@ public class InventoryController : MonoBehaviour
         if (itemToBind.isEquippable)
         {
             _bindSlots[bindSlot] = itemToBind;
-            itemToBind.BindKey();
-            itemToBind = null;
+            itemToBind.BindKey(); // TODO: Rework this line.
+                                  // There is also need to add special icon that will appear in ui slots
+            _bindSlots[bindSlot].GetComponent<IEquipable>().EquipModel();
+
+            Передавать точку для спавна оружия, проверить, чтобы заспавнилось нормально
+            Попытаться экипировать оружие через назначенную клавишу
+            Попытаться разбиндить
+            Попытаться Забиндить что-нибудь кроме оружия
+            Нужно, чтобы корректно появлялась и исчезала моделька забинженного предмета
+                корректно обрабатывались иконки, обозначающие бинд предмета
+            
+            Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
         }
+
+        itemToBind = null;
     }
 
     // TODO: Test
@@ -1125,6 +1136,16 @@ public class InventoryController : MonoBehaviour
             _bindSlots[slotToUnbind] = null;
         }
     }
+
+    internal void TryUseBindedItem(BindSlot bindSlot)
+    {
+        if (_bindSlots[bindSlot] != null)
+        {
+            //bindedItem_1.GetComponent<SCRIPT_IItem>().Use();
+            _bindSlots[bindSlot].GetComponent<SCRIPT_IItem>().Use();
+        }
+    }
+
 
     #region CONTAINER LOGIC
 

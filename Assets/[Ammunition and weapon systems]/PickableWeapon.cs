@@ -28,6 +28,7 @@ public class PickableWeapon : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        // TODO: Get rid of this line
         activeWeapon = GameObject.Find("_Player").GetComponent<SCRIPT_ActiveWeapon>();
     }
 
@@ -43,6 +44,7 @@ public class PickableWeapon : MonoBehaviour, IInteractable
     {
         if (activeWeapon)
         {
+
             SCRIPT_Weapon weaponToPickup = Instantiate(weaponPrefab);
             activeWeapon.Equip(weaponToPickup);
             Destroy(gameObject);

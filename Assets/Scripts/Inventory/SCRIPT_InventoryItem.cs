@@ -48,6 +48,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     public bool isConsumable = false;
     public bool isEquippable = false;
     public bool isBinded = false;
+    public bool isVisualizable = false;
 
     [Header("Stacking properties")]
     public bool isStackable = false; // можно ли стакать предмет

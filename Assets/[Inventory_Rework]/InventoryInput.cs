@@ -22,7 +22,14 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            inventory.TryBindItem(InventoryController.BindSlot.Slot_1);
+            if (inventory.isCheckingInventory)
+            {
+                inventory.TryBindItem(InventoryController.BindSlot.Slot_1);
+            }
+            else
+            {
+                inventory.TryUseBindedItem(InventoryController.BindSlot.Slot_1);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -97,7 +104,6 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
-            Debug.Log("Booba");
             isHoldingCheckStateButton = false;
             inventory.HandleStateIconsVisibility(ref buttonHoldTime, timeToHold);
         }
