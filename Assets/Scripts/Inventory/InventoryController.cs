@@ -24,6 +24,8 @@ public class InventoryController : MonoBehaviour
     }
 
     #region VARIABLES
+    public Transform[] itemSlotPivots;
+
     private Dictionary<BindSlot, SCRIPT_InventoryItem> _bindSlots;
 
     //public SCRIPT_InventoryItem bindedItem_1;
@@ -1099,16 +1101,16 @@ public class InventoryController : MonoBehaviour
             _bindSlots[bindSlot] = itemToBind;
             itemToBind.BindKey(); // TODO: Rework this line.
                                   // There is also need to add special icon that will appear in ui slots
-            _bindSlots[bindSlot].GetComponent<IEquipable>().EquipModel();
+            _bindSlots[bindSlot].GetComponent<IEquipable>().EquipModel(itemSlotPivots[0]);
 
-            Передавать точку для спавна оружия, проверить, чтобы заспавнилось нормально
-            Попытаться экипировать оружие через назначенную клавишу
-            Попытаться разбиндить
-            Попытаться Забиндить что-нибудь кроме оружия
-            Нужно, чтобы корректно появлялась и исчезала моделька забинженного предмета
-                корректно обрабатывались иконки, обозначающие бинд предмета
+            //Передавать точку для спавна оружия, проверить, чтобы заспавнилось нормально
+            //Попытаться экипировать оружие через назначенную клавишу
+            //Попытаться разбиндить
+            //Попытаться Забиндить что-нибудь кроме оружия
+            //Нужно, чтобы корректно появлялась и исчезала моделька забинженного предмета
+            //    корректно обрабатывались иконки, обозначающие бинд предмета
             
-            Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
+            //Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
         }
 
         itemToBind = null;
@@ -1133,6 +1135,12 @@ public class InventoryController : MonoBehaviour
         {
             BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value == itemToBind).Key;
             itemToBind.UnbindKey();
+
+            if (itemToBind.isEquippable)
+            {
+                _bindSlots[slotToUnbind].GetComponent<IEquipable>().UnequipModel();
+            }
+
             _bindSlots[slotToUnbind] = null;
         }
     }

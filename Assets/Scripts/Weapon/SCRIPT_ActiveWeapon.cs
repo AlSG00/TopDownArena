@@ -24,6 +24,16 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         Back = 2
     }
 
+    private void OnEnable()
+    {
+        WeaponItem.OnUseWeapon += TestActivateWeapon;
+    }
+
+    private void OnDisable()
+    {
+        WeaponItem.OnUseWeapon -= TestActivateWeapon;
+    }
+
     private void Start()
     {
         //  rigController = GetComponent<Animator>();
@@ -140,6 +150,26 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             GetComponent<Player_Shooting>().Equip(weapon);
             playerShooting.isHolstered = false;
         }
+    }
+
+    private void TestActivateWeapon(Weapon weaponToActivate)
+    {
+        //var weapon = GetWeapon(activateIndex);
+        //if (weapon)
+        //{
+
+            rigController.SetBool("isHolstered", false);
+            rigController.Play($"ANIM_Equip_{weaponToActivate.weaponName}");
+            //do
+            //{
+            //    yield return new WaitForEndOfFrame();
+            //}
+            //while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+
+            isSwitchingWeapon = false;
+            GetComponent<Player_Shooting>().Equip_2(weaponToActivate);
+            playerShooting.isHolstered = false;
+        //}
     }
 
 

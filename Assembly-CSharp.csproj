@@ -116,6 +116,7 @@
     <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\Scripts\Player\SCRIPT_PlayerFlashlight.cs" />
+    <Compile Include="Assets\[Ammunition and weapon systems]\IEquipable.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSObjectRevealer.cs" />
     <Compile Include="Assets\Scripts\InteractableObjects\SCRIPT_ImplantShop.cs" />
@@ -218,7 +219,6 @@
     <Compile Include="Assets\Scripts\TestResourceCounter.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSResources.cs" />
     <Compile Include="Assets\Scripts\IPointerHandler.cs" />
-    <Compile Include="Assets\[Ammunition and weapon systems]\IEquipable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Thirdparty\TextMesh Pro\Shaders\TMPro.cginc" />

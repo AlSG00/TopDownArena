@@ -466,7 +466,6 @@ GameObject:
   - component: {fileID: 1048267339396752262}
   - component: {fileID: 5711422025580953575}
   - component: {fileID: 1535013958728979702}
-  - component: {fileID: 1048267339396752250}
   m_Layer: 11
   m_Name: '[riflePref]'
   m_TagString: Untagged
@@ -482,7 +481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4608870766503918523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0893, z: -0.4779}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2394955, y: 1.2394955, z: 1.2394958}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -605,56 +604,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a883f6fd36b41f4682b5c8f656370f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffects: []
+  ammoType: 1
+  hitEffects:
+  - tag: Flesh
+    effect: {fileID: 2020388907439012043, guid: 03d78ae064eba0e4e8b0c1bce06a95ef,
+      type: 3}
+  - tag: Concrete
+    effect: {fileID: 7721343467821364781, guid: 0259bac27d2bbdd48b522aa87b29969d,
+      type: 3}
+  - tag: Metal
+    effect: {fileID: 7721343467821364781, guid: a096459dbf94fad4ca31c7fc808caec6,
+      type: 3}
   hitEffectLifetime: 1200
   muzzleFlame: {fileID: 1048267339396752257}
   ammoShells: {fileID: 1048267339396752262}
   weaponAudio: {fileID: 5711422025580953575}
-  weaponName: Rifle
-  WeaponSlot: 1
-  fireRate: 25
-  bulletSpeed: 1000
-  projectilesPerShot: 1
-  activeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  singleShotDelay: 0.3
-  impactForce: 0
-  damage: 0
-  bulletSpreadValue: 0
-  magCapacity: 30
-  currentAmmoInMag: 30
-  singleShots: 0
-  hitEffectMetal: {fileID: 0}
-  hitEffectConcrete: {fileID: 0}
-  hitEffectFlesh: {fileID: 0}
-  tracerEffect: {fileID: 0}
-  magazine: {fileID: 0}
-  muzzle: {fileID: 0}
-  reloadSound: {fileID: 0}
-  ejectMagSound: {fileID: 0}
-  putMagSound: {fileID: 0}
-  pullOutMagSound: {fileID: 0}
-  InsertMagSound: {fileID: 0}
-  isReloading: 0
-  isFiring: 0
-  shotPerformed: 0
---- !u!114 &1048267339396752250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4608870766503918523}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c40f6b6e5a7cb744f9356354f6b7c697, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleFlame: {fileID: 1048267339396752257}
-  ammoShells: {fileID: 1048267339396752262}
-  ammoInStock: {fileID: 0}
-  ammoCounter: {fileID: 0}
   weaponName: Rifle
   WeaponSlot: 1
   fireRate: 600
@@ -666,9 +630,9 @@ MonoBehaviour:
   singleShotDelay: 0
   impactForce: 100
   damage: 10
-  bulletSpreadValue: 0
-  magCapacity: 9999
-  currentAmmoInMag: 9999
+  bulletSpreadValue: 0.06
+  magCapacity: 30
+  currentAmmoInMag: 30
   singleShots: 0
   hitEffectMetal: {fileID: 7314358844588756561, guid: a096459dbf94fad4ca31c7fc808caec6,
     type: 3}
@@ -681,8 +645,6 @@ MonoBehaviour:
   magazine: {fileID: 1047405133121538393}
   muzzle: {fileID: 5783658668788779161}
   reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
-  shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
-  audioSource: {fileID: 5783658668931804524}
   ejectMagSound: {fileID: 8300000, guid: 01de3f440c1400243ba9eff80cec3213, type: 3}
   putMagSound: {fileID: 8300000, guid: 35141b69c42ab2c438f4d6042d3db712, type: 3}
   pullOutMagSound: {fileID: 8300000, guid: 6336383199cceeb4dae50ca2e34604c2, type: 3}
@@ -734,7 +696,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.8021469, b: 0, a: 1}
-  m_Intensity: 0
+  m_Intensity: 20
   m_Range: 5.61
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -992,7 +954,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5783658669181818110}
-  m_LocalRotation: {x: 0.16375445, y: 0.98358727, z: 0.012442974, w: 0.074738435}
+  m_LocalRotation: {x: 0.19929962, y: 0.9795889, z: 0.0052188537, w: 0.025651485}
   m_LocalPosition: {x: -0.0602, y: 0.0768, z: 0.039}
   m_LocalScale: {x: 0.0939733, y: 0.089314245, z: 0.52083284}
   m_ConstrainProportionsScale: 0

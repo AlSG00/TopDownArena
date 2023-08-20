@@ -20,7 +20,8 @@ public class Player_Shooting : MonoBehaviour
     public WeaponAnimationEvents animationEvents;
 
     // Новое
-    public SCRIPT_Weapon weapon;
+    //public SCRIPT_Weapon weapon;
+    public Weapon weapon;
     [HideInInspector] public SCRIPT_MuzzleFlame muzzleFlame;
     public SCRIPT_AmmoShells ammoShells;
 
@@ -31,7 +32,7 @@ public class Player_Shooting : MonoBehaviour
     public Animator animationController;
 
     public bool isHolstered;
-
+    public Weapon weapon_2;
     public SCRIPT_ActiveWeapon activeWeapon;
     //public Transform leftHand;
     
@@ -46,7 +47,7 @@ public class Player_Shooting : MonoBehaviour
         //HandleInventory(false);
         TryGetComponent<SCRIPT_ActiveWeapon>(out activeWeapon);
         isShooting = false;
-        Equip(weapon);
+        //Equip_2(weapon);
         //animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);
     }
 
@@ -107,7 +108,8 @@ public class Player_Shooting : MonoBehaviour
                 if (isAiming && !isHolstered && !activeWeapon.isReloading)
                 {
                     // animationController.SetBool("isShooting", true);
-                    if (!weapon.shotPerformed && lastTimeSingleShot + weapon.singleShotDelay <= Time.time)
+                    if ((weapon.shotPerformed == false) && 
+                        ((lastTimeSingleShot + weapon.singleShotDelay) <= Time.time))
                     {
                         lastTimeSingleShot = Time.time;
                         weapon.StartFiring();
@@ -130,15 +132,27 @@ public class Player_Shooting : MonoBehaviour
                 weapon.shotPerformed = false;
             }
         }
-        if (weapon)
-        {
-            weapon.UpdateBullet(Time.deltaTime);
-        }
+
+        //if (weapon)
+        //{
+        //    weapon.UpdateBullet(Time.deltaTime);
+        //}        //if (weapon)
+        //{
+        //    weapon.UpdateBullet(Time.deltaTime);
+        //}
 
         if (Input.GetKeyDown(KeyCode.X) && !isAiming)
         {
             GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
         }
+    }
+
+    internal void Equip_2(Weapon weaponToActivate)
+    {
+        isHolstered = false;
+        weapon = weaponToActivate;/*.GetComponent<SCRIPT_Weapon>();*/
+        muzzleFlame = weaponToActivate.GetComponentInParent<SCRIPT_MuzzleFlame>();
+        ammoShells = weaponToActivate.GetComponentInParent<SCRIPT_AmmoShells>();
     }
 
     //private void HandleInventory(bool isActive)
@@ -162,10 +176,10 @@ public class Player_Shooting : MonoBehaviour
 
     public void Equip(SCRIPT_Weapon weaponToEquip)
     {
-        isHolstered = false;
-        weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
-        muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
-        ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
+        //isHolstered = false;
+        //weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
+        //muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
+        //ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
     }
 
     //public void OnAnimationEvent(string eventName)

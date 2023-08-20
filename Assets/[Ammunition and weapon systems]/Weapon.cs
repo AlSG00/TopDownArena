@@ -126,25 +126,34 @@ public class Weapon : MonoBehaviour
     // Other
     private Ray ray;
     private RaycastHit hitInfo;
-    private float accumulatedTime;
+    //private float accumulatedTime;
     private List<Bullet> bullets = new List<Bullet>();
     private float _maxBulletLifetime = 3f;
 
     public bool isReloading;
     public bool isFiring = false;
     public bool shotPerformed;
-    private float lastTimeShot;
+    private float _lastTimeShot;
     private float fireDelay;
 
     #endregion
+
+    private void Awake()
+    {
+        _lastTimeShot = 0f;
+
+        bullets = new List<Bullet>();
+    }
 
     private void Start()
     {
         isReloading = false;
         TryGetComponent<SCRIPT_MuzzleFlame>(out muzzleFlame);
         TryGetComponent<SCRIPT_AmmoShells>(out ammoShells);
+        FireBullet();
+        //_lastTimeShot = 0f;
 
-
+        //bullets = new List<Bullet>();
         // TODO: Find another way to connect HUD to a newly picked weapon
         //ammoCounter = GameObject.Find("HUD").GetComponentInChildren<AmmoCounterTest>();
 
@@ -165,7 +174,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (bullets.Count != 0)
+        if ((bullets != null) && (bullets.Count != 0))
         {
             UpdateBullet(Time.deltaTime);
         }
@@ -175,58 +184,67 @@ public class Weapon : MonoBehaviour
     {
         isFiring = true;
         fireDelay = 60f / fireRate;
-        accumulatedTime = 0.0f;
+        //accumulatedTime = 0.0f;
 
         FireBullet();
     }
 
     private void FireBullet()
     {
-        if ((lastTimeShot + fireDelay >= Time.time) || (currentAmmoInMag <= 0) || isReloading)
+        //_lastTimeShot = 0;
+        if ((_lastTimeShot + fireDelay <= Time.time) || (currentAmmoInMag <= 0) || isReloading)
         {
-            Debug.Log("<color=red>Can't shoot</color>");
-            return;
+            Debug.Log($"<color=green>{_lastTimeShot + fireDelay} : {Time.time}</color>");
+            //Debug.Log("<color=red>Can't shoot</color>");
+            //return;
+
+
+            _lastTimeShot = Time.time;
+
+            GenerateShot();
+
+            // TODO: Get it out of this script somehow
+            if (muzzleFlame)
+            {
+                muzzleFlame.LightFlame();
+            }
+
+            // TODO: Get it out of this script somehow x2
+            if (ammoShells)
+            {
+                ammoShells.EjectShell();
+            }
+
+            if (weaponAudio)
+            {
+                weaponAudio.PlayShotSound();
+            }
+
+            //currentAmmoInMag--;
+            //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
         }
-
-        lastTimeShot = Time.time;
-
-        GenerateShot();
-
-        // TODO: Get it out of this script somehow
-        if (muzzleFlame)
+        else
         {
-            muzzleFlame.LightFlame();
-        }
-
-        // TODO: Get it out of this script somehow x2
-        if (ammoShells)
-        {
-            ammoShells.EjectShell();
-        }
-
-        if (weaponAudio)
-        {
-            weaponAudio.PlayShotSound();
-        }
-
-        currentAmmoInMag--;
-        //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
-    }
-
-    // Задержка между выстрелами
-    public void UpdateFiring(float deltaTime)
-    {
-        accumulatedTime += deltaTime;
-        float fireInterval = 1.0f / fireRate;
-        while (accumulatedTime >= 0.0f)
-        {
-            FireBullet();
-            accumulatedTime -= fireInterval;
+            Debug.Log("<color=red>Can't fire.</color>");
         }
     }
+
+    // Задержка между выстрелами. TODO: Првоерить, используется ли она вообще где-то
+    //public void UpdateFiring(float deltaTime)
+    //{
+    //    accumulatedTime += deltaTime;
+    //    float fireInterval = 1.0f / fireRate;
+    //    while (accumulatedTime >= 0.0f)
+    //    {
+    //        FireBullet();
+    //        accumulatedTime -= fireInterval;
+    //    }
+    //}
 
     private void GenerateShot()
     {
+        //if (bullets == null) { bullets = new List<Bullet>(); }
+        
         for (int i = 0; i < projectilesPerShot; i++)
         {
             Vector3 velocity = GetSpreadDirection() * bulletSpeed;
@@ -302,9 +320,16 @@ public class Weapon : MonoBehaviour
 
     private void TryGenerateHitEffect(RaycastHit hit)
     {
-        HitEffect requiredEffect = hitEffects.Find(effect => effect.tag == hit.transform.tag);
-        ParticleSystem effectToCreate = Instantiate(requiredEffect.effect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(effectToCreate, 1200f);
+        try
+        {
+            HitEffect requiredEffect = hitEffects.Find(effect => effect.tag == hit.transform.tag);
+            ParticleSystem effectToCreate = Instantiate(requiredEffect.effect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(effectToCreate, 1200f);
+        }
+        catch
+        {
+            Debug.LogError($"<color=red>Cannot find hit effect for '{hit.transform.tag}'</color>");
+        }
         //if (hitInfo.transform.CompareTag("Concrete"))
         //{
         //    impactTarget = Instantiate(hitEffectConcrete, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));

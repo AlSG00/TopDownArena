@@ -11,7 +11,7 @@ public class PickableWeapon : MonoBehaviour, IInteractable
 
     [Range(1, 1)] public int stackCount;
 
-    public SCRIPT_Weapon weaponPrefab;
+    //public SCRIPT_Weapon weaponPrefab;
     SCRIPT_ActiveWeapon activeWeapon;
     public SCRIPT_InventoryItem inventoryItem;
 
@@ -40,14 +40,14 @@ public class PickableWeapon : MonoBehaviour, IInteractable
     }
 
     // TODO: Implement input key holding to activate this method
-    public void InteractAndUse()
-    {
-        if (activeWeapon)
-        {
+    //public void InteractAndUse()
+    //{
+    //    if (activeWeapon)
+    //    {
 
-            SCRIPT_Weapon weaponToPickup = Instantiate(weaponPrefab);
-            activeWeapon.Equip(weaponToPickup);
-            Destroy(gameObject);
-        }
-    }
+    //        SCRIPT_Weapon weaponToPickup = Instantiate(weaponPrefab);
+    //        activeWeapon.Equip(weaponToPickup);
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

@@ -15,6 +15,7 @@ public class InventoryInput : MonoBehaviour
 
     private void Update()
     {
+        // TODO: Rework and uncomment
         //if(inventory.isCheckingInventory)
         //{
         //    return;
@@ -76,7 +77,10 @@ public class InventoryInput : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            inventory.RightMouseButtonPress();
+            if (inventory.isCheckingInventory)
+            {
+                inventory.RightMouseButtonPress();
+            }
         }
 
         if (Input.GetMouseButtonDown(2))
