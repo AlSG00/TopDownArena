@@ -17,7 +17,7 @@ public class Player_Shooting : MonoBehaviour
 
     //public GameObject inventory;
 
-    public WeaponAnimationEvents animationEvents;
+    //public WeaponAnimationEvents animationEvents;
 
     // Новое
     //public SCRIPT_Weapon weapon;
@@ -32,18 +32,18 @@ public class Player_Shooting : MonoBehaviour
     public Animator animationController;
 
     public bool isHolstered;
-    public Weapon weapon_2;
+    //public Weapon weapon_2;
     public SCRIPT_ActiveWeapon activeWeapon;
     //public Transform leftHand;
     
     //private GameObject magazineHand;
 
     // Этой штуке нечего здесь делать. Переместить!
-    private InventoryController inventory;
+    //private InventoryController inventory;
 
     private void Start()
     {
-        inventory = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
+        //inventory = GameObject.Find("_PlayerCamera").GetComponent<InventoryController>();
         //HandleInventory(false);
         TryGetComponent<SCRIPT_ActiveWeapon>(out activeWeapon);
         isShooting = false;

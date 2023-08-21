@@ -23,12 +23,14 @@ public class Weapon : MonoBehaviour
 
     public SCRIPT_PlayerAmmunition.AmmoType ammoType;
 
-    SCRIPT_PlayerAmmunition.AmmoCollection ammoCollection;
+    //public InventoryController.BindSlot availableSlots;
 
-    private void bubaTest() // TODO: Test method. Redo
-    {
-        SCRIPT_PlayerAmmunition.Ammo ammo = ammoCollection.AmmoTypeCollection[ammoType];
-    }
+    //SCRIPT_PlayerAmmunition.AmmoCollection ammoCollection;
+
+    //private void bubaTest() // TODO: Test method. Redo
+    //{
+    //    SCRIPT_PlayerAmmunition.Ammo ammo = ammoCollection.AmmoTypeCollection[ammoType];
+    //}
 
     private class Bullet
     {

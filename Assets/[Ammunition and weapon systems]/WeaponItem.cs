@@ -5,6 +5,9 @@ using UnityEngine;
 public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
 {
     public bool isUsable { get; set; }
+    //public InventoryController.BindSlot[] availableSlots { get; set; }
+
+    //public InventoryController.BindSlot[] availableSlots;
 
     public Weapon weapon;
     private Weapon _equippedPrefab;

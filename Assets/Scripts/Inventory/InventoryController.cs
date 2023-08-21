@@ -1096,22 +1096,37 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        if (itemToBind.isEquippable)
+        if (itemToBind.isEquippable == false)
         {
-            _bindSlots[bindSlot] = itemToBind;
-            itemToBind.BindKey(); // TODO: Rework this line.
-                                  // There is also need to add special icon that will appear in ui slots
-            _bindSlots[bindSlot].GetComponent<IEquipable>().EquipModel(itemSlotPivots[0]);
-
-            //Передавать точку для спавна оружия, проверить, чтобы заспавнилось нормально
-            //Попытаться экипировать оружие через назначенную клавишу
-            //Попытаться разбиндить
-            //Попытаться Забиндить что-нибудь кроме оружия
-            //Нужно, чтобы корректно появлялась и исчезала моделька забинженного предмета
-            //    корректно обрабатывались иконки, обозначающие бинд предмета
-            
-            //Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
+            Debug.Log("<color=orange>Item is not equipable.</color>");
+            return;
         }
+
+        if (itemToBind.permittedSlots.Contains(bindSlot) == false)
+        {
+            Debug.Log("<color=orange>Item can't be equipped.</color>");
+            return;
+        }
+
+        _bindSlots[bindSlot] = itemToBind;
+        itemToBind.BindKey(); // TODO: Rework this line.
+                              // There is also need to add special icon that will appear in ui slots
+        _bindSlots[bindSlot].GetComponent<IEquipable>().EquipModel(itemSlotPivots[0]);
+
+
+
+
+        //TODO:
+
+        //Передавать точку для спавна оружия, проверить, чтобы заспавнилось нормально
+        //Попытаться экипировать оружие через назначенную клавишу
+        //Попытаться разбиндить
+        //Попытаться Забиндить что-нибудь кроме оружия
+        //Нужно, чтобы корректно появлялась и исчезала моделька забинженного предмета
+        //    корректно обрабатывались иконки, обозначающие бинд предмета
+
+        //Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
+
 
         itemToBind = null;
     }

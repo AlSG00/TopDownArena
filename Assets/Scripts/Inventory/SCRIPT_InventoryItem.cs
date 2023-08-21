@@ -47,6 +47,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     public bool isUsable = false; // можно ли использовать предмет
     public bool isConsumable = false;
     public bool isEquippable = false;
+    public InventoryController.BindSlot[] permittedSlots;
     public bool isBinded = false;
     public bool isVisualizable = false;
 
