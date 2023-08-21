@@ -1104,7 +1104,7 @@ public class InventoryController : MonoBehaviour
 
         if (itemToBind.permittedSlots.Contains(bindSlot) == false)
         {
-            Debug.Log("<color=orange>Item can't be equipped.</color>");
+            Debug.Log("<color=orange>Item can't be equipped at chosen slot.</color>");
             return;
         }
 

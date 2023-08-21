@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058efeb9abb4ab04db4611dde4693675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableSlots_2: 00000000
   weapon: {fileID: 1535013958728979702, guid: 160f899f60942b04dbc3ab131fc8eaae, type: 3}
 --- !u!114 &1124756174162482380
 MonoBehaviour:
@@ -116,6 +115,7 @@ MonoBehaviour:
   isUsable: 0
   isConsumable: 0
   isEquippable: 1
+  permittedSlots: 00000000
   isBinded: 0
   isVisualizable: 0
   isStackable: 0
