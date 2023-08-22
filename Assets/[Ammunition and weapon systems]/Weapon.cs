@@ -89,7 +89,7 @@ public class Weapon : MonoBehaviour
 
     [Header("Weapon parameters")]
     public string weaponName;
-    public SCRIPT_ActiveWeapon.WeaponSlot WeaponSlot;
+    //public SCRIPT_ActiveWeapon.WeaponSlot WeaponSlot;
     public float fireRate = 25;
     public float bulletSpeed = 1000f;
     public int projectilesPerShot = 1;
@@ -152,7 +152,7 @@ public class Weapon : MonoBehaviour
         isReloading = false;
         TryGetComponent<SCRIPT_MuzzleFlame>(out muzzleFlame);
         TryGetComponent<SCRIPT_AmmoShells>(out ammoShells);
-        FireBullet();
+        //FireBullet();
         //_lastTimeShot = 0f;
 
         //bullets = new List<Bullet>();

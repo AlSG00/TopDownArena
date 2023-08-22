@@ -17,12 +17,14 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     public Animator rigController;
 
-    public enum WeaponSlot
-    {
-        Holster = 0,
-        Belt = 1,
-        Back = 2
-    }
+    private Weapon _activeWeapon;
+
+    //public enum WeaponSlot
+    //{
+    //    Holster = 0,
+    //    Belt = 1,
+    //    Back = 2
+    //}
 
     private void OnEnable()
     {
@@ -39,75 +41,86 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         //  rigController = GetComponent<Animator>();
         playerShooting = GetComponent<Player_Shooting>();
         SCRIPT_Weapon equippedWeapon = GetComponentInChildren<SCRIPT_Weapon>();
-        activeWeaponIndex = (int)equippedWeapon.WeaponSlot;
-        if (equippedWeapon)
-        {
-            Equip(equippedWeapon);
-        }
+       // activeWeaponIndex = (int)equippedWeapon.WeaponSlot;
+
+        //if (equippedWeapon)
+        //{
+        //    Equip(equippedWeapon);
+        //}
     }
 
-    private void Update()
-    {
-        var weapon = GetWeapon(activeWeaponIndex);
+    //private void Update()
+    //{
+    //    var weapon = GetWeapon(activeWeaponIndex);
 
-        // Move to InputController
-        if (weapon != null && !weapon.isReloading)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Debug.Log("Holster unavailable");
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
-            }
-        }
-    }
+    //    // Move to InputController
+    //    if (weapon != null && !weapon.isReloading)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Alpha1))
+    //        {
+    //            Debug.Log("Holster unavailable");
+    //        }
+    //        else if (Input.GetKeyDown(KeyCode.Alpha2))
+    //        {
+    //            SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Belt);
+    //        }
+    //        else if (Input.GetKeyDown(KeyCode.Alpha3))
+    //        {
+    //            SetActiveWeapon(SCRIPT_ActiveWeapon.WeaponSlot.Back);
+    //        }
+    //    }
+    //}
 
-    public void Equip(SCRIPT_Weapon weaponToEquip)
-    {
-        GetComponent<Player_Shooting>().Equip(weaponToEquip);
-        int weaponSlotIndex = (int)weaponToEquip.WeaponSlot;
 
-        var weapon = GetWeapon(weaponSlotIndex);
 
-        if (weapon)
-        {
-            Destroy(weapon.gameObject);
-        }
 
-        weapon = weaponToEquip;
-        weapon.transform.SetParent(weaponSlots[weaponSlotIndex], false);
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.transform.localRotation = Quaternion.identity;
 
-        equippedWeapons[weaponSlotIndex] = weapon;
 
-        SetActiveWeapon(weaponToEquip.WeaponSlot);
-    }
 
-    public void SetActiveWeapon(WeaponSlot weaponSlot)
-    {
-        if (!isSwitchingWeapon)
-        {
-            isSwitchingWeapon = true;
-            int holsterIndex = activeWeaponIndex;
-            int activateIndex = (int)weaponSlot;
 
-            if (holsterIndex == activateIndex)
-            {
-                Debug.Log("Already equipped");
-                isSwitchingWeapon = false;
-                return;
-            }
 
-            StartCoroutine(SwitchWeapon(holsterIndex, activateIndex));
-        }
-    }
+    // Don't delete yet
+
+    //public void Equip(SCRIPT_Weapon weaponToEquip)
+    //{
+    //    GetComponent<Player_Shooting>().Equip(weaponToEquip);
+    //    int weaponSlotIndex = (int)weaponToEquip.WeaponSlot;
+
+    //    var weapon = GetWeapon(weaponSlotIndex);
+
+    //    if (weapon)
+    //    {
+    //        Destroy(weapon.gameObject);
+    //    }
+
+    //    weapon = weaponToEquip;
+    //    weapon.transform.SetParent(weaponSlots[weaponSlotIndex], false);
+    //    weapon.transform.localPosition = Vector3.zero;
+    //    weapon.transform.localRotation = Quaternion.identity;
+
+    //    equippedWeapons[weaponSlotIndex] = weapon;
+
+    //    SetActiveWeapon(weaponToEquip.WeaponSlot);
+    //}
+
+    //public void SetActiveWeapon(WeaponSlot weaponSlot)
+    //{
+    //    if (!isSwitchingWeapon)
+    //    {
+    //        isSwitchingWeapon = true;
+    //        int holsterIndex = activeWeaponIndex;
+    //        int activateIndex = (int)weaponSlot;
+
+    //        if (holsterIndex == activateIndex)
+    //        {
+    //            Debug.Log("Already equipped");
+    //            isSwitchingWeapon = false;
+    //            return;
+    //        }
+
+    //        StartCoroutine(SwitchWeapon(holsterIndex, activateIndex));
+    //    }
+    //}
 
     private IEnumerator SwitchWeapon(int holsterIndex, int activateIndex)
     {
@@ -154,23 +167,45 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     private void TestActivateWeapon(Weapon weaponToActivate)
     {
-        //var weapon = GetWeapon(activateIndex);
-        //if (weapon)
-        //{
-
-            rigController.SetBool("isHolstered", false);
-            rigController.Play($"ANIM_Equip_{weaponToActivate.weaponName}");
-            //do
-            //{
-            //    yield return new WaitForEndOfFrame();
-            //}
-            //while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
-
-            isSwitchingWeapon = false;
-            GetComponent<Player_Shooting>().Equip_2(weaponToActivate);
-            playerShooting.isHolstered = false;
-        //}
+         
+        if ((_activeWeapon != null) && (weaponToActivate == _activeWeapon))
+        {
+            Debug.Log($"<color=yellow>Start weapon holstering...</color>");
+            TestHolsterWeapon();
+            
+        }
+        else if ((_activeWeapon != null) && (weaponToActivate != _activeWeapon))
+        {
+            Debug.Log($"<color=yellow>Start weapon switching...</color>");
+            TestHolsterWeapon();
+            TestDrawWeapon(weaponToActivate);
+        }
+        else
+        {
+            Debug.Log($"<color=yellow>Start weapon drawing...</color>");
+            TestDrawWeapon(weaponToActivate);
+        }
     }
+    
+    private void TestHolsterWeapon()
+    {
+        playerShooting.isHolstered = true;
+        rigController.SetBool("isHolstered", true);
+        Debug.Log($"<color=yellow>Holstered [{_activeWeapon.gameObject.name}]</color>");
+        _activeWeapon = null;
+    }    
+
+    private void TestDrawWeapon(Weapon weaponToDraw)
+    {
+        _activeWeapon = weaponToDraw;
+        rigController.SetBool("isHolstered", false);
+        rigController.Play($"ANIM_Equip_{_activeWeapon.weaponName}");
+        isSwitchingWeapon = false;
+        GetComponent<Player_Shooting>().Equip_2(_activeWeapon);
+        playerShooting.isHolstered = false;
+        Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
+    }
+
 
 
     private SCRIPT_Weapon GetWeapon(int index)

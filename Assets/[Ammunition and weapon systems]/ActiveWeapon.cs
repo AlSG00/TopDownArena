@@ -27,7 +27,7 @@ public class ActiveWeapon : MonoBehaviour
         //  rigController = GetComponent<Animator>();
         playerShooting = GetComponent<Player_Shooting>();
         SCRIPT_Weapon equippedWeapon = GetComponentInChildren<SCRIPT_Weapon>();
-        activeWeaponIndex = (int)equippedWeapon.WeaponSlot;
+        //activeWeaponIndex = (int)equippedWeapon.WeaponSlot;
 
 
 

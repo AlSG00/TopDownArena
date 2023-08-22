@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
@@ -11,15 +9,30 @@ public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
 
     public Weapon weapon;
     private Weapon _equippedPrefab;
+    //private bool _isUsing = false;
+
+    //public delegate void UseWeaponAction(Weapon weapon, bool alreadyUsing);
+    //public static event UseWeaponAction OnUseWeapon;
 
     public static event System.Action<Weapon> OnUseWeapon;
 
+
     public void Use()
     {
-        Debug.Log("<color=yellow>Using weapon...</color>");
+        //if (_isUsing == false)
+        //{
+        //    _isUsing = true;
+        //    Debug.Log($"<color=yellow>Using [{gameObject.name}] weapon...</color>");
+        //    OnUseWeapon?.Invoke(_equippedPrefab);
+        //}
+        //else
+        //{
+        //    _isUsing = false;
+        //}
 
+        //_isUsing = true;
+        Debug.Log($"<color=yellow>Using [{gameObject.name}] weapon...</color>");
         OnUseWeapon?.Invoke(_equippedPrefab);
-        // Draw weapon
 
     }
 

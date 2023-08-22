@@ -118,10 +118,10 @@ public class InputManager : MonoBehaviour
         //    weapon.UpdateBullet(Time.deltaTime);
         //}
 
-        if (Input.GetKeyDown(KeyCode.X) && !isAiming)
-        {
-            GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
-        }
+        //if (Input.GetKeyDown(KeyCode.X) && !isAiming)
+        //{
+        //    GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
+        //}
     }
 
     private void InventoryInput()

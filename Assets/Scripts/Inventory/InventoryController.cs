@@ -26,11 +26,24 @@ public class InventoryController : MonoBehaviour
     #region VARIABLES
     public Transform[] itemSlotPivots;
 
-    private Dictionary<BindSlot, SCRIPT_InventoryItem> _bindSlots;
+    //private Dictionary<BindSlot, SCRIPT_InventoryItem> _bindSlots;
+    private Dictionary<BindSlot, EquipmentSlot> _bindSlots;
 
     //public SCRIPT_InventoryItem bindedItem_1;
     //public SCRIPT_InventoryItem bindedItem_2;
     //public SCRIPT_InventoryItem bindedItem_3;
+
+    public class EquipmentSlot
+    {
+        public SCRIPT_InventoryItem item;
+        public Transform pivot;
+
+        public EquipmentSlot(SCRIPT_InventoryItem assignedItem, Transform SlotPivot)
+        {
+            item = assignedItem;
+            pivot = SlotPivot;
+        }
+    }
 
     [Header("References")]
     public SCRIPT_ItemGrid inventoryGrid;
@@ -84,12 +97,30 @@ public class InventoryController : MonoBehaviour
 
     private void Awake()
     {
-        _bindSlots = new Dictionary<BindSlot, SCRIPT_InventoryItem>()
+        //_bindSlots = new Dictionary<BindSlot, SCRIPT_InventoryItem>()
+        //{
+        //    { BindSlot.Slot_1, null},
+        //    { BindSlot.Slot_2, null},
+        //    { BindSlot.Slot_3, null}
+        //};
+
+        //_bindSlots = new Dictionary<BindSlot, SCRIPT_InventoryItem>()
+        //{
+        //    { BindSlot.Slot_1, null},
+        //    { BindSlot.Slot_2, null},
+        //    { BindSlot.Slot_3, null}
+        //};
+
+
+        // Equpment Slots Init
+
+        _bindSlots = new Dictionary<BindSlot, EquipmentSlot>()
         {
-            { BindSlot.Slot_1, null},
-            { BindSlot.Slot_2, null},
-            { BindSlot.Slot_3, null}
+            { BindSlot.Slot_1, new(null, itemSlotPivots[0])},
+            { BindSlot.Slot_2, new(null, itemSlotPivots[1])},
+            { BindSlot.Slot_3, new(null, itemSlotPivots[2])}
         };
+
     }
 
     private void Start()
@@ -1108,10 +1139,12 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        _bindSlots[bindSlot] = itemToBind;
+        _bindSlots[bindSlot].item = itemToBind;
         itemToBind.BindKey(); // TODO: Rework this line.
                               // There is also need to add special icon that will appear in ui slots
-        _bindSlots[bindSlot].GetComponent<IEquipable>().EquipModel(itemSlotPivots[0]);
+
+
+        _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(_bindSlots[bindSlot].pivot);
 
 
 
@@ -1148,12 +1181,12 @@ public class InventoryController : MonoBehaviour
 
         if (itemToBind.isBinded)
         {
-            BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value == itemToBind).Key;
+            BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value.item == itemToBind).Key;
             itemToBind.UnbindKey();
 
             if (itemToBind.isEquippable)
             {
-                _bindSlots[slotToUnbind].GetComponent<IEquipable>().UnequipModel();
+                _bindSlots[slotToUnbind].item.GetComponent<IEquipable>().UnequipModel();
             }
 
             _bindSlots[slotToUnbind] = null;
@@ -1165,7 +1198,7 @@ public class InventoryController : MonoBehaviour
         if (_bindSlots[bindSlot] != null)
         {
             //bindedItem_1.GetComponent<SCRIPT_IItem>().Use();
-            _bindSlots[bindSlot].GetComponent<SCRIPT_IItem>().Use();
+            _bindSlots[bindSlot].item.GetComponent<SCRIPT_IItem>().Use();
         }
     }
 

@@ -24,7 +24,7 @@ public class SCRIPT_Weapon : MonoBehaviour
 
     [Header("Weapon parameters")]
     public string weaponName;
-    public SCRIPT_ActiveWeapon.WeaponSlot WeaponSlot;
+    //public SCRIPT_ActiveWeapon.WeaponSlot WeaponSlot;
     public float fireRate = 25;
     public float bulletSpeed = 1000f;
     public int projectilesPerShot = 1;

@@ -101,7 +101,6 @@
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
     <Compile Include="Assets\Scripts\Items\SCRIPT_Medkit_Small.cs" />
-    <Compile Include="Assets\Scripts\Interaction\SCRIPT_PickableWeapon.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSStencilMask.cs" />
     <Compile Include="Assets\[Ammunition and weapon systems]\PlayerCombatControl.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\CCTVCamera.cs" />
@@ -138,7 +137,6 @@
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Scripts\LOSLayerExcluder.cs" />
     <Compile Include="Assets\Scripts\InteractableApproachingHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory\SCRIPT_InventoryHighlight.cs" />
-    <Compile Include="Assets\Scripts\Weapon\SCRIPT_WeaponPickup.cs" />
     <Compile Include="Assets\Thirdparty\EntroPi\GPU Line Of Sight\Example Scene\Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Test_PlayAnimation.cs" />
     <Compile Include="Assets\Scripts\Doors\ProtectedDoor.cs" />
