@@ -12,7 +12,7 @@ public class PickableWeapon : MonoBehaviour, IInteractable
     [Range(1, 1)] public int stackCount;
 
     //public SCRIPT_Weapon weaponPrefab;
-    SCRIPT_ActiveWeapon activeWeapon;
+    //SCRIPT_ActiveWeapon activeWeapon;
     public SCRIPT_InventoryItem inventoryItem;
 
     public delegate int PickAction(SCRIPT_InventoryItem item, int stackCount);
@@ -29,7 +29,7 @@ public class PickableWeapon : MonoBehaviour, IInteractable
     private void Start()
     {
         // TODO: Get rid of this line
-        activeWeapon = GameObject.Find("_Player").GetComponent<SCRIPT_ActiveWeapon>();
+        //activeWeapon = GameObject.Find("_Player").GetComponent<SCRIPT_ActiveWeapon>();
     }
 
     public void Interact()

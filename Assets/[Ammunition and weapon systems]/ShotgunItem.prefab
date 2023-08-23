@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058efeb9abb4ab04db4611dde4693675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1535013958728979702, guid: 160f899f60942b04dbc3ab131fc8eaae, type: 3}
+  weapon: {fileID: 7053424264713938254, guid: 6b2bc80c1e9161e41bbf377dcaac0985, type: 3}
 --- !u!114 &1124756174162482380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
   itemRectTransform: {fileID: 4262617913092726369}
   lastGrid: {fileID: 0}
   name: 
-  itemData: {fileID: 11400000, guid: a78587a71a9a2ca4f8bd1c4fe86b71c0, type: 2}
-  objectPrefab: {fileID: 3541160466102168151, guid: 2a29a12c7f56c404c8c477fb3c5ea940,
+  itemData: {fileID: 11400000, guid: c6029665936c4b24b9ad0f43fe9ba07e, type: 2}
+  objectPrefab: {fileID: 2565394631221000243, guid: 30332dec1f0e48244afc452692bff909,
     type: 3}
   weight: 5
   isRotatable: 1
@@ -117,7 +117,6 @@ MonoBehaviour:
   isEquippable: 1
   permittedSlots: 01000000
   isBinded: 0
-  isVisualizable: 0
   isStackable: 0
   isDividable: 0
   stackCount: 1

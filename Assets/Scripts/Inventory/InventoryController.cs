@@ -113,14 +113,19 @@ public class InventoryController : MonoBehaviour
 
 
         // Equpment Slots Init
-
-        _bindSlots = new Dictionary<BindSlot, EquipmentSlot>()
+        try
+        {
+            _bindSlots = new Dictionary<BindSlot, EquipmentSlot>()
         {
             { BindSlot.Slot_1, new(null, itemSlotPivots[0])},
             { BindSlot.Slot_2, new(null, itemSlotPivots[1])},
             { BindSlot.Slot_3, new(null, itemSlotPivots[2])}
         };
-
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
     }
 
     private void Start()
