@@ -24,6 +24,11 @@ public class GroundedItemInfoWindow : MonoBehaviour
         GroundedItemInfoHandler.OnHide -= Hide;
     }
 
+    private void Start()
+    {
+        Hide();
+    }
+
     private void LateUpdate()
     {
         if (_lastPosition != null)
