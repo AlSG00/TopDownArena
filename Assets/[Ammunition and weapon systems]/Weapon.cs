@@ -114,16 +114,16 @@ public class Weapon : MonoBehaviour
     public Transform muzzle;
 
      //TODO: move to separated component
-    [Header("Audio")]
-    public AudioClip reloadSound;
+    //[Header("Audio")]
+    //public AudioClip reloadSound;
     //public AudioClip shotSound;
     //public AudioSource audioSource;
 
-    [Header("[Temp rifle reload audio]")]
-    public AudioClip ejectMagSound;
-    public AudioClip putMagSound;
-    public AudioClip pullOutMagSound;
-    public AudioClip InsertMagSound;
+    //[Header("[Temp rifle reload audio]")]
+    //public AudioClip ejectMagSound;
+    //public AudioClip putMagSound;
+    //public AudioClip pullOutMagSound;
+    //public AudioClip InsertMagSound;
 
     // Other
     private Ray ray;
