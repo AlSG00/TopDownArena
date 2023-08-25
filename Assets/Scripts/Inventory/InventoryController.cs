@@ -192,60 +192,88 @@ public class InventoryController : MonoBehaviour
 
         if (selectedItem.isOnCursor)
         {
-            if (selectedItem.isDividable)
+            //if (selectedItem.isDividable)
+            //{
+            //    for (int i = 0; i < selectedItem.stackCount; i++)
+            //    {
+            //        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+            //    }
+            //    selectedItemGrid.testList.Remove(selectedItem);
+            //    UpdateCarryingWeight(selectedItem, true);
+            //    Destroy(selectedItem.gameObject);
+            //    inventoryHighlight.Show(false);
+            //}
+            //else
+            //{
+            //    GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+            //    PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
+            //    droppedItemData.stackCount = selectedItem.stackCount;
+            //    selectedItemGrid.testList.Remove(selectedItem);
+            //    UpdateCarryingWeight(selectedItem, true);
+            //    Destroy(selectedItem.gameObject);
+            //    inventoryHighlight.Show(false);
+            //}
+
+            // NEW: Without isDividable
+            for (int i = 0; i < selectedItem.stackCount; i++)
             {
-                for (int i = 0; i < selectedItem.stackCount; i++)
-                {
-                    Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-                }
-                selectedItemGrid.testList.Remove(selectedItem);
-                UpdateCarryingWeight(selectedItem, true);
-                Destroy(selectedItem.gameObject);
-                inventoryHighlight.Show(false);
+                Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
             }
-            else
-            {
-                GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-                PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
-                droppedItemData.stackCount = selectedItem.stackCount;
-                selectedItemGrid.testList.Remove(selectedItem);
-                UpdateCarryingWeight(selectedItem, true);
-                Destroy(selectedItem.gameObject);
-                inventoryHighlight.Show(false);
-            }
+            selectedItemGrid.testList.Remove(selectedItem);
+            UpdateCarryingWeight(selectedItem, true);
+            Destroy(selectedItem.gameObject);
+            inventoryHighlight.Show(false);
         }
         else
         {
-            if (selectedItem.isDividable)
+            //if (selectedItem.isDividable)
+            //{
+            //    if (selectedItem.stackCount == 1)
+            //    {
+            //        selectedItemGrid.testList.Remove(selectedItem);
+            //        UpdateCarryingWeight(selectedItem, false);
+            //        itemInfoWindow.SetVisibility(false, selectedItem);
+            //        Destroy(selectedItem.gameObject);
+            //        inventoryHighlight.Show(false);
+            //    }
+            //    else
+            //    {
+            //        selectedItem.isDropping = false;
+            //        selectedItem.stackCount--;
+            //        selectedItem.UpdateCounter();
+            //        UpdateCarryingWeight(selectedItem, false);
+            //    }
+            //    Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+            //}
+            //else
+            //{
+            //    GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+            //    PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
+            //    droppedItemData.stackCount = selectedItem.stackCount;
+            //    selectedItemGrid.testList.Remove(selectedItem);
+            //    UpdateCarryingWeight(selectedItem, true);
+            //    itemInfoWindow.SetVisibility(false, selectedItem);
+            //    Destroy(selectedItem.gameObject);
+            //    inventoryHighlight.Show(false);
+            //}
+
+            // NEW: without isDividable
+            if (selectedItem.stackCount == 1)
             {
-                if (selectedItem.stackCount == 1)
-                {
-                    selectedItemGrid.testList.Remove(selectedItem);
-                    UpdateCarryingWeight(selectedItem, false);
-                    itemInfoWindow.SetVisibility(false, selectedItem);
-                    Destroy(selectedItem.gameObject);
-                    inventoryHighlight.Show(false);
-                }
-                else
-                {
-                    selectedItem.isDropping = false;
-                    selectedItem.stackCount--;
-                    selectedItem.UpdateCounter();
-                    UpdateCarryingWeight(selectedItem, false);
-                }
-                Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-            }
-            else
-            {
-                GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-                PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
-                droppedItemData.stackCount = selectedItem.stackCount;
                 selectedItemGrid.testList.Remove(selectedItem);
-                UpdateCarryingWeight(selectedItem, true);
+                UpdateCarryingWeight(selectedItem, false);
                 itemInfoWindow.SetVisibility(false, selectedItem);
                 Destroy(selectedItem.gameObject);
                 inventoryHighlight.Show(false);
             }
+            else
+            {
+                selectedItem.isDropping = false;
+                selectedItem.stackCount--;
+                selectedItem.UpdateCounter();
+                UpdateCarryingWeight(selectedItem, false);
+            }
+            Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
         }
 
         selectedItem = null;
@@ -271,27 +299,40 @@ public class InventoryController : MonoBehaviour
         itemInfoWindow.SetVisibility(false, selectedItem);
         selectedItem.isDropping = true;
         selectedItemGrid.PickFromGrid(selectedItem.positionOnGrid.x, selectedItem.positionOnGrid.y);
-        if (selectedItem.isDividable)
+
+
+        //if (selectedItem.isDividable)
+        //{
+        //    for (int i = 0; i < selectedItem.stackCount; i++)
+        //    {
+        //        Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+        //    }
+        //    selectedItemGrid.testList.Remove(selectedItem);
+        //    UpdateCarryingWeight(selectedItem, true);
+        //    Destroy(selectedItem.gameObject);
+        //    inventoryHighlight.Show(false);
+        //}
+        //else
+        //{
+        //    GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
+        //    PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
+        //    droppedItemData.stackCount = selectedItem.stackCount;
+        //    selectedItemGrid.testList.Remove(selectedItem);
+        //    UpdateCarryingWeight(selectedItem, true);
+        //    Destroy(selectedItem.gameObject);
+        //    inventoryHighlight.Show(false);
+        //}
+
+        // NEW: without isDividable
+        // TODO: This part seems can to be moved to a separate method
+        for (int i = 0; i < selectedItem.stackCount; i++)
         {
-            for (int i = 0; i < selectedItem.stackCount; i++)
-            {
-                Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-            }
-            selectedItemGrid.testList.Remove(selectedItem);
-            UpdateCarryingWeight(selectedItem, true);
-            Destroy(selectedItem.gameObject);
-            inventoryHighlight.Show(false);
+            Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
         }
-        else
-        {
-            GameObject droppedItem = Instantiate(selectedItem.GetComponent<SCRIPT_InventoryItem>().objectPrefab, itemDropPoint.position, Quaternion.identity);
-            PickableObject droppedItemData = droppedItem.GetComponent<PickableObject>();
-            droppedItemData.stackCount = selectedItem.stackCount;
-            selectedItemGrid.testList.Remove(selectedItem);
-            UpdateCarryingWeight(selectedItem, true);
-            Destroy(selectedItem.gameObject);
-            inventoryHighlight.Show(false);
-        }
+        selectedItemGrid.testList.Remove(selectedItem);
+        UpdateCarryingWeight(selectedItem, true);
+        Destroy(selectedItem.gameObject);
+        inventoryHighlight.Show(false);
     }
 
     #endregion
@@ -400,20 +441,30 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        if (item.isDividable)
+        //if (item.isDividable)
+        //{
+        //    if (dropFullStack)
+        //    {
+        //        _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
+        //    }
+        //    else
+        //    {
+        //        _playerCarryingWeight.TakeWeight(item.weight);
+        //    }
+        //}
+        //else
+        //{
+        //    _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
+        //}
+
+        // NEW: without isDividable
+        if (dropFullStack)
         {
-            if (dropFullStack)
-            {
-                _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
-            }
-            else
-            {
-                _playerCarryingWeight.TakeWeight(item.weight);
-            }
+            _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
         }
         else
         {
-            _playerCarryingWeight.TakeWeight(item.weight * item.stackCount);
+            _playerCarryingWeight.TakeWeight(item.weight);
         }
     }
 
@@ -430,6 +481,9 @@ public class InventoryController : MonoBehaviour
             }
         }
         
+
+        Здесь нужно аккуратно переписать логику без isDividable
+
         if (selectedItem.isOnCursor)
         {
             SCRIPT_InventoryItem secondItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];

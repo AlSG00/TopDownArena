@@ -53,10 +53,11 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     [Header("Stacking properties")]
     public bool isStackable = false; // можно ли стакать предмет
-    public bool isDividable = false; // Можно ли выбросить один предмет, а не весь стак
+    //public bool isDividable = false; // Можно ли выбросить один предмет, а не весь стак
     [Range(0, 999)] public int stackCount = 0; // текущий размер стака
     [Range(0, 999)] public int maxStackCount = 0; // максимальный размер стака
 
+    // TODO: Move to separate script
     [Header("Audio")]
     //public AudioSource useItemAudioSource; // источник звука использования предмета
     public AudioClip useItemAudio;
