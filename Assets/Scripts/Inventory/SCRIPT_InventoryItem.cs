@@ -160,16 +160,22 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     
     internal void BindKey()
     {
-        isBinded = true;
-        bindIndicator.enabled = true;
+        if (isBinded == false)
+        {
+            isBinded = true;
+            bindIndicator.enabled = true;
+        }
         // TODO: Enable sprite indicating that current item is binded
         // (draw a frame around the item and put item in the GUI Slot)
     }
 
     internal void UnbindKey()
     {
-        isBinded = false;
-        bindIndicator.enabled = false;
+        if (isBinded)
+        {
+            isBinded = false;
+            bindIndicator.enabled = false;
+        }
         // TODO: Disable sprite indicating that current item bindnd
         // (hide a frame around the item and erase item from the GUI Slot)
     }

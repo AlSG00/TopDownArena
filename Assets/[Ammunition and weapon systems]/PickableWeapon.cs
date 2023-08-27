@@ -21,6 +21,10 @@ public class PickableWeapon : MonoBehaviour, IInteractable
 
     private void Awake()
     {
+        if (stackCount == 0)
+        {
+            stackCount = 1;
+        }
         canInteract = false;
         alreadyInteracting = false;
         inInteractionArea = false;

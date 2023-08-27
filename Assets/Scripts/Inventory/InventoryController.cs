@@ -154,6 +154,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
+            TryUnbindItem();
             DropItem();
         }
     }
@@ -482,16 +483,16 @@ public class InventoryController : MonoBehaviour
         }
         
 
-        Здесь нужно аккуратно переписать логику без isDividable
-
         if (selectedItem.isOnCursor)
         {
             SCRIPT_InventoryItem secondItem = selectedItemGrid.inventoryItemSlot[tileGridPosition.x, tileGridPosition.y];
             if (secondItem != null)
             {
+                //if (secondItem.name == selectedItem.name &&
+                //    selectedItem.isStackable &&
+                //    selectedItem.isDividable)
                 if (secondItem.name == selectedItem.name &&
-                    selectedItem.isStackable &&
-                    selectedItem.isDividable)
+                    selectedItem.isStackable)
                 {
                     if (secondItem.stackCount >= secondItem.maxStackCount)
                     {
@@ -532,8 +533,9 @@ public class InventoryController : MonoBehaviour
             }
             else
             {
-                if (selectedItem.stackCount > 1 &&
-                    selectedItem.isDividable)
+                //if (selectedItem.stackCount > 1 &&
+                //    selectedItem.isDividable)
+                if (selectedItem.stackCount > 1)
                 {
                     SCRIPT_InventoryItem itemOnCursor = selectedItem;
                     CreateItemForUi(itemOnCursor);
@@ -725,6 +727,7 @@ public class InventoryController : MonoBehaviour
         {
             if (selectedItemGrid.isPlayerInventory)
             {
+                TryUnbindItem();
                 selectedItemGrid = containerItemGrid;
                 int stackCountRemaining = InsertIntoAvailableStacks(selectedItem, selectedItem.stackCount, false);
                 if (stackCountRemaining > 0)
@@ -897,6 +900,7 @@ public class InventoryController : MonoBehaviour
         if (selectedItem.lastGrid.isPlayerInventory &&
             selectedItemGrid.isPlayerInventory == false)
         {
+            TryUnbindItem();
             _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
         }
         else if (selectedItem.lastGrid.isPlayerInventory == false &&
@@ -1248,7 +1252,7 @@ public class InventoryController : MonoBehaviour
                 _bindSlots[slotToUnbind].item.GetComponent<IEquipable>().UnequipModel();
             }
 
-            _bindSlots[slotToUnbind] = null;
+            _bindSlots[slotToUnbind].item = null;
         }
     }
 

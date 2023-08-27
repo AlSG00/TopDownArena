@@ -133,9 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeeb1edec73019645b0cbb45d69cfcb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackCount: 0
-  weaponPrefab: {fileID: 1048267339396752250, guid: 160f899f60942b04dbc3ab131fc8eaae,
-    type: 3}
+  stackCount: 1
   inventoryItem: {fileID: 1124756174162482380, guid: 8791264e257bee74e8fddc33974ddfb8,
     type: 3}
 --- !u!114 &-4376182083252733335
