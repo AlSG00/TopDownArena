@@ -10,10 +10,10 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     public bool isReloading = false;
     int activeWeaponIndex;
     private Player_Shooting playerShooting;
-    public Transform[] weaponSlots;
+    //public Transform[] weaponSlots;
     //public Transform weaponParent;
-    public Transform weaponLeftGrip;
-    public Transform weaponRightGrip;
+    //public Transform weaponLeftGrip;
+    //public Transform weaponRightGrip;
 
     public Animator rigController;
 
@@ -167,7 +167,6 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     private void TestActivateWeapon(Weapon weaponToActivate)
     {
-         
         if ((_activeWeapon != null) && (weaponToActivate == _activeWeapon))
         {
             Debug.Log($"<color=yellow>Start weapon holstering...</color>");

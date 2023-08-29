@@ -39,7 +39,11 @@ public class SCRIPT_ItemContainer : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        containerGrid.SetContainerGridVisibility(false);
+        if (containerGrid != null)
+        {
+            containerGrid.SetContainerGridVisibility(false);
+        }
+
         alreadyInteracting = false;
         canInteract = false;
         inInteractionArea = false;

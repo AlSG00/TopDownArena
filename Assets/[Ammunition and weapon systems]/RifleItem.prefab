@@ -115,11 +115,9 @@ MonoBehaviour:
   isUsable: 0
   isConsumable: 0
   isEquippable: 1
-  permittedSlots: 00000000
+  permittedSlots: 0100000002000000
   isBinded: 0
-  isVisualizable: 0
   isStackable: 0
-  isDividable: 0
   stackCount: 1
   maxStackCount: 1
   useItemAudio: {fileID: 0}

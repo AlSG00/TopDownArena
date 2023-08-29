@@ -18,13 +18,17 @@ public class InventoryController : MonoBehaviour
     // TODO: Opportunity to exzpand available equippable slots
     public enum BindSlot
     {
-        Slot_1,
-        Slot_2,
-        Slot_3
+        HolsterSlot,
+        BeltSlot,
+        BackSlot
     }
 
+    public Transform[] holsterSlotOffsetsArray;
+    public Transform[] beltSlotOffsetsArray;
+    public Transform[] backSlotOffsetsArray;
+
     #region VARIABLES
-    public Transform[] itemSlotPivots;
+    //public Transform[] itemSlotPivots;
 
     //private Dictionary<BindSlot, SCRIPT_InventoryItem> _bindSlots;
     private Dictionary<BindSlot, EquipmentSlot> _bindSlots;
@@ -36,12 +40,12 @@ public class InventoryController : MonoBehaviour
     public class EquipmentSlot
     {
         public SCRIPT_InventoryItem item;
-        public Transform pivot;
+        public Transform[] pivots;
 
-        public EquipmentSlot(SCRIPT_InventoryItem assignedItem, Transform SlotPivot)
+        public EquipmentSlot(SCRIPT_InventoryItem assignedItem, Transform[] SlotPivotsArray)
         {
             item = assignedItem;
-            pivot = SlotPivot;
+            pivots = SlotPivotsArray;
         }
     }
 
@@ -97,30 +101,14 @@ public class InventoryController : MonoBehaviour
 
     private void Awake()
     {
-        //_bindSlots = new Dictionary<BindSlot, SCRIPT_InventoryItem>()
-        //{
-        //    { BindSlot.Slot_1, null},
-        //    { BindSlot.Slot_2, null},
-        //    { BindSlot.Slot_3, null}
-        //};
-
-        //_bindSlots = new Dictionary<BindSlot, SCRIPT_InventoryItem>()
-        //{
-        //    { BindSlot.Slot_1, null},
-        //    { BindSlot.Slot_2, null},
-        //    { BindSlot.Slot_3, null}
-        //};
-
-
-        // Equpment Slots Init
         try
         {
             _bindSlots = new Dictionary<BindSlot, EquipmentSlot>()
-        {
-            { BindSlot.Slot_1, new(null, itemSlotPivots[0])},
-            { BindSlot.Slot_2, new(null, itemSlotPivots[1])},
-            { BindSlot.Slot_3, new(null, itemSlotPivots[2])}
-        };
+            {
+                { BindSlot.HolsterSlot, new(null, holsterSlotOffsetsArray)},
+                { BindSlot.BeltSlot, new(null, beltSlotOffsetsArray)},
+                { BindSlot.BackSlot, new(null, backSlotOffsetsArray)}
+            };
         }
         catch (Exception ex)
         {
@@ -1203,13 +1191,13 @@ public class InventoryController : MonoBehaviour
         }
 
         _bindSlots[bindSlot].item = itemToBind;
-        itemToBind.BindKey(); // TODO: Rework this line.
-                              // There is also need to add special icon that will appear in ui slots
+        itemToBind.BindKey(); // TODO: There is also need to add special icon that will appear in ui slots
 
-
-        _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(_bindSlots[bindSlot].pivot);
-
-
+        // TODO: It's very important for pivot to have the same name as a weapon.
+        Transform pivot = _bindSlots[bindSlot].pivots.Single(pivot => pivot.name.Contains(itemToBind.name));
+        Debug.Log($"<color=yellow>Prefered pivot offset is {pivot}.</color>");
+        _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(pivot);
+        //_bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(_bindSlots[bindSlot].pivot);
 
 
         //TODO:

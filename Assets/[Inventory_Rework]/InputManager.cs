@@ -136,11 +136,11 @@ public class InputManager : MonoBehaviour
         {
             if (inventory.isCheckingInventory)
             {
-                inventory.TryBindItem(InventoryController.BindSlot.Slot_1);
+                inventory.TryBindItem(InventoryController.BindSlot.HolsterSlot);
             }
             else
             {
-                inventory.TryUseBindedItem(InventoryController.BindSlot.Slot_1);
+                inventory.TryUseBindedItem(InventoryController.BindSlot.HolsterSlot);
             }
         }
 
@@ -148,11 +148,11 @@ public class InputManager : MonoBehaviour
         {
             if (inventory.isCheckingInventory)
             {
-                inventory.TryBindItem(InventoryController.BindSlot.Slot_2);
+                inventory.TryBindItem(InventoryController.BindSlot.BeltSlot);
             }
             else
             {
-                inventory.TryUseBindedItem(InventoryController.BindSlot.Slot_2);
+                inventory.TryUseBindedItem(InventoryController.BindSlot.BeltSlot);
             }
         }
 
@@ -160,11 +160,11 @@ public class InputManager : MonoBehaviour
         {
             if (inventory.isCheckingInventory)
             {
-                inventory.TryBindItem(InventoryController.BindSlot.Slot_3);
+                inventory.TryBindItem(InventoryController.BindSlot.BackSlot);
             }
             else
             {
-                inventory.TryUseBindedItem(InventoryController.BindSlot.Slot_3);
+                inventory.TryUseBindedItem(InventoryController.BindSlot.BackSlot);
             }
         }
 
