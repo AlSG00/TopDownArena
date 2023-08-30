@@ -1190,6 +1190,11 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
+        // TODO: Here need to write check functions:
+        // - check if item's already binded on this slot
+        // - check if item's already binded at some other slot
+        // - check if something else's already binded on this slot
+
         _bindSlots[bindSlot].item = itemToBind;
         itemToBind.BindKey(); // TODO: There is also need to add special icon that will appear in ui slots
 
@@ -1248,7 +1253,6 @@ public class InventoryController : MonoBehaviour
     {
         if (_bindSlots[bindSlot] != null)
         {
-            //bindedItem_1.GetComponent<SCRIPT_IItem>().Use();
             _bindSlots[bindSlot].item.GetComponent<SCRIPT_IItem>().Use();
         }
     }

@@ -9,6 +9,8 @@ public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
 
     public Weapon weapon;
     private Weapon _equippedPrefab;
+
+    //public Transform bindedSlotPivot;
     //private bool _isUsing = false;
 
     //public delegate void UseWeaponAction(Weapon weapon, bool alreadyUsing);
@@ -39,8 +41,8 @@ public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
     public void EquipModel(Transform itemSlotPivot)
     {
         _equippedPrefab = Instantiate(weapon);
-
-        _equippedPrefab.transform.SetParent(itemSlotPivot, false);
+        _equippedPrefab.bindedSlotPivot = itemSlotPivot;
+        _equippedPrefab.transform.SetParent(_equippedPrefab.bindedSlotPivot, false);
         _equippedPrefab.transform.localPosition = Vector3.zero;
         _equippedPrefab.transform.localRotation = Quaternion.identity;
     }
@@ -48,6 +50,7 @@ public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
     public void UnequipModel()
     {
         Destroy(_equippedPrefab.gameObject);
+        //bindedSlotPivot = null;
         _equippedPrefab = null;
     }
 }

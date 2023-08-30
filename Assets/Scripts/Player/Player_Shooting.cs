@@ -22,8 +22,8 @@ public class Player_Shooting : MonoBehaviour
     // Новое
     //public SCRIPT_Weapon weapon;
     public Weapon weapon;
-    [HideInInspector] public SCRIPT_MuzzleFlame muzzleFlame;
-    public SCRIPT_AmmoShells ammoShells;
+    //[HideInInspector] public SCRIPT_MuzzleFlame muzzleFlame;
+    //public SCRIPT_AmmoShells ammoShells;
 
     private float lastTimeSingleShot; // Задержка перед выстрелом в одиночном режиме стрельбы
     private float tempSpread;         // Запомнить разброс от выстрела, чтобы вернуть его при выходе из прицеливания  
@@ -147,12 +147,13 @@ public class Player_Shooting : MonoBehaviour
         }
     }
 
+    // TODO: Probably this method can be removed.
     internal void Equip_2(Weapon weaponToActivate)
     {
         isHolstered = false;
         weapon = weaponToActivate;/*.GetComponent<SCRIPT_Weapon>();*/
-        muzzleFlame = weaponToActivate.GetComponentInParent<SCRIPT_MuzzleFlame>();
-        ammoShells = weaponToActivate.GetComponentInParent<SCRIPT_AmmoShells>();
+        //muzzleFlame = weaponToActivate.GetComponentInParent<SCRIPT_MuzzleFlame>();
+        //ammoShells = weaponToActivate.GetComponentInParent<SCRIPT_AmmoShells>();
     }
 
     //private void HandleInventory(bool isActive)

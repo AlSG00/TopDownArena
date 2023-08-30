@@ -54,7 +54,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    // TODO: Probably should incapsulate this to separate file?
+    // TODO: Should incapsulate this to separate file?
     [System.Serializable]
     private class HitEffect
     {
@@ -76,6 +76,7 @@ public class Weapon : MonoBehaviour
     //public AmmoCounterTest ammoCounter;
     public WeaponAudio weaponAudio;
 
+    public Transform bindedSlotPivot; // Stores a pivot slot where the weapon was assigned via inventory
     // Прикрутить ссылку на скрипт, в котором будет AnimationEvents для перезарядки каждой отдельной пушки
     // Сейчас перезарядка захардкожена под автомат
 

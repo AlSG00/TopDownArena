@@ -11,7 +11,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     int activeWeaponIndex;
     private Player_Shooting playerShooting;
     //public Transform[] weaponSlots;
-    //public Transform weaponParent;
+    public Transform ActiveWeaponPivot;
     //public Transform weaponLeftGrip;
     //public Transform weaponRightGrip;
 
@@ -188,6 +188,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     
     private void TestHolsterWeapon()
     {
+        // TODO: Set weapon slot pivot as weapon parent when holstering
         playerShooting.isHolstered = true;
         rigController.SetBool("isHolstered", true);
         Debug.Log($"<color=yellow>Holstered [{_activeWeapon.gameObject.name}]</color>");
@@ -196,15 +197,38 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
     private void TestDrawWeapon(Weapon weaponToDraw)
     {
+
+        if (weaponToDraw == null)
+        {
+            throw new System.Exception("<color=red>Weapon to draw is null</color>");
+        }
+
         _activeWeapon = weaponToDraw;
+
+        
         rigController.SetBool("isHolstered", false);
-        rigController.Play($"ANIM_Equip_{_activeWeapon.weaponName}");
+
+        SetWeaponParent(ActiveWeaponPivot);
+
+        Debug.Log($"<color=green>Playing 'weapon_draw_{weaponToDraw.bindedSlotPivot}_{weaponToDraw.name}'</color>");
+        return;
+        // TODO: Play animation depending on weapon slot and equipped weapon.
+        // TODO: Pass the info about picked weapon slot to use correct animation.
+        rigController.Play($"ANIM_Equip_{_activeWeapon.weaponName}"); 
+
+
         isSwitchingWeapon = false;
         GetComponent<Player_Shooting>().Equip_2(_activeWeapon);
         playerShooting.isHolstered = false;
         Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
     }
 
+    private void SetWeaponParent(Transform parent)
+    {
+        _activeWeapon.transform.SetParent(parent, false);
+        _activeWeapon.transform.localPosition = Vector3.zero;
+        _activeWeapon.transform.localRotation = Quaternion.identity;
+    }
 
 
     private SCRIPT_Weapon GetWeapon(int index)
