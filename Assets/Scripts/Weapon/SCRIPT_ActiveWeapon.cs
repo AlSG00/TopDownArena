@@ -206,15 +206,27 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         _activeWeapon = weaponToDraw;
 
         
-        rigController.SetBool("isHolstered", false);
+        //rigController.SetBool("isHolstered", false);
 
         SetWeaponParent(ActiveWeaponPivot);
 
-        Debug.Log($"<color=green>Playing 'weapon_draw_{weaponToDraw.bindedSlotPivot}_{weaponToDraw.name}'</color>");
-        return;
-        // TODO: Play animation depending on weapon slot and equipped weapon.
-        // TODO: Pass the info about picked weapon slot to use correct animation.
-        rigController.Play($"ANIM_Equip_{_activeWeapon.weaponName}"); 
+        //Debug.Log($"<color=green>Playing 'weapon_draw_{weaponToDraw.bindedSlotPivot}_{weaponToDraw.name}'</color>");
+        //return;
+
+
+        //// TODO: Play animation depending on weapon slot and equipped weapon.
+        //// TODO: Pass the info about picked weapon slot to use correct animation.
+        //rigController.Play($"ANIM_Equip_{_activeWeapon.weaponName}"); 
+
+
+        //isSwitchingWeapon = false;
+        //GetComponent<Player_Shooting>().Equip_2(_activeWeapon);
+        //playerShooting.isHolstered = false;
+        //Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
+
+        Debug.Log($"Weapon_Draw_{weaponToDraw.bindedSlotPivot.name}");
+        rigController.Play($"Weapon_Draw_{weaponToDraw.bindedSlotPivot.name}");
+        //rigController.Play($"Weapon_Draw_BeltOffset_Rifle");
 
 
         isSwitchingWeapon = false;

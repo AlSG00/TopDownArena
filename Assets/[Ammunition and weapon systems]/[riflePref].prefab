@@ -592,6 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 5783658668931804524}
   shotSound: {fileID: 8300000, guid: 94ea8621f45ffc74d876558fe4b17d2e, type: 3}
+  reloadSounds: []
 --- !u!114 &1535013958728979702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,8 +620,8 @@ MonoBehaviour:
   muzzleFlame: {fileID: 1048267339396752257}
   ammoShells: {fileID: 1048267339396752262}
   weaponAudio: {fileID: 5711422025580953575}
+  bindedSlotPivot: {fileID: 0}
   weaponName: Rifle
-  WeaponSlot: 1
   fireRate: 600
   bulletSpeed: 330
   projectilesPerShot: 1
@@ -644,11 +645,6 @@ MonoBehaviour:
     type: 3}
   magazine: {fileID: 1047405133121538393}
   muzzle: {fileID: 5783658668788779161}
-  reloadSound: {fileID: 8300000, guid: 374f3a2a2d96ef846b1357c61a6d6ddf, type: 3}
-  ejectMagSound: {fileID: 8300000, guid: 01de3f440c1400243ba9eff80cec3213, type: 3}
-  putMagSound: {fileID: 8300000, guid: 35141b69c42ab2c438f4d6042d3db712, type: 3}
-  pullOutMagSound: {fileID: 8300000, guid: 6336383199cceeb4dae50ca2e34604c2, type: 3}
-  InsertMagSound: {fileID: 8300000, guid: 2690432c9e0a3084385990c2b8a98af2, type: 3}
   isReloading: 0
   isFiring: 0
   shotPerformed: 0
