@@ -76,7 +76,9 @@ public class Weapon : MonoBehaviour
     //public AmmoCounterTest ammoCounter;
     public WeaponAudio weaponAudio;
 
+    // TODO: Move to separate component
     public Transform bindedSlotPivot; // Stores a pivot slot where the weapon was assigned via inventory
+    public string bindedSlotName;
     // Прикрутить ссылку на скрипт, в котором будет AnimationEvents для перезарядки каждой отдельной пушки
     // Сейчас перезарядка захардкожена под автомат
 

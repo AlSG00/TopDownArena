@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 // TODO: Rework it... With heist!
@@ -186,18 +187,25 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         }
     }
     
-    private void TestHolsterWeapon()
+    private async void TestHolsterWeapon()
     {
-        // TODO: Set weapon slot pivot as weapon parent when holstering
         playerShooting.isHolstered = true;
-        rigController.SetBool("isHolstered", true);
+        rigController.Play($"Weapon_Holster_{_activeWeapon.bindedSlotPivot.name}");
+
+        do
+        {
+            await Task.Delay(10);
+        }
+        while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+
+        rigController.Play($"Weapon_Holster_On{_activeWeapon.bindedSlotName}");
         Debug.Log($"<color=yellow>Holstered [{_activeWeapon.gameObject.name}]</color>");
         _activeWeapon = null;
     }    
 
-    private void TestDrawWeapon(Weapon weaponToDraw)
+    private async void TestDrawWeapon(Weapon weaponToDraw)
     {
-
+        rigController.SetBool("[temp]", false);
         if (weaponToDraw == null)
         {
             throw new System.Exception("<color=red>Weapon to draw is null</color>");
@@ -205,34 +213,34 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
         _activeWeapon = weaponToDraw;
 
-        
-        //rigController.SetBool("isHolstered", false);
+        // PROBLEM: async operation will not stop after destroying script,
+        // so potentially this function can be a problem in the future.
+        Debug.Log($"Weapon_Draw_From{_activeWeapon.bindedSlotName}");
+        rigController.Play($"Weapon_Draw_From{_activeWeapon.bindedSlotName}");
+        do
+        {
+            await Task.Delay(10);
+        }
+        while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+        WaitForAnimationEnd();
 
         SetWeaponParent(ActiveWeaponPivot);
-
-        //Debug.Log($"<color=green>Playing 'weapon_draw_{weaponToDraw.bindedSlotPivot}_{weaponToDraw.name}'</color>");
-        //return;
-
-
-        //// TODO: Play animation depending on weapon slot and equipped weapon.
-        //// TODO: Pass the info about picked weapon slot to use correct animation.
-        //rigController.Play($"ANIM_Equip_{_activeWeapon.weaponName}"); 
-
-
-        //isSwitchingWeapon = false;
-        //GetComponent<Player_Shooting>().Equip_2(_activeWeapon);
-        //playerShooting.isHolstered = false;
-        //Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
-
         Debug.Log($"Weapon_Draw_{weaponToDraw.bindedSlotPivot.name}");
         rigController.Play($"Weapon_Draw_{weaponToDraw.bindedSlotPivot.name}");
-        //rigController.Play($"Weapon_Draw_BeltOffset_Rifle");
-
-
         isSwitchingWeapon = false;
         GetComponent<Player_Shooting>().Equip_2(_activeWeapon);
         playerShooting.isHolstered = false;
+
         Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
+    }
+
+    private async void WaitForAnimationEnd()
+    {
+        do
+        {
+            await Task.Delay(10);
+        }
+        while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
     }
 
     private void SetWeaponParent(Transform parent)

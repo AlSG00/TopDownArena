@@ -39,11 +39,13 @@ public class InventoryController : MonoBehaviour
 
     public class EquipmentSlot
     {
+        public string name;
         public SCRIPT_InventoryItem item;
         public Transform[] pivots;
 
-        public EquipmentSlot(SCRIPT_InventoryItem assignedItem, Transform[] SlotPivotsArray)
+        public EquipmentSlot(SCRIPT_InventoryItem assignedItem, Transform[] SlotPivotsArray, string slotName)
         {
+            name = slotName;
             item = assignedItem;
             pivots = SlotPivotsArray;
         }
@@ -105,9 +107,9 @@ public class InventoryController : MonoBehaviour
         {
             _bindSlots = new Dictionary<BindSlot, EquipmentSlot>()
             {
-                { BindSlot.HolsterSlot, new(null, holsterSlotOffsetsArray)},
-                { BindSlot.BeltSlot, new(null, beltSlotOffsetsArray)},
-                { BindSlot.BackSlot, new(null, backSlotOffsetsArray)}
+                { BindSlot.HolsterSlot, new(null, holsterSlotOffsetsArray, "Holster")},
+                { BindSlot.BeltSlot, new(null, beltSlotOffsetsArray, "Belt")},
+                { BindSlot.BackSlot, new(null, backSlotOffsetsArray, "Back")}
             };
         }
         catch (Exception ex)
@@ -1199,9 +1201,11 @@ public class InventoryController : MonoBehaviour
         itemToBind.BindKey(); // TODO: There is also need to add special icon that will appear in ui slots
 
         // TODO: It's very important for pivot to have the same name as a weapon.
+        
         Transform pivot = _bindSlots[bindSlot].pivots.Single(pivot => pivot.name.Contains(itemToBind.name));
+        string slotName = _bindSlots[bindSlot].name;
         Debug.Log($"<color=yellow>Prefered pivot offset is {pivot}.</color>");
-        _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(pivot);
+        _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(pivot, slotName);
         //_bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(_bindSlots[bindSlot].pivot);
 
 

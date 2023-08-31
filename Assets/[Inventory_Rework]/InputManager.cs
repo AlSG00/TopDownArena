@@ -56,6 +56,8 @@ public class InputManager : MonoBehaviour
             if (Input.GetButtonDown("Fire2"))
             {
                 isAiming = true;
+
+                // TODO: move animator logic to separate script
                 animationController.SetBool("isAiming", isAiming);
                 //Aim(true);
 

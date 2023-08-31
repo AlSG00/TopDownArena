@@ -38,10 +38,11 @@ public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
 
     }
 
-    public void EquipModel(Transform itemSlotPivot)
+    public void EquipModel(Transform itemSlotPivot, string slotName)
     {
         _equippedPrefab = Instantiate(weapon);
         _equippedPrefab.bindedSlotPivot = itemSlotPivot;
+        _equippedPrefab.bindedSlotName = slotName;
         _equippedPrefab.transform.SetParent(_equippedPrefab.bindedSlotPivot, false);
         _equippedPrefab.transform.localPosition = Vector3.zero;
         _equippedPrefab.transform.localRotation = Quaternion.identity;
