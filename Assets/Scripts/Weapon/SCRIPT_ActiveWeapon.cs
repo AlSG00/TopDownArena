@@ -198,6 +198,8 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         }
         while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
 
+        SetWeaponParent(_activeWeapon.bindedSlotPivot);
+
         rigController.Play($"Weapon_Holster_On{_activeWeapon.bindedSlotName}");
         Debug.Log($"<color=yellow>Holstered [{_activeWeapon.gameObject.name}]</color>");
         _activeWeapon = null;
@@ -222,7 +224,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
             await Task.Delay(10);
         }
         while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
-        WaitForAnimationEnd();
+        //WaitForAnimationEnd();
 
         SetWeaponParent(ActiveWeaponPivot);
         Debug.Log($"Weapon_Draw_{weaponToDraw.bindedSlotPivot.name}");
@@ -234,22 +236,12 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
     }
 
-    private async void WaitForAnimationEnd()
-    {
-        do
-        {
-            await Task.Delay(10);
-        }
-        while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
-    }
-
     private void SetWeaponParent(Transform parent)
     {
         _activeWeapon.transform.SetParent(parent, false);
         _activeWeapon.transform.localPosition = Vector3.zero;
         _activeWeapon.transform.localRotation = Quaternion.identity;
     }
-
 
     private SCRIPT_Weapon GetWeapon(int index)
     {
