@@ -1192,6 +1192,18 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
+        if (itemToBind.isBinded)
+        {
+            if (itemToBind.bindedSlot == bindSlot)
+            {
+                Debug.Log("<color=orange>Already binded at chosen slot.</color>");
+            }
+            else
+            {
+                // TODO: Add new method for unbinding weapons
+            }
+        }
+
         // TODO: Here need to write check functions:
         // - check if item's already binded on this slot
         // - check if item's already binded at some other slot

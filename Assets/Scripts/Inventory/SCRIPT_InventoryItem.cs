@@ -49,6 +49,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
     public bool isEquippable = false;
     public InventoryController.BindSlot[] permittedSlots;
     public bool isBinded = false;
+    public InventoryController.BindSlot bindedSlot;
     //public bool isVisualizable = false;
 
     [Header("Stacking properties")]
