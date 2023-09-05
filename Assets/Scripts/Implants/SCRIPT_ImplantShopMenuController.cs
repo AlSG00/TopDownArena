@@ -6,9 +6,10 @@ public class SCRIPT_ImplantShopMenuController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Player_Movement _playerMovement;
-    [SerializeField] private Player_Shooting _playerShooting;
+    //[SerializeField] private Player_Shooting _playerShooting;
     [SerializeField] private SCRIPT_ImplantUpgrades _playerImplants;
     [SerializeField] private SCRIPT_PlayerResources _playerResources;
+    [SerializeField] private InputManager _inputManager;
     public bool isOpened;
 
     public int finalMoneyPrice = 0;
@@ -21,7 +22,7 @@ public class SCRIPT_ImplantShopMenuController : MonoBehaviour
     {
         GameObject player = GameObject.Find("_Player");
         _playerMovement = player.GetComponent<Player_Movement>();
-        _playerShooting = player.GetComponent<Player_Shooting>();
+        //_playerShooting = player.GetComponent<Player_Shooting>();
         _playerImplants = player.GetComponent<SCRIPT_ImplantUpgrades>();
         _playerResources = player.GetComponent<SCRIPT_PlayerResources>();
         player = null;
@@ -35,7 +36,8 @@ public class SCRIPT_ImplantShopMenuController : MonoBehaviour
 
         gameObject.SetActive(true);
         _playerMovement.enabled = false;
-        _playerShooting.enabled = false;
+        //_playerShooting.enabled = false;
+        _inputManager.enabled = false;
     }
 
     public void CloseMenu()
@@ -54,7 +56,8 @@ public class SCRIPT_ImplantShopMenuController : MonoBehaviour
 
         gameObject.SetActive(false);
         _playerMovement.enabled = true;
-        _playerShooting.enabled = true;
+        //_playerShooting.enabled = true;
+        _inputManager.enabled = true;
     }
 
     public void PressExitButton()

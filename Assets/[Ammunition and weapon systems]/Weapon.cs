@@ -185,6 +185,18 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    internal bool CanReload()
+    {
+        //if (currentAmmoInMag == magCapacity)
+        //{
+        //    return false;
+        //}
+
+        // TODO: Return FALSE if ammunition storage doesn't contains any of required ammo
+
+        return true;
+    }
+
     public void StartFiring()
     {
         isFiring = true;
@@ -382,6 +394,8 @@ public class Weapon : MonoBehaviour
     // TODO: Rework
     public void Reload()
     {
+
+        Debug.Log($"<color=green>{gameObject.name} reloaded.</color>");
         //int toFill = magCapacity - currentAmmoInMag; // считаем, сколько не хватает
 
         

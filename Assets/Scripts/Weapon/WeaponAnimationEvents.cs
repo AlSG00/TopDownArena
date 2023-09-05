@@ -72,8 +72,8 @@ public class WeaponAnimationEvents : MonoBehaviour
 
     public void SetReloadingBool()
     {
-        activeWeapon.isReloading = !activeWeapon.isReloading;
-        var weapon = activeWeapon.GetActiveWeapon();
-        weapon.audioSource.volume = 0.5f;
+        //activeWeapon.isReloading = !activeWeapon.isReloading;
+        //var weapon = activeWeapon.GetActiveWeapon();
+        //weapon.audioSource.volume = 0.5f;
     }
 }

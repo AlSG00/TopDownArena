@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+
 public class Player_Shooting : MonoBehaviour
 {
     public float aimingDuration = 0.1f;
@@ -53,99 +54,99 @@ public class Player_Shooting : MonoBehaviour
 
     void LateUpdate()
     {
-        ShootInput();                       // Проверка, нажата ли кнопка выстрела
+        //ShootInput();                       // Проверка, нажата ли кнопка выстрела
         //SwitchWeapon();
         //muzzleFlame.FadeFlame();            // Угасание вспышки от выстрела
         //weapon.IsReloading();               // Блокировка стрельбы во время перезарядки
     }
 
-    void ShootInput()
-    {
-        //if (Input.GetKeyDown(KeyCode.Tab))
-        //{
-        //    isCheckingInventory = !isCheckingInventory;
-        //    inventory.HandleInventory(isCheckingInventory);
-        //   // HandleInventory(isCheckingInventory);
-        //}
+    //void ShootInput()
+    //{
+    //    //if (Input.GetKeyDown(KeyCode.Tab))
+    //    //{
+    //    //    isCheckingInventory = !isCheckingInventory;
+    //    //    inventory.HandleInventory(isCheckingInventory);
+    //    //   // HandleInventory(isCheckingInventory);
+    //    //}
 
-        if (weapon)
-        {
-            if (Input.GetKeyDown(KeyCode.R) && isAiming && !activeWeapon.isReloading)
-            {
-                animationController.SetTrigger("Reload");
-                weapon.Reload();
-            }
+    //    if (weapon)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.R) && isAiming && !activeWeapon.isReloading)
+    //        {
+    //            animationController.SetTrigger("Reload");
+    //            weapon.Reload();
+    //        }
 
-            if (Input.GetButtonDown("Fire2"))
-            {
-                isAiming = true;
-                animationController.SetBool("isAiming", isAiming);
-                //Aim(true);
+    //        if (Input.GetButtonDown("Fire2"))
+    //        {
+    //            isAiming = true;
+    //            animationController.SetBool("isAiming", isAiming);
+    //            //Aim(true);
 
-                //if (!valueTaken && !forbidAiming.Contains(weapon.name))
-                //{
-                //    tempSpread = weapon.bulletSpreadValue;
-                //    weapon.bulletSpreadValue = 0;
-                //    valueTaken = true;
-                //}
-            }
+    //            //if (!valueTaken && !forbidAiming.Contains(weapon.name))
+    //            //{
+    //            //    tempSpread = weapon.bulletSpreadValue;
+    //            //    weapon.bulletSpreadValue = 0;
+    //            //    valueTaken = true;
+    //            //}
+    //        }
 
-            if (Input.GetButtonUp("Fire2"))
-            {
-                isAiming = false;
-                animationController.SetBool("isAiming", isAiming);
-                // Aim(false);
-                //if (valueTaken)
-                //{
-                //    weapon.bulletSpreadValue = tempSpread;
-                //    valueTaken = false;
-                //}
-            }
+    //        if (Input.GetButtonUp("Fire2"))
+    //        {
+    //            isAiming = false;
+    //            animationController.SetBool("isAiming", isAiming);
+    //            // Aim(false);
+    //            //if (valueTaken)
+    //            //{
+    //            //    weapon.bulletSpreadValue = tempSpread;
+    //            //    valueTaken = false;
+    //            //}
+    //        }
 
-            if (Input.GetButton("Fire1"))
-            {
-                isHolstered = animationController.GetBool("isHolstered");
-                if (isAiming && !isHolstered && !activeWeapon.isReloading)
-                {
-                    // animationController.SetBool("isShooting", true);
-                    if ((weapon.shotPerformed == false) && 
-                        ((lastTimeSingleShot + weapon.singleShotDelay) <= Time.time))
-                    {
-                        lastTimeSingleShot = Time.time;
-                        weapon.StartFiring();
-                        if (weapon.singleShots)
-                        {
-                            weapon.shotPerformed = true;
-                        }
-                    }
-                }
-                else
-                {
-                    // TODO: Рукопашная
-                }
+    //        if (Input.GetButton("Fire1"))
+    //        {
+    //            isHolstered = animationController.GetBool("isHolstered");
+    //            if (isAiming && !isHolstered && !activeWeapon.isReloading)
+    //            {
+    //                // animationController.SetBool("isShooting", true);
+    //                if ((weapon.shotPerformed == false) && 
+    //                    ((lastTimeSingleShot + weapon.singleShotDelay) <= Time.time))
+    //                {
+    //                    lastTimeSingleShot = Time.time;
+    //                    weapon.StartFiring();
+    //                    if (weapon.singleShots)
+    //                    {
+    //                        weapon.shotPerformed = true;
+    //                    }
+    //                }
+    //            }
+    //            else
+    //            {
+    //                // TODO: Рукопашная
+    //            }
 
-            }
-            else
-            {
-             // animationController.SetBool("isShooting", false);
-                weapon.StopFiring();
-                weapon.shotPerformed = false;
-            }
-        }
+    //        }
+    //        else
+    //        {
+    //         // animationController.SetBool("isShooting", false);
+    //            weapon.StopFiring();
+    //            weapon.shotPerformed = false;
+    //        }
+    //    }
 
-        //if (weapon)
-        //{
-        //    weapon.UpdateBullet(Time.deltaTime);
-        //}        //if (weapon)
-        //{
-        //    weapon.UpdateBullet(Time.deltaTime);
-        //}
+    //    //if (weapon)
+    //    //{
+    //    //    weapon.UpdateBullet(Time.deltaTime);
+    //    //}        //if (weapon)
+    //    //{
+    //    //    weapon.UpdateBullet(Time.deltaTime);
+    //    //}
 
-        if (Input.GetKeyDown(KeyCode.X) && !isAiming)
-        {
-            GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.X) && !isAiming)
+    //    {
+    //        GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
+    //    }
+    //}
 
     // TODO: Probably this method can be removed.
     internal void Equip_2(Weapon weaponToActivate)

@@ -10,8 +10,12 @@ public class InputManager : MonoBehaviour
     public Weapon weapon;
     public SCRIPT_ActiveWeapon activeWeapon;
     public Animator animationController;
+
+
     public bool isAiming = false;
-    public bool isHolstered;
+    public bool isReloading = false;
+
+    //public bool isHolstered;
     private float _lastTimeSingleShot;
 
     // Inventory variables
@@ -47,10 +51,13 @@ public class InputManager : MonoBehaviour
 
         if (weapon)
         {
-            if (Input.GetKeyDown(KeyCode.R) && isAiming && !activeWeapon.isReloading)
+            if (Input.GetKeyDown(KeyCode.R) && isAiming && /*!activeWeapon.isReloading*/ isReloading == false)
             {
-                animationController.SetTrigger("Reload");
-                weapon.Reload();
+                if (weapon.CanReload())
+                {
+                    animationController.SetTrigger("Reload");
+                    weapon.Reload();
+                }
             }
 
             if (Input.GetButtonDown("Fire2"))
@@ -83,8 +90,8 @@ public class InputManager : MonoBehaviour
 
             if (Input.GetButton("Fire1"))
             {
-                isHolstered = animationController.GetBool("isHolstered");
-                if (isAiming && !isHolstered && !activeWeapon.isReloading)
+                //isHolstered = animationController.GetBool("isHolstered");
+                if (isAiming && /*!isHolstered &&*/ /*!activeWeapon.isReloading*/isReloading == false)
                 {
                     // animationController.SetBool("isShooting", true);
                     if ((weapon.shotPerformed == false) &&
@@ -248,5 +255,13 @@ public class InputManager : MonoBehaviour
         {
             inventory.HandleStackDrop(ref buttonHoldTime, timeToHold);
         }
+    }
+
+    internal void Equip_2(Weapon weaponToActivate)
+    {
+        //isHolstered = false;
+        weapon = weaponToActivate;/*.GetComponent<SCRIPT_Weapon>();*/
+        //muzzleFlame = weaponToActivate.GetComponentInParent<SCRIPT_MuzzleFlame>();
+        //ammoShells = weaponToActivate.GetComponentInParent<SCRIPT_AmmoShells>();
     }
 }
