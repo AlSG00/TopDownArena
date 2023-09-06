@@ -1201,6 +1201,7 @@ public class InventoryController : MonoBehaviour
             else
             {
                 // TODO: Add new method for unbinding weapons
+                TryUnbindItem();
             }
         }
 
@@ -1222,17 +1223,10 @@ public class InventoryController : MonoBehaviour
 
 
         //TODO:
-
-        //Передавать точку для спавна оружия, проверить, чтобы заспавнилось нормально
-        //Попытаться экипировать оружие через назначенную клавишу
-        //Попытаться разбиндить
-        //Попытаться Забиндить что-нибудь кроме оружия
-        //Нужно, чтобы корректно появлялась и исчезала моделька забинженного предмета
         //    корректно обрабатывались иконки, обозначающие бинд предмета
-
         //Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
 
-
+        Debug.Log($"<color=green>Binded on {_bindSlots[bindSlot].name}.</color>");
         itemToBind = null;
     }
 
@@ -1253,17 +1247,48 @@ public class InventoryController : MonoBehaviour
 
         if (itemToBind.isBinded)
         {
-            BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value.item == itemToBind).Key;
+            //BindSlot slotToUnbind
+
+            //BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value.item == itemToBind).Key;
             itemToBind.UnbindKey();
 
             if (itemToBind.isEquippable)
             {
-                _bindSlots[slotToUnbind].item.GetComponent<IEquipable>().UnequipModel();
+                //_bindSlots[slotToUnbind].item.GetComponent<IEquipable>().UnequipModel();
+                _bindSlots[itemToBind.bindedSlot].item.GetComponent<IEquipable>().UnequipModel();
             }
 
-            _bindSlots[slotToUnbind].item = null;
+            _bindSlots[itemToBind.bindedSlot].item = null;
         }
     }
+
+    //internal void TryUnbindItem(BindSlot slotToUnbind)
+    //{
+    //    if (selectedItem != null && selectedItem.isOnCursor)
+    //    {
+    //        Debug.Log("<color=orange>Can't unbind. There is item on the cursor.</color>");
+    //        return;
+    //    }
+
+    //    SCRIPT_InventoryItem itemToBind = TryReceiveItem();
+    //    if (itemToBind == null)
+    //    {
+    //        Debug.Log("<color=orange>Nothing to unbind.</color>");
+    //    }
+
+    //    if (itemToBind.isBinded)
+    //    {
+    //        BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value.item == itemToBind).Key;
+    //        itemToBind.UnbindKey();
+
+    //        if (itemToBind.isEquippable)
+    //        {
+    //            _bindSlots[slotToUnbind].item.GetComponent<IEquipable>().UnequipModel();
+    //        }
+
+    //        _bindSlots[slotToUnbind].item = null;
+    //    }
+    //}
 
     internal void TryUseBindedItem(BindSlot bindSlot)
     {
