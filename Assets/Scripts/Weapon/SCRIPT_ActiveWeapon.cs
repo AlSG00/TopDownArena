@@ -7,10 +7,10 @@ using UnityEngine;
 public class SCRIPT_ActiveWeapon : MonoBehaviour
 {
     //public Rig handIk;
-    public SCRIPT_Weapon[] equippedWeapons;
+    //public SCRIPT_Weapon[] equippedWeapons;
     //public bool isSwitchingWeapon = false;
     //public bool isReloading = false;
-    int activeWeaponIndex;
+    //int activeWeaponIndex;
     [SerializeField] private InputManager inputManager;
     //public Transform[] weaponSlots;
     public Transform ActiveWeaponPivot;
@@ -244,15 +244,15 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         _activeWeapon.transform.localRotation = Quaternion.identity;
     }
 
-    private SCRIPT_Weapon GetWeapon(int index)
-    {
-        if (index < 0 || index >= equippedWeapons.Length)
-        {
-            return null;
-        }
+    //private SCRIPT_Weapon GetWeapon(int index)
+    //{
+    //    if (index < 0 || index >= equippedWeapons.Length)
+    //    {
+    //        return null;
+    //    }
 
-        return equippedWeapons[index];
-    }
+    //    return equippedWeapons[index];
+    //}
 
     //public void ToggleActiveWeapon()
     //{
@@ -267,9 +267,9 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     //    }
     //}
 
-    public SCRIPT_Weapon GetActiveWeapon()
-    {
-        return GetWeapon(activeWeaponIndex);
-    }
+    //public SCRIPT_Weapon GetActiveWeapon()
+    //{
+    //    return GetWeapon(activeWeaponIndex);
+    //}
 }
 
