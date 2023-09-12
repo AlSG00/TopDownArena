@@ -1217,6 +1217,7 @@ public class InventoryController : MonoBehaviour
         
         Transform pivot = _bindSlots[bindSlot].pivots.Single(pivot => pivot.name.Contains(itemToBind.name));
         string slotName = _bindSlots[bindSlot].name;
+        itemToBind.bindedSlot = bindSlot;
         Debug.Log($"<color=yellow>Prefered pivot offset is {pivot}.</color>");
         _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(pivot, slotName);
         //_bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(_bindSlots[bindSlot].pivot);
