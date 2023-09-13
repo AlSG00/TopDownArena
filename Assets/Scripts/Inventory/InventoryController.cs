@@ -1192,6 +1192,7 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
+        
         if (itemToBind.isBinded)
         {
             if (itemToBind.bindedSlot == bindSlot)
@@ -1201,7 +1202,19 @@ public class InventoryController : MonoBehaviour
             else
             {
                 // TODO: Add new method for unbinding weapons
-                TryUnbindItem();
+                if (itemToBind.isEquipped)
+                {
+                    _bindSlots[bindSlot].item = itemToBind;
+                    _bindSlots[itemToBind.bindedSlot].item = null;
+                    itemToBind.UnbindKey();
+                    itemToBind.BindKey();
+
+                    добавить в weaponitem метод по замене слота
+                }
+                else
+                {
+                    TryUnbindItem();
+                }
             }
         }
 
@@ -1228,6 +1241,7 @@ public class InventoryController : MonoBehaviour
         //Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
 
         Debug.Log($"<color=green>Binded on {_bindSlots[bindSlot].name}.</color>");
+        
         itemToBind = null;
     }
 

@@ -51,6 +51,7 @@ public class SCRIPT_InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public InventoryController.BindSlot[] permittedSlots;
     public bool isBinded = false;
+    public bool isEquipped = false;
     public InventoryController.BindSlot bindedSlot;
     //public bool isVisualizable = false;
 
