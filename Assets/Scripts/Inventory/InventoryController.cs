@@ -1192,6 +1192,16 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
+        if ((_bindSlots[bindSlot].item != null) && (_bindSlots[bindSlot].item == itemToBind))
+        {
+            сделать ивент, чтобы проигрывалась idle-анимация через activeWeapon
+        }
+
+        // If weapon's already binded:
+        // - if slot to bind is the same as it was before, then do nothing
+        // - if slot to bind is different then need to check if item is equipped:
+        //      - if weapon is being in hands, need to set it to new binded slot and play unarmed idle animation
+        //      - if weapon is on slot, just move it to another slot
         
         if (itemToBind.isBinded)
         {
@@ -1227,20 +1237,16 @@ public class InventoryController : MonoBehaviour
         itemToBind.BindKey(); // TODO: There is also need to add special icon that will appear in ui slots
 
         // TODO: It's very important for pivot to have the same name as a weapon.
-        
+         
         Transform pivot = _bindSlots[bindSlot].pivots.Single(pivot => pivot.name.Contains(itemToBind.name));
         string slotName = _bindSlots[bindSlot].name;
         itemToBind.bindedSlot = bindSlot;
-        Debug.Log($"<color=yellow>Prefered pivot offset is {pivot}.</color>");
+
+        //Debug.Log($"<color=yellow>Prefered pivot offset is {pivot}.</color>");
+
         _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(pivot, slotName);
-        //_bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(_bindSlots[bindSlot].pivot);
 
-
-        //TODO:
-        //    корректно обрабатывались иконки, обозначающие бинд предмета
-        //Нужно сбрасывать бинд, когда выбрасываешь, юзаешь или пертаскиваешь предмет в контейнер
-
-        Debug.Log($"<color=green>Binded on {_bindSlots[bindSlot].name}.</color>");
+        //Debug.Log($"<color=green>Binded on {_bindSlots[bindSlot].name}.</color>");
         
         itemToBind = null;
     }
