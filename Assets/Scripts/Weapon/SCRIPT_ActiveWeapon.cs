@@ -61,6 +61,8 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
 
         rigController.Play($"Weapon_Holster_On{_activeWeapon.bindedSlotName}");
         Debug.Log($"<color=yellow>Holstered [{_activeWeapon.gameObject.name}]</color>");
+
+        похоже тут не проигрывается анимация weapon unarmed после убирания оружия
         _activeWeapon = null;
     }    
 
@@ -90,6 +92,12 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         GetComponent<InputManager>().Equip_2(_activeWeapon);
 
         Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
+    }
+
+    private void TestRemoveWeapon(Weapon weaponToRemove)
+    {
+        SetWeaponParent(_activeWeapon.bindedSlotPivot);
+        _activeWeapon = null;
     }
 
     private void SetWeaponParent(Transform parent)
