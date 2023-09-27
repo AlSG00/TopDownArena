@@ -8,6 +8,7 @@ public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
     private Weapon _equippedPrefab;
 
     public static event System.Action<Weapon> OnUseWeapon;
+    public static event System.Action<Weapon> OnDestroyWeapon;
 
     public void Use()
     {
@@ -27,6 +28,7 @@ public class WeaponItem : MonoBehaviour, SCRIPT_IItem, IEquipable
 
     public void UnequipModel()
     {
+        //OnDestroyWeapon?.Invoke();
         Destroy(_equippedPrefab.gameObject);
         _equippedPrefab = null;
     }

@@ -1192,10 +1192,18 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        if ((_bindSlots[bindSlot].item != null) && (_bindSlots[bindSlot].item == itemToBind))
-        {
-            сделать ивент, чтобы проигрывалась idle-анимация через activeWeapon
-        }
+        //if (_bindSlots[bindSlot].item != null)
+        //{
+        //    if (_bindSlots[bindSlot].item == itemToBind)
+        //    {
+        //        // 
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //    сделать ивент, чтобы проигрывалась idle-анимация через activeWeapon
+        //}
 
         // If weapon's already binded:
         // - if slot to bind is the same as it was before, then do nothing
@@ -1203,27 +1211,45 @@ public class InventoryController : MonoBehaviour
         //      - if weapon is being in hands, need to set it to new binded slot and play unarmed idle animation
         //      - if weapon is on slot, just move it to another slot
         
+        //if (itemToBind.isBinded)
+        //{
+        //    if (itemToBind.bindedSlot == bindSlot)
+        //    {
+        //        Debug.Log("<color=orange>Already binded at chosen slot.</color>");
+        //    }
+        //    else
+        //    {
+        //        // TODO: Add new method for unbinding weapons
+        //        if (itemToBind.isEquipped)
+        //        {
+        //            _bindSlots[bindSlot].item = itemToBind;
+        //            _bindSlots[itemToBind.bindedSlot].item = null;
+        //            itemToBind.UnbindKey();
+        //            itemToBind.BindKey();
+
+        //            добавить в weaponitem метод по замене слота
+        //        }
+        //        else
+        //        {
+        //            TryUnbindItem();
+        //        }
+        //    }
+        //}
+
+        // Trying to bind item
         if (itemToBind.isBinded)
         {
+            // If binding to slot where this item is already binded, then do nothing
             if (itemToBind.bindedSlot == bindSlot)
             {
                 Debug.Log("<color=orange>Already binded at chosen slot.</color>");
             }
             else
             {
-                // TODO: Add new method for unbinding weapons
-                if (itemToBind.isEquipped)
+                UnbindItem(itemToBind);
+                if (_bindSlots[bindSlot].item != null)
                 {
-                    _bindSlots[bindSlot].item = itemToBind;
-                    _bindSlots[itemToBind.bindedSlot].item = null;
-                    itemToBind.UnbindKey();
-                    itemToBind.BindKey();
-
-                    добавить в weaponitem метод по замене слота
-                }
-                else
-                {
-                    TryUnbindItem();
+                    UnbindItem(_bindSlots[bindSlot].item);
                 }
             }
         }
@@ -1268,48 +1294,21 @@ public class InventoryController : MonoBehaviour
 
         if (itemToBind.isBinded)
         {
-            //BindSlot slotToUnbind
-
-            //BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value.item == itemToBind).Key;
-            itemToBind.UnbindKey();
-
-            if (itemToBind.isEquippable)
-            {
-                //_bindSlots[slotToUnbind].item.GetComponent<IEquipable>().UnequipModel();
-                _bindSlots[itemToBind.bindedSlot].item.GetComponent<IEquipable>().UnequipModel();
-            }
-
-            _bindSlots[itemToBind.bindedSlot].item = null;
+            UnbindItem(itemToBind);
         }
     }
 
-    //internal void TryUnbindItem(BindSlot slotToUnbind)
-    //{
-    //    if (selectedItem != null && selectedItem.isOnCursor)
-    //    {
-    //        Debug.Log("<color=orange>Can't unbind. There is item on the cursor.</color>");
-    //        return;
-    //    }
+    private void UnbindItem(SCRIPT_InventoryItem itemToBind)
+    {
+        itemToBind.UnbindKey();
+        if (itemToBind.isEquippable)
+        {
+            _bindSlots[itemToBind.bindedSlot].item.GetComponent<IEquipable>().UnequipModel();
+        }
 
-    //    SCRIPT_InventoryItem itemToBind = TryReceiveItem();
-    //    if (itemToBind == null)
-    //    {
-    //        Debug.Log("<color=orange>Nothing to unbind.</color>");
-    //    }
+        _bindSlots[itemToBind.bindedSlot].item = null;
+    }
 
-    //    if (itemToBind.isBinded)
-    //    {
-    //        BindSlot slotToUnbind = _bindSlots.FirstOrDefault(item => item.Value.item == itemToBind).Key;
-    //        itemToBind.UnbindKey();
-
-    //        if (itemToBind.isEquippable)
-    //        {
-    //            _bindSlots[slotToUnbind].item.GetComponent<IEquipable>().UnequipModel();
-    //        }
-
-    //        _bindSlots[slotToUnbind].item = null;
-    //    }
-    //}
 
     internal void TryUseBindedItem(BindSlot bindSlot)
     {
@@ -1318,7 +1317,6 @@ public class InventoryController : MonoBehaviour
             _bindSlots[bindSlot].item.GetComponent<SCRIPT_IItem>().Use();
         }
     }
-
 
     #region CONTAINER LOGIC
 

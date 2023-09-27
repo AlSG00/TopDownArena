@@ -31,13 +31,13 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         if ((_activeWeapon != null) && (weaponToActivate == _activeWeapon))
         {
             Debug.Log($"<color=yellow>Start weapon holstering...</color>");
-            TestHolsterWeapon();
+            TestHolsterWeapon(false);
             
         }
         else if ((_activeWeapon != null) && (weaponToActivate != _activeWeapon))
         {
             Debug.Log($"<color=yellow>Start weapon switching...</color>");
-            TestHolsterWeapon();
+            TestHolsterWeapon(true);
             TestDrawWeapon(weaponToActivate);
         }
         else
@@ -47,10 +47,9 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         }
     }
     
-    private async void TestHolsterWeapon()
+    private async void TestHolsterWeapon(bool isSwapping)
     {
         rigController.Play($"Weapon_Holster_{_activeWeapon.bindedSlotPivot.name}");
-
         do
         {
             await Task.Delay(10);
@@ -60,9 +59,19 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         SetWeaponParent(_activeWeapon.bindedSlotPivot);
 
         rigController.Play($"Weapon_Holster_On{_activeWeapon.bindedSlotName}");
+        do
+        {
+            await Task.Delay(10);
+        }
+        while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+
         Debug.Log($"<color=yellow>Holstered [{_activeWeapon.gameObject.name}]</color>");
 
-        похоже тут не проигрывается анимация weapon unarmed после убирания оружия
+        if (isSwapping == false)
+        {
+            rigController.Play("Weapon_Unarmed");
+        }
+        //похоже тут не проигрывается анимация weapon unarmed после убирания оружия
         _activeWeapon = null;
     }    
 
@@ -97,6 +106,7 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     private void TestRemoveWeapon(Weapon weaponToRemove)
     {
         SetWeaponParent(_activeWeapon.bindedSlotPivot);
+        rigController.Play("Weapon_Unarmed");
         _activeWeapon = null;
     }
 
