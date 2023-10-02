@@ -899,6 +899,7 @@ public class InventoryController : MonoBehaviour
             _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
         }
 
+        длывардлфыраджолфыврадж
         selectedItem.lastGrid = selectedItemGrid;
         selectedItem.OnCursor(false);
         selectedItem.GetComponent<Image>().raycastTarget = true;
@@ -986,13 +987,6 @@ public class InventoryController : MonoBehaviour
 
     #endregion
 
-
-
-
-
-
-
-    // OK
     private void PlayItemAudio(SCRIPT_InventoryItem item, AudioPlayMode audioMode)
     {
         if (inventoryAudioSource == null)
@@ -1163,9 +1157,11 @@ public class InventoryController : MonoBehaviour
         return itemToBind;
     }
 
+
     // TODO: Add logic for equip weapon when binded
+    public static Action OnRebindWeapon;
     internal void TryBindItem(BindSlot bindSlot)
-    {
+        {
         if (selectedItem != null && selectedItem.isOnCursor)
         {
             Debug.Log("<color=orange>Can't bind. There is item on the cursor.</color>");
@@ -1192,50 +1188,6 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
-        //if (_bindSlots[bindSlot].item != null)
-        //{
-        //    if (_bindSlots[bindSlot].item == itemToBind)
-        //    {
-        //        // 
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //    сделать ивент, чтобы проигрывалась idle-анимация через activeWeapon
-        //}
-
-        // If weapon's already binded:
-        // - if slot to bind is the same as it was before, then do nothing
-        // - if slot to bind is different then need to check if item is equipped:
-        //      - if weapon is being in hands, need to set it to new binded slot and play unarmed idle animation
-        //      - if weapon is on slot, just move it to another slot
-        
-        //if (itemToBind.isBinded)
-        //{
-        //    if (itemToBind.bindedSlot == bindSlot)
-        //    {
-        //        Debug.Log("<color=orange>Already binded at chosen slot.</color>");
-        //    }
-        //    else
-        //    {
-        //        // TODO: Add new method for unbinding weapons
-        //        if (itemToBind.isEquipped)
-        //        {
-        //            _bindSlots[bindSlot].item = itemToBind;
-        //            _bindSlots[itemToBind.bindedSlot].item = null;
-        //            itemToBind.UnbindKey();
-        //            itemToBind.BindKey();
-
-        //            добавить в weaponitem метод по замене слота
-        //        }
-        //        else
-        //        {
-        //            TryUnbindItem();
-        //        }
-        //    }
-        //}
-
         // Trying to bind item
         if (itemToBind.isBinded)
         {
@@ -1243,14 +1195,13 @@ public class InventoryController : MonoBehaviour
             if (itemToBind.bindedSlot == bindSlot)
             {
                 Debug.Log("<color=orange>Already binded at chosen slot.</color>");
+                return;
             }
             else
             {
                 UnbindItem(itemToBind);
-                if (_bindSlots[bindSlot].item != null)
-                {
-                    UnbindItem(_bindSlots[bindSlot].item);
-                }
+
+                
             }
         }
 
@@ -1268,11 +1219,11 @@ public class InventoryController : MonoBehaviour
         string slotName = _bindSlots[bindSlot].name;
         itemToBind.bindedSlot = bindSlot;
 
-        //Debug.Log($"<color=yellow>Prefered pivot offset is {pivot}.</color>");
+        Debug.Log($"<color=yellow>Prefered pivot offset is {pivot}.</color>");
 
         _bindSlots[bindSlot].item.GetComponent<IEquipable>().EquipModel(pivot, slotName);
 
-        //Debug.Log($"<color=green>Binded on {_bindSlots[bindSlot].name}.</color>");
+        Debug.Log($"<color=green>Binded on {_bindSlots[bindSlot].name}.</color>");
         
         itemToBind = null;
     }
@@ -1306,7 +1257,12 @@ public class InventoryController : MonoBehaviour
             _bindSlots[itemToBind.bindedSlot].item.GetComponent<IEquipable>().UnequipModel();
         }
 
-        _bindSlots[itemToBind.bindedSlot].item = null;
+        if (_bindSlots[itemToBind.bindedSlot].item != null)
+        {
+            //UnbindItem(_bindSlots[bindSlot].item);
+            _bindSlots[itemToBind.bindedSlot].item = null;
+            OnRebindWeapon?.Invoke();
+        }
     }
 
 
@@ -1361,6 +1317,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    // used to fill already initialized container
     public void InsertItemIntoInitializedContainer(List<SCRIPT_InventoryItem> storedItemList)
     {
         selectedItemGrid.testList = new List<SCRIPT_InventoryItem>();

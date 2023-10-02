@@ -14,11 +14,13 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     private void OnEnable()
     {
         WeaponItem.OnUseWeapon += TestActivateWeapon;
+        InventoryController.OnRebindWeapon += SetUnarmedAnimation;
     }
 
     private void OnDisable()
     {
         WeaponItem.OnUseWeapon -= TestActivateWeapon;
+        InventoryController.OnRebindWeapon -= SetUnarmedAnimation;
     }
 
     private void Start()
@@ -115,6 +117,11 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         _activeWeapon.transform.SetParent(parent, false);
         _activeWeapon.transform.localPosition = Vector3.zero;
         _activeWeapon.transform.localRotation = Quaternion.identity;
+    }
+
+    private void SetUnarmedAnimation()
+    {
+        rigController.Play("Weapon_Unarmed");
     }
 }
 
