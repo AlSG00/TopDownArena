@@ -756,6 +756,7 @@ public class InventoryController : MonoBehaviour
                     itemInfoWindow.SetVisibility(false, selectedItem);
                     if (selectedItem.lastGrid != selectedItemGrid)
                     {
+                        //UnbindItem(selectedItem);
                         _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
                     }
                     selectedItem.GetComponent<Image>().raycastTarget = true;
@@ -814,6 +815,7 @@ public class InventoryController : MonoBehaviour
             previousGrid = selectedItemGrid;
             if (selectedItemGrid.isPlayerInventory)
             {
+                UnbindItem(selectedItem);
                 selectedItemGrid = containerItemGrid;
             }
             else
@@ -887,19 +889,23 @@ public class InventoryController : MonoBehaviour
             return;
         }
 
+        //selectedItem.OnCursor(false);
         if (selectedItem.lastGrid.isPlayerInventory &&
             selectedItemGrid.isPlayerInventory == false)
         {
-            TryUnbindItem();
+            //TryUnbindItem();
+            UnbindItem(selectedItem);
             _playerCarryingWeight.TakeWeight(selectedItem.weight * selectedItem.stackCount);
         }
         else if (selectedItem.lastGrid.isPlayerInventory == false &&
             selectedItemGrid.isPlayerInventory)
         {
+            //TryUnbindItem();
+            UnbindItem(selectedItem);
             _playerCarryingWeight.AddWeight(selectedItem.weight * selectedItem.stackCount);
         }
 
-        הכûגאנהכפûנאהזמכפûגנאהז
+        
         selectedItem.lastGrid = selectedItemGrid;
         selectedItem.OnCursor(false);
         selectedItem.GetComponent<Image>().raycastTarget = true;
@@ -1161,7 +1167,13 @@ public class InventoryController : MonoBehaviour
     // TODO: Add logic for equip weapon when binded
     public static Action OnRebindWeapon;
     internal void TryBindItem(BindSlot bindSlot)
+    {
+        if (selectedItemGrid.isPlayerInventory == false)
         {
+            Debug.Log("<color=orange>Can't bind. The item isn't in the player's inventory.</color>");
+            return;
+        }
+
         if (selectedItem != null && selectedItem.isOnCursor)
         {
             Debug.Log("<color=orange>Can't bind. There is item on the cursor.</color>");
@@ -1241,6 +1253,7 @@ public class InventoryController : MonoBehaviour
         if (itemToBind == null)
         {
             Debug.Log("<color=orange>Nothing to unbind.</color>");
+            return; 
         }
 
         if (itemToBind.isBinded)
@@ -1252,7 +1265,8 @@ public class InventoryController : MonoBehaviour
     private void UnbindItem(SCRIPT_InventoryItem itemToBind)
     {
         itemToBind.UnbindKey();
-        if (itemToBind.isEquippable)
+        if (itemToBind.isEquippable &&
+            _bindSlots[itemToBind.bindedSlot].item != null)
         {
             _bindSlots[itemToBind.bindedSlot].item.GetComponent<IEquipable>().UnequipModel();
         }
