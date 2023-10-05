@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     }
 
     public SCRIPT_PlayerAmmunition.AmmoType ammoType;
-
+    ыва
     //public InventoryController.BindSlot availableSlots;
 
     //SCRIPT_PlayerAmmunition.AmmoCollection ammoCollection;

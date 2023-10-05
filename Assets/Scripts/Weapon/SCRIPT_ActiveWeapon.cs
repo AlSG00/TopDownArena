@@ -3,7 +3,6 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
-// TODO: Rework it... With heist!
 public class SCRIPT_ActiveWeapon : MonoBehaviour
 {
     [SerializeField] private InputManager inputManager;
@@ -21,11 +20,6 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     {
         WeaponItem.OnUseWeapon -= TestActivateWeapon;
         InventoryController.OnRebindWeapon -= SetUnarmedAnimation;
-    }
-
-    private void Start()
-    {
-        SCRIPT_Weapon equippedWeapon = GetComponentInChildren<SCRIPT_Weapon>();
     }
 
     private void TestActivateWeapon(Weapon weaponToActivate)

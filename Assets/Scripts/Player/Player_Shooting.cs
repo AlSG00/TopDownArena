@@ -176,13 +176,13 @@ public class Player_Shooting : MonoBehaviour
 
     //}
 
-    public void Equip(SCRIPT_Weapon weaponToEquip)
-    {
-        //isHolstered = false;
-        //weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
-        //muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
-        //ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
-    }
+    //public void Equip(SCRIPT_Weapon weaponToEquip)
+    //{
+    //    //isHolstered = false;
+    //    //weapon = weaponToEquip;/*.GetComponent<SCRIPT_Weapon>();*/
+    //    //muzzleFlame = weaponToEquip.GetComponentInParent<SCRIPT_MuzzleFlame>();
+    //    //ammoShells = weaponToEquip.GetComponentInParent<SCRIPT_AmmoShells>();
+    //}
 
     //public void OnAnimationEvent(string eventName)
     //{
