@@ -7,14 +7,27 @@ public class SCRIPT_PlayerAmmunition : MonoBehaviour
 
     AmmoCollection ammoCollection;
 
-    
+    private void OnEnable()
+    {
+        Weapon.onReload()
+    }
+
+    private void OnDisable()
+    {
+        
+    }
 
     private void Start()
     {
         ammoCollection.InitializeAmmoTypeCollection();
     }
 
-    
+    private void CheckAvailableAmmunition()
+    {
+
+    }
+
+
     [System.Serializable]
     public class AmmoCollection
     {

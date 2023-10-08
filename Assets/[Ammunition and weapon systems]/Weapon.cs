@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     }
 
     public SCRIPT_PlayerAmmunition.AmmoType ammoType;
-    ыва
+    
     //public InventoryController.BindSlot availableSlots;
 
     //SCRIPT_PlayerAmmunition.AmmoCollection ammoCollection;
@@ -130,6 +130,9 @@ public class Weapon : MonoBehaviour
     private float _lastTimeShot;
     private float fireDelay;
 
+    public delegate bool ReloadAction(SCRIPT_PlayerAmmunition.AmmoType ammoType);
+    public static event ReloadAction onReload;
+
     #endregion
 
     private void Awake()
@@ -172,18 +175,6 @@ public class Weapon : MonoBehaviour
         {
             UpdateBullet(Time.deltaTime);
         }
-    }
-
-    internal bool CanReload()
-    {
-        //if (currentAmmoInMag == magCapacity)
-        //{
-        //    return false;
-        //}
-
-        // TODO: Return FALSE if ammunition storage doesn't contains any of required ammo
-
-        return true;
     }
 
     public void StartFiring()
@@ -381,13 +372,22 @@ public class Weapon : MonoBehaviour
 
 
     // TODO: Rework
-    public void Reload()
+    public void TryReload()
     {
 
-        Debug.Log($"<color=green>{gameObject.name} reloaded.</color>");
+        Debug.Log($"<color=green>{gameObject.name} reloading...</color>");
         //int toFill = magCapacity - currentAmmoInMag; // считаем, сколько не хватает
 
-        
+        //if (CanReload())
+        //{
+
+        //}
+        //else
+        //{
+        //    Debug.Log($"<color=red>Can't reload</color>");
+        //}
+
+
 
         //currentAmmoInMag += currentWeaponStock.TakeAmmo(toFill); // досыпаем
 
@@ -408,6 +408,20 @@ public class Weapon : MonoBehaviour
         ////      - play animation
         ////      - play sound
         ////      - reduce remaining ammo count in the ammunition component
+
+        onReload?.Invoke(ammoType);
+    }
+
+    internal bool CanReload()
+    {
+        //if (currentAmmoInMag == magCapacity)
+        //{
+        //    return false;
+        //}
+
+        // TODO: Return FALSE if ammunition storage doesn't contains any of required ammo
+        async;ldkfhj
+        return true;
     }
 
     public Vector3 GetSpreadDirection()

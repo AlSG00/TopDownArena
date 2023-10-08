@@ -56,7 +56,7 @@ public class InputManager : MonoBehaviour
                 if (weapon.CanReload())
                 {
                     animationController.SetTrigger("Reload");
-                    weapon.Reload();
+                    weapon.TryReload();
                 }
             }
 
