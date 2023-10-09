@@ -5,28 +5,25 @@ using UnityEngine;
 public class SCRIPT_PlayerAmmunition : MonoBehaviour
 {
 
-    AmmoCollection ammoCollection;
+    AmmoCollection ammoCollection = new();
+
+    public delegate void ReturnAmmoAction(int ammo);
+    public static event ReturnAmmoAction OnAmmoReturn;
 
     private void OnEnable()
     {
-        Weapon.onReload()
+        Weapon.onReload += ammoCollection.ReturnRemainingAmmo;
     }
 
     private void OnDisable()
     {
-        
+        Weapon.onReload -= ammoCollection.ReturnRemainingAmmo;
     }
 
     private void Start()
     {
         ammoCollection.InitializeAmmoTypeCollection();
     }
-
-    private void CheckAvailableAmmunition()
-    {
-
-    }
-
 
     [System.Serializable]
     public class AmmoCollection
@@ -44,11 +41,26 @@ public class SCRIPT_PlayerAmmunition : MonoBehaviour
             AmmoTypeCollection = new()
             {
                 { AmmoType.pistolAmmo, pistolAmmo },
-                { AmmoType.pistolAmmo, rifleAmmo },
-                { AmmoType.pistolAmmo, shotgunAmmo },
-                { AmmoType.pistolAmmo, energyAmmo },
-                { AmmoType.pistolAmmo, magnumAmmo }
+                { AmmoType.rifleAmmo, rifleAmmo },
+                { AmmoType.shotgunAmmo, shotgunAmmo },
+                { AmmoType.energyAmmo, energyAmmo },
+                { AmmoType.magnumAmmo, magnumAmmo }
             };
+        }
+
+        internal void ReturnRemainingAmmo(AmmoType ammoType, int requiredAmmoCount)
+        {
+            int availableAmmoCount = AmmoTypeCollection[ammoType].left;
+            Debug.Log($"<color=yellow> Available ammo: {availableAmmoCount}</color>");
+
+            if (requiredAmmoCount > availableAmmoCount)
+            {
+                OnAmmoReturn?.Invoke(requiredAmmoCount - availableAmmoCount);
+            }
+
+            availableAmmoCount -= requiredAmmoCount;
+            Debug.Log($"<color=yellow> Ammo remaining: {availableAmmoCount}</color>");
+            OnAmmoReturn?.Invoke(requiredAmmoCount);
         }
     }
 

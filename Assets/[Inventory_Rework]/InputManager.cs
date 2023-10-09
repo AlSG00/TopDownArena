@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
 
 
     public bool isAiming = false;
-    public bool isReloading = false;
+    //public bool isReloading = false;
 
     //public bool isHolstered;
     private float _lastTimeSingleShot;
@@ -25,8 +25,8 @@ public class InputManager : MonoBehaviour
     private float buttonHoldTime = 0f;
     private float timeToHold = 0.3f;
 
-    
 
+    
 
     private void Update()
     {
@@ -51,49 +51,29 @@ public class InputManager : MonoBehaviour
 
         if (weapon)
         {
-            if (Input.GetKeyDown(KeyCode.R) && isAiming && /*!activeWeapon.isReloading*/ isReloading == false)
+            if (Input.GetKeyDown(KeyCode.R) && isAiming/* && isReloading == false*/)
             {
-                if (weapon.CanReload())
-                {
-                    animationController.SetTrigger("Reload");
-                    weapon.TryReload();
-                }
+              //  isReloading = true;
+                weapon.TryReload();
             }
 
             if (Input.GetButtonDown("Fire2"))
             {
                 isAiming = true;
-
-                // TODO: move animator logic to separate script
                 animationController.SetBool("isAiming", isAiming);
-                //Aim(true);
-
-                //if (!valueTaken && !forbidAiming.Contains(weapon.name))
-                //{
-                //    tempSpread = weapon.bulletSpreadValue;
-                //    weapon.bulletSpreadValue = 0;
-                //    valueTaken = true;
-                //}
             }
 
             if (Input.GetButtonUp("Fire2"))
             {
                 isAiming = false;
                 animationController.SetBool("isAiming", isAiming);
-                // Aim(false);
-                //if (valueTaken)
-                //{
-                //    weapon.bulletSpreadValue = tempSpread;
-                //    valueTaken = false;
-                //}
             }
 
+            // TODO: Simplify
             if (Input.GetButton("Fire1"))
             {
-                //isHolstered = animationController.GetBool("isHolstered");
-                if (isAiming && /*!isHolstered &&*/ /*!activeWeapon.isReloading*/isReloading == false)
+                if (isAiming/* && isReloading == false*/)
                 {
-                    // animationController.SetBool("isShooting", true);
                     if ((weapon.shotPerformed == false) &&
                         ((_lastTimeSingleShot + weapon.singleShotDelay) <= Time.time))
                     {
@@ -113,24 +93,10 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                // animationController.SetBool("isShooting", false);
                 weapon.StopFiring();
                 weapon.shotPerformed = false;
             }
         }
-
-        //if (weapon)
-        //{
-        //    weapon.UpdateBullet(Time.deltaTime);
-        //}        //if (weapon)
-        //{
-        //    weapon.UpdateBullet(Time.deltaTime);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.X) && !isAiming)
-        //{
-        //    GetComponent<SCRIPT_ActiveWeapon>().ToggleActiveWeapon();
-        //}
     }
 
     private void InventoryInput()
@@ -263,5 +229,10 @@ public class InputManager : MonoBehaviour
         weapon = weaponToActivate;/*.GetComponent<SCRIPT_Weapon>();*/
         //muzzleFlame = weaponToActivate.GetComponentInParent<SCRIPT_MuzzleFlame>();
         //ammoShells = weaponToActivate.GetComponentInParent<SCRIPT_AmmoShells>();
+    }
+
+    private async void PlayReloadAnimation()
+    {
+        activeWeapon.ReloadWeapon();
     }
 }

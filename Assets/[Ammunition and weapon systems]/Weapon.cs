@@ -130,8 +130,9 @@ public class Weapon : MonoBehaviour
     private float _lastTimeShot;
     private float fireDelay;
 
-    public delegate bool ReloadAction(SCRIPT_PlayerAmmunition.AmmoType ammoType);
+    public delegate void ReloadAction(SCRIPT_PlayerAmmunition.AmmoType ammoType, int requiredAmmo);
     public static event ReloadAction onReload;
+    public static event System.Action OnReloadSuccess;
 
     #endregion
 
@@ -140,6 +141,16 @@ public class Weapon : MonoBehaviour
         _lastTimeShot = 0f;
 
         bullets = new List<Bullet>();
+    }
+
+    private void OnEnable()
+    {
+        SCRIPT_PlayerAmmunition.OnAmmoReturn += Reload;
+    }
+
+    private void OnDisable()
+    {
+        SCRIPT_PlayerAmmunition.OnAmmoReturn -= Reload;
     }
 
     private void Start()
@@ -189,7 +200,26 @@ public class Weapon : MonoBehaviour
     private void FireBullet()
     {
         //_lastTimeShot = 0;
-        if ((_lastTimeShot + fireDelay <= Time.time) || (currentAmmoInMag <= 0) || isReloading)
+        if ((_lastTimeShot + fireDelay >= Time.time) || (currentAmmoInMag <= 0) || isReloading)
+        {
+            if (_lastTimeShot + fireDelay <= Time.time)
+            {
+                Debug.Log($"<color=red>fireDelay {_lastTimeShot + fireDelay} | {Time.time}</color>");
+            }
+
+            if (currentAmmoInMag <= 0)
+            {
+                Debug.Log("<color=red>No ammo</color>");
+            }
+
+            if (isReloading)
+            {
+                Debug.Log("<color=red>Is reloading</color>");
+            }
+
+            return;
+        }
+        else
         {
             Debug.Log($"<color=green>{_lastTimeShot + fireDelay} : {Time.time}</color>");
             //Debug.Log("<color=red>Can't shoot</color>");
@@ -217,13 +247,14 @@ public class Weapon : MonoBehaviour
                 weaponAudio.PlayShotSound();
             }
 
-            //currentAmmoInMag--;
+            currentAmmoInMag--;
+            Debug.Log($"{currentAmmoInMag}|{magCapacity} left");
             //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
         }
-        else
-        {
-            Debug.Log("<color=red>Can't fire.</color>");
-        }
+        //else
+        //{
+        //    Debug.Log("<color=red>Can't fire.</color>");
+        //}
     }
 
     // «адержка между выстрелами. TODO: ѕрвоерить, используетс€ ли она вообще где-то
@@ -367,61 +398,36 @@ public class Weapon : MonoBehaviour
                 i--;
             }
         }
-        //bullets.RemoveAll(bullet => bullet.lifeTime >= _maxBulletLifetime);
     }
 
 
     // TODO: Rework
     public void TryReload()
     {
+        if (currentAmmoInMag == magCapacity)
+        {
+            Debug.Log($"<color=green>Mag is already full</color>");
+            return;
+        }
 
+        isReloading = true;
         Debug.Log($"<color=green>{gameObject.name} reloading...</color>");
-        //int toFill = magCapacity - currentAmmoInMag; // считаем, сколько не хватает
-
-        //if (CanReload())
-        //{
-
-        //}
-        //else
-        //{
-        //    Debug.Log($"<color=red>Can't reload</color>");
-        //}
-
-
-
-        //currentAmmoInMag += currentWeaponStock.TakeAmmo(toFill); // досыпаем
-
-        //if (toFill > 0 && currentWeaponStock.left > 0)
-        //{
-        //    //ammoCounter.SetCurrentAmmo(currentAmmoInMag, currentWeaponStock.left);
-        //    Debug.Log($"Left {currentWeaponStock.left}");
-        //}
-        //else
-        //{
-        //    Debug.Log("Can't reload");
-        //}
-
-        //// PSEUDOCODE for method reworking:
-        //// - Check remaining ammo in the ammunition component
-        //// - If it has required ammo available, reload:
-        ////      - add ammo
-        ////      - play animation
-        ////      - play sound
-        ////      - reduce remaining ammo count in the ammunition component
-
-        onReload?.Invoke(ammoType);
+        int requiredAmmo = magCapacity - currentAmmoInMag;
+        onReload?.Invoke(ammoType, requiredAmmo);
     }
 
-    internal bool CanReload()
-    {
-        //if (currentAmmoInMag == magCapacity)
-        //{
-        //    return false;
-        //}
 
-        // TODO: Return FALSE if ammunition storage doesn't contains any of required ammo
-        async;ldkfhj
-        return true;
+
+    internal void Reload(int ammo)
+    {
+        if (ammo == 0)
+        {
+            Debug.Log($"<color=orange>Not enough {ammoType} to reload.</color>");
+        }
+
+        currentAmmoInMag += ammo;
+        Debug.Log($"<color=yellow>Ammo added: {ammo}. Current ammo {currentAmmoInMag}</color>");
+        OnReloadSuccess?.Invoke();
     }
 
     public Vector3 GetSpreadDirection()

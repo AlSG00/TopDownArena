@@ -14,12 +14,14 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
     {
         WeaponItem.OnUseWeapon += TestActivateWeapon;
         InventoryController.OnRebindWeapon += SetUnarmedAnimation;
+        Weapon.OnReloadSuccess += ReloadWeapon;
     }
 
     private void OnDisable()
     {
         WeaponItem.OnUseWeapon -= TestActivateWeapon;
         InventoryController.OnRebindWeapon -= SetUnarmedAnimation;
+        Weapon.OnReloadSuccess -= ReloadWeapon;
     }
 
     private void TestActivateWeapon(Weapon weaponToActivate)
@@ -99,11 +101,18 @@ public class SCRIPT_ActiveWeapon : MonoBehaviour
         Debug.Log($"<color=yellow>Drawed [{_activeWeapon.gameObject.name}]</color>");
     }
 
-    private void TestRemoveWeapon(Weapon weaponToRemove)
+    public async void ReloadWeapon()
     {
-        SetWeaponParent(_activeWeapon.bindedSlotPivot);
-        rigController.Play("Weapon_Unarmed");
-        _activeWeapon = null;
+        rigController.SetTrigger("Reload");
+
+        do
+        {
+            await Task.Delay(20);
+        }
+        while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+
+        _activeWeapon.isReloading = false;
+      //  inputManager.isReloading = false;
     }
 
     private void SetWeaponParent(Transform parent)
