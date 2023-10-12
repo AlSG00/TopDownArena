@@ -1211,9 +1211,7 @@ public class InventoryController : MonoBehaviour
             }
             else
             {
-                UnbindItem(itemToBind);
-
-                
+                UnbindItem(itemToBind); 
             }
         }
 
