@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 500, y: 200}
   m_MaxSize: {x: 40480, y: 16192}
   vertical: 0
-  controlID: 144
+  controlID: 97
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 45
+  controlID: 98
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 46
+  controlID: 99
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1770,7 +1770,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 8.539333, y: 6.2074957, z: -47.903946}
     speed: 2
-    m_Value: {x: 8.539333, y: 6.207495, z: -47.903946}
+    m_Value: {x: 8.539333, y: 6.2074957, z: -47.903946}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1819,7 +1819,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.36272877, y: 0.118936576, z: -0.04672828, w: -0.92314035}
     speed: 2
-    m_Value: {x: -0.36291912, y: 0.11477611, z: -0.04509351, w: -0.9236248}
+    m_Value: {x: -0.3627288, y: 0.11893658, z: -0.046728283, w: -0.9231404}
   m_Size:
     m_Target: 1.1694888
     speed: 2
@@ -2140,7 +2140,7 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 78
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 92
+  m_DirectoriesAreaWidth: 269
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
