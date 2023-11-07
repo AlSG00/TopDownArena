@@ -21,8 +21,8 @@ public class Player_Movement : MonoBehaviour
     public float sprintSpeed;
     private float sprint; // Переименовать переменные по-нормальному
     public bool isRunning = false; 
-    public float turnSpeed = 0.1f; // TODO: Пока не используется, исправить
-    public Vector3 movement; //TODO: Нафига оно тут??
+    public float turnSpeed = 2f;
+    [HideInInspector]public Vector3 movement; //Used for stamina script
     
     [Header("Movement audio")]
     [SerializeField] private AudioSource footstepsAudioSource;
@@ -34,7 +34,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private LayerMask _footstepSoundLayer;
 
     private FootstepSwapper _swapper;
-    public LayerMask activeLayers;
+    public LayerMask footstepsActiveLayers;
+    //public LayerMask turnDeadZone; // 
 
     #endregion
 
@@ -46,10 +47,14 @@ public class Player_Movement : MonoBehaviour
         _swapper = GetComponent<FootstepSwapper>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
         Sprint();
+    }
+
+    private void FixedUpdate()
+    {
         HandleRotationInput();
     }
 
@@ -113,13 +118,26 @@ public class Player_Movement : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
-             transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            //if (hit.collider.CompareTag("DeadZone"))
+            //{
+            //    return;
+            //}
+            //transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+
+            var forw = hit.point;
+            forw.z = 0;
+
+            Quaternion targetRotation = Quaternion.LookRotation(hit.point - transform.position);
+            targetRotation.x = 0f;
+            targetRotation.z = 0f;
+
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * turnSpeed);
         }
     }
 
     private void PlayFootstepsSound(AnimationEvent evt)
     {
-        _swapper.CheckLayers(activeLayers);
+        _swapper.CheckLayers(footstepsActiveLayers);
         if (evt.animatorClipInfo.weight > 0.5f)
         {
             int n = Random.Range(0, fotstepsAudioClips.Count);

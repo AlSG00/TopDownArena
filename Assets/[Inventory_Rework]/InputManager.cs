@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private InventoryController inventory;
+    [SerializeField] private InventoryController _inventory;
+    //[SerializeField] private Player_Movement _movement;
 
     // Combat variables
     public Weapon weapon;
@@ -45,7 +46,7 @@ public class InputManager : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Tab))
         //{
         //    isCheckingInventory = !isCheckingInventory;
-        //    inventory.HandleInventory(isCheckingInventory);
+        //    _inventory.HandleInventory(isCheckingInventory);
         //   // HandleInventory(isCheckingInventory);
         //}
 
@@ -102,50 +103,50 @@ public class InputManager : MonoBehaviour
     private void InventoryInput()
     {
         // TODO: Rework and uncomment
-        //if(inventory.isCheckingInventory)
+        //if(_inventory.isCheckingInventory)
         //{
         //    return;
         //}
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (inventory.isCheckingInventory)
+            if (_inventory.isCheckingInventory)
             {
-                inventory.TryBindItem(InventoryController.BindSlot.HolsterSlot);
+                _inventory.TryBindItem(InventoryController.BindSlot.HolsterSlot);
             }
             else
             {
-                inventory.TryUseBindedItem(InventoryController.BindSlot.HolsterSlot);
+                _inventory.TryUseBindedItem(InventoryController.BindSlot.HolsterSlot);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (inventory.isCheckingInventory)
+            if (_inventory.isCheckingInventory)
             {
-                inventory.TryBindItem(InventoryController.BindSlot.BeltSlot);
+                _inventory.TryBindItem(InventoryController.BindSlot.BeltSlot);
             }
             else
             {
-                inventory.TryUseBindedItem(InventoryController.BindSlot.BeltSlot);
+                _inventory.TryUseBindedItem(InventoryController.BindSlot.BeltSlot);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (inventory.isCheckingInventory)
+            if (_inventory.isCheckingInventory)
             {
-                inventory.TryBindItem(InventoryController.BindSlot.BackSlot);
+                _inventory.TryBindItem(InventoryController.BindSlot.BackSlot);
             }
             else
             {
-                inventory.TryUseBindedItem(InventoryController.BindSlot.BackSlot);
+                _inventory.TryUseBindedItem(InventoryController.BindSlot.BackSlot);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            inventory.TryUnbindItem();
+            _inventory.TryUnbindItem();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -160,32 +161,32 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            inventory.RotateItem();
+            _inventory.RotateItem();
         }
 
         if (Input.GetMouseButtonDown(0))
         {
             if (isHoldingShiftButton)
             {
-                inventory.MoveItemFast();
+                _inventory.MoveItemFast();
             }
             else
             {
-                inventory.LeftMouseButtonPress();
+                _inventory.LeftMouseButtonPress();
             }
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (inventory.isCheckingInventory)
+            if (_inventory.isCheckingInventory)
             {
-                inventory.RightMouseButtonPress();
+                _inventory.RightMouseButtonPress();
             }
         }
 
         if (Input.GetMouseButtonDown(2))
         {
-            inventory.HandleMoreItemInfoVisibility();
+            _inventory.HandleMoreItemInfoVisibility();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -197,7 +198,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q))
         {
             isHoldingDropItemButton = false;
-            inventory.HandleItemDrop();
+            _inventory.HandleItemDrop();
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -209,17 +210,17 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             isHoldingCheckStateButton = false;
-            inventory.HandleStateIconsVisibility(ref buttonHoldTime, timeToHold);
+            _inventory.HandleStateIconsVisibility(ref buttonHoldTime, timeToHold);
         }
 
-        if (isHoldingCheckStateButton && inventory.isCheckingInventory == false)
+        if (isHoldingCheckStateButton && _inventory.isCheckingInventory == false)
         {
-            inventory.HandleStateIconButtonHolding(ref buttonHoldTime, timeToHold);
+            _inventory.HandleStateIconButtonHolding(ref buttonHoldTime, timeToHold);
         }
 
-        if (isHoldingDropItemButton && inventory.isCheckingInventory)
+        if (isHoldingDropItemButton && _inventory.isCheckingInventory)
         {
-            inventory.HandleStackDrop(ref buttonHoldTime, timeToHold);
+            _inventory.HandleStackDrop(ref buttonHoldTime, timeToHold);
         }
     }
 
